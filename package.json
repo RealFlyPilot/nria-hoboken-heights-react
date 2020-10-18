@@ -1,0 +1,13 @@
+{
+  "description": "The splash page for hobokenheights",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babelify": "^8.0.0"
+  },
+  "dependencies": {
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  }
+}
