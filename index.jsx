@@ -73,7 +73,7 @@ class SplashPage extends React.Component {
 		};
 		return (
 			<div id="page">
-				<MusicPlayer></MusicPlayer>
+				<MusicPlayer isFirstSlide={this.state.currIdx === 0}></MusicPlayer>
 				<div className="slides_wrapper" onWheel={this.handleWheelEvent.bind(this)}>
 					<div
 						ref="inner"

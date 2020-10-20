@@ -82,4 +82,11 @@ table {
 	top: 50px;
 	right: 50px;
 	color: #fff;
+	text-align: center;
+	&.center_layout {
+		left: 50%;
+		top: auto;
+		bottom: 50px;
+		transform: translateX(-50%);
+	}
 }

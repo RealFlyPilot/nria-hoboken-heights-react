@@ -16,8 +16,13 @@ class MusicPlayer extends React.Component {
 		} else {
 			this.state.audioPlayer.pause();
 		}
+		let classes = "musicplayer";
+		if(this.props.isFirstSlide) {
+			classes += " center_layout";
+		}
+
 		return (
-			<div className="musicplayer" onClick={this.handleClick.bind(this)}>
+			<div className={classes} onClick={this.handleClick.bind(this)}>
 				Sound <br />{statusText}
 			</div>
 		);

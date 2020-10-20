@@ -17,9 +17,14 @@ class MusicPlayer extends React.Component {
 		} else {
 			this.state.audioPlayer.pause();
 		}
+		let classes = "musicplayer";
+		if (this.props.isFirstSlide) {
+			classes += " center_layout";
+		}
+
 		return React.createElement(
 			'div',
-			{ className: 'musicplayer', onClick: this.handleClick.bind(this) },
+			{ className: classes, onClick: this.handleClick.bind(this) },
 			'Sound ',
 			React.createElement('br', null),
 			statusText
@@ -30,23 +35,41 @@ module.exports = MusicPlayer;
 
 },{}],2:[function(require,module,exports){
 const SLIDES = [{
-	background: "#000",
+	styles: {
+		background: "#000"
+	},
 	center: "Hoboken Heights",
 	bottom: "Sound Experience Yes or no"
 }, {
-	center: "Slide 2",
-	background: "/assets/hobokenh1.webp"
+	styles: {
+		backgroundImage: "url(/assets/hobokenh0.webp)",
+		backgroundSize: "cover"
+	},
+	center: "Slide 2"
 }, {
+	styles: {
+		backgroundImage: "url(/assets/hobokenh1.webp)",
+		backgroundSize: "contain"
+	},
 	center: "Slide 3",
 	background: "#000"
 }, {
+	styles: {
+		backgroundColor: "#000"
+	},
 	center: "Slide 4",
 	background: "#000"
 }, {
+	styles: {
+		backgroundColor: "#000"
+	},
 	background: "#000",
 	center: "Slide 5"
 }, {
-	background: "#000",
+	styles: {
+		backgroundColor: "#fff",
+		color: "#000"
+	},
 	center: "Slide 6"
 }];
 
@@ -56,24 +79,18 @@ module.exports = SLIDES;
 class Slide extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			styles: this.props.obj.styles
+		};
+		this.state.styles.backgroundRepeat = "no-repeat";
+		this.state.styles.backgroundPosition = "center";
 	}
 	render() {
 		const slideObj = this.props.obj;
 
-		const isBackgroundImage = slideObj.background[0] !== "#";
-		const styles = {};
-		if (!isBackgroundImage) {
-			styles.backgroundColor = slideObj.background || "#000";
-		} else {
-			styles.backgroundImage = "url(" + slideObj.background + ")";
-			styles.backgroundRepeat = "no-repeat";
-			styles.backgroundSize = "contain";
-			styles.backgroundPosition = "center";
-		}
-
 		return React.createElement(
 			"div",
-			{ className: "slide bg000", style: styles },
+			{ className: "slide bg000", style: this.state.styles },
 			React.createElement(
 				"h1",
 				{ className: "center" },
@@ -160,7 +177,7 @@ class SplashPage extends React.Component {
 		return React.createElement(
 			'div',
 			{ id: 'page' },
-			React.createElement(MusicPlayer, null),
+			React.createElement(MusicPlayer, { isFirstSlide: this.state.currIdx === 0 }),
 			React.createElement(
 				'div',
 				{ className: 'slides_wrapper', onWheel: this.handleWheelEvent.bind(this) },
