@@ -104,14 +104,28 @@ const SLIDES = [{
 }, {
 	video: "/assets/videos/NIRMA_1_Exterior_High_Cinemagraphic.mp4",
 	videoLoop: true,
-	addCornerLogo: true
+	addCornerLogo: true,
+	centerBottom: "MANHATTAN AVE, 1300<br />COMING SOON"
 }, {
 	styles: {
 		backgroundImage: "url(/assets/images/hobokenh1.webp)",
-		backgroundSize: "contain"
+		backgroundSize: "contain",
+		fontSize: '15px',
+		lineHeight: '21px'
 	},
-	// center: "Slide 3",
-	background: "#000"
+	centerImage: "/assets/images/NIRMA_Logo_White.png",
+	centerImageStyles: {
+		width: "272px",
+		marginBottom: "55px"
+	},
+	center: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.<br /><br />Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+	centerTextStyles: {
+		width: "56vw",
+		fontFamily: '"Gotham-Light", sans-serif',
+		fontWeight: '300'
+	},
+	contactButton: true
+	// background: "#000"
 }, {
 	video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
 	videoLoop: true,
@@ -138,6 +152,10 @@ class Slide extends React.Component {
 			this.state.styles.backgroundPosition = "center";
 		}
 	}
+	scrollToContactForm() {
+		const { scrollToLastSlide } = this.props;
+		scrollToLastSlide();
+	}
 	render() {
 		const slideObj = this.props.obj;
 		return React.createElement(
@@ -149,10 +167,17 @@ class Slide extends React.Component {
 				React.createElement("source", { src: slideObj.video, type: "video/mp4" })
 			),
 			React.createElement(
-				"h1",
-				{ className: "center" },
-				slideObj.center
-			)
+				"div",
+				{ className: "center", style: slideObj.centerTextStyles },
+				slideObj.centerImage && React.createElement("img", { style: slideObj.centerImageStyles, src: slideObj.centerImage }),
+				React.createElement("h1", { dangerouslySetInnerHTML: { __html: slideObj.center } }),
+				slideObj.contactButton && React.createElement(
+					"div",
+					{ className: "btn contactButton", onClick: this.scrollToContactForm.bind(this) },
+					"CONTACT"
+				)
+			),
+			React.createElement("h1", { className: "centerBottom", dangerouslySetInnerHTML: { __html: slideObj.centerBottom } })
 		);
 	}
 }
@@ -240,7 +265,7 @@ class SplashPage extends React.Component {
 		}, false);
 	}
 	render() {
-		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { key: idx, obj: slide }));
+		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { scrollToLastSlide: this.lastSlide, key: idx, obj: slide }));
 		let classes = "slides_wrapper";
 		const innerStyle = {
 			transform: 'translateY(-' + this.state.currIdx * 100 + 'vh)'
@@ -249,7 +274,7 @@ class SplashPage extends React.Component {
 		return React.createElement(
 			'div',
 			{ id: 'page' },
-			this.state.slides[this.state.currIdx].addCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_White.png' }),
+			this.state.slides[this.state.currIdx].addCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_White.png' }),
 			React.createElement(MusicPlayer, { scrollToLastSlide: this.lastSlide, isFirstSlide: this.state.currIdx === 0 }),
 			React.createElement(
 				'div',

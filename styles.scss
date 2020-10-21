@@ -10,7 +10,8 @@
 
 @font-face {
     src: url("assets/fonts/Gotham-Book.otf") format("opentype");
-    font-family: 'Gotham';
+	font-family: 'Gotham';
+	font-weight: 400;
 }
 
 @font-face {
@@ -19,6 +20,8 @@
 	font-weight: 700;
 	font-style: normal;
 }
+
+
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -47,7 +50,6 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-	font-family: 'Gotham', sans-serif;
 }
 ol, ul {
 	list-style: none;
@@ -66,6 +68,10 @@ table {
 }
 
 /* Custom Styles */
+body {
+	font-family: 'Gotham', sans-serif;
+	font-weight: 400;
+}
 .slides_wrapper {
 	overflow: hidden;
 	height: 100vh;
@@ -80,9 +86,29 @@ table {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
+	.btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 50px;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: #fff;
+		width: 217px;
+		height: 66px;
+		font-size: 15px;
+		line-height: 18px;
+		letter-spacing: 2.25px;
+		color: #000000;
+		cursor: pointer;
+	}
 	&.bg000 {
 		background-color: #000;
 		color: #fff;
+	}
+	.center {
+		text-align: center;
 	}
 	.background-image {
 		position: absolute;
@@ -97,6 +123,19 @@ table {
 	}
 	
 	> h1 {
+		// &.center {
+		// 	position: absolute;
+		// }
+		&.centerBottom {
+			letter-spacing: 4.4px;
+			position: absolute;
+			bottom: 13vh;
+			line-height: 45px;
+			text-align: center;
+		}
+	}
+	.contactButton {
+		color: #a9a9a9;
 	}
 }
 .musicplayer_container {
@@ -118,7 +157,7 @@ table {
 		display: block;
 		left: 50%;
 		top: auto;
-		bottom: 50px;
+		bottom: 13vh;
 		transform: translateX(-50%);
 		.corner_content {
 			display: none;

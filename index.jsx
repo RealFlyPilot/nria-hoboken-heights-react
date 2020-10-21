@@ -79,7 +79,7 @@ class SplashPage extends React.Component {
 	}
 	render() {
 		const $slides = this.state.slides.map((slide, idx) =>
-			<Slide key={idx} obj={slide}></Slide>
+			<Slide scrollToLastSlide={this.lastSlide} key={idx} obj={slide}></Slide>
 		);
 		let classes = "slides_wrapper";
 		const innerStyle = {
@@ -89,7 +89,7 @@ class SplashPage extends React.Component {
 		return (
 			<div id="page">
 				{this.state.slides[this.state.currIdx].addCornerLogo &&
-					<img className='corner-logo' src='/assets/images/NIRMA_Logo_White.png' />
+					<img className='corner-logo' src='/assets/images/NIRMA_Logo_Symbol_White.png' />
 				}
 				<MusicPlayer scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0}></MusicPlayer>
 				<div className="slides_wrapper" onWheel={this.handleWheelEvent.bind(this)}>

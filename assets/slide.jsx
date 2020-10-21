@@ -9,6 +9,10 @@ class Slide extends React.Component {
 			this.state.styles.backgroundPosition = "center";
 		}
 	}
+	scrollToContactForm() {
+		const {scrollToLastSlide} = this.props;
+		scrollToLastSlide();
+	}
 	render() {
 		const slideObj = this.props.obj;
 		return (
@@ -18,7 +22,16 @@ class Slide extends React.Component {
 						<source src={slideObj.video} type="video/mp4" />
 					</video>
 				}
-				<h1 className="center">{slideObj.center}</h1>
+				<div className="center" style={slideObj.centerTextStyles}>
+					{slideObj.centerImage &&
+						<img style={slideObj.centerImageStyles} src={slideObj.centerImage}/>
+					}
+					<h1 dangerouslySetInnerHTML={{ __html: slideObj.center }} />
+					{slideObj.contactButton &&
+						<div className='btn contactButton' onClick={this.scrollToContactForm.bind(this)}>CONTACT</div>
+					}
+				</div>
+				<h1 className="centerBottom" dangerouslySetInnerHTML={{ __html: slideObj.centerBottom }}></h1>
 			</div>
 		);
 	}
