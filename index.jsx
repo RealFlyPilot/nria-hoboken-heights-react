@@ -12,6 +12,7 @@ class SplashPage extends React.Component {
 			transitiongState: 0, // 0 for false -1 for up 1 for down
 			currIdx: 0
 		};
+		this.lastSlide = this.lastSlide.bind(this);
 	}
 	handleWheelEvent(evt) {
 		const isScrollingDown = evt.deltaY > 0;
@@ -53,6 +54,19 @@ class SplashPage extends React.Component {
 			currIdx: newIdx
 		});
 	}
+	lastSlide() {
+		if(this.isTransitioning()) {
+			return;
+		}
+		const newIdx = this.state.slides.length - 1;
+		if(newIdx < 0) {
+			return;
+		}
+		this.setState({
+			transitiongState: 1,
+			currIdx: newIdx
+		});
+	}
 	componentDidUpdate() {
 		const that = this;
 		return;
@@ -71,9 +85,13 @@ class SplashPage extends React.Component {
 		const innerStyle = {
 			transform: 'translateY(-' + (this.state.currIdx * 100) + 'vh)'
 		};
+
 		return (
 			<div id="page">
-				<MusicPlayer isFirstSlide={this.state.currIdx === 0}></MusicPlayer>
+				{this.state.slides[this.state.currIdx].addCornerLogo &&
+					<img className='corner-logo' src='/assets/images/NIRMA_Logo_White.png' />
+				}
+				<MusicPlayer scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0}></MusicPlayer>
 				<div className="slides_wrapper" onWheel={this.handleWheelEvent.bind(this)}>
 					<div
 						ref="inner"

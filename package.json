@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "build": "browserify index.jsx -t -v babelify --outfile index.js",
+    "watch": "watchify index.jsx -t babelify --outfile index.js",
+    "watch-sass": "sass styles.scss styles.css --watch"
+  },
   "description": "The splash page for hobokenheights",
   "devDependencies": {
     "babel": "^6.23.0",

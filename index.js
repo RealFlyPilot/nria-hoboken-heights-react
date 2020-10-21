@@ -4,67 +4,118 @@ class MusicPlayer extends React.Component {
 		super(props);
 		this.state = {
 			isPlaying: false,
-			audioPlayer: new Audio('./assets/SOUND-GENERAL_MUSIC.mp3')
+			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3')
 		};
 	}
 	handleClick(evt) {
 		this.setState({ isPlaying: !this.state.isPlaying });
 	}
+	scrollToContactForm() {
+		const { scrollToLastSlide } = this.props;
+		scrollToLastSlide();
+	}
+
 	render() {
-		let statusText = this.state.isPlaying ? 'On' : 'Off';
+		let statusText = this.state.isPlaying ? 'ON' : 'OFF';
 		if (this.state.isPlaying) {
 			this.state.audioPlayer.play();
 		} else {
 			this.state.audioPlayer.pause();
 		}
-		let classes = "musicplayer";
+
+		let classes = "musicplayer_container";
 		if (this.props.isFirstSlide) {
 			classes += " center_layout";
+		} else {
+			classes += " corner_layout";
 		}
 
 		return React.createElement(
 			'div',
-			{ className: classes, onClick: this.handleClick.bind(this) },
-			'Sound ',
-			React.createElement('br', null),
-			statusText
+			{ className: classes },
+			React.createElement(
+				'div',
+				{ className: 'musicplayer centered_content', onClick: this.handleClick.bind(this) },
+				React.createElement(
+					'div',
+					{ className: 'landing_page_sound_player' },
+					'SOUND EXPERIENCE',
+					React.createElement(SoundExperienceSettings, { isPlaying: this.state.isPlaying })
+				)
+			),
+			React.createElement(
+				'div',
+				{ className: 'corner_content' },
+				React.createElement(
+					'div',
+					{ className: 'musicplayer', onClick: this.handleClick.bind(this) },
+					React.createElement(
+						'div',
+						null,
+						'SOUND',
+						React.createElement('br', null),
+						statusText
+					)
+				),
+				React.createElement('div', { className: 'separator' }),
+				React.createElement(
+					'div',
+					{ onClick: this.scrollToContactForm.bind(this) },
+					'CONTACT'
+				)
+			)
 		);
 	}
 }
 module.exports = MusicPlayer;
+
+class SoundExperienceSettings extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
+		return React.createElement(
+			'div',
+			{ className: 'settings' },
+			React.createElement(
+				'span',
+				{ className: this.props.isPlaying ? 'selected_option' : '' },
+				'YES'
+			),
+			' ',
+			React.createElement('div', { className: 'separator' }),
+			' ',
+			React.createElement(
+				'span',
+				{ className: !this.props.isPlaying ? 'selected_option' : '' },
+				'NO'
+			)
+		);
+	}
+}
 
 },{}],2:[function(require,module,exports){
 const SLIDES = [{
 	styles: {
 		background: "#000"
 	},
-	center: "Hoboken Heights",
-	bottom: "Sound Experience Yes or no"
+	video: "/assets/videos/NIRMA_Logo_Motion.mp4",
+	isLandingPage: 1
+}, {
+	video: "/assets/videos/NIRMA_1_Exterior_High_Cinemagraphic.mp4",
+	videoLoop: true,
+	addCornerLogo: true
 }, {
 	styles: {
-		backgroundImage: "url(/assets/hobokenh0.webp)",
-		backgroundSize: "cover"
-	},
-	center: "Slide 2"
-}, {
-	styles: {
-		backgroundImage: "url(/assets/hobokenh1.webp)",
+		backgroundImage: "url(/assets/images/hobokenh1.webp)",
 		backgroundSize: "contain"
 	},
-	center: "Slide 3",
+	// center: "Slide 3",
 	background: "#000"
 }, {
-	styles: {
-		backgroundColor: "#000"
-	},
-	center: "Slide 4",
-	background: "#000"
-}, {
-	styles: {
-		backgroundColor: "#000"
-	},
-	background: "#000",
-	center: "Slide 5"
+	video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
+	videoLoop: true,
+	addCornerLogo: true
 }, {
 	styles: {
 		backgroundColor: "#fff",
@@ -82,15 +133,21 @@ class Slide extends React.Component {
 		this.state = {
 			styles: this.props.obj.styles
 		};
-		this.state.styles.backgroundRepeat = "no-repeat";
-		this.state.styles.backgroundPosition = "center";
+		if (this.state.styles) {
+			this.state.styles.backgroundRepeat = "no-repeat";
+			this.state.styles.backgroundPosition = "center";
+		}
 	}
 	render() {
 		const slideObj = this.props.obj;
-
 		return React.createElement(
 			"div",
 			{ className: "slide bg000", style: this.state.styles },
+			slideObj.video && React.createElement(
+				"video",
+				{ autoPlay: true, muted: true, loop: slideObj.videoLoop ? true : false, className: "background-video" },
+				React.createElement("source", { src: slideObj.video, type: "video/mp4" })
+			),
 			React.createElement(
 				"h1",
 				{ className: "center" },
@@ -117,6 +174,7 @@ class SplashPage extends React.Component {
 			transitiongState: 0, // 0 for false -1 for up 1 for down
 			currIdx: 0
 		};
+		this.lastSlide = this.lastSlide.bind(this);
 	}
 	handleWheelEvent(evt) {
 		const isScrollingDown = evt.deltaY > 0;
@@ -158,6 +216,19 @@ class SplashPage extends React.Component {
 			currIdx: newIdx
 		});
 	}
+	lastSlide() {
+		if (this.isTransitioning()) {
+			return;
+		}
+		const newIdx = this.state.slides.length - 1;
+		if (newIdx < 0) {
+			return;
+		}
+		this.setState({
+			transitiongState: 1,
+			currIdx: newIdx
+		});
+	}
 	componentDidUpdate() {
 		const that = this;
 		return;
@@ -174,10 +245,12 @@ class SplashPage extends React.Component {
 		const innerStyle = {
 			transform: 'translateY(-' + this.state.currIdx * 100 + 'vh)'
 		};
+
 		return React.createElement(
 			'div',
 			{ id: 'page' },
-			React.createElement(MusicPlayer, { isFirstSlide: this.state.currIdx === 0 }),
+			this.state.slides[this.state.currIdx].addCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_White.png' }),
+			React.createElement(MusicPlayer, { scrollToLastSlide: this.lastSlide, isFirstSlide: this.state.currIdx === 0 }),
 			React.createElement(
 				'div',
 				{ className: 'slides_wrapper', onWheel: this.handleWheelEvent.bind(this) },

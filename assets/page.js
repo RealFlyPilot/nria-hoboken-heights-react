@@ -2,33 +2,23 @@ const SLIDES = [{
 	styles: {
 		background: "#000",
 	},
-	center: "Hoboken Heights",
-	bottom: "Sound Experience Yes or no"
+	video: "/assets/videos/NIRMA_Logo_Motion.mp4",
+	isLandingPage: 1,
+}, {
+	video: "/assets/videos/NIRMA_1_Exterior_High_Cinemagraphic.mp4",
+	videoLoop: true,
+	addCornerLogo: true
 }, {
 	styles: {
-		backgroundImage: "url(/assets/hobokenh0.webp)",
-		backgroundSize: "cover"
-	},
-	center: "Slide 2",
-}, {
-	styles: {
-		backgroundImage: "url(/assets/hobokenh1.webp)",
+		backgroundImage: "url(/assets/images/hobokenh1.webp)",
 		backgroundSize: "contain"
 	},
-	center: "Slide 3",
+	// center: "Slide 3",
 	background: "#000"
 }, {
-	styles: {
-		backgroundColor: "#000",
-	},
-	center: "Slide 4",
-	background: "#000"
-}, {
-	styles: {
-		backgroundColor: "#000",
-	},
-	background: "#000",
-	center: "Slide 5"
+	video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
+	videoLoop: true,
+	addCornerLogo: true
 }, {
 	styles: {
 		backgroundColor: "#fff",
