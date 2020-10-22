@@ -8,7 +8,11 @@ const SLIDES = [{
 	video: "/assets/videos/NIRMA_1_Exterior_High_Cinemagraphic.mp4",
 	videoLoop: true,
 	addCornerLogo: true,
-	centerBottom: "MANHATTAN AVE, 1300<br />COMING SOON",
+	centerBottom: {
+		line1: "MANHATTAN AVE, 1300",
+		line2: "COMING SOON",
+	},
+	hasDownArrow: true
 }, {
 	styles: {
 		backgroundImage: "url(/assets/images/hobokenh1.webp)",
@@ -38,7 +42,10 @@ const SLIDES = [{
 		backgroundColor: "#fff",
 		color: "#000"
 	},
-	center: "Slide 6"
+	addCornerLogo: true,
+	addDarkCornerLogo: true,
+	animateCornerLogoOnStart: true,
+	contactFormSlide: true
 }];
 
 module.exports = SLIDES;

@@ -2,22 +2,6 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@font-face {
-  src: url("assets/fonts/Gotham-Light.otf");
-  font-family: "Gotham-Light" format("opentype");
-  font-weight: 300;
-}
-@font-face {
-  src: url("assets/fonts/Gotham-Book.otf") format("opentype");
-  font-family: "Gotham";
-  font-weight: 400;
-}
-@font-face {
-  src: url("assets/fonts/Gotham-Bold.otf");
-  font-family: "Gotham-Bold" format("opentype");
-  font-weight: 700;
-  font-style: normal;
-}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -69,6 +53,72 @@ table {
 }
 
 /* Custom Styles */
+@font-face {
+  src: url("assets/fonts/Gotham-Light.otf");
+  font-family: "Gotham-Light" format("opentype");
+  font-weight: 300;
+}
+@font-face {
+  src: url("assets/fonts/Gotham-Book.otf") format("opentype");
+  font-family: "Gotham";
+  font-weight: 400;
+}
+@font-face {
+  src: url("assets/fonts/Gotham-Bold.otf");
+  font-family: "Gotham-Bold" format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+@keyframes fadeInDriftUp {
+  0% {
+    top: 15px;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+@keyframes lineAppear {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 42px;
+  }
+}
+@keyframes soundOptionsSlideOutLeft {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 86px;
+  }
+}
+@keyframes soundOptionsSlideOutRight {
+  0% {
+    left: -86px;
+  }
+  100% {
+    left: 0;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes slideCornerLogo {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(260px);
+  }
+}
 body {
   font-family: "Gotham", sans-serif;
   font-weight: 400;
@@ -83,6 +133,12 @@ body {
   transition-duration: 500ms;
 }
 
+.separator {
+  border-left: 0.5462802649px solid #FFFFFF;
+  height: 42px;
+  margin: 0 24px;
+}
+
 .slide {
   height: 100vh;
   width: 100vw;
@@ -90,6 +146,49 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+}
+.slide.runAnimations .centerBottom > h1 {
+  position: relative;
+  animation-fill-mode: forwards;
+  animation-name: fadeInDriftUp;
+  animation-duration: 0.7s;
+  animation-delay: 0.5s;
+}
+.slide.runAnimations .centerBottom > h1 + h1 {
+  animation-delay: 0.7s;
+}
+.slide.runAnimations .center > h1,
+.slide.runAnimations .center .contactButton {
+  position: relative;
+  animation-fill-mode: forwards;
+  animation-name: fadeInDriftUp;
+  animation-duration: 1.7s;
+  animation-delay: 0.5s;
+}
+.slide.runAnimations .center > h1 {
+  animation-delay: 0.7s;
+}
+.slide.runAnimations .center .contactButton {
+  animation-delay: 1.1s;
+}
+.slide.runAnimations .downArrow {
+  opacity: 1;
+  bottom: 0;
+}
+.slide.runAnimations .privacyPolicy .verticalLineContainer .verticalLine {
+  height: 100%;
+}
+.slide.runAnimations .privacyPolicy .logo {
+  opacity: 1;
+}
+.slide .downArrow {
+  opacity: 0;
+  transition: all 1.2s;
+  transition-delay: 1s;
+  position: relative;
+  bottom: 50px;
+  cursor: pointer;
+  margin-top: 20px;
 }
 .slide .btn {
   display: flex;
@@ -114,6 +213,9 @@ body {
 .slide .center {
   text-align: center;
 }
+.slide .center > h1 {
+  opacity: 0;
+}
 .slide .background-image {
   position: absolute;
   top: 0;
@@ -125,15 +227,122 @@ body {
   width: 100%;
   height: 100%;
 }
-.slide > h1.centerBottom {
+.slide .centerBottom {
   letter-spacing: 4.4px;
   position: absolute;
   bottom: 13vh;
   line-height: 45px;
   text-align: center;
 }
+.slide .centerBottom > h1 {
+  opacity: 0;
+}
 .slide .contactButton {
   color: #a9a9a9;
+  opacity: 0;
+}
+.slide .contactPageWrapper {
+  width: 100%;
+  height: 100%;
+}
+.slide .contactForm {
+  position: absolute;
+  left: 100px;
+  top: 175px;
+  background-color: #CDCDCD;
+  padding: 53px;
+  width: 44vw;
+}
+.slide .contactForm .headline {
+  font-size: 14px;
+  letter-spacing: 4.17px;
+  line-height: 16.66px;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 18px;
+}
+.slide .contactForm .two-input-group {
+  display: flex;
+}
+.slide .contactForm .two-input-group .form-control {
+  flex-grow: 1;
+}
+.slide .contactForm .two-input-group .form-control + .form-control {
+  margin-left: 32px;
+}
+.slide .contactForm .form-control {
+  font-family: "Gotham-Light", sans-serif;
+  font-weight: 300;
+}
+.slide .contactForm .form-control .label {
+  display: block;
+  color: #000;
+  font-size: 14.2px;
+  line-height: 19.88px;
+  margin-top: 24px;
+}
+.slide .contactForm .form-control .input {
+  margin-top: 16.53px;
+  background-color: #fff;
+  height: 44px;
+  border: none 0 transparent;
+  width: 100%;
+}
+.slide .contactForm .fine-print {
+  font-size: 10px;
+  line-height: 21px;
+  color: #000;
+  margin-top: 18px;
+}
+.slide .contactForm .rightArrow {
+  float: right;
+  margin-top: 40px;
+}
+.slide .privacyPolicy {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  float: right;
+}
+.slide .privacyPolicy .verticalLineContainer {
+  height: 50vh;
+}
+.slide .privacyPolicy .verticalLineContainer .verticalLine {
+  border-left: solid 0.55px #000;
+  transition: all 1.2s;
+  transition-delay: 0.9s;
+  height: 0;
+}
+.slide .privacyPolicy .logo {
+  height: 90px;
+  margin-bottom: 56px;
+  margin-top: 35px;
+  opacity: 0;
+  transition: all 1.2s;
+  transition-delay: 2.1s;
+}
+.slide .privacyPolicy .contactInfo {
+  text-align: center;
+}
+.slide .privacyPolicy .contactInfo .address,
+.slide .privacyPolicy .contactInfo .phone,
+.slide .privacyPolicy .contactInfo .copyright {
+  font-size: 15px;
+  line-height: 25px;
+}
+.slide .privacyPolicy .contactInfo .phone {
+  font-weight: 700;
+  font-family: "Gotham-Bold", sans-serif;
+}
+.slide .privacyPolicy .contactInfo .copyright {
+  font-weight: 300;
+  font-family: "Gotham-Light", sans-serif;
+  margin-top: 50px;
+}
+.slide .privacyPolicy .contactInfo .btn {
+  border: solid 1px #000;
+  margin-top: 46px;
 }
 
 .musicplayer_container {
@@ -143,6 +352,12 @@ body {
   text-align: center;
   cursor: pointer;
   letter-spacing: 4.4px;
+}
+.musicplayer_container.darkMode {
+  color: #000;
+}
+.musicplayer_container.darkMode .separator {
+  border-left-color: #000;
 }
 .musicplayer_container.corner_layout {
   top: 50px;
@@ -166,28 +381,221 @@ body {
   display: flex;
   align-items: center;
 }
-.musicplayer_container .separator {
-  border-left: 0.5462802649px solid #FFFFFF;
-  height: 42px;
-  margin: 0 24px;
+.musicplayer_container .musicplayer .landing_page_sound_player.animationHasNotRun .title {
+  position: relative;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-name: fadeInDriftUp;
+  animation-duration: 1s;
+  animation-delay: 4s;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player.animationHasNotRun .settings .button.play {
+  background-color: #000;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player.animationHasNotRun .settings .button.play .text {
+  animation-name: soundOptionsSlideOutLeft;
+  animation-delay: 5s;
+  width: 0;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player.animationHasNotRun .settings .button.mute .text {
+  animation-name: soundOptionsSlideOutRight;
+  animation-delay: 5.2s;
+  position: relative;
+  left: -86px;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player.animationHasNotRun .settings .button .text {
+  animation-fill-mode: forwards;
+  animation-duration: 0.75s;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player.animationHasNotRun .settings .separator {
+  height: 0;
+  animation-fill-mode: forwards;
+  animation-name: lineAppear;
+  animation-duration: 0.75s;
+  animation-delay: 4.5s;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player .title {
+  opacity: 1;
 }
 .musicplayer_container .musicplayer .landing_page_sound_player .settings {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 40px;
+  height: 42px;
 }
-.musicplayer_container .musicplayer .landing_page_sound_player .settings .selected_option {
+.musicplayer_container .musicplayer .landing_page_sound_player .settings .button {
+  width: 86px;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player .settings .button.play {
+  z-index: 1;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player .settings .button.play .text {
+  float: right;
+  width: 86px;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player .settings .button.mute .text {
+  float: left;
+  width: 86px;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player .settings .button .text {
+  overflow: hidden;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player .settings .button:hover {
   font-weight: 700;
   font-family: "Gotham-Bold", sans-serif;
 }
+.musicplayer_container .musicplayer .landing_page_sound_player .settings .separator {
+  margin: 0;
+}
 
-.corner-logo {
+.corner-logo-wrapper {
   position: absolute;
   top: 40px;
   left: 100px;
   z-index: 12;
+  height: 60px;
+  width: 250px;
+  cursor: default;
+}
+.corner-logo-wrapper:hover .corner-logo {
+  transform: translateX(260px);
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(1) {
+  animation-delay: 0.55s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(3) {
+  animation-delay: 0.65s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(4) {
+  animation-delay: 0.7s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(5) {
+  animation-delay: 0.75s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(6) {
+  animation-delay: 0.8s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(7) {
+  animation-delay: 0.35s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(7) {
+  animation-delay: 0.85s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(8) {
+  animation-delay: 0.4s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(8) {
+  animation-delay: 0.9s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(9) {
+  animation-delay: 0.45s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(9) {
+  animation-delay: 0.95s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(10) {
+  animation-delay: 0.5s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(10) {
+  animation-delay: 1s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(11) {
+  animation-delay: 0.55s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(11) {
+  animation-delay: 1.05s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(12) {
+  animation-delay: 0.6s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(12) {
+  animation-delay: 1.1s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(13) {
+  animation-delay: 0.65s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(13) {
+  animation-delay: 1.15s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(14) {
+  animation-delay: 0.7s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(14) {
+  animation-delay: 1.2s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(15) {
+  animation-delay: 0.75s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(15) {
+  animation-delay: 1.25s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation:nth-child(16) {
+  animation-delay: 0.8s;
+}
+.corner-logo-wrapper.animate .text .cascading-animation:nth-child(16) {
+  animation-delay: 1.3s;
+}
+.corner-logo-wrapper:hover .text .cascading-animation, .corner-logo-wrapper.animate .text .cascading-animation {
+  animation-fill-mode: forwards;
+  animation-name: fadeIn;
+  animation-duration: 0.2s;
+}
+.corner-logo-wrapper.animate .corner-logo {
+  animation-fill-mode: forwards;
+  animation-name: slideCornerLogo;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+}
+.corner-logo-wrapper.darkMode .text {
+  color: #000;
+}
+.corner-logo-wrapper.darkMode .separator {
+  border-left-color: #000;
+}
+.corner-logo-wrapper .corner-logo {
   width: 110px;
+  transition: all 1s;
+  position: absolute;
+  left: 0;
+}
+.corner-logo-wrapper .text {
+  transition: all 1s;
+  position: absolute;
+  top: 20px;
+  color: #fff;
+  width: 300px;
+  display: flex;
+  align-items: center;
+}
+.corner-logo-wrapper .text .letter {
+  opacity: 0;
+  padding-right: 4.4px;
+}
+.corner-logo-wrapper .text .separator {
+  opacity: 0;
+  margin: 0 12px;
 }
 
 /*# sourceMappingURL=styles.css.map */

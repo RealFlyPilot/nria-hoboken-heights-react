@@ -13,6 +13,7 @@ class SplashPage extends React.Component {
 			currIdx: 0
 		};
 		this.lastSlide = this.lastSlide.bind(this);
+		this.nextSlide = this.nextSlide.bind(this);
 	}
 	handleWheelEvent(evt) {
 		const isScrollingDown = evt.deltaY > 0;
@@ -77,21 +78,50 @@ class SplashPage extends React.Component {
 			});
 		}, false);
 	}
+	explodeString(string){
+		const spans = string.split("").map(function(char, index){
+			return <span className='letter cascading-animation' key={index}>{char}</span>;
+		})
+		return spans;
+	}
 	render() {
 		const $slides = this.state.slides.map((slide, idx) =>
-			<Slide scrollToLastSlide={this.lastSlide} key={idx} obj={slide}></Slide>
+			<Slide goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx}></Slide>
 		);
-		let classes = "slides_wrapper";
 		const innerStyle = {
 			transform: 'translateY(-' + (this.state.currIdx * 100) + 'vh)'
 		};
 
+		const thisSlideState = this.state.slides[this.state.currIdx];
+		const addCornerLogo = thisSlideState.addCornerLogo;
+		const darkCornerLogo = thisSlideState.addDarkCornerLogo;
+		const animateCornerLogoOnStart = thisSlideState.animateCornerLogoOnStart;
+
+		let cornerLogoWrapperClasses = 'corner-logo-wrapper';
+		if(darkCornerLogo) {
+			cornerLogoWrapperClasses += ' darkMode';
+		}
+		if(animateCornerLogoOnStart) {
+			cornerLogoWrapperClasses += ' animate';
+		}
 		return (
 			<div id="page">
-				{this.state.slides[this.state.currIdx].addCornerLogo &&
-					<img className='corner-logo' src='/assets/images/NIRMA_Logo_Symbol_White.png' />
+				{addCornerLogo &&
+					<div className={cornerLogoWrapperClasses}>
+						<div className='text'>
+							{this.explodeString('HOBOKEN HEIGHTS')}
+							<div className='cascading-animation separator' />
+						</div>
+						{darkCornerLogo && 
+							<img className='corner-logo' src='/assets/images/NIRMA_Logo_Symbol_Black.png' />
+						}
+						{!darkCornerLogo && 
+							<img className='corner-logo' src='/assets/images/NIRMA_Logo_Symbol_White.png' />
+						}
+						
+					</div>
 				}
-				<MusicPlayer scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0}></MusicPlayer>
+				<MusicPlayer darkMode={darkCornerLogo} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0}></MusicPlayer>
 				<div className="slides_wrapper" onWheel={this.handleWheelEvent.bind(this)}>
 					<div
 						ref="inner"

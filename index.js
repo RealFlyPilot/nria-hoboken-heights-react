@@ -4,30 +4,61 @@ class MusicPlayer extends React.Component {
 		super(props);
 		this.state = {
 			isPlaying: false,
-			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3')
+			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3'),
+			landingPageAnimationFinished: 0
 		};
+
+		this.musicPlay = this.musicPlay.bind(this);
+		this.musicMute = this.musicMute.bind(this);
+		this.scrollToNextSlide = this.scrollToNextSlide.bind(this);
+		this.endAnimation = this.endAnimation.bind(this);
 	}
 	handleClick(evt) {
 		this.setState({ isPlaying: !this.state.isPlaying });
+	}
+	musicPlay(evt) {
+		this.setState({ isPlaying: true });
+	}
+	musicMute(evt) {
+		this.setState({ isPlaying: false });
 	}
 	scrollToContactForm() {
 		const { scrollToLastSlide } = this.props;
 		scrollToLastSlide();
 	}
 
+	scrollToNextSlide() {
+		const { goToNextSlide } = this.props;
+		goToNextSlide();
+	}
+
+	endAnimation() {
+		this.setState({ landingPageAnimationFinished: 1 });
+	}
+
 	render() {
 		let statusText = this.state.isPlaying ? 'ON' : 'OFF';
+		let classes = "musicplayer_container";
+		let landing_page_sound_player_classes = 'landing_page_sound_player';
+
 		if (this.state.isPlaying) {
 			this.state.audioPlayer.play();
 		} else {
 			this.state.audioPlayer.pause();
 		}
 
-		let classes = "musicplayer_container";
 		if (this.props.isFirstSlide) {
 			classes += " center_layout";
 		} else {
 			classes += " corner_layout";
+		}
+
+		if (this.props.darkMode) {
+			classes += " darkMode";
+		}
+
+		if (!this.state.landingPageAnimationFinished) {
+			landing_page_sound_player_classes += " animationHasNotRun";
 		}
 
 		return React.createElement(
@@ -35,12 +66,16 @@ class MusicPlayer extends React.Component {
 			{ className: classes },
 			React.createElement(
 				'div',
-				{ className: 'musicplayer centered_content', onClick: this.handleClick.bind(this) },
+				{ className: 'musicplayer centered_content' },
 				React.createElement(
 					'div',
-					{ className: 'landing_page_sound_player' },
-					'SOUND EXPERIENCE',
-					React.createElement(SoundExperienceSettings, { isPlaying: this.state.isPlaying })
+					{ className: landing_page_sound_player_classes },
+					React.createElement(
+						'div',
+						{ className: 'title' },
+						'SOUND EXPERIENCE'
+					),
+					React.createElement(SoundExperienceSettings, { animationEnded: this.endAnimation, nextSlide: this.scrollToNextSlide, muteMusic: this.musicMute, playMusic: this.musicPlay, isPlaying: this.state.isPlaying })
 				)
 			),
 			React.createElement(
@@ -73,22 +108,58 @@ class SoundExperienceSettings extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+
+	startMusicPlayer() {
+		const { nextSlide } = this.props;
+		const { playMusic } = this.props;
+		playMusic();
+		nextSlide();
+	}
+
+	stopMusicPlayer() {
+		const { nextSlide } = this.props;
+		const { muteMusic } = this.props;
+		muteMusic();
+		nextSlide();
+	}
+
+	animationHasEnded() {
+		const { animationEnded } = this.props;
+		animationEnded();
+	}
+
 	render() {
+		let playButtonClasses = 'button play';
+		let muteButtonClasses = 'button mute';
+		let settingsClasses = 'settings';
+
+		if (this.props.isPlaying) {
+			playButtonClasses += " selected_option";
+		} else {
+			muteButtonClasses += " selected_option";
+		}
+
 		return React.createElement(
 			'div',
-			{ className: 'settings' },
+			{ className: settingsClasses },
 			React.createElement(
-				'span',
-				{ className: this.props.isPlaying ? 'selected_option' : '' },
-				'YES'
+				'div',
+				{ className: playButtonClasses, onClick: this.startMusicPlayer.bind(this) },
+				React.createElement(
+					'div',
+					{ className: 'text' },
+					'YES'
+				)
 			),
-			' ',
 			React.createElement('div', { className: 'separator' }),
-			' ',
 			React.createElement(
-				'span',
-				{ className: !this.props.isPlaying ? 'selected_option' : '' },
-				'NO'
+				'div',
+				{ onClick: this.stopMusicPlayer.bind(this), className: muteButtonClasses, onAnimationEnd: this.animationHasEnded.bind(this) },
+				React.createElement(
+					'div',
+					{ className: 'text' },
+					'NO'
+				)
 			)
 		);
 	}
@@ -105,7 +176,11 @@ const SLIDES = [{
 	video: "/assets/videos/NIRMA_1_Exterior_High_Cinemagraphic.mp4",
 	videoLoop: true,
 	addCornerLogo: true,
-	centerBottom: "MANHATTAN AVE, 1300<br />COMING SOON"
+	centerBottom: {
+		line1: "MANHATTAN AVE, 1300",
+		line2: "COMING SOON"
+	},
+	hasDownArrow: true
 }, {
 	styles: {
 		backgroundImage: "url(/assets/images/hobokenh1.webp)",
@@ -135,7 +210,10 @@ const SLIDES = [{
 		backgroundColor: "#fff",
 		color: "#000"
 	},
-	center: "Slide 6"
+	addCornerLogo: true,
+	addDarkCornerLogo: true,
+	animateCornerLogoOnStart: true,
+	contactFormSlide: true
 }];
 
 module.exports = SLIDES;
@@ -152,20 +230,33 @@ class Slide extends React.Component {
 			this.state.styles.backgroundPosition = "center";
 		}
 	}
+
 	scrollToContactForm() {
 		const { scrollToLastSlide } = this.props;
 		scrollToLastSlide();
 	}
+
+	scrollToNextSlide() {
+		const { goToNextSlide } = this.props;
+		goToNextSlide();
+	}
+
 	render() {
 		const slideObj = this.props.obj;
+		let slideClasses = "slide bg000";
+		const isCurrent = this.props.isCurrent;
+
+		if (isCurrent) slideClasses += " runAnimations";
+
 		return React.createElement(
 			"div",
-			{ className: "slide bg000", style: this.state.styles },
+			{ className: slideClasses, style: this.state.styles },
 			slideObj.video && React.createElement(
 				"video",
 				{ autoPlay: true, muted: true, loop: slideObj.videoLoop ? true : false, className: "background-video" },
 				React.createElement("source", { src: slideObj.video, type: "video/mp4" })
 			),
+			slideObj.contactFormSlide && React.createElement(ContactFormSlide, null),
 			React.createElement(
 				"div",
 				{ className: "center", style: slideObj.centerTextStyles },
@@ -177,12 +268,148 @@ class Slide extends React.Component {
 					"CONTACT"
 				)
 			),
-			React.createElement("h1", { className: "centerBottom", dangerouslySetInnerHTML: { __html: slideObj.centerBottom } })
+			React.createElement(
+				"div",
+				{ className: "centerBottom" },
+				slideObj.centerBottom && slideObj.centerBottom.line1 && React.createElement("h1", { dangerouslySetInnerHTML: { __html: slideObj.centerBottom.line1 } }),
+				slideObj.centerBottom && slideObj.centerBottom.line2 && React.createElement("h1", { dangerouslySetInnerHTML: { __html: slideObj.centerBottom.line2 } }),
+				slideObj.hasDownArrow && React.createElement("img", { onClick: this.scrollToNextSlide.bind(this), className: "downArrow", src: "/assets/images/downarrow.svg" })
+			)
 		);
 	}
 }
 
 module.exports = Slide;
+
+class ContactFormSlide extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
+		return React.createElement(
+			"div",
+			{ className: "contactPageWrapper" },
+			React.createElement(
+				"div",
+				{ className: "contactForm" },
+				React.createElement(
+					"div",
+					{ className: "headline" },
+					"FOR INFORMATION PLEASE FILL THE FORM BELOW"
+				),
+				React.createElement(
+					"div",
+					{ className: "two-input-group" },
+					React.createElement(
+						"div",
+						{ className: "form-control" },
+						React.createElement(
+							"label",
+							{ className: "label" },
+							"First Name*"
+						),
+						React.createElement("input", { className: "input" })
+					),
+					React.createElement(
+						"div",
+						{ className: "form-control" },
+						React.createElement(
+							"label",
+							{ className: "label" },
+							"Last Name*"
+						),
+						React.createElement("input", { className: "input" })
+					)
+				),
+				React.createElement(
+					"div",
+					{ className: "form-control" },
+					React.createElement(
+						"label",
+						{ className: "label" },
+						"E-mail*"
+					),
+					React.createElement("input", { className: "input" })
+				),
+				React.createElement(
+					"div",
+					{ className: "form-control" },
+					React.createElement(
+						"label",
+						{ className: "label" },
+						"Mobile Phone Number*"
+					),
+					React.createElement("input", { className: "input" })
+				),
+				React.createElement(
+					"div",
+					{ className: "form-control" },
+					React.createElement(
+						"label",
+						{ className: "label" },
+						"How did you hear of us?*"
+					),
+					React.createElement("input", { className: "input" })
+				),
+				React.createElement(
+					"div",
+					{ className: "form-control" },
+					React.createElement(
+						"label",
+						{ className: "label" },
+						"How may we help you?*"
+					),
+					React.createElement("textarea", { className: "input" })
+				),
+				React.createElement(
+					"div",
+					{ className: "fine-print" },
+					"NOTE: By filling out this contact form, I give you my permission to contact me via email, cell phone, or text until I opt out of any such communications."
+				),
+				React.createElement("img", { className: "rightArrow", src: "/assets/images/rightArrow.svg" })
+			),
+			React.createElement(
+				"div",
+				{ className: "privacyPolicy" },
+				React.createElement(
+					"div",
+					{ className: "verticalLineContainer" },
+					React.createElement("div", { className: "verticalLine" })
+				),
+				React.createElement("img", { className: "logo", src: "/assets/images/NRLiving.png" }),
+				React.createElement(
+					"div",
+					{ className: "contactInfo" },
+					React.createElement(
+						"div",
+						{ className: "address" },
+						"1300 Manhattan Avenue Union City, NJ 07087"
+					),
+					React.createElement(
+						"div",
+						{ className: "address" },
+						"Manhattan Avenue Capital 1300, LLC"
+					),
+					React.createElement(
+						"div",
+						{ className: "phone" },
+						"201-400-7487"
+					),
+					React.createElement(
+						"div",
+						{ className: "copyright" },
+						"\xA9 2020 Hoboken Heights. All rights reserved."
+					),
+					React.createElement(
+						"div",
+						{ className: "btn" },
+						"PRIVACY POLICY"
+					)
+				)
+			)
+		);
+	}
+}
 
 },{}],4:[function(require,module,exports){
 'use strict';
@@ -200,6 +427,7 @@ class SplashPage extends React.Component {
 			currIdx: 0
 		};
 		this.lastSlide = this.lastSlide.bind(this);
+		this.nextSlide = this.nextSlide.bind(this);
 	}
 	handleWheelEvent(evt) {
 		const isScrollingDown = evt.deltaY > 0;
@@ -264,18 +492,50 @@ class SplashPage extends React.Component {
 			});
 		}, false);
 	}
+	explodeString(string) {
+		const spans = string.split("").map(function (char, index) {
+			return React.createElement(
+				'span',
+				{ className: 'letter cascading-animation', key: index },
+				char
+			);
+		});
+		return spans;
+	}
 	render() {
-		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { scrollToLastSlide: this.lastSlide, key: idx, obj: slide }));
-		let classes = "slides_wrapper";
+		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx }));
 		const innerStyle = {
 			transform: 'translateY(-' + this.state.currIdx * 100 + 'vh)'
 		};
 
+		const thisSlideState = this.state.slides[this.state.currIdx];
+		const addCornerLogo = thisSlideState.addCornerLogo;
+		const darkCornerLogo = thisSlideState.addDarkCornerLogo;
+		const animateCornerLogoOnStart = thisSlideState.animateCornerLogoOnStart;
+
+		let cornerLogoWrapperClasses = 'corner-logo-wrapper';
+		if (darkCornerLogo) {
+			cornerLogoWrapperClasses += ' darkMode';
+		}
+		if (animateCornerLogoOnStart) {
+			cornerLogoWrapperClasses += ' animate';
+		}
 		return React.createElement(
 			'div',
 			{ id: 'page' },
-			this.state.slides[this.state.currIdx].addCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_White.png' }),
-			React.createElement(MusicPlayer, { scrollToLastSlide: this.lastSlide, isFirstSlide: this.state.currIdx === 0 }),
+			addCornerLogo && React.createElement(
+				'div',
+				{ className: cornerLogoWrapperClasses },
+				React.createElement(
+					'div',
+					{ className: 'text' },
+					this.explodeString('HOBOKEN HEIGHTS'),
+					React.createElement('div', { className: 'cascading-animation separator' })
+				),
+				darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_Black.png' }),
+				!darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_White.png' })
+			),
+			React.createElement(MusicPlayer, { darkMode: darkCornerLogo, goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, isFirstSlide: this.state.currIdx === 0 }),
 			React.createElement(
 				'div',
 				{ className: 'slides_wrapper', onWheel: this.handleWheelEvent.bind(this) },
