@@ -1,110 +1,289 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-class MusicPlayer extends React.Component {
+class ContactForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isPlaying: false,
-			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3'),
-			landingPageAnimationFinished: 0
+			first_name: '',
+			last_name: '',
+			email: '',
+			mobilephone: '',
+			how_you_heard: '',
+			how_can_we_help: '',
+			formSubmitted: ''
 		};
-
-		this.musicPlay = this.musicPlay.bind(this);
-		this.musicMute = this.musicMute.bind(this);
-		this.scrollToNextSlide = this.scrollToNextSlide.bind(this);
-		this.endAnimation = this.endAnimation.bind(this);
-	}
-	handleClick(evt) {
-		this.setState({ isPlaying: !this.state.isPlaying });
-	}
-	musicPlay(evt) {
-		this.setState({ isPlaying: true });
-	}
-	musicMute(evt) {
-		this.setState({ isPlaying: false });
-	}
-	scrollToContactForm() {
-		const { scrollToLastSlide } = this.props;
-		scrollToLastSlide();
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.resetForm = this.resetForm.bind(this);
 	}
 
-	scrollToNextSlide() {
-		const { goToNextSlide } = this.props;
-		goToNextSlide();
+	handleInputChange(event) {
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
+
+		this.setState({
+			[name]: value
+		});
 	}
 
-	endAnimation() {
-		this.setState({ landingPageAnimationFinished: 1 });
+	handleSubmit() {
+		console.log('A form was submitted: ');
+		console.log(this.state);
+		this.setState({
+			formSubmitted: true,
+			first_name: '',
+			last_name: '',
+			email: '',
+			mobilephone: '',
+			how_you_heard: '',
+			how_can_we_help: ''
+		});
+	}
+	resetForm() {
+		this.setState({
+			formSubmitted: null
+		});
 	}
 
 	render() {
-		let statusText = this.state.isPlaying ? 'ON' : 'OFF';
-		let classes = "musicplayer_container";
-		let landing_page_sound_player_classes = 'landing_page_sound_player';
-
-		if (this.state.isPlaying) {
-			this.state.audioPlayer.play();
-		} else {
-			this.state.audioPlayer.pause();
-		}
-
-		if (this.props.isFirstSlide) {
-			classes += " center_layout";
-		} else {
-			classes += " corner_layout";
-		}
-
-		if (this.props.darkMode) {
-			classes += " darkMode";
-		}
-
-		if (!this.state.landingPageAnimationFinished) {
-			landing_page_sound_player_classes += " animationHasNotRun";
+		let contactFormClasses = 'contactForm';
+		if (this.state.formSubmitted) {
+			contactFormClasses += ' submitted';
 		}
 
 		return React.createElement(
-			'div',
-			{ className: classes },
+			'form',
+			{ className: contactFormClasses },
 			React.createElement(
 				'div',
-				{ className: 'musicplayer centered_content' },
+				{ className: 'submittedFormOverlay' },
 				React.createElement(
 					'div',
-					{ className: landing_page_sound_player_classes },
-					React.createElement(
-						'div',
-						{ className: 'title' },
-						'SOUND EXPERIENCE'
-					),
-					React.createElement(SoundExperienceSettings, { animationEnded: this.endAnimation, nextSlide: this.scrollToNextSlide, muteMusic: this.musicMute, playMusic: this.musicPlay, isPlaying: this.state.isPlaying })
+					{ className: 'text' },
+					'THANK YOU!'
+				),
+				React.createElement(
+					'div',
+					{ className: 'closeBtn', onClick: this.resetForm },
+					'X'
 				)
 			),
 			React.createElement(
 				'div',
-				{ className: 'corner_content' },
+				{ className: 'headline' },
+				'FOR INFORMATION PLEASE FILL THE FORM BELOW'
+			),
+			React.createElement(
+				'div',
+				{ className: 'two-input-group' },
 				React.createElement(
 					'div',
-					{ className: 'musicplayer', onClick: this.handleClick.bind(this) },
+					{ className: 'form-control' },
 					React.createElement(
-						'div',
-						null,
-						'SOUND',
-						React.createElement('br', null),
-						statusText
-					)
+						'label',
+						{ className: 'label' },
+						'First Name*'
+					),
+					React.createElement('input', { className: 'input',
+						name: 'first_name',
+						type: 'text',
+						value: this.state.first_name,
+						onChange: this.handleInputChange })
 				),
-				React.createElement('div', { className: 'separator' }),
 				React.createElement(
 					'div',
-					{ onClick: this.scrollToContactForm.bind(this) },
+					{ className: 'form-control' },
+					React.createElement(
+						'label',
+						{ className: 'label' },
+						'Last Name*'
+					),
+					React.createElement('input', { className: 'input',
+						name: 'last_name',
+						type: 'text',
+						value: this.state.last_name,
+						onChange: this.handleInputChange })
+				)
+			),
+			React.createElement(
+				'div',
+				{ className: 'form-control' },
+				React.createElement(
+					'label',
+					{ className: 'label' },
+					'E-mail*'
+				),
+				React.createElement('input', { className: 'input',
+					name: 'email',
+					type: 'text',
+					value: this.state.email,
+					onChange: this.handleInputChange })
+			),
+			React.createElement(
+				'div',
+				{ className: 'form-control' },
+				React.createElement(
+					'label',
+					{ className: 'label' },
+					'Mobile Phone Number*'
+				),
+				React.createElement('input', { className: 'input',
+					name: 'mobilephone',
+					type: 'text',
+					value: this.state.mobilephone,
+					onChange: this.handleInputChange })
+			),
+			React.createElement(
+				'div',
+				{ className: 'form-control' },
+				React.createElement(
+					'label',
+					{ className: 'label' },
+					'How did you hear of us?*'
+				),
+				React.createElement('input', { className: 'input',
+					name: 'how_you_heard',
+					type: 'text',
+					value: this.state.how_you_heard,
+					onChange: this.handleInputChange })
+			),
+			React.createElement(
+				'div',
+				{ className: 'form-control' },
+				React.createElement(
+					'label',
+					{ className: 'label' },
+					'How may we help you?*'
+				),
+				React.createElement('textarea', { className: 'input textarea',
+					name: 'how_can_we_help',
+					type: 'text',
+					value: this.state.how_can_we_help,
+					onChange: this.handleInputChange })
+			),
+			React.createElement(
+				'div',
+				{ className: 'fine-print' },
+				'NOTE: By filling out this contact form, I give you my permission to contact me via email, cell phone, or text until I opt out of any such communications.'
+			),
+			React.createElement('img', { className: 'rightArrow', src: '/assets/images/rightArrow.svg', onClick: this.handleSubmit })
+		);
+	}
+}
+
+module.exports = ContactForm;
+
+},{}],2:[function(require,module,exports){
+const ContactForm = require('./contactform.jsx');
+
+class ContactFormSlide extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
+		return React.createElement(
+			"div",
+			{ className: "contactPageWrapper" },
+			React.createElement(ContactForm, null),
+			React.createElement(
+				"div",
+				{ className: "privacyPolicy" },
+				React.createElement(
+					"div",
+					{ className: "verticalLineContainer" },
+					React.createElement("div", { className: "verticalLine" })
+				),
+				React.createElement("img", { className: "logo", src: "/assets/images/NRLiving.png" }),
+				React.createElement(
+					"div",
+					{ className: "contactInfo" },
+					React.createElement(
+						"div",
+						{ className: "address" },
+						"1300 Manhattan Avenue Union City, NJ 07087"
+					),
+					React.createElement(
+						"div",
+						{ className: "address" },
+						"Manhattan Avenue Capital 1300, LLC"
+					),
+					React.createElement(
+						"div",
+						{ className: "phone" },
+						"201-400-7487"
+					),
+					React.createElement(
+						"div",
+						{ className: "copyright" },
+						"\xA9 2020 Hoboken Heights. All rights reserved."
+					),
+					React.createElement(
+						"div",
+						{ className: "btn" },
+						"PRIVACY POLICY"
+					)
+				)
+			)
+		);
+	}
+}
+module.exports = ContactFormSlide;
+
+},{"./contactform.jsx":1}],3:[function(require,module,exports){
+class CornerMusicPlayer extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	animationHasEnded() {
+		const { animationEnded } = this.props;
+		animationEnded();
+	}
+
+	toggleMusicPlayer() {
+		const { togglePlayer } = this.props;
+		togglePlayer();
+	}
+
+	scrollToBottomSlide() {
+		const { scrollToContactFormSlide } = this.props;
+		scrollToContactFormSlide();
+	}
+
+	render() {
+		const statusText = this.props.musicIsPlaying ? 'ON' : 'OFF';
+		return React.createElement(
+			'div',
+			{ className: 'corner_content slideInAnimationWrapper' },
+			React.createElement(
+				'div',
+				{ className: 'musicplayer slideInAnimationElementContainer', onClick: this.toggleMusicPlayer.bind(this) },
+				React.createElement(
+					'div',
+					{ className: 'slideInAnimationElement slideInAnimationElementLeft' },
+					'SOUND',
+					React.createElement('br', null),
+					statusText
+				)
+			),
+			React.createElement('div', { className: 'separator' }),
+			React.createElement(
+				'div',
+				{ className: 'slideInAnimationElementContainer', onClick: this.scrollToBottomSlide.bind(this) },
+				React.createElement(
+					'div',
+					{ className: 'text slideInAnimationElement slideInAnimationElementRight', onAnimationEnd: this.animationHasEnded.bind(this) },
 					'CONTACT'
 				)
 			)
 		);
 	}
 }
-module.exports = MusicPlayer;
 
-class SoundExperienceSettings extends React.Component {
+module.exports = CornerMusicPlayer;
+
+},{}],4:[function(require,module,exports){
+class LandingPageMusicPlayer extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -129,9 +308,9 @@ class SoundExperienceSettings extends React.Component {
 	}
 
 	render() {
-		let playButtonClasses = 'button play';
-		let muteButtonClasses = 'button mute';
-		let settingsClasses = 'settings';
+		let settingsClasses = 'settings slideInAnimationWrapper';
+		let playButtonClasses = 'button play slideInAnimationElementContainer';
+		let muteButtonClasses = 'button mute slideInAnimationElementContainer';
 
 		if (this.props.isPlaying) {
 			playButtonClasses += " selected_option";
@@ -147,7 +326,7 @@ class SoundExperienceSettings extends React.Component {
 				{ className: playButtonClasses, onClick: this.startMusicPlayer.bind(this) },
 				React.createElement(
 					'div',
-					{ className: 'text' },
+					{ className: 'text slideInAnimationElement slideInAnimationElementLeft' },
 					'YES'
 				)
 			),
@@ -157,7 +336,7 @@ class SoundExperienceSettings extends React.Component {
 				{ onClick: this.stopMusicPlayer.bind(this), className: muteButtonClasses, onAnimationEnd: this.animationHasEnded.bind(this) },
 				React.createElement(
 					'div',
-					{ className: 'text' },
+					{ className: 'text slideInAnimationElement slideInAnimationElementRight' },
 					'NO'
 				)
 			)
@@ -165,7 +344,117 @@ class SoundExperienceSettings extends React.Component {
 	}
 }
 
-},{}],2:[function(require,module,exports){
+module.exports = LandingPageMusicPlayer;
+
+},{}],5:[function(require,module,exports){
+const LandingPageMusicPlayer = require('./landingpagemusicplayer.jsx');
+
+const CornerMusicPlayer = require('./cornermusicplayer.jsx');
+
+class MusicPlayer extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			isPlaying: false,
+			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3'),
+			landingPageAnimationFinished: 0,
+			cornerMusicPlayerAnimationFinished: 0
+		};
+
+		this.musicPlay = this.musicPlay.bind(this);
+		this.musicMute = this.musicMute.bind(this);
+		this.scrollToNextSlide = this.scrollToNextSlide.bind(this);
+		this.scrollToContactForm = this.scrollToContactForm.bind(this);
+		this.landingPageAnimationEnded = this.landingPageAnimationEnded.bind(this);
+		this.cornerMusicPlayerAnimationEnded = this.cornerMusicPlayerAnimationEnded.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick(evt) {
+		this.setState({ isPlaying: !this.state.isPlaying });
+	}
+	musicPlay(evt) {
+		this.setState({ isPlaying: true });
+	}
+	musicMute(evt) {
+		this.setState({ isPlaying: false });
+	}
+	scrollToContactForm() {
+		const { scrollToLastSlide } = this.props;
+		scrollToLastSlide();
+	}
+
+	scrollToNextSlide() {
+		const { goToNextSlide } = this.props;
+		goToNextSlide();
+	}
+
+	landingPageAnimationEnded() {
+		this.setState({ landingPageAnimationFinished: 1 });
+	}
+
+	cornerMusicPlayerAnimationEnded() {
+		this.setState({ cornerMusicPlayerAnimationFinished: 1 });
+	}
+
+	render() {
+
+		let classes = "musicplayer_container";
+		let landing_page_sound_player_classes = 'landing_page_sound_player';
+		let corner_content_wrapper_classes = 'corner_content_wrapper';
+
+		if (this.state.isPlaying) {
+			this.state.audioPlayer.play();
+		} else {
+			this.state.audioPlayer.pause();
+		}
+
+		if (this.props.isFirstSlide) {
+			classes += " center_layout";
+		} else {
+			classes += " corner_layout";
+		}
+
+		if (this.props.darkMode) {
+			classes += " darkMode";
+		}
+
+		if (!this.state.landingPageAnimationFinished) {
+			landing_page_sound_player_classes += " animationHasNotRun";
+		}
+
+		if (!this.state.cornerMusicPlayerAnimationFinished) {
+			corner_content_wrapper_classes += " animationHasNotRun";
+		}
+
+		return React.createElement(
+			'div',
+			{ className: classes },
+			React.createElement(
+				'div',
+				{ className: 'musicplayer centered_content' },
+				React.createElement(
+					'div',
+					{ className: landing_page_sound_player_classes },
+					React.createElement(
+						'div',
+						{ className: 'title' },
+						'SOUND EXPERIENCE'
+					),
+					React.createElement(LandingPageMusicPlayer, { animationEnded: this.landingPageAnimationEnded, nextSlide: this.scrollToNextSlide, muteMusic: this.musicMute, playMusic: this.musicPlay, isPlaying: this.state.isPlaying })
+				)
+			),
+			React.createElement(
+				'div',
+				{ className: corner_content_wrapper_classes },
+				React.createElement(CornerMusicPlayer, { animationEnded: this.cornerMusicPlayerAnimationEnded, scrollToContactFormSlide: this.scrollToContactForm, togglePlayer: this.handleClick, musicIsPlaying: this.state.isPlaying })
+			)
+		);
+	}
+}
+
+module.exports = MusicPlayer;
+
+},{"./cornermusicplayer.jsx":3,"./landingpagemusicplayer.jsx":4}],6:[function(require,module,exports){
 const SLIDES = [{
 	styles: {
 		background: "#000"
@@ -218,7 +507,9 @@ const SLIDES = [{
 
 module.exports = SLIDES;
 
-},{}],3:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
+const ContactFormSlide = require('./contactformslide.jsx');
+
 class Slide extends React.Component {
 	constructor(props) {
 		super(props);
@@ -281,137 +572,7 @@ class Slide extends React.Component {
 
 module.exports = Slide;
 
-class ContactFormSlide extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		return React.createElement(
-			"div",
-			{ className: "contactPageWrapper" },
-			React.createElement(
-				"div",
-				{ className: "contactForm" },
-				React.createElement(
-					"div",
-					{ className: "headline" },
-					"FOR INFORMATION PLEASE FILL THE FORM BELOW"
-				),
-				React.createElement(
-					"div",
-					{ className: "two-input-group" },
-					React.createElement(
-						"div",
-						{ className: "form-control" },
-						React.createElement(
-							"label",
-							{ className: "label" },
-							"First Name*"
-						),
-						React.createElement("input", { className: "input" })
-					),
-					React.createElement(
-						"div",
-						{ className: "form-control" },
-						React.createElement(
-							"label",
-							{ className: "label" },
-							"Last Name*"
-						),
-						React.createElement("input", { className: "input" })
-					)
-				),
-				React.createElement(
-					"div",
-					{ className: "form-control" },
-					React.createElement(
-						"label",
-						{ className: "label" },
-						"E-mail*"
-					),
-					React.createElement("input", { className: "input" })
-				),
-				React.createElement(
-					"div",
-					{ className: "form-control" },
-					React.createElement(
-						"label",
-						{ className: "label" },
-						"Mobile Phone Number*"
-					),
-					React.createElement("input", { className: "input" })
-				),
-				React.createElement(
-					"div",
-					{ className: "form-control" },
-					React.createElement(
-						"label",
-						{ className: "label" },
-						"How did you hear of us?*"
-					),
-					React.createElement("input", { className: "input" })
-				),
-				React.createElement(
-					"div",
-					{ className: "form-control" },
-					React.createElement(
-						"label",
-						{ className: "label" },
-						"How may we help you?*"
-					),
-					React.createElement("textarea", { className: "input" })
-				),
-				React.createElement(
-					"div",
-					{ className: "fine-print" },
-					"NOTE: By filling out this contact form, I give you my permission to contact me via email, cell phone, or text until I opt out of any such communications."
-				),
-				React.createElement("img", { className: "rightArrow", src: "/assets/images/rightArrow.svg" })
-			),
-			React.createElement(
-				"div",
-				{ className: "privacyPolicy" },
-				React.createElement(
-					"div",
-					{ className: "verticalLineContainer" },
-					React.createElement("div", { className: "verticalLine" })
-				),
-				React.createElement("img", { className: "logo", src: "/assets/images/NRLiving.png" }),
-				React.createElement(
-					"div",
-					{ className: "contactInfo" },
-					React.createElement(
-						"div",
-						{ className: "address" },
-						"1300 Manhattan Avenue Union City, NJ 07087"
-					),
-					React.createElement(
-						"div",
-						{ className: "address" },
-						"Manhattan Avenue Capital 1300, LLC"
-					),
-					React.createElement(
-						"div",
-						{ className: "phone" },
-						"201-400-7487"
-					),
-					React.createElement(
-						"div",
-						{ className: "copyright" },
-						"\xA9 2020 Hoboken Heights. All rights reserved."
-					),
-					React.createElement(
-						"div",
-						{ className: "btn" },
-						"PRIVACY POLICY"
-					)
-				)
-			)
-		);
-	}
-}
-
-},{}],4:[function(require,module,exports){
+},{"./contactformslide.jsx":2}],8:[function(require,module,exports){
 'use strict';
 
 const SLIDES = require('./assets/page.js');
@@ -556,4 +717,4 @@ class SplashPage extends React.Component {
 let domContainer = document.querySelector('#container');
 ReactDOM.render(React.createElement(SplashPage, null), domContainer);
 
-},{"./assets/musicplayer.jsx":1,"./assets/page.js":2,"./assets/slide.jsx":3}]},{},[4]);
+},{"./assets/musicplayer.jsx":5,"./assets/page.js":6,"./assets/slide.jsx":7}]},{},[8]);

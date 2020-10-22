@@ -1,16 +1,24 @@
+const LandingPageMusicPlayer = require('./landingpagemusicplayer.jsx');
+
+const CornerMusicPlayer = require('./cornermusicplayer.jsx');
+
 class MusicPlayer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			isPlaying: false,
 			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3'),
-			landingPageAnimationFinished: 0
+			landingPageAnimationFinished: 0,
+			cornerMusicPlayerAnimationFinished: 0
 		}
 		
 		this.musicPlay = this.musicPlay.bind(this);
 		this.musicMute = this.musicMute.bind(this);
 		this.scrollToNextSlide = this.scrollToNextSlide.bind(this);
-		this.endAnimation = this.endAnimation.bind(this);
+		this.scrollToContactForm = this.scrollToContactForm.bind(this);
+		this.landingPageAnimationEnded = this.landingPageAnimationEnded.bind(this);
+		this.cornerMusicPlayerAnimationEnded = this.cornerMusicPlayerAnimationEnded.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 	handleClick(evt) {
 		this.setState({ isPlaying: !this.state.isPlaying });
@@ -31,15 +39,20 @@ class MusicPlayer extends React.Component {
 		goToNextSlide();
 	}
 
-	endAnimation(){
+	landingPageAnimationEnded(){
 		this.setState({landingPageAnimationFinished: 1});
+	}
+
+	cornerMusicPlayerAnimationEnded(){
+		this.setState({cornerMusicPlayerAnimationFinished: 1});
 	}
 	
 
 	render() {
-		let statusText = this.state.isPlaying ? 'ON' : 'OFF';
+		
 		let classes = "musicplayer_container";
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
+		let corner_content_wrapper_classes = 'corner_content_wrapper';
 
 		if(this.state.isPlaying) {
 			this.state.audioPlayer.play();
@@ -57,87 +70,29 @@ class MusicPlayer extends React.Component {
 		if(this.props.darkMode) {
 			classes += " darkMode";
 		}
-
 		
 		if(!this.state.landingPageAnimationFinished) {
 			landing_page_sound_player_classes += " animationHasNotRun";
 		}
 
-		
+		if(!this.state.cornerMusicPlayerAnimationFinished) {
+			corner_content_wrapper_classes += " animationHasNotRun";
+		}
 
 		return (
 			<div className={classes}>
 				<div className='musicplayer centered_content'>
 					<div className={landing_page_sound_player_classes}>
 						<div className='title'>SOUND EXPERIENCE</div>
-						<SoundExperienceSettings animationEnded={this.endAnimation} nextSlide={this.scrollToNextSlide} muteMusic={this.musicMute} playMusic={this.musicPlay} isPlaying={this.state.isPlaying} />
+						<LandingPageMusicPlayer animationEnded={this.landingPageAnimationEnded} nextSlide={this.scrollToNextSlide} muteMusic={this.musicMute} playMusic={this.musicPlay} isPlaying={this.state.isPlaying} />
 					</div>
 				</div>
-				<div className='corner_content'>
-					<div className='musicplayer' onClick={this.handleClick.bind(this)}>
-						<div>
-						SOUND<br />{statusText}
-						</div>
-					</div>
-					<div className='separator' />
-					<div onClick={this.scrollToContactForm.bind(this)}>CONTACT</div>
+				<div className={corner_content_wrapper_classes}>
+					<CornerMusicPlayer animationEnded={this.cornerMusicPlayerAnimationEnded} scrollToContactFormSlide={this.scrollToContactForm} togglePlayer={this.handleClick} musicIsPlaying={this.state.isPlaying}/>
 				</div>
 			</div>
 		);
 	}
 }
+
 module.exports = MusicPlayer;
-
-
-class SoundExperienceSettings extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
-	startMusicPlayer() {
-		const {nextSlide} = this.props;
-		const {playMusic} = this.props;
-		playMusic();
-		nextSlide();
-	}
-
-	stopMusicPlayer() {
-		const {nextSlide} = this.props;
-		const {muteMusic} = this.props;
-		muteMusic();
-		nextSlide();
-	}
-
-	animationHasEnded() {
-		const {animationEnded} = this.props;
-		animationEnded();
-	}
-	
-
-	render(){
-		let playButtonClasses = 'button play';
-		let muteButtonClasses = 'button mute';
-		let settingsClasses = 'settings';
-
-		if(this.props.isPlaying) {
-			playButtonClasses += " selected_option";
-		}
-		else {
-			muteButtonClasses += " selected_option";
-		}
-
-		
-		
-		return (
-			<div className={settingsClasses}>
-				<div className={playButtonClasses} onClick={this.startMusicPlayer.bind(this)}>
-					<div className='text'>YES</div>
-				</div>
-				<div className='separator' />
-				<div onClick={this.stopMusicPlayer.bind(this)} className={muteButtonClasses} onAnimationEnd={this.animationHasEnded.bind(this)}>
-					<div className='text'>NO</div>
-				</div>
-			</div>
-		);
-	}
-}

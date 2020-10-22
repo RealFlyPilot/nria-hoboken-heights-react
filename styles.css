@@ -87,20 +87,20 @@ table {
     height: 42px;
   }
 }
-@keyframes soundOptionsSlideOutLeft {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 86px;
-  }
-}
 @keyframes soundOptionsSlideOutRight {
   0% {
-    left: -86px;
+    transform: translateX(-86px);
   }
   100% {
-    left: 0;
+    transform: translateX(0);
+  }
+}
+@keyframes soundOptionsSlideOutLeft {
+  0% {
+    transform: translateX(86px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
 @keyframes fadeIn {
@@ -119,6 +119,10 @@ table {
     transform: translateX(260px);
   }
 }
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Gotham", sans-serif;
   font-weight: 400;
@@ -137,6 +141,98 @@ body {
   border-left: 0.5462802649px solid #FFFFFF;
   height: 42px;
   margin: 0 24px;
+}
+
+/* This will run the slide in animation.
+ * It will only run once since we will remove the 
+ * .animationHasNotRun class after the animation
+ * has ran.
+ * For reference: 
+ * slideInAnimation($elementWidth, $delay)
+ */
+.animationHasNotRun.landing_page_sound_player .slideInAnimationWrapper .slideInAnimationElementContainer {
+  overflow: hidden;
+}
+.animationHasNotRun.landing_page_sound_player .slideInAnimationWrapper .slideInAnimationElementContainer .slideInAnimationElement {
+  animation-fill-mode: forwards;
+  animation-duration: 0.75s;
+  transform: translateX(100vw);
+  width: 86px;
+}
+.animationHasNotRun.landing_page_sound_player .slideInAnimationWrapper .slideInAnimationElementContainer .slideInAnimationElementLeft {
+  animation-fill-mode: forwards;
+  animation-name: soundOptionsSlideOutLeft;
+  animation-delay: 5s;
+}
+@keyframes soundOptionsSlideOutLeft {
+  0% {
+    transform: translateX(86px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.animationHasNotRun.landing_page_sound_player .slideInAnimationWrapper .slideInAnimationElementContainer .slideInAnimationElementRight {
+  animation-fill-mode: forwards;
+  animation-name: soundOptionsSlideOutRight;
+  animation-delay: 5.2s;
+}
+@keyframes soundOptionsSlideOutRight {
+  0% {
+    transform: translateX(-86px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.animationHasNotRun.landing_page_sound_player .slideInAnimationWrapper .separator {
+  height: 0;
+  animation-fill-mode: forwards;
+  animation-name: lineAppear;
+  animation-duration: 0.75s;
+  animation-delay: 4.5s;
+}
+.animationHasNotRun.corner_content_wrapper .slideInAnimationWrapper .slideInAnimationElementContainer {
+  overflow: hidden;
+}
+.animationHasNotRun.corner_content_wrapper .slideInAnimationWrapper .slideInAnimationElementContainer .slideInAnimationElement {
+  animation-fill-mode: forwards;
+  animation-duration: 0.75s;
+  transform: translateX(100vw);
+  width: 140px;
+}
+.animationHasNotRun.corner_content_wrapper .slideInAnimationWrapper .slideInAnimationElementContainer .slideInAnimationElementLeft {
+  animation-fill-mode: forwards;
+  animation-name: soundOptionsSlideOutLeft;
+  animation-delay: 0.9s;
+}
+@keyframes soundOptionsSlideOutLeft {
+  0% {
+    transform: translateX(140px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.animationHasNotRun.corner_content_wrapper .slideInAnimationWrapper .slideInAnimationElementContainer .slideInAnimationElementRight {
+  animation-fill-mode: forwards;
+  animation-name: soundOptionsSlideOutRight;
+  animation-delay: 1.1s;
+}
+@keyframes soundOptionsSlideOutRight {
+  0% {
+    transform: translateX(-140px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.animationHasNotRun.corner_content_wrapper .slideInAnimationWrapper .separator {
+  height: 0;
+  animation-fill-mode: forwards;
+  animation-name: lineAppear;
+  animation-duration: 0.75s;
+  animation-delay: 0.4s;
 }
 
 .slide {
@@ -253,6 +349,31 @@ body {
   padding: 53px;
   width: 44vw;
 }
+.slide .contactForm.submitted {
+  background-color: #000;
+}
+.slide .contactForm.submitted .submittedFormOverlay {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 4.4px;
+  font-size: 20px;
+}
+.slide .contactForm.submitted .submittedFormOverlay .closeBtn {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+.slide .contactForm .submittedFormOverlay {
+  display: none;
+}
 .slide .contactForm .headline {
   font-size: 14px;
   letter-spacing: 4.17px;
@@ -287,6 +408,14 @@ body {
   height: 44px;
   border: none 0 transparent;
   width: 100%;
+  font-size: 20px;
+  font-weight: 300;
+  font-family: "Gotham-Light", sans-serif;
+  letter-spacing: 4.4px;
+  padding: 10px;
+}
+.slide .contactForm .form-control .input.textarea {
+  height: 100px;
 }
 .slide .contactForm .fine-print {
   font-size: 10px;
@@ -374,12 +503,18 @@ body {
   bottom: 13vh;
   transform: translateX(-50%);
 }
-.musicplayer_container.center_layout .corner_content {
+.musicplayer_container.center_layout .corner_content_wrapper {
   display: none;
 }
 .musicplayer_container .corner_content {
   display: flex;
   align-items: center;
+}
+.musicplayer_container .corner_content .slideInAnimationElement {
+  width: 140px;
+}
+.musicplayer_container .corner_content .separator {
+  margin: 0;
 }
 .musicplayer_container .musicplayer .landing_page_sound_player.animationHasNotRun .title {
   position: relative;
@@ -388,31 +523,6 @@ body {
   animation-name: fadeInDriftUp;
   animation-duration: 1s;
   animation-delay: 4s;
-}
-.musicplayer_container .musicplayer .landing_page_sound_player.animationHasNotRun .settings .button.play {
-  background-color: #000;
-}
-.musicplayer_container .musicplayer .landing_page_sound_player.animationHasNotRun .settings .button.play .text {
-  animation-name: soundOptionsSlideOutLeft;
-  animation-delay: 5s;
-  width: 0;
-}
-.musicplayer_container .musicplayer .landing_page_sound_player.animationHasNotRun .settings .button.mute .text {
-  animation-name: soundOptionsSlideOutRight;
-  animation-delay: 5.2s;
-  position: relative;
-  left: -86px;
-}
-.musicplayer_container .musicplayer .landing_page_sound_player.animationHasNotRun .settings .button .text {
-  animation-fill-mode: forwards;
-  animation-duration: 0.75s;
-}
-.musicplayer_container .musicplayer .landing_page_sound_player.animationHasNotRun .settings .separator {
-  height: 0;
-  animation-fill-mode: forwards;
-  animation-name: lineAppear;
-  animation-duration: 0.75s;
-  animation-delay: 4.5s;
 }
 .musicplayer_container .musicplayer .landing_page_sound_player .title {
   opacity: 1;
