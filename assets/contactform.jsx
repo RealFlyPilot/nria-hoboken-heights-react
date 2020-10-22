@@ -108,7 +108,7 @@ class ContactForm extends React.Component {
 						onChange={this.handleInputChange}/>
 				</div>
 				<div className="fine-print">NOTE: By filling out this contact form, I give you my permission to contact me via email, cell phone, or text until I opt out of any such communications.</div>
-				<img className='rightArrow' src='/assets/images/rightArrow.svg' onClick={this.handleSubmit} />
+				<img className='rightArrow' src='/assets/images/rightarrow.svg' onClick={this.handleSubmit} />
 			</form>
 		);
 	}
