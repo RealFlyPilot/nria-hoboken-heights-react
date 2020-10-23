@@ -16,7 +16,7 @@ const SLIDES = [{
 }, {
 	styles: {
 		backgroundImage: "url(/assets/images/hobokenh1.webp)",
-		backgroundSize: "contain",
+		backgroundSize: "cover",
 		fontSize: '15px',
 		lineHeight: '21px'
 	},

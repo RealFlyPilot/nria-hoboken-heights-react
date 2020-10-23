@@ -24,6 +24,7 @@ class SplashPage extends React.Component {
 		}
 	}
 	watchForEventEnd() {
+		// console.log('event ended')
 		this.setState({transitiongState: 0});
 	}
 	isTransitioning() {
