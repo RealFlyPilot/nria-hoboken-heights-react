@@ -10,13 +10,50 @@ class SplashPage extends React.Component {
 		this.state = {
 			slides: SLIDES,
 			transitiongState: 0, // 0 for false -1 for up 1 for down
-			currIdx: 0
+			currIdx: 0,
+			previousScrollVal: 0,
+			peakScrollVal: 0,
+			readyForScroll: 1
 		};
 		this.lastSlide = this.lastSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
+
+
+		this.throttleOnScrollStart = _.throttle(this.throttleOnScrollStart.bind(this), 200, {leading:true});
 	}
+	throttleOnScrollStart(deltaY) {
+		if (Math.abs(deltaY) > 3 && this.state.readyForScroll) {
+			
+			if(Math.abs(deltaY) > Math.abs(this.state.previousScrollVal)) {
+				const isScrollingDown = deltaY > 0;
+				if(isScrollingDown) {
+					this.nextSlide();
+				} else {
+					this.prevSlide();
+				}
+				this.setState({peakScrollVal: deltaY});
+				this.setState({readyForScroll: null});
+			}
+		}
+		else {
+			if(Math.abs(this.state.peakScrollVal)/2 >= Math.abs(deltaY)) {
+				console.log('fallen past threshold')
+				this.setState({readyForScroll: true});
+			}
+			else if(Math.abs(deltaY) > Math.abs(this.state.peakScrollVal)) {
+				console.log('rising still')
+				this.setState({peakScrollVal: deltaY});
+			}
+		}
+
+		this.setState({previousScrollVal: deltaY});
+	}
+
 	handleWheelEvent(evt) {
-		const isScrollingDown = evt.deltaY > 0;
+		const deltaY = evt.deltaY;
+		this.throttleOnScrollStart(deltaY);
+		return;
+		const isScrollingDown = deltaY > 0;
 		if(isScrollingDown) {
 			this.nextSlide();
 		} else {
@@ -24,7 +61,6 @@ class SplashPage extends React.Component {
 		}
 	}
 	watchForEventEnd() {
-		// console.log('event ended')
 		this.setState({transitiongState: 0});
 	}
 	isTransitioning() {
