@@ -43,8 +43,7 @@ class ContactForm extends React.Component {
 			formSubmitted: null
 		})
 	}
-
-	render() {
+    render() {
 		let contactFormClasses = 'contactForm';
 		if(this.state.formSubmitted){
 			contactFormClasses += ' submitted'

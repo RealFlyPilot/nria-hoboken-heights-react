@@ -21,7 +21,6 @@ class Slide extends React.Component {
 		const {goToNextSlide} = this.props;
 		goToNextSlide();
 	}
-
 	render() {
 		const slideObj = this.props.obj;
 		let slideClasses = "slide bg000"

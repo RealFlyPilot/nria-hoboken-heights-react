@@ -44,7 +44,6 @@ class ContactForm extends React.Component {
 			formSubmitted: null
 		});
 	}
-
 	render() {
 		let contactFormClasses = 'contactForm';
 		if (this.state.formSubmitted) {
@@ -531,7 +530,6 @@ class Slide extends React.Component {
 		const { goToNextSlide } = this.props;
 		goToNextSlide();
 	}
-
 	render() {
 		const slideObj = this.props.obj;
 		let slideClasses = "slide bg000";
@@ -593,10 +591,10 @@ class SplashPage extends React.Component {
 		this.lastSlide = this.lastSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
 
-		this.throttleOnScrollStart = _.throttle(this.throttleOnScrollStart.bind(this), 200, { leading: true });
+		this.throttleOnScrollStart = _.throttle(this.throttleOnScrollStart.bind(this), 100, { leading: true, trailing: true });
 	}
 	throttleOnScrollStart(deltaY) {
-		if (Math.abs(deltaY) > 3 && this.state.readyForScroll) {
+		if (Math.abs(deltaY) >= 1 && this.state.readyForScroll) {
 			if (Math.abs(deltaY) > Math.abs(this.state.previousScrollVal)) {
 				const isScrollingDown = deltaY > 0;
 				if (isScrollingDown) {
@@ -620,6 +618,7 @@ class SplashPage extends React.Component {
 
 	handleWheelEvent(evt) {
 		const deltaY = evt.deltaY;
+		console.log(deltaY);
 		this.throttleOnScrollStart(deltaY);
 		return;
 		const isScrollingDown = deltaY > 0;
@@ -672,6 +671,13 @@ class SplashPage extends React.Component {
 		this.setState({
 			transitiongState: 1,
 			currIdx: newIdx
+		});
+	}
+	componentDidMount() {
+		window.addEventListener('keydown', event => {
+			if (!event.target.classList.contains('input')) {
+				if (event.code == "ArrowUp") this.prevSlide();else if (event.code == "ArrowDown") this.nextSlide();else if (event.code == "ArrowLeft") this.prevSlide();else if (event.code == "ArrowRight") this.nextSlide();
+			}
 		});
 	}
 	componentDidUpdate() {

@@ -19,13 +19,13 @@ class SplashPage extends React.Component {
 		this.nextSlide = this.nextSlide.bind(this);
 
 
-		this.throttleOnScrollStart = _.throttle(this.throttleOnScrollStart.bind(this), 200, {leading:true});
+		this.throttleOnScrollStart = _.throttle(this.throttleOnScrollStart.bind(this), 100, {leading:true,trailing:true});
 	}
 	throttleOnScrollStart(deltaY) {
-		if (Math.abs(deltaY) > 3 && this.state.readyForScroll) {
-			if(Math.abs(deltaY) > Math.abs(this.state.previousScrollVal)) {
+		if (Math.abs(deltaY) >= 1 && this.state.readyForScroll) {
+			if (Math.abs(deltaY) > Math.abs(this.state.previousScrollVal)) {
 				const isScrollingDown = deltaY > 0;
-				if(isScrollingDown) {
+				if (isScrollingDown) {
 					this.nextSlide();
 				} else {
 					this.prevSlide();
@@ -35,10 +35,10 @@ class SplashPage extends React.Component {
 			}
 		}
 		else {
-			if(Math.abs(this.state.peakScrollVal)/2 >= Math.abs(deltaY)) {
+			if (Math.abs(this.state.peakScrollVal)/2 >= Math.abs(deltaY)) {
 				this.setState({readyForScroll: true});
 			}
-			else if(Math.abs(deltaY) > Math.abs(this.state.peakScrollVal)) {
+			else if (Math.abs(deltaY) > Math.abs(this.state.peakScrollVal)) {
 				this.setState({peakScrollVal: deltaY});
 			}
 		}
@@ -48,10 +48,11 @@ class SplashPage extends React.Component {
 
 	handleWheelEvent(evt) {
 		const deltaY = evt.deltaY;
+		console.log(deltaY)
 		this.throttleOnScrollStart(deltaY);
 		return;
 		const isScrollingDown = deltaY > 0;
-		if(isScrollingDown) {
+		if (isScrollingDown) {
 			this.nextSlide();
 		} else {
 			this.prevSlide();
@@ -64,11 +65,11 @@ class SplashPage extends React.Component {
 		return this.state.transitiongState != 0;
 	}
 	nextSlide() {
-		if(this.isTransitioning()) {
+		if (this.isTransitioning()) {
 			return;
 		}
 		const newIdx = this.state.currIdx + 1;
-		if(newIdx >= SLIDES.length) {
+		if (newIdx >= SLIDES.length) {
 			return;
 		}
 		this.setState({
@@ -77,11 +78,11 @@ class SplashPage extends React.Component {
 		});
 	}
 	prevSlide() {
-		if(this.isTransitioning()) {
+		if (this.isTransitioning()) {
 			return;
 		}
 		const newIdx = this.state.currIdx - 1;
-		if(newIdx < 0) {
+		if (newIdx < 0) {
 			return;
 		}
 		this.setState({
@@ -90,16 +91,26 @@ class SplashPage extends React.Component {
 		});
 	}
 	lastSlide() {
-		if(this.isTransitioning()) {
+		if (this.isTransitioning()) {
 			return;
 		}
 		const newIdx = this.state.slides.length - 1;
-		if(newIdx < 0) {
+		if (newIdx < 0) {
 			return;
 		}
 		this.setState({
 			transitiongState: 1,
 			currIdx: newIdx
+		});
+	}
+	componentDidMount() {
+		window.addEventListener('keydown', (event) => {
+			if (!event.target.classList.contains('input')) {
+				if (event.code == "ArrowUp") this.prevSlide()
+				else if (event.code == "ArrowDown") this.nextSlide()
+				else if (event.code == "ArrowLeft") this.prevSlide()
+				else if (event.code == "ArrowRight") this.nextSlide()
+			}
 		});
 	}
 	componentDidUpdate() {
@@ -132,10 +143,10 @@ class SplashPage extends React.Component {
 		const animateCornerLogoOnStart = thisSlideState.animateCornerLogoOnStart;
 
 		let cornerLogoWrapperClasses = 'corner-logo-wrapper';
-		if(darkCornerLogo) {
+		if (darkCornerLogo) {
 			cornerLogoWrapperClasses += ' darkMode';
 		}
-		if(animateCornerLogoOnStart) {
+		if (animateCornerLogoOnStart) {
 			cornerLogoWrapperClasses += ' animate';
 		}
 		return (
