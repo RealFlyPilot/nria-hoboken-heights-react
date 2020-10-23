@@ -349,9 +349,6 @@ body {
   padding: 53px;
   width: 44vw;
 }
-.slide .contactForm.submitted {
-  background-color: #000;
-}
 .slide .contactForm.submitted .submittedFormOverlay {
   background: #000;
   width: 100%;
