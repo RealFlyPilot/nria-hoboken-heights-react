@@ -345,9 +345,9 @@ body {
 .slide .contactForm {
   position: absolute;
   left: 100px;
-  top: 16.2vh;
+  top: 175px;
   background-color: #CDCDCD;
-  padding: 4.5vh;
+  padding: 53px;
   width: 44vw;
 }
 .slide .contactForm.submitted .submittedFormOverlay {
@@ -378,7 +378,7 @@ body {
   line-height: 16.66px;
   text-transform: uppercase;
   color: #fff;
-  margin-bottom: 1.6vh;
+  margin-bottom: 18px;
 }
 .slide .contactForm .two-input-group {
   display: flex;
@@ -398,19 +398,19 @@ body {
   color: #000;
   font-size: 14.2px;
   line-height: 19.88px;
-  margin-top: 1.8vh;
+  margin-top: 24px;
 }
 .slide .contactForm .form-control .input {
-  margin-top: 1vh;
+  margin-top: 16px;
   background-color: #fff;
-  height: 4vh;
+  height: 44px;
   border: none 0 transparent;
   width: 100%;
   font-size: 20px;
   font-weight: 300;
   font-family: "Gotham-Light", sans-serif;
   letter-spacing: 4.4px;
-  padding: 0.9vh;
+  padding: 10px;
 }
 .slide .contactForm .form-control .input.textarea {
   height: 80px;
@@ -419,11 +419,11 @@ body {
   font-size: 10px;
   line-height: 1.4em;
   color: #000;
-  margin-top: 1vh;
+  margin-top: 18px;
 }
 .slide .contactForm .rightArrow {
   float: right;
-  margin-top: 2vh;
+  margin-top: 40px;
 }
 .slide .privacyPolicy {
   width: 45%;
@@ -433,7 +433,7 @@ body {
   float: right;
 }
 .slide .privacyPolicy .verticalLineContainer {
-  height: 40vh;
+  height: 50vh;
 }
 .slide .privacyPolicy .verticalLineContainer .verticalLine {
   border-left: solid 0.55px #000;
@@ -704,6 +704,33 @@ body {
 .corner-logo-wrapper .text .separator {
   opacity: 0;
   margin: 0 12px;
+}
+
+@media screen and (max-width: 1500px) {
+  .slide .contactForm {
+    top: 16.2vh;
+    padding: 4.5vh;
+  }
+  .slide .contactForm .headline {
+    margin-bottom: 1.6vh;
+  }
+  .slide .contactForm .form-control .label {
+    margin-top: 1.8vh;
+  }
+  .slide .contactForm .form-control .input {
+    margin-top: 1vh;
+    height: 4vh;
+    padding: 0.9vh;
+  }
+  .slide .contactForm .fine-print {
+    margin-top: 1vh;
+  }
+  .slide .contactForm .rightArrow {
+    margin-top: 2vh;
+  }
+  .slide .privacyPolicy .verticalLineContainer {
+    height: 35vh;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
