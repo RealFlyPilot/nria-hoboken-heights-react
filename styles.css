@@ -345,9 +345,9 @@ body {
 .slide .contactForm {
   position: absolute;
   left: 100px;
-  top: 175px;
+  top: 16.2vh;
   background-color: #CDCDCD;
-  padding: 53px;
+  padding: 4.5vh;
   width: 44vw;
 }
 .slide .contactForm.submitted .submittedFormOverlay {
@@ -378,7 +378,7 @@ body {
   line-height: 16.66px;
   text-transform: uppercase;
   color: #fff;
-  margin-bottom: 18px;
+  margin-bottom: 1.6vh;
 }
 .slide .contactForm .two-input-group {
   display: flex;
@@ -398,32 +398,32 @@ body {
   color: #000;
   font-size: 14.2px;
   line-height: 19.88px;
-  margin-top: 24px;
+  margin-top: 1.8vh;
 }
 .slide .contactForm .form-control .input {
-  margin-top: 16.53px;
+  margin-top: 1vh;
   background-color: #fff;
-  height: 44px;
+  height: 4vh;
   border: none 0 transparent;
   width: 100%;
   font-size: 20px;
   font-weight: 300;
   font-family: "Gotham-Light", sans-serif;
   letter-spacing: 4.4px;
-  padding: 10px;
+  padding: 0.9vh;
 }
 .slide .contactForm .form-control .input.textarea {
-  height: 100px;
+  height: 80px;
 }
 .slide .contactForm .fine-print {
   font-size: 10px;
-  line-height: 21px;
+  line-height: 1.4em;
   color: #000;
-  margin-top: 18px;
+  margin-top: 1vh;
 }
 .slide .contactForm .rightArrow {
   float: right;
-  margin-top: 40px;
+  margin-top: 2vh;
 }
 .slide .privacyPolicy {
   width: 45%;
@@ -433,7 +433,7 @@ body {
   float: right;
 }
 .slide .privacyPolicy .verticalLineContainer {
-  height: 50vh;
+  height: 40vh;
 }
 .slide .privacyPolicy .verticalLineContainer .verticalLine {
   border-left: solid 0.55px #000;
