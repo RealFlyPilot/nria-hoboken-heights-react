@@ -618,7 +618,6 @@ class SplashPage extends React.Component {
 
 	handleWheelEvent(evt) {
 		const deltaY = evt.deltaY;
-		console.log(deltaY);
 		this.throttleOnScrollStart(deltaY);
 		return;
 		const isScrollingDown = deltaY > 0;
