@@ -23,7 +23,6 @@ class SplashPage extends React.Component {
 	}
 	throttleOnScrollStart(deltaY) {
 		if (Math.abs(deltaY) > 3 && this.state.readyForScroll) {
-			
 			if(Math.abs(deltaY) > Math.abs(this.state.previousScrollVal)) {
 				const isScrollingDown = deltaY > 0;
 				if(isScrollingDown) {
@@ -37,11 +36,9 @@ class SplashPage extends React.Component {
 		}
 		else {
 			if(Math.abs(this.state.peakScrollVal)/2 >= Math.abs(deltaY)) {
-				console.log('fallen past threshold')
 				this.setState({readyForScroll: true});
 			}
 			else if(Math.abs(deltaY) > Math.abs(this.state.peakScrollVal)) {
-				console.log('rising still')
 				this.setState({peakScrollVal: deltaY});
 			}
 		}
