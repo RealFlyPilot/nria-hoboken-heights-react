@@ -591,9 +591,16 @@ class SplashPage extends React.Component {
 		this.lastSlide = this.lastSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
 
-		this.throttleOnScrollStart = _.throttle(this.throttleOnScrollStart.bind(this), 100, { leading: true, trailing: true });
+		this.throttleOnScroll = _.throttle(this.throttleOnScroll.bind(this), 100, { leading: true });
+		// this.debounceOnScroll = _.throttle(this.debounceOnScroll.bind(this), 3500, {leading: true, trailing:true});
 	}
-	throttleOnScrollStart(deltaY) {
+	// debounceOnScroll() {
+	// 	//very long scrolls last 3.5 seconds, should be safe to zero out the scroll at that point
+	// 	//this would create a more responsive experience since a deltaY of 1 would then trigger a slide
+
+	// 	this.setState({previousScrollVal: 0});
+	// }
+	throttleOnScroll(deltaY) {
 		if (Math.abs(deltaY) >= 1 && this.state.readyForScroll) {
 			if (Math.abs(deltaY) > Math.abs(this.state.previousScrollVal)) {
 				const isScrollingDown = deltaY > 0;
@@ -618,7 +625,8 @@ class SplashPage extends React.Component {
 
 	handleWheelEvent(evt) {
 		const deltaY = evt.deltaY;
-		this.throttleOnScrollStart(deltaY);
+		this.throttleOnScroll(deltaY);
+		// this.debounceOnScroll(deltaY);
 		return;
 		const isScrollingDown = deltaY > 0;
 		if (isScrollingDown) {
