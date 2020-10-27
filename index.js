@@ -599,7 +599,7 @@ class SplashPage extends React.Component {
 		let browser;
 		const user_agent = navigator.userAgent.toLowerCase();
 
-		if (user_agent.indexOf('Windows') != -1) {
+		if (user_agent.indexOf('windows') != -1) {
 			this.state.operating_sys = 'windows';
 		}
 		if (user_agent.indexOf('safari') != -1) {
