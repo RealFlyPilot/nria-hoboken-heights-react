@@ -14,7 +14,8 @@ class SplashPage extends React.Component {
 			previousScrollVal: 0,
 			peakScrollVal: 0,
 			readyForScroll: 1,
-			browser: ''
+			browser: '',
+			operating_sys: ''
 		};
 		this.lastSlide = this.lastSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
@@ -26,6 +27,9 @@ class SplashPage extends React.Component {
 		let browser;
 		const user_agent = navigator.userAgent.toLowerCase();
 
+		if (user_agent.indexOf('Windows') != -1){
+			this.state.operating_sys = 'windows';
+		}
 		if (user_agent.indexOf('safari') != -1) {
 			if (user_agent.indexOf('chrome') > -1) {
 				browser= 'chrome';
@@ -87,9 +91,9 @@ class SplashPage extends React.Component {
 	}
 	handleWheelEvent(evt) {
 		const deltaY = evt.deltaY;
-		if(this.state.browser == 'safari') {
+		const browserWithSingleScrollEvent = this.state.browser == 'safari' || (this.state.browser == 'firefox' && this.state.operating_sys == 'windows');
+		if(browserWithSingleScrollEvent) {
 			this.scrollSlide(deltaY)
-			
 		}
 		else {
 			this.throttleOnScroll(deltaY);
