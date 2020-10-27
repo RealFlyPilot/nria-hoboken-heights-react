@@ -8,6 +8,7 @@ class MusicPlayer extends React.Component {
 		this.state = {
 			isPlaying: false,
 			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3'),
+			soundEffect: new Audio(),
 			landingPageAnimationFinished: 0,
 			cornerMusicPlayerAnimationFinished: 0
 		}
@@ -19,6 +20,9 @@ class MusicPlayer extends React.Component {
 		this.landingPageAnimationEnded = this.landingPageAnimationEnded.bind(this);
 		this.cornerMusicPlayerAnimationEnded = this.cornerMusicPlayerAnimationEnded.bind(this);
 		this.handleClick = this.handleClick.bind(this);
+		this.state.soundEffect.loop = true;
+
+		
 	}
 	handleClick(evt) {
 		this.setState({ isPlaying: !this.state.isPlaying });
@@ -47,9 +51,22 @@ class MusicPlayer extends React.Component {
 		this.setState({cornerMusicPlayerAnimationFinished: 1});
 	}
 	
+	playSoundEffect(){
+		if(this.state.isPlaying && this.props.soundEffect) {
+			const updateSoundSource = this.state.soundEffect.src.indexOf(this.props.soundEffect.substring(1)) == -1;
+			const soundIsPaused = this.state.soundEffect.paused;
+			if (updateSoundSource){
+				this.state.soundEffect.src = this.props.soundEffect
+			}
+			if (soundIsPaused) {
+				this.state.soundEffect.play();
+			}
+		}
+		else this.state.soundEffect.pause()
+	}
 
 	render() {
-		
+		this.playSoundEffect();
 		let classes = "musicplayer_container";
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
 		let corner_content_wrapper_classes = 'corner_content_wrapper';

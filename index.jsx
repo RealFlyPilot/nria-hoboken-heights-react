@@ -209,6 +209,7 @@ class SplashPage extends React.Component {
 		};
 
 		const thisSlideState = this.state.slides[this.state.currIdx];
+		const thisSlideSoundEffect = thisSlideState.soundEffect;
 		const addCornerLogo = thisSlideState.addCornerLogo;
 		const darkCornerLogo = thisSlideState.addDarkCornerLogo;
 		const animateCornerLogoOnStart = thisSlideState.animateCornerLogoOnStart;
@@ -237,7 +238,7 @@ class SplashPage extends React.Component {
 						
 					</div>
 				}
-				<MusicPlayer darkMode={darkCornerLogo} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0}></MusicPlayer>
+				<MusicPlayer soundEffect={thisSlideSoundEffect} darkMode={darkCornerLogo} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0}></MusicPlayer>
 				<div className="slides_wrapper" onWheel={this.handleWheelEvent.bind(this)} onScroll={this.handleScrollEvent.bind(this)}>
 					<div
 						ref="inner"

@@ -356,6 +356,7 @@ class MusicPlayer extends React.Component {
 		this.state = {
 			isPlaying: false,
 			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3'),
+			soundEffect: new Audio(),
 			landingPageAnimationFinished: 0,
 			cornerMusicPlayerAnimationFinished: 0
 		};
@@ -367,6 +368,7 @@ class MusicPlayer extends React.Component {
 		this.landingPageAnimationEnded = this.landingPageAnimationEnded.bind(this);
 		this.cornerMusicPlayerAnimationEnded = this.cornerMusicPlayerAnimationEnded.bind(this);
 		this.handleClick = this.handleClick.bind(this);
+		this.state.soundEffect.loop = true;
 	}
 	handleClick(evt) {
 		this.setState({ isPlaying: !this.state.isPlaying });
@@ -395,8 +397,21 @@ class MusicPlayer extends React.Component {
 		this.setState({ cornerMusicPlayerAnimationFinished: 1 });
 	}
 
-	render() {
+	playSoundEffect() {
+		if (this.state.isPlaying && this.props.soundEffect) {
+			const updateSoundSource = this.state.soundEffect.src.indexOf(this.props.soundEffect.substring(1)) == -1;
+			const soundIsPaused = this.state.soundEffect.paused;
+			if (updateSoundSource) {
+				this.state.soundEffect.src = this.props.soundEffect;
+			}
+			if (soundIsPaused) {
+				this.state.soundEffect.play();
+			}
+		} else this.state.soundEffect.pause();
+	}
 
+	render() {
+		this.playSoundEffect();
 		let classes = "musicplayer_container";
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
 		let corner_content_wrapper_classes = 'corner_content_wrapper';
@@ -468,7 +483,8 @@ const SLIDES = [{
 		line1: "MANHATTAN AVE, 1300",
 		line2: "COMING SOON"
 	},
-	hasDownArrow: true
+	hasDownArrow: true,
+	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3"
 }, {
 	styles: {
 		backgroundImage: "url(/assets/images/hobokenh1.png)",
@@ -775,6 +791,7 @@ class SplashPage extends React.Component {
 		};
 
 		const thisSlideState = this.state.slides[this.state.currIdx];
+		const thisSlideSoundEffect = thisSlideState.soundEffect;
 		const addCornerLogo = thisSlideState.addCornerLogo;
 		const darkCornerLogo = thisSlideState.addDarkCornerLogo;
 		const animateCornerLogoOnStart = thisSlideState.animateCornerLogoOnStart;
@@ -801,7 +818,7 @@ class SplashPage extends React.Component {
 				darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_Black.png' }),
 				!darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_White.png' })
 			),
-			React.createElement(MusicPlayer, { darkMode: darkCornerLogo, goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, isFirstSlide: this.state.currIdx === 0 }),
+			React.createElement(MusicPlayer, { soundEffect: thisSlideSoundEffect, darkMode: darkCornerLogo, goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, isFirstSlide: this.state.currIdx === 0 }),
 			React.createElement(
 				'div',
 				{ className: 'slides_wrapper', onWheel: this.handleWheelEvent.bind(this), onScroll: this.handleScrollEvent.bind(this) },

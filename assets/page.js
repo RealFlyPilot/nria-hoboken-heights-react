@@ -12,7 +12,8 @@ const SLIDES = [{
 		line1: "MANHATTAN AVE, 1300",
 		line2: "COMING SOON",
 	},
-	hasDownArrow: true
+	hasDownArrow: true,
+	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3"
 }, {
 	styles: {
 		backgroundImage: "url(/assets/images/hobokenh1.png)",
