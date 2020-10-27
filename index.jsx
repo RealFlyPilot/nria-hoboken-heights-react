@@ -13,7 +13,8 @@ class SplashPage extends React.Component {
 			currIdx: 0,
 			previousScrollVal: 0,
 			peakScrollVal: 0,
-			readyForScroll: 1
+			readyForScroll: 1,
+			browser: ''
 		};
 		this.lastSlide = this.lastSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
@@ -21,6 +22,21 @@ class SplashPage extends React.Component {
 
 		this.throttleOnScroll = _.throttle(this.throttleOnScroll.bind(this), 100, {leading:true});
 		// this.debounceOnScroll = _.throttle(this.debounceOnScroll.bind(this), 3500, {leading: true, trailing:true});
+
+		let browser;
+		const user_agent = navigator.userAgent.toLowerCase();
+
+		if (user_agent.indexOf('safari') != -1) {
+			if (user_agent.indexOf('chrome') > -1) {
+				browser= 'chrome';
+			} else {
+				browser ='safari';
+			}
+		}
+		else if (user_agent.indexOf('firefox') != -1) {
+			browser ='firefox';
+		}
+		this.state.browser= browser;
 	}
 	// debounceOnScroll() {
 	// 	//very long scrolls last 3.5 seconds, should be safe to zero out the scroll at that point
@@ -28,15 +44,19 @@ class SplashPage extends React.Component {
 	
 	// 	this.setState({previousScrollVal: 0});
 	// }
+	scrollSlide(deltaY){
+		const isScrollingDown = deltaY > 0;
+		if (isScrollingDown) {
+			this.nextSlide();
+		} else {
+			this.prevSlide();
+		}
+		
+	}
 	throttleOnScroll(deltaY) {
 		if (Math.abs(deltaY) >= 1 && this.state.readyForScroll) {
 			if (Math.abs(deltaY) > Math.abs(this.state.previousScrollVal)) {
-				const isScrollingDown = deltaY > 0;
-				if (isScrollingDown) {
-					this.nextSlide();
-				} else {
-					this.prevSlide();
-				}
+				this.scrollSlide(deltaY)
 				this.setState({peakScrollVal: deltaY});
 				this.setState({readyForScroll: null});
 			}
@@ -53,9 +73,27 @@ class SplashPage extends React.Component {
 		this.setState({previousScrollVal: deltaY});
 	}
 
+	handleScrollEvent(evt) {
+		const deltaY = evt.deltaY;
+		// this.throttleOnScroll(deltaY);
+		// this.debounceOnScroll(deltaY);
+		return;
+		const isScrollingDown = deltaY > 0;
+		if (isScrollingDown) {
+			this.nextSlide();
+		} else {
+			this.prevSlide();
+		}
+	}
 	handleWheelEvent(evt) {
 		const deltaY = evt.deltaY;
-		this.throttleOnScroll(deltaY);
+		if(this.state.browser == 'safari') {
+			this.scrollSlide(deltaY)
+			
+		}
+		else {
+			this.throttleOnScroll(deltaY);
+		}
 		// this.debounceOnScroll(deltaY);
 		return;
 		const isScrollingDown = deltaY > 0;
@@ -174,7 +212,7 @@ class SplashPage extends React.Component {
 					</div>
 				}
 				<MusicPlayer darkMode={darkCornerLogo} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0}></MusicPlayer>
-				<div className="slides_wrapper" onWheel={this.handleWheelEvent.bind(this)}>
+				<div className="slides_wrapper" onWheel={this.handleWheelEvent.bind(this)} onScroll={this.handleScrollEvent.bind(this)}>
 					<div
 						ref="inner"
 						className="slides_inner"

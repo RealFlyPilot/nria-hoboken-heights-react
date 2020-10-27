@@ -15,7 +15,7 @@ const SLIDES = [{
 	hasDownArrow: true
 }, {
 	styles: {
-		backgroundImage: "url(/assets/images/hobokenh1.webp)",
+		backgroundImage: "url(/assets/images/hobokenh1.png)",
 		backgroundSize: "cover",
 		fontSize: '15px',
 		lineHeight: '21px'
