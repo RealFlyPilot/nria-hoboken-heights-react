@@ -596,9 +596,31 @@ class SplashPage extends React.Component {
 		this.throttleOnScroll = _.throttle(this.throttleOnScroll.bind(this), 100, { leading: true });
 		// this.debounceOnScroll = _.throttle(this.debounceOnScroll.bind(this), 3500, {leading: true, trailing:true});
 
+
+		/*
+   * Browser wheel event inconsistencies
+   * 
+   * Chrome - outputs many consecutive events that start with deltaY of 1/-1 and can 
+   * go into the hundreds depending on how quickly you tried to scroll. 
+   * Even the smallest consistent scroll can output multiple events of deltaY = 1/-1
+   * A new deltaY event can be created every hundreth of a second. A single scroll can output
+   * hundreds of deltaY events.
+   * 
+   * Safari - usually only outputs a single wheel event whether the scroll is long and slow or big and quick
+   * The deltaY will be 1 or -1. In some cases when the scroll is very quick, deltaY events are created in a manner similar to Chrome
+   * 
+   * Firefox on Mac is similar to Chrome
+   * 
+   * Firefox on Windows is a mix of both Chrome's and Safari's style
+   * With small quick scrolls, only a single event is output
+   * With long slow scrolls, a new deltaY event is created about every second
+   * With quick big scrolls, many events are created from deltaY of 3 to about 30, 
+   * sometimes every few ms, but it doesnt create nearly as many events as Chrome. A single scroll can output
+   * dozens of deltaY events
+   *
+  */
 		let browser;
 		const user_agent = navigator.userAgent.toLowerCase();
-
 		if (user_agent.indexOf('windows') != -1) {
 			this.state.operating_sys = 'windows';
 		}

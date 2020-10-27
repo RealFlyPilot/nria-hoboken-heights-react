@@ -134,7 +134,8 @@ body {
 }
 .slides_wrapper .slides_inner {
   transition-property: transform;
-  transition-duration: 800ms;
+  transition-duration: 1400ms;
+  transition-timing-function: cubic-bezier(0.29, 0.79, 0.35, 0.99);
 }
 
 .separator {
