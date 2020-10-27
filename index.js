@@ -487,7 +487,7 @@ const SLIDES = [{
 	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3"
 }, {
 	styles: {
-		backgroundImage: "url(/assets/images/hobokenh1.png)",
+		backgroundImage: "url(/assets/images/hobokenh1.jpg)",
 		backgroundSize: "cover",
 		fontSize: '15px',
 		lineHeight: '21px'
