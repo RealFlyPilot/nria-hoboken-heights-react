@@ -1,4 +1,5 @@
 const ContactFormSlide = require('./contactformslide.jsx');
+const Header = require('./header.jsx');
 
 class Slide extends React.Component {
 	constructor(props) {
@@ -8,7 +9,6 @@ class Slide extends React.Component {
 		}
 		if(this.state.styles) {
 			this.state.styles.backgroundRepeat = "no-repeat";
-			this.state.styles.backgroundPosition = "center";
 		}
 	}
 
@@ -25,11 +25,17 @@ class Slide extends React.Component {
 		const slideObj = this.props.obj;
 		let slideClasses = "slide bg000"
 		const isCurrent = this.props.isCurrent;
+		const headerOptions = {
+			addCornerLogo: slideObj.addCornerLogo,
+			addDarkCornerLogo: slideObj.addDarkCornerLogo,
+			animateCornerLogoOnStart: slideObj.animateCornerLogoOnStart
+		};
 		
 		if(isCurrent) slideClasses += " runAnimations";
 
 		return (
 			<div className={slideClasses} style={this.state.styles}>
+				<Header options={headerOptions} />
 				{slideObj.video &&
 					<video autoPlay muted loop={slideObj.videoLoop ? true : false} className='background-video'>
 						<source src={slideObj.video} type="video/mp4" />

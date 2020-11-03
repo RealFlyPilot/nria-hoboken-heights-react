@@ -3,6 +3,7 @@
 const SLIDES = require('./assets/page.js');
 const Slide = require('./assets/slide.jsx');
 const MusicPlayer = require('./assets/musicplayer.jsx');
+const modules = require('./assets/modules.jsx');
 
 class SplashPage extends React.Component {
 	constructor(props) {
@@ -194,12 +195,6 @@ class SplashPage extends React.Component {
 			});
 		}, false);
 	}
-	explodeString(string){
-		const spans = string.split("").map(function(char, index){
-			return <span className='letter cascading-animation' key={index}>{char}</span>;
-		})
-		return spans;
-	}
 	render() {
 		const $slides = this.state.slides.map((slide, idx) =>
 			<Slide goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx}></Slide>
@@ -223,21 +218,6 @@ class SplashPage extends React.Component {
 		}
 		return (
 			<div id="page">
-				{addCornerLogo &&
-					<div className={cornerLogoWrapperClasses}>
-						<div className='text'>
-							{this.explodeString('HOBOKEN HEIGHTS')}
-							<div className='cascading-animation separator' />
-						</div>
-						{darkCornerLogo && 
-							<img className='corner-logo' src='/assets/images/NIRMA_Logo_Symbol_Black.png' />
-						}
-						{!darkCornerLogo && 
-							<img className='corner-logo' src='/assets/images/NIRMA_Logo_Symbol_White.png' />
-						}
-						
-					</div>
-				}
 				<MusicPlayer soundEffect={thisSlideSoundEffect} darkMode={darkCornerLogo} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0}></MusicPlayer>
 				<div className="slides_wrapper" onWheel={this.handleWheelEvent.bind(this)} onScroll={this.handleScrollEvent.bind(this)}>
 					<div

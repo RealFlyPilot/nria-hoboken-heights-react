@@ -282,6 +282,43 @@ class CornerMusicPlayer extends React.Component {
 module.exports = CornerMusicPlayer;
 
 },{}],4:[function(require,module,exports){
+const modules = require('./modules.jsx');
+
+class Header extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
+		const slideHeaderState = this.props.options;
+		const addCornerLogo = slideHeaderState.addCornerLogo;
+		const darkCornerLogo = slideHeaderState.addDarkCornerLogo;
+		const animateCornerLogoOnStart = slideHeaderState.animateCornerLogoOnStart;
+
+		let cornerLogoWrapperClasses = 'corner-logo-wrapper';
+		if (darkCornerLogo) {
+			cornerLogoWrapperClasses += ' darkMode';
+		}
+		if (animateCornerLogoOnStart) {
+			cornerLogoWrapperClasses += ' animate';
+		}
+		return React.createElement(
+			'div',
+			{ className: cornerLogoWrapperClasses },
+			React.createElement(
+				'div',
+				{ className: 'text' },
+				modules.explodeString('HOBOKEN HEIGHTS'),
+				React.createElement('div', { className: 'cascading-animation separator' })
+			),
+			darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_Black.png' }),
+			!darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_White.png' })
+		);
+	}
+}
+
+module.exports = Header;
+
+},{"./modules.jsx":6}],5:[function(require,module,exports){
 class LandingPageMusicPlayer extends React.Component {
 	constructor(props) {
 		super(props);
@@ -345,7 +382,23 @@ class LandingPageMusicPlayer extends React.Component {
 
 module.exports = LandingPageMusicPlayer;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+const modules = {
+	explodeString: function (string) {
+		const spans = string.split("").map(function (char, index) {
+			return React.createElement(
+				"span",
+				{ className: "letter cascading-animation", key: index },
+				char
+			);
+		});
+		return spans;
+	}
+};
+
+module.exports = modules;
+
+},{}],7:[function(require,module,exports){
 const LandingPageMusicPlayer = require('./landingpagemusicplayer.jsx');
 
 const CornerMusicPlayer = require('./cornermusicplayer.jsx');
@@ -468,7 +521,7 @@ class MusicPlayer extends React.Component {
 
 module.exports = MusicPlayer;
 
-},{"./cornermusicplayer.jsx":3,"./landingpagemusicplayer.jsx":4}],6:[function(require,module,exports){
+},{"./cornermusicplayer.jsx":3,"./landingpagemusicplayer.jsx":5}],8:[function(require,module,exports){
 const SLIDES = [{
 	styles: {
 		background: "#000"
@@ -488,7 +541,9 @@ const SLIDES = [{
 }, {
 	styles: {
 		backgroundImage: "url(/assets/images/hobokenh1.jpg)",
-		backgroundSize: "cover",
+		backgroundColor: "#FFF",
+		backgroundPosition: "top",
+		backgroundSize: "calc(100% - 90px) calc(100% - 45px)",
 		fontSize: '15px',
 		lineHeight: '21px'
 	},
@@ -522,8 +577,9 @@ const SLIDES = [{
 
 module.exports = SLIDES;
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 const ContactFormSlide = require('./contactformslide.jsx');
+const Header = require('./header.jsx');
 
 class Slide extends React.Component {
 	constructor(props) {
@@ -533,7 +589,6 @@ class Slide extends React.Component {
 		};
 		if (this.state.styles) {
 			this.state.styles.backgroundRepeat = "no-repeat";
-			this.state.styles.backgroundPosition = "center";
 		}
 	}
 
@@ -550,35 +605,41 @@ class Slide extends React.Component {
 		const slideObj = this.props.obj;
 		let slideClasses = "slide bg000";
 		const isCurrent = this.props.isCurrent;
+		const headerOptions = {
+			addCornerLogo: slideObj.addCornerLogo,
+			addDarkCornerLogo: slideObj.addDarkCornerLogo,
+			animateCornerLogoOnStart: slideObj.animateCornerLogoOnStart
+		};
 
 		if (isCurrent) slideClasses += " runAnimations";
 
 		return React.createElement(
-			"div",
+			'div',
 			{ className: slideClasses, style: this.state.styles },
+			React.createElement(Header, { options: headerOptions }),
 			slideObj.video && React.createElement(
-				"video",
-				{ autoPlay: true, muted: true, loop: slideObj.videoLoop ? true : false, className: "background-video" },
-				React.createElement("source", { src: slideObj.video, type: "video/mp4" })
+				'video',
+				{ autoPlay: true, muted: true, loop: slideObj.videoLoop ? true : false, className: 'background-video' },
+				React.createElement('source', { src: slideObj.video, type: 'video/mp4' })
 			),
 			slideObj.contactFormSlide && React.createElement(ContactFormSlide, null),
 			React.createElement(
-				"div",
-				{ className: "center", style: slideObj.centerTextStyles },
-				slideObj.centerImage && React.createElement("img", { style: slideObj.centerImageStyles, src: slideObj.centerImage }),
-				React.createElement("h1", { dangerouslySetInnerHTML: { __html: slideObj.center } }),
+				'div',
+				{ className: 'center', style: slideObj.centerTextStyles },
+				slideObj.centerImage && React.createElement('img', { style: slideObj.centerImageStyles, src: slideObj.centerImage }),
+				React.createElement('h1', { dangerouslySetInnerHTML: { __html: slideObj.center } }),
 				slideObj.contactButton && React.createElement(
-					"div",
-					{ className: "btn contactButton", onClick: this.scrollToContactForm.bind(this) },
-					"CONTACT"
+					'div',
+					{ className: 'btn contactButton', onClick: this.scrollToContactForm.bind(this) },
+					'CONTACT'
 				)
 			),
 			React.createElement(
-				"div",
-				{ className: "centerBottom" },
-				slideObj.centerBottom && slideObj.centerBottom.line1 && React.createElement("h1", { dangerouslySetInnerHTML: { __html: slideObj.centerBottom.line1 } }),
-				slideObj.centerBottom && slideObj.centerBottom.line2 && React.createElement("h1", { dangerouslySetInnerHTML: { __html: slideObj.centerBottom.line2 } }),
-				slideObj.hasDownArrow && React.createElement("img", { onClick: this.scrollToNextSlide.bind(this), className: "downArrow", src: "/assets/images/downarrow.svg" })
+				'div',
+				{ className: 'centerBottom' },
+				slideObj.centerBottom && slideObj.centerBottom.line1 && React.createElement('h1', { dangerouslySetInnerHTML: { __html: slideObj.centerBottom.line1 } }),
+				slideObj.centerBottom && slideObj.centerBottom.line2 && React.createElement('h1', { dangerouslySetInnerHTML: { __html: slideObj.centerBottom.line2 } }),
+				slideObj.hasDownArrow && React.createElement('img', { onClick: this.scrollToNextSlide.bind(this), className: 'downArrow', src: '/assets/images/downarrow.svg' })
 			)
 		);
 	}
@@ -586,12 +647,13 @@ class Slide extends React.Component {
 
 module.exports = Slide;
 
-},{"./contactformslide.jsx":2}],8:[function(require,module,exports){
+},{"./contactformslide.jsx":2,"./header.jsx":4}],10:[function(require,module,exports){
 'use strict';
 
 const SLIDES = require('./assets/page.js');
 const Slide = require('./assets/slide.jsx');
 const MusicPlayer = require('./assets/musicplayer.jsx');
+const modules = require('./assets/modules.jsx');
 
 class SplashPage extends React.Component {
 	constructor(props) {
@@ -774,16 +836,6 @@ class SplashPage extends React.Component {
 			});
 		}, false);
 	}
-	explodeString(string) {
-		const spans = string.split("").map(function (char, index) {
-			return React.createElement(
-				'span',
-				{ className: 'letter cascading-animation', key: index },
-				char
-			);
-		});
-		return spans;
-	}
 	render() {
 		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx }));
 		const innerStyle = {
@@ -806,18 +858,6 @@ class SplashPage extends React.Component {
 		return React.createElement(
 			'div',
 			{ id: 'page' },
-			addCornerLogo && React.createElement(
-				'div',
-				{ className: cornerLogoWrapperClasses },
-				React.createElement(
-					'div',
-					{ className: 'text' },
-					this.explodeString('HOBOKEN HEIGHTS'),
-					React.createElement('div', { className: 'cascading-animation separator' })
-				),
-				darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_Black.png' }),
-				!darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_White.png' })
-			),
 			React.createElement(MusicPlayer, { soundEffect: thisSlideSoundEffect, darkMode: darkCornerLogo, goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, isFirstSlide: this.state.currIdx === 0 }),
 			React.createElement(
 				'div',
@@ -839,4 +879,4 @@ class SplashPage extends React.Component {
 let domContainer = document.querySelector('#container');
 ReactDOM.render(React.createElement(SplashPage, null), domContainer);
 
-},{"./assets/musicplayer.jsx":5,"./assets/page.js":6,"./assets/slide.jsx":7}]},{},[8]);
+},{"./assets/modules.jsx":6,"./assets/musicplayer.jsx":7,"./assets/page.js":8,"./assets/slide.jsx":9}]},{},[10]);
