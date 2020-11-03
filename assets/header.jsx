@@ -7,6 +7,9 @@ class Header extends React.Component {
 	render() {
 		const slideHeaderState = this.props.options;
 		const addCornerLogo = slideHeaderState.addCornerLogo;
+		if(!addCornerLogo) {
+			return(<div></div>);
+		}
 		const darkCornerLogo = slideHeaderState.addDarkCornerLogo;
 		const animateCornerLogoOnStart = slideHeaderState.animateCornerLogoOnStart;
 
