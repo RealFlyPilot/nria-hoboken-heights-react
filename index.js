@@ -534,6 +534,7 @@ const SLIDES = [{
 }, {
 	video: "/assets/videos/NIRMA_1_Exterior_High_Cinemagraphic.mp4",
 	videoLoop: true,
+	videoZoomEffect: true,
 	addCornerLogo: true,
 	centerBottom: {
 		line1: "MANHATTAN AVE, 1300",
@@ -566,6 +567,7 @@ const SLIDES = [{
 }, {
 	video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
 	videoLoop: true,
+	videoZoomEffect: true,
 	addCornerLogo: true
 }, {
 	styles: {
@@ -607,6 +609,8 @@ class Slide extends React.Component {
 	render() {
 		const slideObj = this.props.obj;
 		let slideClasses = "slide bg000";
+		let videoClasses = 'background-video';
+
 		const isCurrent = this.props.isCurrent;
 		const headerOptions = {
 			addCornerLogo: slideObj.addCornerLogo,
@@ -615,6 +619,7 @@ class Slide extends React.Component {
 		};
 
 		if (isCurrent) slideClasses += " runAnimations";
+		if (slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect';
 
 		return React.createElement(
 			'div',
@@ -622,7 +627,7 @@ class Slide extends React.Component {
 			React.createElement(Header, { options: headerOptions }),
 			slideObj.video && React.createElement(
 				'video',
-				{ autoPlay: true, muted: true, loop: slideObj.videoLoop ? true : false, className: 'background-video' },
+				{ autoPlay: true, muted: true, loop: slideObj.videoLoop ? true : false, className: videoClasses },
 				React.createElement('source', { src: slideObj.video, type: 'video/mp4' })
 			),
 			slideObj.contactFormSlide && React.createElement(ContactFormSlide, null),

@@ -7,6 +7,7 @@ const SLIDES = [{
 }, {
 	video: "/assets/videos/NIRMA_1_Exterior_High_Cinemagraphic.mp4",
 	videoLoop: true,
+	videoZoomEffect: true,
 	addCornerLogo: true,
 	centerBottom: {
 		line1: "MANHATTAN AVE, 1300",
@@ -39,6 +40,7 @@ const SLIDES = [{
 }, {
 	video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
 	videoLoop: true,
+	videoZoomEffect: true,
 	addCornerLogo: true
 }, {
 	styles: {

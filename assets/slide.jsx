@@ -24,6 +24,8 @@ class Slide extends React.Component {
 	render() {
 		const slideObj = this.props.obj;
 		let slideClasses = "slide bg000"
+		let videoClasses = 'background-video'
+		
 		const isCurrent = this.props.isCurrent;
 		const headerOptions = {
 			addCornerLogo: slideObj.addCornerLogo,
@@ -32,12 +34,13 @@ class Slide extends React.Component {
 		};
 		
 		if(isCurrent) slideClasses += " runAnimations";
-
+		if(slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect'
+		
 		return (
 			<div className={slideClasses} style={this.state.styles}>
 				<Header options={headerOptions} />
 				{slideObj.video &&
-					<video autoPlay muted loop={slideObj.videoLoop ? true : false} className='background-video'>
+					<video autoPlay muted loop={slideObj.videoLoop ? true : false} className={videoClasses}>
 						<source src={slideObj.video} type="video/mp4" />
 					</video>
 				}

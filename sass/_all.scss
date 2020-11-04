@@ -140,8 +140,10 @@ body {
 	overflow: hidden;
 	&.runAnimations {
 		.background-video {
-			transform: scale(1);
-			transition-delay: 1.1s;
+			&.videoZoomEffect {
+				transform: scale(1);
+				transition-delay: 1.1s;
+			}
 		}
 		.centerBottom {
 			> h1 {
@@ -229,8 +231,10 @@ body {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transform: scale(1.07);
-		transition: transform 1.2s ease-out 1.2s;
+		&.videoZoomEffect {
+			transform: scale(1.07);
+			transition: transform 1.2s ease-out 1.2s;
+		}
 	}
 	
 	.centerBottom {
