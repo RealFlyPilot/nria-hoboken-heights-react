@@ -10,6 +10,7 @@ class SplashPage extends React.Component {
 		super(props);
 		this.state = {
 			slides: SLIDES,
+			slidesViewed: [0],
 			transitiongState: 0, // 0 for false -1 for up 1 for down
 			currIdx: 0,
 			previousScrollVal: 0,
@@ -136,6 +137,12 @@ class SplashPage extends React.Component {
 	isTransitioning() {
 		return this.state.transitiongState != 0;
 	}
+	addIdxToViewedSlides(idx) {
+		if(this.state.slidesViewed.includes(idx)) return;
+
+		let slidesViewedArray = this.state.slidesViewed.concat(idx);
+		this.setState({ slidesViewed: slidesViewedArray })
+	}
 	nextSlide() {
 		if (this.isTransitioning()) {
 			return;
@@ -148,6 +155,8 @@ class SplashPage extends React.Component {
 			transitiongState: 1,
 			currIdx: newIdx
 		});
+
+		this.addIdxToViewedSlides(newIdx);
 	}
 	prevSlide() {
 		if (this.isTransitioning()) {
@@ -161,6 +170,7 @@ class SplashPage extends React.Component {
 			transitiongState: -1,
 			currIdx: newIdx
 		});
+		this.addIdxToViewedSlides(newIdx);
 	}
 	lastSlide() {
 		if (this.isTransitioning()) {
@@ -174,6 +184,7 @@ class SplashPage extends React.Component {
 			transitiongState: 1,
 			currIdx: newIdx
 		});
+		this.addIdxToViewedSlides(newIdx);
 	}
 	componentDidMount() {
 		window.addEventListener('keydown', (event) => {
@@ -196,8 +207,9 @@ class SplashPage extends React.Component {
 		}, false);
 	}
 	render() {
+		
 		const $slides = this.state.slides.map((slide, idx) =>
-			<Slide goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx}></Slide>
+			<Slide slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx}></Slide>
 		);
 		const innerStyle = {
 			transform: 'translateY(-' + (this.state.currIdx * 100) + 'vh)'
@@ -216,6 +228,9 @@ class SplashPage extends React.Component {
 		if (animateCornerLogoOnStart) {
 			cornerLogoWrapperClasses += ' animate';
 		}
+
+		
+		
 		return (
 			<div id="page">
 				<MusicPlayer soundEffect={thisSlideSoundEffect} darkMode={darkCornerLogo} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0}></MusicPlayer>

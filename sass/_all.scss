@@ -485,6 +485,37 @@ body {
 	}
 }
 
+
+.runAnimationOnce {
+	.corner-logo-wrapper {
+		@for $i from 1 through 16 {//letters in string plus following line
+			&.animate {
+				.text .cascading-animation {
+					&:nth-child(#{$i}) {
+						animation-delay: 0.5s + $i * (0.8s / 16);
+					}
+				}
+			}
+		}
+		&.animate {
+			.corner-logo {
+				animation-duration: 1s;
+				animation-delay: 0.5s;
+				animation-fill-mode: forwards;
+				animation-name: slideCornerLogo;
+				
+			}
+		}
+		&.animate {
+			.text .cascading-animation {
+				animation-duration: 0.2s;
+				animation-fill-mode: forwards;
+				animation-name: fadeIn;
+			}
+		}
+		
+	}
+}
 .corner-logo-wrapper {
 	position: absolute;
 	top: 40px;
@@ -507,31 +538,16 @@ body {
 				}
 			}
 		}
-		&.animate {
-			.text .cascading-animation {
-				&:nth-child(#{$i}) {
-					animation-delay: 0.5s + $i * (0.8s / 16);
-				}
-			}
-		}
 	}
-	&:hover,
-	&.animate {
+	&:hover {
 		.text .cascading-animation {
 			animation-fill-mode: forwards;
 			animation-name: fadeIn;
 			animation-duration: 0.2s;
 		}
-		
 	}
-	&.animate {
-		.corner-logo {
-			animation-fill-mode: forwards;
-			animation-name: slideCornerLogo;
-			animation-duration: 1s;
-			animation-delay: 0.5s;
-		}
-	}
+	
+	
 	&.darkMode {
 		.text {
 			color: #000;

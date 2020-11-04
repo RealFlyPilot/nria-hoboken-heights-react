@@ -34,6 +34,7 @@ class Slide extends React.Component {
 		};
 		
 		if(isCurrent) slideClasses += " runAnimations";
+		if(this.props.slideViewed) slideClasses += " runAnimationOnce";
 		if(slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect'
 		
 		return (
