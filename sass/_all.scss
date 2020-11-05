@@ -2,7 +2,7 @@ $separator-line-height: 42px;
 $soundOptionsButtonWidth: 86px;
 $cornerLogoAnimateDistance: 260px;
 $cornerMusicPlayerChildElementWidth: 140px;
-
+$slideAnimationDuration: 1400ms;
 @mixin slideInAnimation($elementWidth, $delay) {
 	.slideInAnimationWrapper {
 		.slideInAnimationElementContainer {
@@ -104,8 +104,14 @@ body {
 	height: 100vh;
 	.slides_inner {
 		transition-property: transform;
-		transition-duration: 1400ms;
+		transition-duration: $slideAnimationDuration;
 		transition-timing-function: cubic-bezier(0.29, 0.79, 0.35, 0.99);
+		&.slide_idx_4 {
+			.hideOnLastSlide {
+				opacity: 0;
+			}
+		}
+		
 	}
 }
 .separator {
@@ -341,6 +347,7 @@ body {
 		.rightArrow {
 			float: right;
 			margin-top: 40px;
+			cursor: pointer;
 		}
 	}
 	.privacyPolicy {
@@ -490,31 +497,7 @@ body {
 
 .runAnimationOnce {
 	.corner-logo-wrapper {
-		@for $i from 1 through 16 {//letters in string plus following line
-			&.animate {
-				.text .cascading-animation {
-					&:nth-child(#{$i}) {
-						animation-delay: 0.5s + $i * (0.8s / 16);
-					}
-				}
-			}
-		}
-		&.animate {
-			.corner-logo {
-				animation-duration: 1s;
-				animation-delay: 0.5s;
-				animation-fill-mode: forwards;
-				animation-name: slideCornerLogo;
-				
-			}
-		}
-		&.animate {
-			.text .cascading-animation {
-				animation-duration: 0.2s;
-				animation-fill-mode: forwards;
-				animation-name: fadeIn;
-			}
-		}
+		
 		
 	}
 }
@@ -526,6 +509,36 @@ body {
 	height: 60px;
 	width: 250px;
 	cursor: default;
+
+	&.fixed {
+		z-index: 0;
+		@for $i from 1 through 16 {//letters in string plus following line
+			&.animate {
+				.text .cascading-animation {
+					&:nth-child(#{$i}) {
+						//each letter should have a longer delay than the previous, but should start after slide animation finishes
+						animation-delay: $slideAnimationDuration + $i * (0.8s / 16);
+					}
+				}
+			}
+		}
+		&.animate {
+			.corner-logo {
+				animation-duration: 1s;
+				animation-delay: $slideAnimationDuration;//wait for slide animation to finish before running animation
+				animation-fill-mode: forwards;
+				animation-name: slideCornerLogo;
+				
+			}
+		}
+		&.animate {
+			.text .cascading-animation {
+				animation-duration: 0.2s;//speed of each letter's appearance
+				animation-fill-mode: forwards;
+				animation-name: fadeIn;
+			}
+		}
+	}
 	&:hover {
 		.corner-logo {
 			transform: translateX($cornerLogoAnimateDistance);

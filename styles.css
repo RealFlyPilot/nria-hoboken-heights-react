@@ -137,6 +137,9 @@ body {
   transition-duration: 1400ms;
   transition-timing-function: cubic-bezier(0.29, 0.79, 0.35, 0.99);
 }
+.slides_wrapper .slides_inner.slide_idx_4 .hideOnLastSlide {
+  opacity: 0;
+}
 
 .separator {
   border-left: 0.5462802649px solid #FFFFFF;
@@ -436,6 +439,7 @@ body {
 .slide .contactForm .rightArrow {
   float: right;
   margin-top: 40px;
+  cursor: pointer;
 }
 .slide .privacyPolicy {
   width: 45%;
@@ -569,66 +573,6 @@ body {
   margin: 0;
 }
 
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(1) {
-  animation-delay: 0.55s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(2) {
-  animation-delay: 0.6s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(3) {
-  animation-delay: 0.65s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(4) {
-  animation-delay: 0.7s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(5) {
-  animation-delay: 0.75s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(6) {
-  animation-delay: 0.8s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(7) {
-  animation-delay: 0.85s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(8) {
-  animation-delay: 0.9s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(9) {
-  animation-delay: 0.95s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(10) {
-  animation-delay: 1s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(11) {
-  animation-delay: 1.05s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(12) {
-  animation-delay: 1.1s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(13) {
-  animation-delay: 1.15s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(14) {
-  animation-delay: 1.2s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(15) {
-  animation-delay: 1.25s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation:nth-child(16) {
-  animation-delay: 1.3s;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .corner-logo {
-  animation-duration: 1s;
-  animation-delay: 0.5s;
-  animation-fill-mode: forwards;
-  animation-name: slideCornerLogo;
-}
-.runAnimationOnce .corner-logo-wrapper.animate .text .cascading-animation {
-  animation-duration: 0.2s;
-  animation-fill-mode: forwards;
-  animation-name: fadeIn;
-}
-
 .corner-logo-wrapper {
   position: absolute;
   top: 40px;
@@ -637,6 +581,68 @@ body {
   height: 60px;
   width: 250px;
   cursor: default;
+}
+.corner-logo-wrapper.fixed {
+  z-index: 0;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(1) {
+  animation-delay: 1450ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(2) {
+  animation-delay: 1500ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(3) {
+  animation-delay: 1550ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(4) {
+  animation-delay: 1600ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(5) {
+  animation-delay: 1650ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(6) {
+  animation-delay: 1700ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(7) {
+  animation-delay: 1750ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(8) {
+  animation-delay: 1800ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(9) {
+  animation-delay: 1850ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(10) {
+  animation-delay: 1900ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(11) {
+  animation-delay: 1950ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(12) {
+  animation-delay: 2000ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(13) {
+  animation-delay: 2050ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(14) {
+  animation-delay: 2100ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(15) {
+  animation-delay: 2150ms;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation:nth-child(16) {
+  animation-delay: 2200ms;
+}
+.corner-logo-wrapper.fixed.animate .corner-logo {
+  animation-duration: 1s;
+  animation-delay: 1400ms;
+  animation-fill-mode: forwards;
+  animation-name: slideCornerLogo;
+}
+.corner-logo-wrapper.fixed.animate .text .cascading-animation {
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  animation-name: fadeIn;
 }
 .corner-logo-wrapper:hover .corner-logo {
   transform: translateX(260px);

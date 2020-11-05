@@ -4,6 +4,7 @@ const SLIDES = require('./assets/page.js');
 const Slide = require('./assets/slide.jsx');
 const MusicPlayer = require('./assets/musicplayer.jsx');
 const modules = require('./assets/modules.jsx');
+const Header = require('./assets/header.jsx');
 
 class SplashPage extends React.Component {
 	constructor(props) {
@@ -175,7 +176,7 @@ class SplashPage extends React.Component {
 	lastSlide() {
 		const newIdx = this.state.slides.length - 1;
 		const alreadyOnLastSlide = this.state.currIdx == newIdx;
-		
+
 		if (this.isTransitioning() || alreadyOnLastSlide) {
 			return;
 		}
@@ -222,24 +223,29 @@ class SplashPage extends React.Component {
 		const addCornerLogo = thisSlideState.addCornerLogo;
 		const darkCornerLogo = thisSlideState.addDarkCornerLogo;
 		const animateCornerLogoOnStart = thisSlideState.animateCornerLogoOnStart;
-
-		let cornerLogoWrapperClasses = 'corner-logo-wrapper';
-		if (darkCornerLogo) {
-			cornerLogoWrapperClasses += ' darkMode';
-		}
-		if (animateCornerLogoOnStart) {
-			cornerLogoWrapperClasses += ' animate';
-		}
+		const lastSlideIdx = (this.state.slides.length - 1);
+		const lastSlideViewed = this.state.slidesViewed.includes(lastSlideIdx);
 
 		
+		let headerOptions = {
+			addCornerLogo: true,
+			addDarkCornerLogo: true,
+			fixedHeader: true
+		};
+		
+		if(lastSlideViewed) {
+			headerOptions.animateCornerLogoOnStart = true;
+		}
+		let slides_inner_classes = "slides_inner slide_idx_"+this.state.currIdx;
 		
 		return (
 			<div id="page">
 				<MusicPlayer soundEffect={thisSlideSoundEffect} darkMode={darkCornerLogo} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0}></MusicPlayer>
 				<div className="slides_wrapper" onWheel={this.handleWheelEvent.bind(this)} onScroll={this.handleScrollEvent.bind(this)}>
+					<Header options={headerOptions} />
 					<div
 						ref="inner"
-						className="slides_inner"
+						className={slides_inner_classes}
 						style={innerStyle}
 						onTransitionEnd={this.watchForEventEnd.bind(this)}>
 						{$slides}

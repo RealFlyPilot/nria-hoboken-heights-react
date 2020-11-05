@@ -30,7 +30,8 @@ class Slide extends React.Component {
 		const headerOptions = {
 			addCornerLogo: slideObj.addCornerLogo,
 			addDarkCornerLogo: slideObj.addDarkCornerLogo,
-			animateCornerLogoOnStart: slideObj.animateCornerLogoOnStart
+			animateCornerLogoOnStart: slideObj.animateCornerLogoOnStart,
+			hideOnLastSlide: slideObj.hideOnLastSlide
 		};
 		
 		if(isCurrent) slideClasses += " runAnimations";

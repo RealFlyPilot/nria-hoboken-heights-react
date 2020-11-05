@@ -301,12 +301,14 @@ class Header extends React.Component {
 	}
 	render() {
 		const slideHeaderState = this.props.options;
+		const fixedHeader = slideHeaderState.fixedHeader;
 		const addCornerLogo = slideHeaderState.addCornerLogo;
 		if (!addCornerLogo) {
 			return React.createElement('div', null);
 		}
 		const darkCornerLogo = slideHeaderState.addDarkCornerLogo;
 		const animateCornerLogoOnStart = slideHeaderState.animateCornerLogoOnStart;
+		const hideOnLastSlide = slideHeaderState.hideOnLastSlide;
 
 		let cornerLogoWrapperClasses = 'corner-logo-wrapper';
 		if (darkCornerLogo) {
@@ -314,6 +316,12 @@ class Header extends React.Component {
 		}
 		if (animateCornerLogoOnStart) {
 			cornerLogoWrapperClasses += ' animate';
+		}
+		if (fixedHeader) {
+			cornerLogoWrapperClasses += ' fixed';
+		}
+		if (hideOnLastSlide) {
+			cornerLogoWrapperClasses += ' hideOnLastSlide';
 		}
 		return React.createElement(
 			'div',
@@ -579,15 +587,16 @@ const SLIDES = [{
 	video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
 	videoLoop: true,
 	videoZoomEffect: true,
-	addCornerLogo: true
+	addCornerLogo: true,
+	hideOnLastSlide: true
 }, {
 	styles: {
-		backgroundColor: "#fff",
+		backgroundColor: "transparent",
 		color: "#000"
 	},
-	addCornerLogo: true,
-	addDarkCornerLogo: true,
-	animateCornerLogoOnStart: true,
+	// addCornerLogo: true,
+	// addDarkCornerLogo: true,
+	// animateCornerLogoOnStart: true,
 	contactFormSlide: true
 }];
 
@@ -626,7 +635,8 @@ class Slide extends React.Component {
 		const headerOptions = {
 			addCornerLogo: slideObj.addCornerLogo,
 			addDarkCornerLogo: slideObj.addDarkCornerLogo,
-			animateCornerLogoOnStart: slideObj.animateCornerLogoOnStart
+			animateCornerLogoOnStart: slideObj.animateCornerLogoOnStart,
+			hideOnLastSlide: slideObj.hideOnLastSlide
 		};
 
 		if (isCurrent) slideClasses += " runAnimations";
@@ -674,6 +684,7 @@ const SLIDES = require('./assets/page.js');
 const Slide = require('./assets/slide.jsx');
 const MusicPlayer = require('./assets/musicplayer.jsx');
 const modules = require('./assets/modules.jsx');
+const Header = require('./assets/header.jsx');
 
 class SplashPage extends React.Component {
 	constructor(props) {
@@ -881,14 +892,19 @@ class SplashPage extends React.Component {
 		const addCornerLogo = thisSlideState.addCornerLogo;
 		const darkCornerLogo = thisSlideState.addDarkCornerLogo;
 		const animateCornerLogoOnStart = thisSlideState.animateCornerLogoOnStart;
+		const lastSlideIdx = this.state.slides.length - 1;
+		const lastSlideViewed = this.state.slidesViewed.includes(lastSlideIdx);
 
-		let cornerLogoWrapperClasses = 'corner-logo-wrapper';
-		if (darkCornerLogo) {
-			cornerLogoWrapperClasses += ' darkMode';
+		let headerOptions = {
+			addCornerLogo: true,
+			addDarkCornerLogo: true,
+			fixedHeader: true
+		};
+
+		if (lastSlideViewed) {
+			headerOptions.animateCornerLogoOnStart = true;
 		}
-		if (animateCornerLogoOnStart) {
-			cornerLogoWrapperClasses += ' animate';
-		}
+		let slides_inner_classes = "slides_inner slide_idx_" + this.state.currIdx;
 
 		return React.createElement(
 			'div',
@@ -897,11 +913,12 @@ class SplashPage extends React.Component {
 			React.createElement(
 				'div',
 				{ className: 'slides_wrapper', onWheel: this.handleWheelEvent.bind(this), onScroll: this.handleScrollEvent.bind(this) },
+				React.createElement(Header, { options: headerOptions }),
 				React.createElement(
 					'div',
 					{
 						ref: 'inner',
-						className: 'slides_inner',
+						className: slides_inner_classes,
 						style: innerStyle,
 						onTransitionEnd: this.watchForEventEnd.bind(this) },
 					$slides
@@ -914,4 +931,4 @@ class SplashPage extends React.Component {
 let domContainer = document.querySelector('#container');
 ReactDOM.render(React.createElement(SplashPage, null), domContainer);
 
-},{"./assets/modules.jsx":6,"./assets/musicplayer.jsx":7,"./assets/page.js":8,"./assets/slide.jsx":9}]},{},[10]);
+},{"./assets/header.jsx":4,"./assets/modules.jsx":6,"./assets/musicplayer.jsx":7,"./assets/page.js":8,"./assets/slide.jsx":9}]},{},[10]);

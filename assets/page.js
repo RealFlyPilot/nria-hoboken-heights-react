@@ -41,15 +41,16 @@ const SLIDES = [{
 	video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
 	videoLoop: true,
 	videoZoomEffect: true,
-	addCornerLogo: true
+	addCornerLogo: true,
+	hideOnLastSlide: true
 }, {
 	styles: {
-		backgroundColor: "#fff",
+		backgroundColor: "transparent",
 		color: "#000"
 	},
-	addCornerLogo: true,
-	addDarkCornerLogo: true,
-	animateCornerLogoOnStart: true,
+	// addCornerLogo: true,
+	// addDarkCornerLogo: true,
+	// animateCornerLogoOnStart: true,
 	contactFormSlide: true
 }];
 
