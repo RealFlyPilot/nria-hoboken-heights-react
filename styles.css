@@ -724,28 +724,38 @@ body {
 
 @media screen and (max-width: 1500px) {
   .slide .contactForm {
-    top: 16.2vh;
-    padding: 4.5vh;
+    top: 120px;
+    padding: 4vh;
   }
   .slide .contactForm .headline {
     margin-bottom: 1.6vh;
   }
   .slide .contactForm .form-control .label {
-    margin-top: 1.8vh;
+    margin-top: 1vh;
+    font-size: 12px;
+    line-height: 1.4em;
   }
   .slide .contactForm .form-control .input {
-    margin-top: 1vh;
+    margin-top: 0.5vh;
     height: 4vh;
     padding: 0.9vh;
   }
   .slide .contactForm .fine-print {
-    margin-top: 1vh;
+    margin-top: 0.5vh;
   }
   .slide .contactForm .rightArrow {
-    margin-top: 2vh;
+    margin-top: 0;
+    width: 40px;
   }
   .slide .privacyPolicy .verticalLineContainer {
-    height: 35vh;
+    height: 30vh;
+  }
+  .slide .privacyPolicy .logo {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+  }
+  .slide .privacyPolicy .contactInfo .btn {
+    margin-top: 4vh;
   }
 }
 
