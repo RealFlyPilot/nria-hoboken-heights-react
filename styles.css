@@ -208,7 +208,7 @@ body {
 .animationHasNotRun.corner_content_wrapper .slideInAnimationWrapper .slideInAnimationElementContainer .slideInAnimationElementLeft {
   animation-fill-mode: forwards;
   animation-name: soundOptionsSlideOutLeft;
-  animation-delay: 0.9s;
+  animation-delay: 1.7s;
 }
 @keyframes soundOptionsSlideOutLeft {
   0% {
@@ -221,7 +221,7 @@ body {
 .animationHasNotRun.corner_content_wrapper .slideInAnimationWrapper .slideInAnimationElementContainer .slideInAnimationElementRight {
   animation-fill-mode: forwards;
   animation-name: soundOptionsSlideOutRight;
-  animation-delay: 1.1s;
+  animation-delay: 1.9s;
 }
 @keyframes soundOptionsSlideOutRight {
   0% {
@@ -236,7 +236,7 @@ body {
   animation-fill-mode: forwards;
   animation-name: lineAppear;
   animation-duration: 0.75s;
-  animation-delay: 0.4s;
+  animation-delay: 1.2s;
 }
 
 .slide {

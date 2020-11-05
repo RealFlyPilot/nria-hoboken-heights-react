@@ -132,7 +132,7 @@ body {
 		@include slideInAnimation($soundOptionsButtonWidth, 4.5s)
 	}
 	&.corner_content_wrapper {
-		@include slideInAnimation($cornerMusicPlayerChildElementWidth, 0.4s)
+		@include slideInAnimation($cornerMusicPlayerChildElementWidth, 1.2s)
 	}
 }
 
