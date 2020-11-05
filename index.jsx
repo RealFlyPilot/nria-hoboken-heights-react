@@ -173,10 +173,12 @@ class SplashPage extends React.Component {
 		this.addIdxToViewedSlides(newIdx);
 	}
 	lastSlide() {
-		if (this.isTransitioning()) {
+		const newIdx = this.state.slides.length - 1;
+		const alreadyOnLastSlide = this.state.currIdx == newIdx;
+		
+		if (this.isTransitioning() || alreadyOnLastSlide) {
 			return;
 		}
-		const newIdx = this.state.slides.length - 1;
 		if (newIdx < 0) {
 			return;
 		}
