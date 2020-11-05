@@ -206,6 +206,17 @@ class ContactFormSlide extends React.Component {
 						{ className: "address" },
 						"Manhattan Avenue Capital 1300, LLC"
 					),
+					React.createElement("br", null),
+					React.createElement(
+						"div",
+						{ className: "address" },
+						"Richard Stabile"
+					),
+					React.createElement(
+						"div",
+						{ className: "address" },
+						"RE/MAX Real Estate Limited"
+					),
 					React.createElement(
 						"div",
 						{ className: "phone" },

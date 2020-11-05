@@ -475,7 +475,7 @@ body {
 .slide .privacyPolicy .contactInfo .copyright {
   font-weight: 300;
   font-family: "Gotham-Light", sans-serif;
-  margin-top: 50px;
+  margin-top: 1.4em;
 }
 .slide .privacyPolicy .contactInfo .btn {
   border: solid 1px #000;
