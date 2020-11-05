@@ -137,7 +137,7 @@ body {
   transition-duration: 1400ms;
   transition-timing-function: cubic-bezier(0.29, 0.79, 0.35, 0.99);
 }
-.slides_wrapper .slides_inner.slide_idx_4 .hideOnLastSlide {
+.slides_wrapper .slides_inner.slide_idx_4 .cornerLogoHideOnLastSlide {
   opacity: 0;
 }
 
@@ -285,6 +285,13 @@ body {
 }
 .slide.runAnimations .privacyPolicy .logo {
   opacity: 1;
+}
+.slide.runAnimations .cornerLogofadeIn {
+  animation-fill-mode: forwards;
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+  animation-delay: 1.2s;
+  opacity: 0;
 }
 .slide .downArrow {
   opacity: 0;

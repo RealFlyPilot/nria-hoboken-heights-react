@@ -107,7 +107,7 @@ body {
 		transition-duration: $slideAnimationDuration;
 		transition-timing-function: cubic-bezier(0.29, 0.79, 0.35, 0.99);
 		&.slide_idx_4 {
-			.hideOnLastSlide {
+			.cornerLogoHideOnLastSlide {
 				opacity: 0;
 			}
 		}
@@ -189,6 +189,13 @@ body {
 		}
 		.privacyPolicy .logo {
 			opacity: 1;
+		}
+		.cornerLogofadeIn {
+			animation-fill-mode: forwards;
+			animation-name: fadeIn;
+			animation-duration: 0.5s;
+			animation-delay: 1.2s;
+			opacity: 0;
 		}
 	}
 	.downArrow {

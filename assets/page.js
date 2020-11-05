@@ -42,14 +42,15 @@ const SLIDES = [{
 	videoLoop: true,
 	videoZoomEffect: true,
 	addCornerLogo: true,
-	hideOnLastSlide: true
+	cornerLogoHideOnLastSlide: true,
+	cornerLogofadeIn: true
 }, {
 	styles: {
 		backgroundColor: "transparent",
 		color: "#000"
 	},
 	// addCornerLogo: true,
-	// addDarkCornerLogo: true,
+	addDarkCornerLogo: true,
 	// animateCornerLogoOnStart: true,
 	contactFormSlide: true
 }];

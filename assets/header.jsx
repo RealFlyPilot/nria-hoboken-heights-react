@@ -13,7 +13,8 @@ class Header extends React.Component {
 		}
 		const darkCornerLogo = slideHeaderState.addDarkCornerLogo;
 		const animateCornerLogoOnStart = slideHeaderState.animateCornerLogoOnStart;
-		const hideOnLastSlide = slideHeaderState.hideOnLastSlide;
+		const cornerLogoHideOnLastSlide = slideHeaderState.cornerLogoHideOnLastSlide;
+		const cornerLogofadeIn = slideHeaderState.cornerLogofadeIn;
 
 		let cornerLogoWrapperClasses = 'corner-logo-wrapper';
 		if (darkCornerLogo) {
@@ -25,8 +26,11 @@ class Header extends React.Component {
 		if (fixedHeader) {
 			cornerLogoWrapperClasses += ' fixed';
 		}
-		if (hideOnLastSlide) {
-			cornerLogoWrapperClasses += ' hideOnLastSlide';
+		if (cornerLogoHideOnLastSlide) {
+			cornerLogoWrapperClasses += ' cornerLogoHideOnLastSlide';
+		}
+		if (cornerLogofadeIn) {
+			cornerLogoWrapperClasses += ' cornerLogofadeIn';
 		}
 		return (
 			<div className={cornerLogoWrapperClasses}>

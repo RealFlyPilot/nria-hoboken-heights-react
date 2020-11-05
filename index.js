@@ -308,7 +308,8 @@ class Header extends React.Component {
 		}
 		const darkCornerLogo = slideHeaderState.addDarkCornerLogo;
 		const animateCornerLogoOnStart = slideHeaderState.animateCornerLogoOnStart;
-		const hideOnLastSlide = slideHeaderState.hideOnLastSlide;
+		const cornerLogoHideOnLastSlide = slideHeaderState.cornerLogoHideOnLastSlide;
+		const cornerLogofadeIn = slideHeaderState.cornerLogofadeIn;
 
 		let cornerLogoWrapperClasses = 'corner-logo-wrapper';
 		if (darkCornerLogo) {
@@ -320,8 +321,11 @@ class Header extends React.Component {
 		if (fixedHeader) {
 			cornerLogoWrapperClasses += ' fixed';
 		}
-		if (hideOnLastSlide) {
-			cornerLogoWrapperClasses += ' hideOnLastSlide';
+		if (cornerLogoHideOnLastSlide) {
+			cornerLogoWrapperClasses += ' cornerLogoHideOnLastSlide';
+		}
+		if (cornerLogofadeIn) {
+			cornerLogoWrapperClasses += ' cornerLogofadeIn';
 		}
 		return React.createElement(
 			'div',
@@ -588,14 +592,15 @@ const SLIDES = [{
 	videoLoop: true,
 	videoZoomEffect: true,
 	addCornerLogo: true,
-	hideOnLastSlide: true
+	cornerLogoHideOnLastSlide: true,
+	cornerLogofadeIn: true
 }, {
 	styles: {
 		backgroundColor: "transparent",
 		color: "#000"
 	},
 	// addCornerLogo: true,
-	// addDarkCornerLogo: true,
+	addDarkCornerLogo: true,
 	// animateCornerLogoOnStart: true,
 	contactFormSlide: true
 }];
@@ -636,7 +641,8 @@ class Slide extends React.Component {
 			addCornerLogo: slideObj.addCornerLogo,
 			addDarkCornerLogo: slideObj.addDarkCornerLogo,
 			animateCornerLogoOnStart: slideObj.animateCornerLogoOnStart,
-			hideOnLastSlide: slideObj.hideOnLastSlide
+			cornerLogoHideOnLastSlide: slideObj.cornerLogoHideOnLastSlide,
+			cornerLogofadeIn: slideObj.cornerLogofadeIn
 		};
 
 		if (isCurrent) slideClasses += " runAnimations";
