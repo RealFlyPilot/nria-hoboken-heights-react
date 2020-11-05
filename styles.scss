@@ -12,43 +12,50 @@
 
 
 
-@media screen and (max-width: 1500px) {
+@media screen and (min-width: 769px) and (max-height: 1080px) {
 	//Fixes for contact form slide on smaller screens
 	.slide {
 		.contactForm {
-			top: 120px;
+			top: calc(100px + 6vh);
 			padding: 4vh;
 			
 			.headline {
 				margin-bottom: 1.6vh;
+				line-height: 1.4em;
+				font-size: calc(11px + .2vh);
+				letter-spacing: 0.4vh;
 			}
 			.form-control {
 				.label {
 					margin-top: 1vh;
-					font-size: 12px;
+					font-size: calc(11px + .2vh);
 					line-height: 1.4em;
 				}
 				.input {
 					margin-top: 0.5vh;
 					height: 4vh;
 					padding: 0.9vh;
+					&.textarea {
+						height: calc(30px + 2vh);
+					}
 				}
 			}
 			.fine-print {
 				margin-top: 0.5vh;
 			}
 			.rightArrow {
-				margin-top: 0;
+				margin-top: 0.5vh;
 				width: 40px;
 			}
 		}
 		.privacyPolicy {
 			.verticalLineContainer {
-				height: 30vh;
+				height: calc(100px + 10vh);
 			}
 			.logo {
 				margin-top: 3vh;
 				margin-bottom: 3vh;
+				height: calc(45px + 4vh);
 			}
 			.contactInfo .btn {
 				margin-top: 4vh;

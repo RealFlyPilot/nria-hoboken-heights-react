@@ -402,6 +402,7 @@ body {
 .slide .contactForm .form-control {
   font-family: "Gotham-Light", sans-serif;
   font-weight: 300;
+  letter-spacing: 1px;
 }
 .slide .contactForm .form-control .label {
   display: block;
@@ -430,6 +431,7 @@ body {
   line-height: 1.4em;
   color: #000;
   margin-top: 18px;
+  letter-spacing: 1px;
 }
 .slide .contactForm .rightArrow {
   float: right;
@@ -722,17 +724,20 @@ body {
   margin: 0 12px;
 }
 
-@media screen and (max-width: 1500px) {
+@media screen and (min-width: 769px) and (max-height: 1080px) {
   .slide .contactForm {
-    top: 120px;
+    top: calc(100px + 6vh);
     padding: 4vh;
   }
   .slide .contactForm .headline {
     margin-bottom: 1.6vh;
+    line-height: 1.4em;
+    font-size: calc(11px + .2vh);
+    letter-spacing: 0.4vh;
   }
   .slide .contactForm .form-control .label {
     margin-top: 1vh;
-    font-size: 12px;
+    font-size: calc(11px + .2vh);
     line-height: 1.4em;
   }
   .slide .contactForm .form-control .input {
@@ -740,19 +745,23 @@ body {
     height: 4vh;
     padding: 0.9vh;
   }
+  .slide .contactForm .form-control .input.textarea {
+    height: calc(30px + 2vh);
+  }
   .slide .contactForm .fine-print {
     margin-top: 0.5vh;
   }
   .slide .contactForm .rightArrow {
-    margin-top: 0;
+    margin-top: 0.5vh;
     width: 40px;
   }
   .slide .privacyPolicy .verticalLineContainer {
-    height: 30vh;
+    height: calc(100px + 10vh);
   }
   .slide .privacyPolicy .logo {
     margin-top: 3vh;
     margin-bottom: 3vh;
+    height: calc(45px + 4vh);
   }
   .slide .privacyPolicy .contactInfo .btn {
     margin-top: 4vh;
