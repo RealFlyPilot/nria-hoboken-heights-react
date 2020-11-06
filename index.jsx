@@ -18,7 +18,10 @@ class SplashPage extends React.Component {
 			peakScrollVal: 0,
 			readyForScroll: 1,
 			browser: '',
-			operating_sys: ''
+			operating_sys: '',
+
+			isPlaying: false,
+			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3')
 		};
 		this.lastSlide = this.lastSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
@@ -28,6 +31,11 @@ class SplashPage extends React.Component {
 		// this.debounceOnScroll = _.throttle(this.debounceOnScroll.bind(this), 3500, {leading: true, trailing:true});
 
 
+		this.musicMute = this.musicMute.bind(this);
+		this.musicPlay = this.musicPlay.bind(this);
+		this.musicToggle = this.musicToggle.bind(this);
+
+	
 		/*
 		 * Browser wheel event inconsistencies
 		 * 
@@ -73,6 +81,16 @@ class SplashPage extends React.Component {
 	
 	// 	this.setState({previousScrollVal: 0});
 	// }
+
+	musicMute(evt) {
+		this.setState({ isPlaying: false });
+	}
+	musicPlay(evt) {
+		this.setState({ isPlaying: true });
+	}
+	musicToggle(){
+		this.setState({ isPlaying: !this.state.isPlaying })
+	}
 	scrollSlide(deltaY){
 		const isScrollingDown = deltaY > 0;
 		if (isScrollingDown) {
@@ -80,7 +98,6 @@ class SplashPage extends React.Component {
 		} else {
 			this.prevSlide();
 		}
-		
 	}
 	throttleOnScroll(deltaY) {
 		if (Math.abs(deltaY) >= 1 && this.state.readyForScroll) {
@@ -101,7 +118,6 @@ class SplashPage extends React.Component {
 
 		this.setState({previousScrollVal: deltaY});
 	}
-
 	handleScrollEvent(evt) {
 		const deltaY = evt.deltaY;
 		// this.throttleOnScroll(deltaY);
@@ -209,10 +225,16 @@ class SplashPage extends React.Component {
 			});
 		}, false);
 	}
-	render() {
-		
+
+	render() {		
+		if(this.state.isPlaying) {
+			this.state.audioPlayer.play();
+		} else {
+			this.state.audioPlayer.pause();
+		}
+
 		const $slides = this.state.slides.map((slide, idx) =>
-			<Slide slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx}></Slide>
+			<Slide playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
 		);
 		const innerStyle = {
 			transform: 'translateY(-' + (this.state.currIdx * 100) + 'vh)'
@@ -240,7 +262,7 @@ class SplashPage extends React.Component {
 		
 		return (
 			<div id="page">
-				<MusicPlayer soundEffect={thisSlideSoundEffect} darkMode={darkCornerLogo} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0}></MusicPlayer>
+				<MusicPlayer toggleMusicPlayer={this.musicToggle} soundEffect={thisSlideSoundEffect} darkMode={darkCornerLogo} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0} isPlaying={this.state.isPlaying}></MusicPlayer>
 				<div className="slides_wrapper" onWheel={this.handleWheelEvent.bind(this)} onScroll={this.handleScrollEvent.bind(this)}>
 					<Header options={headerOptions} />
 					<div

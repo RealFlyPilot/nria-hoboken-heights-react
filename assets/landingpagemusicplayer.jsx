@@ -22,7 +22,6 @@ class LandingPageMusicPlayer extends React.Component {
 		animationEnded();
 	}
 	
-
 	render(){
 		let settingsClasses = 'settings slideInAnimationWrapper';
 		let playButtonClasses = 'button play slideInAnimationElementContainer';

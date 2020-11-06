@@ -43,7 +43,9 @@ const SLIDES = [{
 	videoZoomEffect: true,
 	addCornerLogo: true,
 	cornerLogoHideOnLastSlide: true,
-	cornerLogofadeIn: true
+	cornerLogofadeIn: true,
+	soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3"
+	
 }, {
 	styles: {
 		backgroundColor: "transparent",

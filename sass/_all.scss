@@ -411,7 +411,6 @@ body {
 	z-index: 2;
 	color: #fff;
 	text-align: center;
-	cursor: pointer;
 	letter-spacing: 4.4px;
 	&.darkMode {
 		color: #000;
@@ -428,11 +427,12 @@ body {
 		}
 	}
 	&.center_layout {
+		position: static;
 		display: block;
-		left: 50%;
-		top: auto;
-		bottom: 13vh;
-		transform: translateX(-50%);
+		// left: 50%;
+		// top: auto;
+		// bottom: 13vh;
+		// transform: translateX(-50%);
 		.corner_content_wrapper {
 			display: none;
 		}
@@ -446,6 +446,9 @@ body {
 		.separator {
 			margin: 0;
 		}
+	}
+	.button {
+		cursor: pointer;
 	}
 	
 
