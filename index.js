@@ -279,7 +279,7 @@ class CornerMusicPlayer extends React.Component {
 			React.createElement('div', { className: 'separator' }),
 			React.createElement(
 				'div',
-				{ className: 'button  slideInAnimationElementContainer', onClick: this.scrollToBottomSlide.bind(this) },
+				{ className: 'button slideInAnimationElementContainer', onClick: this.scrollToBottomSlide.bind(this) },
 				React.createElement(
 					'div',
 					{ className: 'text slideInAnimationElement slideInAnimationElementRight', onAnimationEnd: this.animationHasEnded.bind(this) },
@@ -709,12 +709,19 @@ class SplashPage extends React.Component {
 			readyForScroll: 1,
 			browser: '',
 			operating_sys: '',
+			touchState: 0, //0 for end, 1 for start, 2 for move
+			touchDirection: null,
+			touchStartCoordinate: {
+				x: null,
+				y: null
+			},
 
 			isPlaying: false,
 			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3')
 		};
 		this.lastSlide = this.lastSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
+		this.handleTouchStart = this.handleTouchStart.bind(this);
 
 		this.throttleOnScroll = _.throttle(this.throttleOnScroll.bind(this), 100, { leading: true });
 		// this.debounceOnScroll = _.throttle(this.debounceOnScroll.bind(this), 3500, {leading: true, trailing:true});
@@ -836,7 +843,7 @@ class SplashPage extends React.Component {
 		this.setState({ transitiongState: 0 });
 	}
 	isTransitioning() {
-		return this.state.transitiongState != 0;
+		return this.state.transitiongState != 0 || this.state.touchState == 2;
 	}
 	addIdxToViewedSlides(idx) {
 		if (this.state.slidesViewed.includes(idx)) return;
@@ -907,6 +914,49 @@ class SplashPage extends React.Component {
 		}, false);
 	}
 
+	handleTouchStart(evt) {
+		const coordinateX = evt.touches[0].clientX;
+		const coordinateY = evt.touches[0].clientY;
+		const coordinateObj = {
+			x: coordinateX,
+			y: coordinateY
+		};
+		this.setState({
+			touchState: 1,
+			touchStartCoordinate: coordinateObj
+		});
+	}
+	handleTouchMove(evt) {
+		if (this.state.touchState != 1) return;
+		const coordinateX = evt.touches[0].clientX;
+		const coordinateY = evt.touches[0].clientY;
+		const horizontalDirection = this.state.touchStartCoordinate.x > coordinateX ? 'right' : 'left';
+		const verticalDirection = this.state.touchStartCoordinate.y > coordinateY ? 'down' : 'up';
+		const horizontalDifference = Math.abs(this.state.touchStartCoordinate.x - coordinateX);
+		const verticalDifference = Math.abs(this.state.touchStartCoordinate.y - coordinateY);
+
+		let mainTouchDirection;
+		if (verticalDifference > horizontalDifference) {
+			mainTouchDirection = verticalDirection;
+		} else {
+			mainTouchDirection = horizontalDirection;
+		}
+
+		this.setState({
+			touchState: 2,
+			touchDirection: mainTouchDirection
+		});
+		if (mainTouchDirection == 'up') {
+			this.prevSlide();
+		} else if (mainTouchDirection == 'down') {
+			this.nextSlide();
+		}
+	}
+	handleTouchEnd() {
+		this.setState({
+			touchState: 0
+		});
+	}
 	render() {
 		if (this.state.isPlaying) {
 			this.state.audioPlayer.play();
@@ -944,7 +994,7 @@ class SplashPage extends React.Component {
 			React.createElement(MusicPlayer, { toggleMusicPlayer: this.musicToggle, soundEffect: thisSlideSoundEffect, darkMode: darkCornerLogo, goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, isFirstSlide: this.state.currIdx === 0, isPlaying: this.state.isPlaying }),
 			React.createElement(
 				'div',
-				{ className: 'slides_wrapper', onWheel: this.handleWheelEvent.bind(this), onScroll: this.handleScrollEvent.bind(this) },
+				{ className: 'slides_wrapper', onTouchStart: this.handleTouchStart.bind(this), onTouchMove: this.handleTouchMove.bind(this), onTouchEnd: this.handleTouchEnd.bind(this), onWheel: this.handleWheelEvent.bind(this), onScroll: this.handleScrollEvent.bind(this) },
 				React.createElement(Header, { options: headerOptions }),
 				React.createElement(
 					'div',

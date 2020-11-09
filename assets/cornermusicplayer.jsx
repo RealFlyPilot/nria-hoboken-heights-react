@@ -29,7 +29,7 @@ class CornerMusicPlayer extends React.Component {
 					</div>
 				</div>
 				<div className='separator' />
-				<div className="button  slideInAnimationElementContainer" onClick={this.scrollToBottomSlide.bind(this)}>
+				<div className="button slideInAnimationElementContainer" onClick={this.scrollToBottomSlide.bind(this)}>
 					<div className="text slideInAnimationElement slideInAnimationElementRight" onAnimationEnd={this.animationHasEnded.bind(this)}>CONTACT</div>
 				</div>
 			</div>
