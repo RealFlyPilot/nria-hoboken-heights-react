@@ -16,11 +16,8 @@ const SLIDES = [{
 	hasDownArrow: true,
 	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3"
 }, {
+	slideClasses: "backgroundFrame",
 	styles: {
-		backgroundImage: "url(/assets/images/hobokenh1.jpg)",
-		backgroundColor: "#FFF",
-		backgroundPosition: "top",
-		backgroundSize: "calc(100% - 90px) calc(100% - 45px)",
 		fontSize: '15px',
 		lineHeight: '21px'
 	},

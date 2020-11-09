@@ -1,3 +1,25 @@
 body {
     overflow: hidden;//this is used only to prevent pull-to-refresh which can be triggered anytime the user tries to scroll up on a touch device
 }
+
+.corner_content_wrapper {
+    display: none;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player {
+    font-size: 12px;
+    .settings {
+        margin-top: 10px;
+    }
+}
+.slides_wrapper {
+    .corner-logo-wrapper {
+        display: none;
+    }
+    .slides_inner {
+        .slide {
+            &.backgroundFrame {
+                background-size: 100% 100%;
+            }
+        }
+    }
+}

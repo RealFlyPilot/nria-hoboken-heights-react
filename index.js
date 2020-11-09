@@ -502,11 +502,8 @@ const SLIDES = [{
 	hasDownArrow: true,
 	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3"
 }, {
+	slideClasses: "backgroundFrame",
 	styles: {
-		backgroundImage: "url(/assets/images/hobokenh1.jpg)",
-		backgroundColor: "#FFF",
-		backgroundPosition: "top",
-		backgroundSize: "calc(100% - 90px) calc(100% - 45px)",
 		fontSize: '15px',
 		lineHeight: '21px'
 	},
@@ -615,6 +612,7 @@ class Slide extends React.Component {
 		this.playSoundEffect();
 
 		const slideObj = this.props.obj;
+		console.log(slideObj);
 		let slideClasses = "slide bg000";
 		let videoClasses = 'background-video';
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
@@ -628,6 +626,7 @@ class Slide extends React.Component {
 			cornerLogofadeIn: slideObj.cornerLogofadeIn
 		};
 
+		slideClasses += slideObj.slideClasses != undefined ? " " + slideObj.slideClasses : '';
 		if (isCurrent) slideClasses += " runAnimations";
 		if (this.props.slideViewed) slideClasses += " runAnimationOnce";
 		if (slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect';
