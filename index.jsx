@@ -273,16 +273,36 @@ class SplashPage extends React.Component {
 			touchDirection: mainTouchDirection
 		});
 		if(mainTouchDirection == 'up') {
-			this.prevSlide();
+			
 		}
 		else if(mainTouchDirection == 'down') {
 			this.nextSlide();
+		}
+		switch(mainTouchDirection) {
+			case 'up':
+				this.prevSlide();
+				break;
+			case 'down':
+				this.nextSlide();
+				break;
+			case 'left':
+				
+				break;
+			case 'right':
+				this.slideRight();
+				break;
 		}
 	}
 	handleTouchEnd(){
 		this.setState({
 			touchState: 0
 		});
+	}
+	slideRight(){
+		// let 
+		// this.setState({
+		// 	slides[this.state.currIdx].slidePosition: 0
+		// });
 	}
 	render() {		
 		if(this.state.isPlaying) {

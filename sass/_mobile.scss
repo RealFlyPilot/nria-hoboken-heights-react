@@ -1,6 +1,9 @@
 body {
     overflow: hidden;//this is used only to prevent pull-to-refresh which can be triggered anytime the user tries to scroll up on a touch device
 }
+.not-mobile {
+	display: none;
+}
 .slide_idx_0 {
     + .musicplayer_container + .mobileMenu .hamburger {
         transform: translateY(-50px);

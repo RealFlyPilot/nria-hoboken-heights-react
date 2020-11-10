@@ -5,6 +5,10 @@
 /* Custom Styles */
 @import 'sass/_all';
 
+@media screen and (min-width: 769px) {
+	@import 'sass/_desktop';
+}
+
 @media screen and (max-width: 768px) {
 	@import 'sass/_mobile';
 }

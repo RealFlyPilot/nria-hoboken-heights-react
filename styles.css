@@ -800,9 +800,18 @@ body {
   margin: 0 12px;
 }
 
+@media screen and (min-width: 769px) {
+  .mobile-only {
+    display: none;
+  }
+}
 @media screen and (max-width: 768px) {
   body {
     overflow: hidden;
+  }
+
+  .not-mobile {
+    display: none;
   }
 
   .slide_idx_0 + .musicplayer_container + .mobileMenu .hamburger {

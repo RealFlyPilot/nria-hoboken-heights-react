@@ -581,7 +581,15 @@ const SLIDES = [{
 	},
 	hasDownArrow: true,
 	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3",
-	phantomMusicPlayer: true
+	phantomMusicPlayer: true,
+	mobileHasDifferentContent: true,
+	mobileContent: {
+		left: {
+			centerBottom: {
+				line1: "SWIPE <div>RIGHT ARROW</div>"
+			}
+		}
+	}
 }, {
 	slideClasses: "backgroundFrame",
 	styles: {
@@ -699,6 +707,7 @@ class Slide extends React.Component {
 		let videoClasses = 'background-video';
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
 		let centerTextClasses = 'center';
+		let centerBottomClasses = "centerBottom";
 
 		const isCurrent = this.props.isCurrent;
 		const headerOptions = {
@@ -721,6 +730,11 @@ class Slide extends React.Component {
 
 		if (slideObj.centerTextClasses) {
 			centerTextClasses += ' ' + slideObj.centerTextClasses;
+		}
+
+		if (slideObj.mobileHasDifferentContent) {
+			centerTextClasses += ' not-mobile';
+			centerBottomClasses += ' not-mobile';
 		}
 
 		return React.createElement(
@@ -750,7 +764,7 @@ class Slide extends React.Component {
 			),
 			React.createElement(
 				'div',
-				{ className: 'centerBottom' },
+				{ className: centerBottomClasses },
 				slideObj.isLandingPage && React.createElement(
 					'div',
 					{ className: 'musicplayer_container center_layout' },
@@ -772,6 +786,15 @@ class Slide extends React.Component {
 				slideObj.centerBottom && slideObj.centerBottom.line1 && React.createElement('h1', { dangerouslySetInnerHTML: { __html: slideObj.centerBottom.line1 } }),
 				slideObj.centerBottom && slideObj.centerBottom.line2 && React.createElement('h1', { dangerouslySetInnerHTML: { __html: slideObj.centerBottom.line2 } }),
 				slideObj.hasDownArrow && React.createElement('img', { onClick: this.scrollToNextSlide.bind(this), className: 'downArrow', src: '/assets/images/downarrow.svg' })
+			),
+			slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && React.createElement(
+				'div',
+				{ className: 'centerBottom mobile-only left' },
+				React.createElement(
+					'div',
+					{ className: 'line' },
+					slideObj.mobileContent.left.centerBottom.line1
+				)
 			)
 		);
 	}
@@ -1043,16 +1066,34 @@ class SplashPage extends React.Component {
 			touchState: 2,
 			touchDirection: mainTouchDirection
 		});
-		if (mainTouchDirection == 'up') {
-			this.prevSlide();
-		} else if (mainTouchDirection == 'down') {
+		if (mainTouchDirection == 'up') {} else if (mainTouchDirection == 'down') {
 			this.nextSlide();
+		}
+		switch (mainTouchDirection) {
+			case 'up':
+				this.prevSlide();
+				break;
+			case 'down':
+				this.nextSlide();
+				break;
+			case 'left':
+
+				break;
+			case 'right':
+				this.slideRight();
+				break;
 		}
 	}
 	handleTouchEnd() {
 		this.setState({
 			touchState: 0
 		});
+	}
+	slideRight() {
+		// let 
+		// this.setState({
+		// 	slides[this.state.currIdx].slidePosition: 0
+		// });
 	}
 	render() {
 		if (this.state.isPlaying) {

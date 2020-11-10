@@ -76,7 +76,8 @@ class Slide extends React.Component {
 		let videoClasses = 'background-video'
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
 		let centerTextClasses = 'center';
-		
+		let centerBottomClasses = "centerBottom";
+
 		const isCurrent = this.props.isCurrent;
 		const headerOptions = {
 			addCornerLogo: slideObj.addCornerLogo,
@@ -98,6 +99,11 @@ class Slide extends React.Component {
 
 		if(slideObj.centerTextClasses) {
 			centerTextClasses += ' ' + slideObj.centerTextClasses;
+		}
+
+		if(slideObj.mobileHasDifferentContent) {
+			centerTextClasses += ' not-mobile';
+			centerBottomClasses += ' not-mobile';
 		}
 		
 
@@ -131,7 +137,7 @@ class Slide extends React.Component {
 					}
 				</div>
 				
-				<div className="centerBottom">
+				<div className={centerBottomClasses}>
 					{slideObj.isLandingPage &&
 						<div className="musicplayer_container center_layout">
 							<div className='musicplayer centered_content'>
@@ -152,6 +158,11 @@ class Slide extends React.Component {
 						<img onClick={this.scrollToNextSlide.bind(this)} className='downArrow' src='/assets/images/downarrow.svg' />
 					}
 				</div>
+				{slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && 
+					<div className="centerBottom mobile-only left">
+						<div className="line">{slideObj.mobileContent.left.centerBottom.line1}</div>
+					</div>
+				}
 			</div>
 		);
 	}

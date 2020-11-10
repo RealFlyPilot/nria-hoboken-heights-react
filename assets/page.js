@@ -17,7 +17,15 @@ const SLIDES = [{
 	},
 	hasDownArrow: true,
 	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3",
-	phantomMusicPlayer: true
+	phantomMusicPlayer: true,
+	mobileHasDifferentContent: true,
+	mobileContent: {
+		left: {
+			centerBottom: {
+				line1: "SWIPE <div>RIGHT ARROW</div>"
+			}
+		}
+	}
 }, {
 	slideClasses: "backgroundFrame",
 	styles: {
