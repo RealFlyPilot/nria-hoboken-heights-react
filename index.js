@@ -308,7 +308,7 @@ class Header extends React.Component {
 
 module.exports = Header;
 
-},{"./modules.jsx":5}],4:[function(require,module,exports){
+},{"./modules.jsx":6}],4:[function(require,module,exports){
 class LandingPageMusicPlayer extends React.Component {
 	constructor(props) {
 		super(props);
@@ -373,6 +373,89 @@ class LandingPageMusicPlayer extends React.Component {
 module.exports = LandingPageMusicPlayer;
 
 },{}],5:[function(require,module,exports){
+class MobileMenu extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			mobileMenuOpen: 0
+		};
+	}
+
+	lastSlide() {
+		const { scrollToLastSlide } = this.props;
+		scrollToLastSlide();
+		this.closeMobileMenu();
+	}
+	toggleSound() {
+		const { toggleMusic } = this.props;
+		toggleMusic();
+	}
+
+	expandMobileMenu() {
+		this.setState({ mobileMenuOpen: 1 });
+	}
+	closeMobileMenu() {
+		this.setState({ mobileMenuOpen: 0 });
+	}
+	render() {
+
+		let mobileMenuClasses = 'mobileMenu';
+		let expandedMobileMenuClasses = 'expandedMobileMenu';
+		let hamburgerClasses = 'hamburger';
+		expandedMobileMenuClasses += this.state.mobileMenuOpen ? ' open' : '';
+		hamburgerClasses += this.props.currIdx == 4 ? ' darkMode' : '';
+
+		return React.createElement(
+			'div',
+			{ className: mobileMenuClasses },
+			React.createElement(
+				'div',
+				{ className: hamburgerClasses, onClick: this.expandMobileMenu.bind(this) },
+				React.createElement('div', { className: 'line' }),
+				React.createElement('div', { className: 'line' })
+			),
+			React.createElement(
+				'div',
+				{ className: expandedMobileMenuClasses },
+				React.createElement(
+					'div',
+					{ className: 'menuItemsContainer' },
+					React.createElement(
+						'div',
+						{ className: 'text' },
+						'HOBOKEN HEIGHTS'
+					),
+					React.createElement('div', { className: 'separator' }),
+					React.createElement(
+						'div',
+						{ className: 'logo' },
+						React.createElement('img', { src: '/assets/images/NIRMA_Logo_Symbol_White.png', alt: '' })
+					),
+					React.createElement(
+						'div',
+						{ className: 'sound', onClick: this.toggleSound.bind(this) },
+						this.props.isPlaying && React.createElement('img', { src: '/assets/images/mobile_sound_on.svg', alt: '' }),
+						!this.props.isPlaying && React.createElement('img', { src: '/assets/images/mobile_sound_off.svg', alt: '' })
+					),
+					React.createElement(
+						'div',
+						{ className: 'contact', onClick: this.lastSlide.bind(this) },
+						React.createElement('img', { src: '/assets/images/mobile_mail.svg', alt: '' })
+					),
+					React.createElement(
+						'div',
+						{ className: 'close_btn', onClick: this.closeMobileMenu.bind(this) },
+						React.createElement('img', { src: '/assets/images/mobile_menu_x.svg', alt: '' })
+					)
+				)
+			)
+		);
+	}
+}
+
+module.exports = MobileMenu;
+
+},{}],6:[function(require,module,exports){
 const modules = {
 	explodeString: function (string) {
 		const spans = string.split("").map(function (char, index) {
@@ -388,7 +471,7 @@ const modules = {
 
 module.exports = modules;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 class MusicPlayer extends React.Component {
 	constructor(props) {
 		super(props);
@@ -478,7 +561,7 @@ class MusicPlayer extends React.Component {
 
 module.exports = MusicPlayer;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 const SLIDES = [{
 	styles: {
 		background: "#000"
@@ -538,7 +621,7 @@ const SLIDES = [{
 
 module.exports = SLIDES;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 const ContactFormSlide = require('./contactformslide.jsx');
 const Header = require('./header.jsx');
 const LandingPageMusicPlayer = require('./landingpagemusicplayer.jsx');
@@ -688,7 +771,7 @@ class Slide extends React.Component {
 
 module.exports = Slide;
 
-},{"./contactformslide.jsx":2,"./header.jsx":3,"./landingpagemusicplayer.jsx":4,"./musicplayer.jsx":6}],9:[function(require,module,exports){
+},{"./contactformslide.jsx":2,"./header.jsx":3,"./landingpagemusicplayer.jsx":4,"./musicplayer.jsx":7}],10:[function(require,module,exports){
 'use strict';
 
 const SLIDES = require('./assets/page.js');
@@ -696,6 +779,7 @@ const Slide = require('./assets/slide.jsx');
 const MusicPlayer = require('./assets/musicplayer.jsx');
 const modules = require('./assets/modules.jsx');
 const Header = require('./assets/header.jsx');
+const MobileMenu = require('./assets/mobilemenu.jsx');
 
 class SplashPage extends React.Component {
 	constructor(props) {
@@ -1009,7 +1093,8 @@ class SplashPage extends React.Component {
 						onTransitionEnd: this.watchForEventEnd.bind(this) },
 					$slides
 				),
-				React.createElement(MusicPlayer, { toggleMusicPlayer: this.musicToggle, soundEffect: thisSlideSoundEffect, darkMode: darkCornerLogo, goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, isFirstSlide: this.state.currIdx === 0, currIdx: this.state.currIdx, isPlaying: this.state.isPlaying })
+				React.createElement(MusicPlayer, { toggleMusicPlayer: this.musicToggle, soundEffect: thisSlideSoundEffect, darkMode: darkCornerLogo, goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, isFirstSlide: this.state.currIdx === 0, currIdx: this.state.currIdx, isPlaying: this.state.isPlaying }),
+				React.createElement(MobileMenu, { currIdx: this.state.currIdx, scrollToLastSlide: this.lastSlide, isPlaying: this.state.isPlaying, toggleMusic: this.musicToggle })
 			)
 		);
 	}
@@ -1018,4 +1103,4 @@ class SplashPage extends React.Component {
 let domContainer = document.querySelector('#container');
 ReactDOM.render(React.createElement(SplashPage, null), domContainer);
 
-},{"./assets/header.jsx":3,"./assets/modules.jsx":5,"./assets/musicplayer.jsx":6,"./assets/page.js":7,"./assets/slide.jsx":8}]},{},[9]);
+},{"./assets/header.jsx":3,"./assets/mobilemenu.jsx":5,"./assets/modules.jsx":6,"./assets/musicplayer.jsx":7,"./assets/page.js":8,"./assets/slide.jsx":9}]},{},[10]);

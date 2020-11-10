@@ -95,6 +95,9 @@ $slideAnimationDuration: 1400ms;
 * {
 	box-sizing: border-box;
 }
+.mobileMenu {
+	display: none;
+}
 body {
 	font-family: 'Gotham', sans-serif;
 	font-weight: 400;
@@ -593,7 +596,7 @@ body {
 				animation-duration: 0.2s;//speed of each letter's appearance
 				animation-fill-mode: forwards;
 				animation-name: fadeIn;
-				
+
 				//Reset the animation to allow it to run again on rearrival
 				opacity: 0;
 			}

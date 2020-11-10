@@ -5,6 +5,7 @@ const Slide = require('./assets/slide.jsx');
 const MusicPlayer = require('./assets/musicplayer.jsx');
 const modules = require('./assets/modules.jsx');
 const Header = require('./assets/header.jsx');
+const MobileMenu = require('./assets/mobilemenu.jsx');
 
 class SplashPage extends React.Component {
 	constructor(props) {
@@ -329,6 +330,7 @@ class SplashPage extends React.Component {
 						{$slides}
 					</div>
 					<MusicPlayer toggleMusicPlayer={this.musicToggle} soundEffect={thisSlideSoundEffect} darkMode={darkCornerLogo} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0} currIdx={this.state.currIdx} isPlaying={this.state.isPlaying}></MusicPlayer>
+					<MobileMenu currIdx={this.state.currIdx} scrollToLastSlide={this.lastSlide} isPlaying={this.state.isPlaying} toggleMusic={this.musicToggle} />
 				</div>
 			</div>
 		);
