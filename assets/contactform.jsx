@@ -48,7 +48,9 @@ class ContactForm extends React.Component {
 		if(this.state.formSubmitted){
 			contactFormClasses += ' submitted'
 		}
-
+		const select2Styles = {
+			width:"100%"
+		}
 		return (
 			<form className={contactFormClasses}>
 				<div className="submittedFormOverlay">
@@ -92,11 +94,12 @@ class ContactForm extends React.Component {
 				</div>
 				<div className="form-control">
 					<label className="label">How did you hear of us?*</label>
-					<input className="input"
-						name="how_you_heard"
-						type="text"
-						value={this.state.how_you_heard}
-						onChange={this.handleInputChange} />
+					<select style={select2Styles} className='how_you_heard' value={this.state.how_you_heard} name="how_you_heard" onChange={this.handleInputChange}>
+						<option></option>
+						<option value="Google">Google</option>
+						<option value="Friend">Friend</option>
+						<option value="Newspaper">Newspaper</option>
+					</select>
 				</div>
 				<div className="form-control">
 					<label className="label">How may we help you?*</label>

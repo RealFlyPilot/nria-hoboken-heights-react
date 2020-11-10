@@ -49,7 +49,9 @@ class ContactForm extends React.Component {
 		if (this.state.formSubmitted) {
 			contactFormClasses += ' submitted';
 		}
-
+		const select2Styles = {
+			width: "100%"
+		};
 		return React.createElement(
 			'form',
 			{ className: contactFormClasses },
@@ -140,11 +142,26 @@ class ContactForm extends React.Component {
 					{ className: 'label' },
 					'How did you hear of us?*'
 				),
-				React.createElement('input', { className: 'input',
-					name: 'how_you_heard',
-					type: 'text',
-					value: this.state.how_you_heard,
-					onChange: this.handleInputChange })
+				React.createElement(
+					'select',
+					{ style: select2Styles, className: 'how_you_heard', value: this.state.how_you_heard, name: 'how_you_heard', onChange: this.handleInputChange },
+					React.createElement('option', null),
+					React.createElement(
+						'option',
+						{ value: 'Google' },
+						'Google'
+					),
+					React.createElement(
+						'option',
+						{ value: 'Friend' },
+						'Friend'
+					),
+					React.createElement(
+						'option',
+						{ value: 'Newspaper' },
+						'Newspaper'
+					)
+				)
 			),
 			React.createElement(
 				'div',
@@ -881,6 +898,10 @@ class SplashPage extends React.Component {
 		this.addIdxToViewedSlides(newIdx);
 	}
 	componentDidMount() {
+		$('.how_you_heard').select2({
+			placeholder: "",
+			width: 'resolve'
+		});
 		window.addEventListener('keydown', event => {
 			if (!event.target.classList.contains('input')) {
 				if (event.code == "ArrowUp") this.prevSlide();else if (event.code == "ArrowDown") this.nextSlide();else if (event.code == "ArrowLeft") this.prevSlide();else if (event.code == "ArrowRight") this.nextSlide();

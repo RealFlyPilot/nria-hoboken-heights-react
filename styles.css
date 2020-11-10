@@ -468,6 +468,16 @@ body {
 .slide .contactForm .form-control .input.textarea {
   height: 80px;
 }
+.slide .contactForm .form-control .select2-container--default .select2-selection--single {
+  border: none;
+  border-radius: 0;
+}
+.slide .contactForm .form-control .select2-container--default .select2-selection--single .select2-selection__arrow b {
+  border-color: #000 transparent transparent transparent;
+}
+.slide .contactForm .form-control .how_you_heard {
+  width: 100%;
+}
 .slide .contactForm .fine-print {
   font-size: 10px;
   line-height: 1.4em;

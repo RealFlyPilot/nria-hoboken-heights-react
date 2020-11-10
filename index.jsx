@@ -213,6 +213,10 @@ class SplashPage extends React.Component {
 		this.addIdxToViewedSlides(newIdx);
 	}
 	componentDidMount() {
+		$('.how_you_heard').select2({
+			placeholder: "",
+			width: 'resolve'
+		});
 		window.addEventListener('keydown', (event) => {
 			if (!event.target.classList.contains('input')) {
 				if (event.code == "ArrowUp") this.prevSlide()

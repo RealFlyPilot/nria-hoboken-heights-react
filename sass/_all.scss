@@ -383,6 +383,18 @@ body {
 					height: 80px;
 				}
 			}
+			.select2-container--default {
+				.select2-selection--single {
+					border: none;
+					border-radius: 0;
+					.select2-selection__arrow b {
+						border-color: #000 transparent transparent transparent;
+					}
+				}
+			}
+			.how_you_heard {
+				width: 100%;
+			}
 		}
 		.fine-print {
 			font-size: 10px;
