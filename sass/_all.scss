@@ -99,6 +99,7 @@ body {
 	font-family: 'Gotham', sans-serif;
 	font-weight: 400;
 }
+
 .slides_wrapper {
 	overflow: hidden;
 	height: 100vh;
@@ -111,13 +112,45 @@ body {
 				opacity: 0;
 			}
 		}
-		
 	}
 }
 .separator {
 	border-left: 0.5462802649px solid #FFFFFF;
 	height: $separator-line-height;
 	margin: 0 24px;
+}
+
+/*
+ * Set music player opacity delays to make sure the players appear and disappear as needed
+ *
+ * There are 2 .musicplayer_container elements. 
+ * One is within slide 2 to show that it scrolls down when you go from the second to the first slide.
+ * The other is a fixed position which is hidden on the first slide always but is visible on the rest 
+ * so when you scroll through slides 2-5 it will stay in the top right corner.
+ */
+.slides_wrapper {
+	> .musicplayer_container {
+		opacity: 1;
+		transition: opacity 0s linear $slideAnimationDuration;
+	}
+	.slides_inner {
+		.slide .musicplayer_container {
+			opacity: 1;
+			transition: opacity 0s linear $slideAnimationDuration;
+		}
+		&.slide_idx_2 {
+			.slide .musicplayer_container {
+				opacity: 0;
+				transition: opacity 0s;
+			}
+		}
+		&.slide_idx_0 {
+			+ .musicplayer_container {
+				opacity: 0;
+				transition: opacity 0s;
+			}
+		}
+	}
 }
 
 /* This will run the slide in animation.
@@ -127,13 +160,14 @@ body {
  * For reference: 
  * slideInAnimation($elementWidth, $delay)
  */
-.animationHasNotRun {
-	&.landing_page_sound_player {
-		@include slideInAnimation($soundOptionsButtonWidth, 4.5s)
-	}
-	&.corner_content_wrapper {
-		@include slideInAnimation($cornerMusicPlayerChildElementWidth, 1.2s)
-	}
+
+
+.landing_page_sound_player:not(.animationHasNotRun) {
+	@include slideInAnimation($soundOptionsButtonWidth, 4.5s)
+}
+
+.corner_content_wrapper:not(.animationHasNotRun) {
+	@include slideInAnimation($cornerMusicPlayerChildElementWidth, 1.2s)
 }
 
 .slide {
@@ -460,18 +494,13 @@ body {
 
 	.musicplayer {
 		.landing_page_sound_player {
-			&.animationHasNotRun {
-				.title {
-					position: relative;
-					opacity: 0;
-					animation-fill-mode: forwards;
-					animation-name: fadeInDriftUp;
-					animation-duration: 1s;
-					animation-delay: 4s;
-				}
-			}
 			.title {
-				opacity: 1;
+				position: relative;
+				opacity: 0;
+				animation-fill-mode: forwards;
+				animation-name: fadeInDriftUp;
+				animation-duration: 1s;
+				animation-delay: 4s;
 			}
 			.settings {
 				display: flex;

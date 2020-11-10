@@ -14,7 +14,8 @@ const SLIDES = [{
 		line2: "COMING SOON",
 	},
 	hasDownArrow: true,
-	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3"
+	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3",
+	phantomMusicPlayer: true
 }, {
 	slideClasses: "backgroundFrame",
 	styles: {

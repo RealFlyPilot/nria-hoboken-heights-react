@@ -240,59 +240,6 @@ class ContactFormSlide extends React.Component {
 module.exports = ContactFormSlide;
 
 },{"./contactform.jsx":1}],3:[function(require,module,exports){
-class CornerMusicPlayer extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
-	animationHasEnded() {
-		const { animationEnded } = this.props;
-		animationEnded();
-	}
-
-	toggleMusicPlayer() {
-		const { togglePlayer } = this.props;
-		togglePlayer();
-	}
-
-	scrollToBottomSlide() {
-		const { scrollToContactFormSlide } = this.props;
-		scrollToContactFormSlide();
-	}
-
-	render() {
-		const statusText = this.props.musicIsPlaying ? 'ON' : 'OFF';
-		return React.createElement(
-			'div',
-			{ className: 'corner_content slideInAnimationWrapper' },
-			React.createElement(
-				'div',
-				{ className: 'button musicplayer slideInAnimationElementContainer', onClick: this.toggleMusicPlayer.bind(this) },
-				React.createElement(
-					'div',
-					{ className: 'slideInAnimationElement slideInAnimationElementLeft' },
-					'SOUND',
-					React.createElement('br', null),
-					statusText
-				)
-			),
-			React.createElement('div', { className: 'separator' }),
-			React.createElement(
-				'div',
-				{ className: 'button slideInAnimationElementContainer', onClick: this.scrollToBottomSlide.bind(this) },
-				React.createElement(
-					'div',
-					{ className: 'text slideInAnimationElement slideInAnimationElementRight', onAnimationEnd: this.animationHasEnded.bind(this) },
-					'CONTACT'
-				)
-			)
-		);
-	}
-}
-
-module.exports = CornerMusicPlayer;
-
-},{}],4:[function(require,module,exports){
 const modules = require('./modules.jsx');
 
 class Header extends React.Component {
@@ -344,7 +291,7 @@ class Header extends React.Component {
 
 module.exports = Header;
 
-},{"./modules.jsx":6}],5:[function(require,module,exports){
+},{"./modules.jsx":5}],4:[function(require,module,exports){
 class LandingPageMusicPlayer extends React.Component {
 	constructor(props) {
 		super(props);
@@ -408,7 +355,7 @@ class LandingPageMusicPlayer extends React.Component {
 
 module.exports = LandingPageMusicPlayer;
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 const modules = {
 	explodeString: function (string) {
 		const spans = string.split("").map(function (char, index) {
@@ -424,9 +371,7 @@ const modules = {
 
 module.exports = modules;
 
-},{}],7:[function(require,module,exports){
-const CornerMusicPlayer = require('./cornermusicplayer.jsx');
-
+},{}],6:[function(require,module,exports){
 class MusicPlayer extends React.Component {
 	constructor(props) {
 		super(props);
@@ -451,31 +396,64 @@ class MusicPlayer extends React.Component {
 		this.setState({ cornerMusicPlayerAnimationFinished: 1 });
 	}
 
+	componentDidUpdate(prevProps) {
+		if (prevProps.currIdx !== this.props.currIdx && this.props.currIdx == 1) {
+			this.cornerMusicPlayerAnimationEnded();
+		}
+	}
+
 	render() {
 		let classes = "musicplayer_container";
 		let corner_content_wrapper_classes = 'corner_content_wrapper';
 
-		if (this.props.isFirstSlide) {
-			classes += " center_layout";
-		} else {
-			classes += " corner_layout";
-		}
+		// if(this.props.isFirstSlide) {
+		// 	classes += " center_layout";
+		// }
+		// else {
+		// }
+		classes += " corner_layout";
 
 		if (this.props.darkMode) {
 			classes += " darkMode";
 		}
 
-		if (!this.state.cornerMusicPlayerAnimationFinished) {
+		if (!this.state.cornerMusicPlayerAnimationFinished && this.props.currIdx != 1) {
 			corner_content_wrapper_classes += " animationHasNotRun";
 		}
 
+		const statusText = this.props.isPlaying ? 'ON' : 'OFF';
+
 		return React.createElement(
-			'div',
+			"div",
 			{ className: classes },
 			React.createElement(
-				'div',
+				"div",
 				{ className: corner_content_wrapper_classes },
-				React.createElement(CornerMusicPlayer, { animationEnded: this.cornerMusicPlayerAnimationEnded, scrollToContactFormSlide: this.scrollToContactForm, togglePlayer: this.toggleMusic, musicIsPlaying: this.props.isPlaying })
+				React.createElement(
+					"div",
+					{ className: "corner_content slideInAnimationWrapper" },
+					React.createElement(
+						"div",
+						{ className: "button musicplayer slideInAnimationElementContainer", onClick: this.toggleMusic.bind(this) },
+						React.createElement(
+							"div",
+							{ className: "slideInAnimationElement slideInAnimationElementLeft" },
+							"SOUND",
+							React.createElement("br", null),
+							statusText
+						)
+					),
+					React.createElement("div", { className: "separator" }),
+					React.createElement(
+						"div",
+						{ className: "button slideInAnimationElementContainer", onClick: this.scrollToContactForm.bind(this) },
+						React.createElement(
+							"div",
+							{ className: "text slideInAnimationElement slideInAnimationElementRight" },
+							"CONTACT"
+						)
+					)
+				)
 			)
 		);
 	}
@@ -483,7 +461,7 @@ class MusicPlayer extends React.Component {
 
 module.exports = MusicPlayer;
 
-},{"./cornermusicplayer.jsx":3}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 const SLIDES = [{
 	styles: {
 		background: "#000"
@@ -500,7 +478,8 @@ const SLIDES = [{
 		line2: "COMING SOON"
 	},
 	hasDownArrow: true,
-	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3"
+	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3",
+	phantomMusicPlayer: true
 }, {
 	slideClasses: "backgroundFrame",
 	styles: {
@@ -542,10 +521,11 @@ const SLIDES = [{
 
 module.exports = SLIDES;
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 const ContactFormSlide = require('./contactformslide.jsx');
 const Header = require('./header.jsx');
 const LandingPageMusicPlayer = require('./landingpagemusicplayer.jsx');
+const MusicPlayer = require('./musicplayer.jsx');
 
 class Slide extends React.Component {
 	constructor(props) {
@@ -568,6 +548,7 @@ class Slide extends React.Component {
 		}
 	}
 
+	toggleMusic() {}
 	musicMute() {
 		const { stopMusic } = this.props;
 		stopMusic();
@@ -612,7 +593,6 @@ class Slide extends React.Component {
 		this.playSoundEffect();
 
 		const slideObj = this.props.obj;
-		console.log(slideObj);
 		let slideClasses = "slide bg000";
 		let videoClasses = 'background-video';
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
@@ -631,13 +611,18 @@ class Slide extends React.Component {
 		if (this.props.slideViewed) slideClasses += " runAnimationOnce";
 		if (slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect';
 
-		if (!this.state.landingPageAnimationFinished) {
-			landing_page_sound_player_classes += " animationHasNotRun";
-		}
+		// if(!this.state.landingPageAnimationFinished) {
+		// 	landing_page_sound_player_classes += " animationHasNotRun";
+		// }
+
 		return React.createElement(
 			'div',
 			{ className: slideClasses, style: this.state.styles },
 			React.createElement(Header, { options: headerOptions }),
+			slideObj.phantomMusicPlayer &&
+			// This music player should only appear on the second slide to create the visual effect of it sliding down and up with the second slide.
+			// The regular music player is fixed in the right top corner
+			React.createElement(MusicPlayer, { currIdx: this.props.currIdx, toggleMusicPlayer: this.musicToggle, goToNextSlide: this.scrollToNextSlide, scrollToLastSlide: this.scrollToContactForm, isPlaying: this.props.isPlaying }),
 			slideObj.video && React.createElement(
 				'video',
 				{ autoPlay: true, muted: true, loop: slideObj.videoLoop ? true : false, className: videoClasses },
@@ -686,7 +671,7 @@ class Slide extends React.Component {
 
 module.exports = Slide;
 
-},{"./contactformslide.jsx":2,"./header.jsx":4,"./landingpagemusicplayer.jsx":5}],10:[function(require,module,exports){
+},{"./contactformslide.jsx":2,"./header.jsx":3,"./landingpagemusicplayer.jsx":4,"./musicplayer.jsx":6}],9:[function(require,module,exports){
 'use strict';
 
 const SLIDES = require('./assets/page.js');
@@ -963,7 +948,7 @@ class SplashPage extends React.Component {
 			this.state.audioPlayer.pause();
 		}
 
-		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { playMusic: this.musicPlay, stopMusic: this.musicMute, slideViewed: this.state.slidesViewed.includes(idx), goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx, isPlaying: this.state.isPlaying }));
+		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { currIdx: this.state.currIdx, playMusic: this.musicPlay, stopMusic: this.musicMute, slideViewed: this.state.slidesViewed.includes(idx), goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx, isPlaying: this.state.isPlaying }));
 		const innerStyle = {
 			transform: 'translateY(-' + this.state.currIdx * 100 + 'vh)'
 		};
@@ -990,7 +975,6 @@ class SplashPage extends React.Component {
 		return React.createElement(
 			'div',
 			{ id: 'page' },
-			React.createElement(MusicPlayer, { toggleMusicPlayer: this.musicToggle, soundEffect: thisSlideSoundEffect, darkMode: darkCornerLogo, goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, isFirstSlide: this.state.currIdx === 0, isPlaying: this.state.isPlaying }),
 			React.createElement(
 				'div',
 				{ className: 'slides_wrapper', onTouchStart: this.handleTouchStart.bind(this), onTouchMove: this.handleTouchMove.bind(this), onTouchEnd: this.handleTouchEnd.bind(this), onWheel: this.handleWheelEvent.bind(this), onScroll: this.handleScrollEvent.bind(this) },
@@ -1003,7 +987,8 @@ class SplashPage extends React.Component {
 						style: innerStyle,
 						onTransitionEnd: this.watchForEventEnd.bind(this) },
 					$slides
-				)
+				),
+				React.createElement(MusicPlayer, { toggleMusicPlayer: this.musicToggle, soundEffect: thisSlideSoundEffect, darkMode: darkCornerLogo, goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, isFirstSlide: this.state.currIdx === 0, currIdx: this.state.currIdx, isPlaying: this.state.isPlaying })
 			)
 		);
 	}
@@ -1012,4 +997,4 @@ class SplashPage extends React.Component {
 let domContainer = document.querySelector('#container');
 ReactDOM.render(React.createElement(SplashPage, null), domContainer);
 
-},{"./assets/header.jsx":4,"./assets/modules.jsx":6,"./assets/musicplayer.jsx":7,"./assets/page.js":8,"./assets/slide.jsx":9}]},{},[10]);
+},{"./assets/header.jsx":3,"./assets/modules.jsx":5,"./assets/musicplayer.jsx":6,"./assets/page.js":7,"./assets/slide.jsx":8}]},{},[9]);

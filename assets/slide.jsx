@@ -1,6 +1,7 @@
 const ContactFormSlide = require('./contactformslide.jsx');
 const Header = require('./header.jsx');
 const LandingPageMusicPlayer = require('./landingpagemusicplayer.jsx');
+const MusicPlayer = require('./musicplayer.jsx');
 
 class Slide extends React.Component {
 	constructor(props) {
@@ -23,6 +24,9 @@ class Slide extends React.Component {
 		}
 	}
 
+	toggleMusic(){
+
+	}
 	musicMute() {
 		const {stopMusic} = this.props;
 		stopMusic();
@@ -68,7 +72,6 @@ class Slide extends React.Component {
 		this.playSoundEffect();
 
 		const slideObj = this.props.obj;
-		console.log(slideObj);
 		let slideClasses = "slide bg000"
 		let videoClasses = 'background-video'
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
@@ -87,12 +90,21 @@ class Slide extends React.Component {
 		if(this.props.slideViewed) slideClasses += " runAnimationOnce";
 		if(slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect'
 		
-		if(!this.state.landingPageAnimationFinished) {
-			landing_page_sound_player_classes += " animationHasNotRun";
-		}
+		// if(!this.state.landingPageAnimationFinished) {
+		// 	landing_page_sound_player_classes += " animationHasNotRun";
+		// }
+		
 		return (
+
+			
 			<div className={slideClasses} style={this.state.styles}>
 				<Header options={headerOptions} />
+				
+				{slideObj.phantomMusicPlayer &&
+					// This music player should only appear on the second slide to create the visual effect of it sliding down and up with the second slide.
+					// The regular music player is fixed in the right top corner
+					<MusicPlayer currIdx={this.props.currIdx} toggleMusicPlayer={this.musicToggle}  goToNextSlide={this.scrollToNextSlide} scrollToLastSlide={this.scrollToContactForm} isPlaying={this.props.isPlaying}></MusicPlayer>
+				}
 				{slideObj.video &&
 					<video autoPlay muted loop={slideObj.videoLoop ? true : false} className={videoClasses}>
 						<source src={slideObj.video} type="video/mp4" />
