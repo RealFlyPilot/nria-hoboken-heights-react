@@ -286,10 +286,10 @@ class SplashPage extends React.Component {
 				this.nextSlide();
 				break;
 			case 'left':
-				
+				this.slideHorizontal('left');
 				break;
 			case 'right':
-				this.slideRight();
+				this.slideHorizontal('right');
 				break;
 		}
 	}
@@ -298,11 +298,28 @@ class SplashPage extends React.Component {
 			touchState: 0
 		});
 	}
-	slideRight(){
-		// let 
-		// this.setState({
-		// 	slides[this.state.currIdx].slidePosition: 0
-		// });
+	slideHorizontal(direction){
+		const key = this.state.currIdx;
+		const mobileHorizontalVideoSlideEnabled = this.state.slides[key].mobileHorizontalVideoSlideEnabled;
+		if(!mobileHorizontalVideoSlideEnabled) return
+
+		const videoMobileStartPosition = this.state.slides[key].videoMobileStartPosition
+		let newVideoMobileStartPosition
+		
+		if(direction == 'right') {
+			if(videoMobileStartPosition == 'left') newVideoMobileStartPosition = 'center'
+			else if(videoMobileStartPosition == 'center') newVideoMobileStartPosition = 'right'
+			else return
+		}
+		else {
+			if(videoMobileStartPosition == 'right') newVideoMobileStartPosition = 'center'
+			else if(videoMobileStartPosition == 'center') newVideoMobileStartPosition = 'left'
+			else return
+		}
+
+		const slidesStateCopy = this.state.slides
+		slidesStateCopy[key].videoMobileStartPosition = newVideoMobileStartPosition
+		this.setState({ slides: slidesStateCopy })
 	}
 	render() {		
 		if(this.state.isPlaying) {

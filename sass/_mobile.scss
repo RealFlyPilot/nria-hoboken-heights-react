@@ -105,25 +105,31 @@ body {
             &.backgroundFrame {
                 background-size: cover;
             }
+            &.mobile-video-position- {
+                &left {
+                    .background-video {
+                        object-position: left;
+                    }
+                    
+                }
+                &center {
+                    .background-video {
+                        object-position: center;
+                    }
+                }
+                &right {
+                    .background-video {
+                        object-position: right;
+                    }
+                }
+            }
             .center {
                 // width: 82vw;
                 > h1 {
                     text-align: justify;
                 }
             }
-            .background-video {
-                &.mobile-video-position- {
-                    &left {
-                        object-position: left;
-                    }
-                    &center {
-                        object-position: center;
-                    }
-                    &right {
-                        object-position: right;
-                    }
-                }
-            }
+            
         }
     }
 }

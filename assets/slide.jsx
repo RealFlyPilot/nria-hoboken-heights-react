@@ -91,7 +91,7 @@ class Slide extends React.Component {
 		if(isCurrent) slideClasses += " runAnimations";
 		if(this.props.slideViewed) slideClasses += " runAnimationOnce";
 		if(slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect'
-		videoClasses += slideObj.videoMobileStartPosition ? ' mobile-video-position-' + slideObj.videoMobileStartPosition : ' mobile-video-position-left'
+		slideClasses += slideObj.videoMobileStartPosition ? ' mobile-video-position-' + slideObj.videoMobileStartPosition : ' mobile-video-position-left'
 		
 		// if(!this.state.landingPageAnimationFinished) {
 		// 	landing_page_sound_player_classes += " animationHasNotRun";
@@ -165,7 +165,7 @@ class Slide extends React.Component {
 					}
 				</div>
 				{slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && 
-					<div className="centerBottom mobile-only left">
+					<div className="centerBottom mobile-only mobile-content-left">
 						<div className="line">{slideObj.mobileContent.left.centerBottom.line1}</div>
 					</div>
 				}

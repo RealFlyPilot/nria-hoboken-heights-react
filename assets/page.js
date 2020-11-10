@@ -25,7 +25,8 @@ const SLIDES = [{
 				line1: "SWIPE <div>RIGHT ARROW</div>"
 			}
 		}
-	}
+	},
+	mobileHorizontalVideoSlideEnabled: true
 }, {
 	slideClasses: "backgroundFrame",
 	styles: {
@@ -56,7 +57,8 @@ const SLIDES = [{
 	addCornerLogo: true,
 	cornerLogoHideOnLastSlide: true,
 	cornerLogofadeIn: true,
-	soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3"
+	soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3",
+	mobileHorizontalVideoSlideEnabled: true
 	
 }, {
 	styles: {

@@ -589,7 +589,8 @@ const SLIDES = [{
 				line1: "SWIPE <div>RIGHT ARROW</div>"
 			}
 		}
-	}
+	},
+	mobileHorizontalVideoSlideEnabled: true
 }, {
 	slideClasses: "backgroundFrame",
 	styles: {
@@ -620,7 +621,8 @@ const SLIDES = [{
 	addCornerLogo: true,
 	cornerLogoHideOnLastSlide: true,
 	cornerLogofadeIn: true,
-	soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3"
+	soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3",
+	mobileHorizontalVideoSlideEnabled: true
 
 }, {
 	styles: {
@@ -726,7 +728,7 @@ class Slide extends React.Component {
 		if (isCurrent) slideClasses += " runAnimations";
 		if (this.props.slideViewed) slideClasses += " runAnimationOnce";
 		if (slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect';
-		videoClasses += slideObj.videoMobileStartPosition ? ' mobile-video-position-' + slideObj.videoMobileStartPosition : ' mobile-video-position-left';
+		slideClasses += slideObj.videoMobileStartPosition ? ' mobile-video-position-' + slideObj.videoMobileStartPosition : ' mobile-video-position-left';
 
 		// if(!this.state.landingPageAnimationFinished) {
 		// 	landing_page_sound_player_classes += " animationHasNotRun";
@@ -800,7 +802,7 @@ class Slide extends React.Component {
 			),
 			slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && React.createElement(
 				'div',
-				{ className: 'centerBottom mobile-only left' },
+				{ className: 'centerBottom mobile-only mobile-content-left' },
 				React.createElement(
 					'div',
 					{ className: 'line' },
@@ -1088,10 +1090,10 @@ class SplashPage extends React.Component {
 				this.nextSlide();
 				break;
 			case 'left':
-
+				this.slideHorizontal('left');
 				break;
 			case 'right':
-				this.slideRight();
+				this.slideHorizontal('right');
 				break;
 		}
 	}
@@ -1100,11 +1102,23 @@ class SplashPage extends React.Component {
 			touchState: 0
 		});
 	}
-	slideRight() {
-		// let 
-		// this.setState({
-		// 	slides[this.state.currIdx].slidePosition: 0
-		// });
+	slideHorizontal(direction) {
+		const key = this.state.currIdx;
+		const mobileHorizontalVideoSlideEnabled = this.state.slides[key].mobileHorizontalVideoSlideEnabled;
+		if (!mobileHorizontalVideoSlideEnabled) return;
+
+		const videoMobileStartPosition = this.state.slides[key].videoMobileStartPosition;
+		let newVideoMobileStartPosition;
+
+		if (direction == 'right') {
+			if (videoMobileStartPosition == 'left') newVideoMobileStartPosition = 'center';else if (videoMobileStartPosition == 'center') newVideoMobileStartPosition = 'right';else return;
+		} else {
+			if (videoMobileStartPosition == 'right') newVideoMobileStartPosition = 'center';else if (videoMobileStartPosition == 'center') newVideoMobileStartPosition = 'left';else return;
+		}
+
+		const slidesStateCopy = this.state.slides;
+		slidesStateCopy[key].videoMobileStartPosition = newVideoMobileStartPosition;
+		this.setState({ slides: slidesStateCopy });
 	}
 	render() {
 		if (this.state.isPlaying) {
