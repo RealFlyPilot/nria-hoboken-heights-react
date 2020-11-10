@@ -604,8 +604,12 @@ const SLIDES = [{
 	center: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.<br /><br />Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
 	centerTextClasses: 'gotham-light',
 	centerTextStyles: {
-		// width: "56vw",
+		width: "56vw"
 	},
+	centerTextStylesMobile: {
+		width: "82vw"
+	},
+
 	contactButton: true
 	// background: "#000"
 }, {
@@ -737,6 +741,13 @@ class Slide extends React.Component {
 			centerBottomClasses += ' not-mobile';
 		}
 
+		let centerTextStyles;
+		if (window.innerWidth > 768) {
+			centerTextStyles = slideObj.centerTextStyles;
+		} else {
+			centerTextStyles = slideObj.centerTextStylesMobile;
+		}
+
 		return React.createElement(
 			'div',
 			{ className: slideClasses, style: this.state.styles },
@@ -753,7 +764,7 @@ class Slide extends React.Component {
 			slideObj.contactFormSlide && React.createElement(ContactFormSlide, null),
 			React.createElement(
 				'div',
-				{ className: centerTextClasses, style: slideObj.centerTextStyles },
+				{ className: centerTextClasses, style: centerTextStyles },
 				slideObj.centerImage && React.createElement('img', { style: slideObj.centerImageStyles, src: slideObj.centerImage }),
 				React.createElement('h1', { dangerouslySetInnerHTML: { __html: slideObj.center } }),
 				slideObj.contactButton && React.createElement(

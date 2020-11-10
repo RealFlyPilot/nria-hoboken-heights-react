@@ -328,9 +328,6 @@ body {
   animation-delay: 1.2s;
   opacity: 0;
 }
-.slide .center {
-  width: 56vw;
-}
 .slide .downArrow {
   opacity: 0;
   transition: all 1.2s;
@@ -914,9 +911,6 @@ body {
   }
   .slides_wrapper .slides_inner .slide.backgroundFrame {
     background-size: cover;
-  }
-  .slides_wrapper .slides_inner .slide .center {
-    width: 82vw;
   }
   .slides_wrapper .slides_inner .slide .center > h1 {
     text-align: justify;

@@ -106,9 +106,15 @@ class Slide extends React.Component {
 			centerBottomClasses += ' not-mobile';
 		}
 		
+		let centerTextStyles;
+		if(window.innerWidth > 768){
+			centerTextStyles = slideObj.centerTextStyles
+		}
+		else {
+			centerTextStyles = slideObj.centerTextStylesMobile
+		}
 
 		return (
-
 			
 			<div className={slideClasses} style={this.state.styles}>
 				<Header options={headerOptions} />
@@ -127,7 +133,7 @@ class Slide extends React.Component {
 					<ContactFormSlide />
 					
 				}
-				<div className={centerTextClasses} style={slideObj.centerTextStyles}>
+				<div className={centerTextClasses} style={centerTextStyles}>
 					{slideObj.centerImage &&
 						<img style={slideObj.centerImageStyles} src={slideObj.centerImage}/>
 					}
