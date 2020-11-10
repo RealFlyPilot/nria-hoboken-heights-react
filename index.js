@@ -988,7 +988,7 @@ class SplashPage extends React.Component {
 			fixedHeader: true
 		};
 
-		if (lastSlideViewed) {
+		if (this.state.currIdx == lastSlideIdx) {
 			headerOptions.animateCornerLogoOnStart = true;
 		}
 		let slides_inner_classes = "slides_inner slide_idx_" + this.state.currIdx;

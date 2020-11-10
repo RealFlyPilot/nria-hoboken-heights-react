@@ -686,11 +686,20 @@ body {
   animation-delay: 1400ms;
   animation-fill-mode: forwards;
   animation-name: slideCornerLogo;
+  transform: translateX(0);
+  transition: transform 0s;
 }
 .corner-logo-wrapper.fixed.animate .text .cascading-animation {
   animation-duration: 0.2s;
   animation-fill-mode: forwards;
   animation-name: fadeIn;
+  opacity: 0;
+}
+.corner-logo-wrapper.fixed .corner-logo {
+  transform: translateX(260px);
+}
+.corner-logo-wrapper.fixed .text .cascading-animation {
+  opacity: 1;
 }
 .corner-logo-wrapper:hover .corner-logo {
   transform: translateX(260px);

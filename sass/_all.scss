@@ -555,12 +555,6 @@ body {
 }
 
 
-.runAnimationOnce {
-	.corner-logo-wrapper {
-		
-		
-	}
-}
 .corner-logo-wrapper {
 	position: absolute;
 	top: 40px;
@@ -588,7 +582,10 @@ body {
 				animation-delay: $slideAnimationDuration;//wait for slide animation to finish before running animation
 				animation-fill-mode: forwards;
 				animation-name: slideCornerLogo;
-				
+
+				//Reset the animation to allow it to run again on rearrival
+				transform: translateX(0);
+				transition: transform 0s;
 			}
 		}
 		&.animate {
@@ -596,7 +593,18 @@ body {
 				animation-duration: 0.2s;//speed of each letter's appearance
 				animation-fill-mode: forwards;
 				animation-name: fadeIn;
+				
+				//Reset the animation to allow it to run again on rearrival
+				opacity: 0;
 			}
+		}
+
+		//These will reset the animation
+		.corner-logo {
+			transform: translateX($cornerLogoAnimateDistance);
+		}
+		.text .cascading-animation {
+			opacity: 1;
 		}
 	}
 	&:hover {
