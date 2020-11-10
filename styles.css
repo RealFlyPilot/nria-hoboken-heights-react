@@ -472,6 +472,9 @@ body {
   border: none;
   border-radius: 0;
 }
+.slide .contactForm .form-control .select2-container--default .select2-selection--single .select2-selection__rendered {
+  letter-spacing: 4.4px;
+}
 .slide .contactForm .form-control .select2-container--default .select2-selection--single .select2-selection__arrow b {
   border-color: #000 transparent transparent transparent;
 }
