@@ -100,7 +100,7 @@ body {
     .slides_inner {
         .slide {
             &.backgroundFrame {
-                background-size: 100% 100%;
+                background-size: cover;
             }
             .center {
                 width: 82vw;
