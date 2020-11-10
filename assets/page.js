@@ -3,11 +3,13 @@ const SLIDES = [{
 		background: "#000",
 	},
 	video: "/assets/videos/NIRMA_Logo_Motion.mp4",
+	videoMobileStartPosition: 'center',
 	isLandingPage: 1,
 }, {
 	video: "/assets/videos/NIRMA_1_Exterior_High_Cinemagraphic.mp4",
 	videoLoop: true,
 	videoZoomEffect: true,
+	videoMobileStartPosition: 'left',
 	addCornerLogo: true,
 	centerBottom: {
 		line1: "MANHATTAN AVE, 1300",
@@ -28,10 +30,9 @@ const SLIDES = [{
 		marginBottom: "55px"
 	},
 	center: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.<br /><br />Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+	centerTextClasses: 'gotham-light',
 	centerTextStyles: {
-		width: "56vw",
-		fontFamily: '"Gotham-Light", sans-serif',
-		fontWeight: '300'
+		// width: "56vw",
 	},
 	contactButton: true,
 	// background: "#000"
@@ -39,6 +40,7 @@ const SLIDES = [{
 	video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
 	videoLoop: true,
 	videoZoomEffect: true,
+	videoMobileStartPosition: 'center',
 	addCornerLogo: true,
 	cornerLogoHideOnLastSlide: true,
 	cornerLogofadeIn: true,

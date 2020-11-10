@@ -567,11 +567,13 @@ const SLIDES = [{
 		background: "#000"
 	},
 	video: "/assets/videos/NIRMA_Logo_Motion.mp4",
+	videoMobileStartPosition: 'center',
 	isLandingPage: 1
 }, {
 	video: "/assets/videos/NIRMA_1_Exterior_High_Cinemagraphic.mp4",
 	videoLoop: true,
 	videoZoomEffect: true,
+	videoMobileStartPosition: 'left',
 	addCornerLogo: true,
 	centerBottom: {
 		line1: "MANHATTAN AVE, 1300",
@@ -592,10 +594,9 @@ const SLIDES = [{
 		marginBottom: "55px"
 	},
 	center: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.<br /><br />Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+	centerTextClasses: 'gotham-light',
 	centerTextStyles: {
-		width: "56vw",
-		fontFamily: '"Gotham-Light", sans-serif',
-		fontWeight: '300'
+		// width: "56vw",
 	},
 	contactButton: true
 	// background: "#000"
@@ -603,6 +604,7 @@ const SLIDES = [{
 	video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
 	videoLoop: true,
 	videoZoomEffect: true,
+	videoMobileStartPosition: 'center',
 	addCornerLogo: true,
 	cornerLogoHideOnLastSlide: true,
 	cornerLogofadeIn: true,
@@ -696,6 +698,7 @@ class Slide extends React.Component {
 		let slideClasses = "slide bg000";
 		let videoClasses = 'background-video';
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
+		let centerTextClasses = 'center';
 
 		const isCurrent = this.props.isCurrent;
 		const headerOptions = {
@@ -710,10 +713,15 @@ class Slide extends React.Component {
 		if (isCurrent) slideClasses += " runAnimations";
 		if (this.props.slideViewed) slideClasses += " runAnimationOnce";
 		if (slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect';
+		videoClasses += slideObj.videoMobileStartPosition ? ' mobile-video-position-' + slideObj.videoMobileStartPosition : ' mobile-video-position-left';
 
 		// if(!this.state.landingPageAnimationFinished) {
 		// 	landing_page_sound_player_classes += " animationHasNotRun";
 		// }
+
+		if (slideObj.centerTextClasses) {
+			centerTextClasses += ' ' + slideObj.centerTextClasses;
+		}
 
 		return React.createElement(
 			'div',
@@ -731,7 +739,7 @@ class Slide extends React.Component {
 			slideObj.contactFormSlide && React.createElement(ContactFormSlide, null),
 			React.createElement(
 				'div',
-				{ className: 'center', style: slideObj.centerTextStyles },
+				{ className: centerTextClasses, style: slideObj.centerTextStyles },
 				slideObj.centerImage && React.createElement('img', { style: slideObj.centerImageStyles, src: slideObj.centerImage }),
 				React.createElement('h1', { dangerouslySetInnerHTML: { __html: slideObj.center } }),
 				slideObj.contactButton && React.createElement(

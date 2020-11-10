@@ -75,6 +75,7 @@ class Slide extends React.Component {
 		let slideClasses = "slide bg000"
 		let videoClasses = 'background-video'
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
+		let centerTextClasses = 'center';
 		
 		const isCurrent = this.props.isCurrent;
 		const headerOptions = {
@@ -89,11 +90,17 @@ class Slide extends React.Component {
 		if(isCurrent) slideClasses += " runAnimations";
 		if(this.props.slideViewed) slideClasses += " runAnimationOnce";
 		if(slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect'
+		videoClasses += slideObj.videoMobileStartPosition ? ' mobile-video-position-' + slideObj.videoMobileStartPosition : ' mobile-video-position-left'
 		
 		// if(!this.state.landingPageAnimationFinished) {
 		// 	landing_page_sound_player_classes += " animationHasNotRun";
 		// }
+
+		if(slideObj.centerTextClasses) {
+			centerTextClasses += ' ' + slideObj.centerTextClasses;
+		}
 		
+
 		return (
 
 			
@@ -114,7 +121,7 @@ class Slide extends React.Component {
 					<ContactFormSlide />
 					
 				}
-				<div className="center" style={slideObj.centerTextStyles}>
+				<div className={centerTextClasses} style={slideObj.centerTextStyles}>
 					{slideObj.centerImage &&
 						<img style={slideObj.centerImageStyles} src={slideObj.centerImage}/>
 					}
