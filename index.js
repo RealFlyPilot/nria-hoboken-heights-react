@@ -570,7 +570,7 @@ const SLIDES = [{
 	videoMobileStartPosition: 'center',
 	isLandingPage: 1
 }, {
-	video: "/assets/videos/NIRMA_1_Exterior_High_Cinemagraphic.mp4",
+	video: "/assets/videos/NRIMA_1_Exterior_HIGH_Cinemagraphic.mp4",
 	videoLoop: true,
 	videoZoomEffect: true,
 	videoMobileStartPosition: 'left',
