@@ -1085,9 +1085,15 @@ body {
   .slides_wrapper .slides_inner .slide .contactForm.submitted .submittedFormOverlay .closeBtn {
     transform: translateY(400vh);
   }
+  .slides_wrapper .slides_inner .slide .contactForm .fine-print {
+    font-size: 9px;
+    margin-top: 14px;
+  }
   .slides_wrapper .slides_inner .slide .contactForm .mobileRightArrowContainer {
     display: flex;
     align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   .slides_wrapper .slides_inner .slide .contactForm .mobileRightArrowContainer .text {
     margin-right: 20px;

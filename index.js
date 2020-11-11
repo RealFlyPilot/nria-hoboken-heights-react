@@ -214,13 +214,13 @@ class ContactForm extends React.Component {
 				React.createElement('img', { className: 'rightArrow not-mobile', src: '/assets/images/rightarrow.svg', onClick: this.handleSubmit }),
 				React.createElement(
 					'div',
-					{ className: 'mobileRightArrowContainer mobile-only' },
+					{ className: 'mobileRightArrowContainer mobile-only', onClick: this.handleSubmit },
 					React.createElement(
 						'div',
 						{ className: 'text' },
 						'SEND'
 					),
-					React.createElement('img', { className: 'rightArrow mobile-only', src: '/assets/images/mobileSubmitArrow.svg', onClick: this.handleSubmit })
+					React.createElement('img', { className: 'rightArrow mobile-only', src: '/assets/images/mobileSubmitArrow.svg' })
 				)
 			)
 		);
