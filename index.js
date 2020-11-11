@@ -8,8 +8,8 @@ class ContactForm extends React.Component {
 			email: '',
 			mobilephone: '',
 			how_you_heard: '',
-			how_can_we_help: '',
-			formSubmitted: ''
+			how_can_we_help: ''
+			// formSubmitted: '',
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,13 +24,15 @@ class ContactForm extends React.Component {
 		this.setState({
 			[name]: value
 		});
+
+		console.log('changed');
 	}
 
 	handleSubmit() {
 		console.log('A form was submitted: ');
 		console.log(this.state);
 		this.setState({
-			formSubmitted: true,
+			// formSubmitted: true,
 			first_name: '',
 			last_name: '',
 			email: '',
@@ -38,17 +40,30 @@ class ContactForm extends React.Component {
 			how_you_heard: '',
 			how_can_we_help: ''
 		});
+		const { formSubmitted } = this.props;
+		formSubmitted();
 	}
 	resetForm() {
-		this.setState({
-			formSubmitted: null
+		// this.setState ({
+		// 	formSubmitted: null
+		// })
+		const { formCleared } = this.props;
+		formCleared();
+	}
+
+	componentDidMount() {
+
+		//This is a fix to detect changes on the select2
+		jQuery(this.refs.how_you_heard).on("change", e => {
+			this.handleInputChange(e);
 		});
 	}
+
 	render() {
 		let contactFormClasses = 'contactForm';
-		if (this.state.formSubmitted) {
-			contactFormClasses += ' submitted';
-		}
+		// if(this.state.formSubmitted){
+		// 	contactFormClasses += ' submitted'
+		// }
 		const select2Styles = {
 			width: "100%"
 		};
@@ -144,7 +159,12 @@ class ContactForm extends React.Component {
 				),
 				React.createElement(
 					'select',
-					{ style: select2Styles, className: 'how_you_heard', value: this.state.how_you_heard, name: 'how_you_heard', onChange: this.handleInputChange },
+					{ style: select2Styles,
+						className: 'how_you_heard',
+						value: this.state.how_you_heard,
+						name: 'how_you_heard',
+						onChange: this.handleInputChange,
+						ref: 'how_you_heard' },
 					React.createElement('option', null),
 					React.createElement(
 						'option',
@@ -200,11 +220,21 @@ class ContactFormSlide extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+	contactFormSubmitted() {
+		const { formSubmitted } = this.props;
+		formSubmitted();
+	}
+
+	contactFormCleared() {
+		const { formCleared } = this.props;
+		formCleared();
+	}
+
 	render() {
 		return React.createElement(
 			"div",
 			{ className: "contactPageWrapper" },
-			React.createElement(ContactForm, null),
+			React.createElement(ContactForm, { formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
 			React.createElement(
 				"div",
 				{ className: "privacyPolicy" },
@@ -696,7 +726,6 @@ class Slide extends React.Component {
 		}
 	}
 
-	toggleMusic() {}
 	musicMute() {
 		const { stopMusic } = this.props;
 		stopMusic();
@@ -735,6 +764,16 @@ class Slide extends React.Component {
 				this.state.soundEffect.play();
 			}
 		} else this.state.soundEffect.pause();
+	}
+
+	contactFormSubmitted() {
+		const { formSubmitted } = this.props;
+		formSubmitted();
+	}
+
+	contactFormCleared() {
+		const { formCleared } = this.props;
+		formCleared();
 	}
 
 	render() {
@@ -795,7 +834,7 @@ class Slide extends React.Component {
 				{ autoPlay: true, muted: true, loop: slideObj.videoLoop ? true : false, className: videoClasses },
 				React.createElement('source', { src: slideObj.video, type: 'video/mp4' })
 			),
-			slideObj.contactFormSlide && React.createElement(ContactFormSlide, null),
+			slideObj.contactFormSlide && React.createElement(ContactFormSlide, { formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
 			React.createElement(
 				'div',
 				{ className: centerTextClasses, style: centerTextStyles },
@@ -1158,6 +1197,13 @@ class SplashPage extends React.Component {
 		slidesStateCopy[key].videoMobileStartPosition = newVideoMobileStartPosition;
 		this.setState({ slides: slidesStateCopy });
 	}
+	contactFormSubmitted() {
+		this.setState({ formSubmitted: true });
+	}
+	contactFormCleared() {
+		this.setState({ formSubmitted: null });
+	}
+
 	render() {
 		if (this.state.isPlaying) {
 			this.state.audioPlayer.play();
@@ -1165,7 +1211,7 @@ class SplashPage extends React.Component {
 			this.state.audioPlayer.pause();
 		}
 
-		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { currIdx: this.state.currIdx, playMusic: this.musicPlay, stopMusic: this.musicMute, slideViewed: this.state.slidesViewed.includes(idx), goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx, isPlaying: this.state.isPlaying }));
+		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this), currIdx: this.state.currIdx, playMusic: this.musicPlay, stopMusic: this.musicMute, slideViewed: this.state.slidesViewed.includes(idx), goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx, isPlaying: this.state.isPlaying }));
 		const innerStyle = {
 			transform: 'translateY(-' + this.state.currIdx * 100 + 'vh)'
 		};
@@ -1189,9 +1235,24 @@ class SplashPage extends React.Component {
 		}
 		let slides_inner_classes = "slides_inner slide_idx_" + this.state.currIdx;
 
+		let pageClasses = this.state.formSubmitted ? 'formSubmitted' : '';
 		return React.createElement(
 			'div',
-			{ id: 'page' },
+			{ id: 'page', className: pageClasses },
+			React.createElement(
+				'div',
+				{ className: 'submittedFormOverlay mobile-only' },
+				React.createElement(
+					'div',
+					{ className: 'text' },
+					'THANK YOU!'
+				),
+				React.createElement(
+					'div',
+					{ className: 'closeBtn', onClick: this.contactFormCleared.bind(this) },
+					'X'
+				)
+			),
 			React.createElement(
 				'div',
 				{ className: 'slides_wrapper', onTouchStart: this.handleTouchStart.bind(this), onTouchMove: this.handleTouchMove.bind(this), onTouchEnd: this.handleTouchEnd.bind(this), onWheel: this.handleWheelEvent.bind(this), onScroll: this.handleScrollEvent.bind(this) },

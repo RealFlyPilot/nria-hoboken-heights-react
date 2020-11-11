@@ -325,6 +325,14 @@ class SplashPage extends React.Component {
 		slidesStateCopy[key].videoMobileStartPosition = newVideoMobileStartPosition
 		this.setState({ slides: slidesStateCopy })
 	}
+	contactFormSubmitted(){
+		this.setState({ formSubmitted: true })
+	}
+	contactFormCleared(){
+		this.setState({ formSubmitted: null })
+	}
+
+
 	render() {		
 		if(this.state.isPlaying) {
 			this.state.audioPlayer.play();
@@ -333,7 +341,7 @@ class SplashPage extends React.Component {
 		}
 
 		const $slides = this.state.slides.map((slide, idx) =>
-			<Slide currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
+			<Slide formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
 		);
 		const innerStyle = {
 			transform: 'translateY(-' + (this.state.currIdx * 100) + 'vh)'
@@ -359,8 +367,13 @@ class SplashPage extends React.Component {
 		}
 		let slides_inner_classes = "slides_inner slide_idx_"+this.state.currIdx;
 		
+		let pageClasses = this.state.formSubmitted ? 'formSubmitted' : '';
 		return (
-			<div id="page">
+			<div id="page" className={pageClasses}>
+				<div className="submittedFormOverlay mobile-only">
+					<div className="text">THANK YOU!</div>
+					<div className="closeBtn" onClick={this.contactFormCleared.bind(this)}>X</div>
+				</div>
 				<div className="slides_wrapper" onTouchStart={this.handleTouchStart.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchEnd={this.handleTouchEnd.bind(this)} onWheel={this.handleWheelEvent.bind(this)} onScroll={this.handleScrollEvent.bind(this)}>
 					<Header options={headerOptions} />
 					<div

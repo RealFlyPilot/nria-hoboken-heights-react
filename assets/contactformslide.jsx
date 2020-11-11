@@ -4,10 +4,20 @@ class ContactFormSlide extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+	contactFormSubmitted(){
+		const {formSubmitted} = this.props;
+		formSubmitted();
+	}
+
+	contactFormCleared(){
+		const {formCleared} = this.props;
+		formCleared();
+	}
+
 	render(){
 		return (
 			<div className="contactPageWrapper">
-				<ContactForm />
+				<ContactForm formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} />
 				<div className="privacyPolicy">
 					<div className="verticalLineContainer">
 						<div className="verticalLine" />

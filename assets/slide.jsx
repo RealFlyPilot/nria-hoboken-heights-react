@@ -24,9 +24,6 @@ class Slide extends React.Component {
 		}
 	}
 
-	toggleMusic(){
-
-	}
 	musicMute() {
 		const {stopMusic} = this.props;
 		stopMusic();
@@ -66,6 +63,16 @@ class Slide extends React.Component {
 			}
 		}
 		else this.state.soundEffect.pause()
+	}
+
+	contactFormSubmitted(){
+		const {formSubmitted} = this.props;
+		formSubmitted();
+	}
+
+	contactFormCleared(){
+		const {formCleared} = this.props;
+		formCleared();
 	}
 
 	render() {
@@ -130,7 +137,7 @@ class Slide extends React.Component {
 					</video>
 				}
 				{slideObj.contactFormSlide &&
-					<ContactFormSlide />
+					<ContactFormSlide formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} />
 					
 				}
 				<div className={centerTextClasses} style={centerTextStyles}>

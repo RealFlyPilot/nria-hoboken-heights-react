@@ -290,6 +290,32 @@ body {
   animation-delay: 1.2s;
 }
 
+.submittedFormOverlay {
+  display: none;
+  background: #000;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 4.4px;
+  font-size: 20px;
+  z-index: 1;
+}
+.submittedFormOverlay .closeBtn {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  cursor: pointer;
+}
+
+.formSubmitted .submittedFormOverlay {
+  display: flex;
+}
+
 .slide {
   height: 100vh;
   width: 100vw;
@@ -428,29 +454,6 @@ body {
   padding: 53px;
   width: 44vw;
   margin-bottom: 53px;
-}
-.slide .contactForm.submitted .submittedFormOverlay {
-  background: #000;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  letter-spacing: 4.4px;
-  font-size: 20px;
-  z-index: 1;
-}
-.slide .contactForm.submitted .submittedFormOverlay .closeBtn {
-  position: absolute;
-  top: 50px;
-  right: 50px;
-}
-.slide .contactForm .submittedFormOverlay {
-  display: none;
 }
 .slide .contactForm .headline {
   font-size: 14px;
@@ -820,7 +823,7 @@ body {
 
 @media screen and (min-width: 769px) {
   .mobile-only {
-    display: none;
+    display: none !important;
   }
 }
 @media screen and (max-width: 768px) {

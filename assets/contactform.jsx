@@ -8,7 +8,7 @@ class ContactForm extends React.Component {
 			mobilephone: '',
 			how_you_heard: '',
 			how_can_we_help: '',
-			formSubmitted: '',
+			// formSubmitted: '',
 		}
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,13 +23,15 @@ class ContactForm extends React.Component {
 		this.setState({
 			[name]: value
 		});
+
+		console.log('changed')
 	}
 
 	handleSubmit() {
 		console.log('A form was submitted: ');
 		console.log(this.state);
 		this.setState ({
-			formSubmitted: true,
+			// formSubmitted: true,
 			first_name: '',
 			last_name: '',
 			email: '',
@@ -37,17 +39,30 @@ class ContactForm extends React.Component {
 			how_you_heard: '',
 			how_can_we_help: '',
 		});
+		const {formSubmitted} = this.props;
+		formSubmitted();
 	}
 	resetForm(){
-		this.setState ({
-			formSubmitted: null
+		// this.setState ({
+		// 	formSubmitted: null
+		// })
+		const {formCleared} = this.props;
+		formCleared();
+	}
+
+	componentDidMount() {
+
+		//This is a fix to detect changes on the select2
+		jQuery(this.refs.how_you_heard).on("change",  (e)=> {
+			this.handleInputChange(e)
 		})
 	}
+
     render() {
 		let contactFormClasses = 'contactForm';
-		if(this.state.formSubmitted){
-			contactFormClasses += ' submitted'
-		}
+		// if(this.state.formSubmitted){
+		// 	contactFormClasses += ' submitted'
+		// }
 		const select2Styles = {
 			width:"100%"
 		}
@@ -94,7 +109,13 @@ class ContactForm extends React.Component {
 				</div>
 				<div className="form-control">
 					<label className="label">How did you hear of us?*</label>
-					<select style={select2Styles} className='how_you_heard' value={this.state.how_you_heard} name="how_you_heard" onChange={this.handleInputChange}>
+					<select style={select2Styles}
+						className='how_you_heard'
+						value={this.state.how_you_heard}
+						name="how_you_heard"
+						onChange={this.handleInputChange}
+						ref='how_you_heard'>
+
 						<option></option>
 						<option value="Google">Google</option>
 						<option value="Friend">Friend</option>
