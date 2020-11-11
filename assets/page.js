@@ -28,7 +28,13 @@ const SLIDES = [{
 					alignItems: 'center'
 				},
 			}
-		}
+		},
+		center: {
+			centerBottom: {
+				line1: "MANHATTAN AVE, 1300",
+				line2: "COMING SOON",
+			}
+		},
 	},
 	mobileHorizontalVideoSlideEnabled: true
 }, {
@@ -62,7 +68,20 @@ const SLIDES = [{
 	cornerLogoHideOnLastSlide: true,
 	cornerLogofadeIn: true,
 	soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3",
-	mobileHorizontalVideoSlideEnabled: true
+	mobileHorizontalVideoSlideEnabled: true,
+	mobileHasDifferentContent: true,
+	
+	mobileContent: {
+		center: {
+			centerBottom: {
+				line1: "<div class='left_arrow_bouncing'></div> SWIPE <div class='right_arrow_bouncing'></div>",
+				lineStyles: {
+					display: 'flex',
+					alignItems: 'center'
+				},
+			}
+		},
+	},
 	
 }, {
 	styles: {

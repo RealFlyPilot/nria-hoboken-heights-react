@@ -592,6 +592,12 @@ const SLIDES = [{
 					alignItems: 'center'
 				}
 			}
+		},
+		center: {
+			centerBottom: {
+				line1: "MANHATTAN AVE, 1300",
+				line2: "COMING SOON"
+			}
 		}
 	},
 	mobileHorizontalVideoSlideEnabled: true
@@ -626,7 +632,20 @@ const SLIDES = [{
 	cornerLogoHideOnLastSlide: true,
 	cornerLogofadeIn: true,
 	soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3",
-	mobileHorizontalVideoSlideEnabled: true
+	mobileHorizontalVideoSlideEnabled: true,
+	mobileHasDifferentContent: true,
+
+	mobileContent: {
+		center: {
+			centerBottom: {
+				line1: "<div class='left_arrow_bouncing'></div> SWIPE <div class='right_arrow_bouncing'></div>",
+				lineStyles: {
+					display: 'flex',
+					alignItems: 'center'
+				}
+			}
+		}
+	}
 
 }, {
 	styles: {
@@ -808,6 +827,12 @@ class Slide extends React.Component {
 				'div',
 				{ className: "centerBottom mobile-only mobile-content-left " + (slideObj.videoMobileStartPosition == 'left' ? ' animate' : '') },
 				React.createElement('div', { style: slideObj.mobileContent.left.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.left.centerBottom.line1 } })
+			),
+			slideObj.mobileHasDifferentContent && slideObj.mobileContent.center && React.createElement(
+				'div',
+				{ className: "centerBottom mobile-only mobile-content-center " + (slideObj.videoMobileStartPosition == 'center' ? ' animate' : '') },
+				React.createElement('div', { style: slideObj.mobileContent.center.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.center.centerBottom.line1 } }),
+				React.createElement('div', { style: slideObj.mobileContent.center.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.center.centerBottom.line2 } })
 			)
 		);
 	}

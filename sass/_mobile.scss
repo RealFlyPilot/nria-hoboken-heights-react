@@ -1,20 +1,34 @@
-@keyframes bounce {
+@keyframes rightbounce {
 	0% {transform: translateX(0);}
 	25% {transform: translateX(5px);}
 	50% {transform: translateX(0);}
 	100% {transform: translateX(0);}
 }
-
+@keyframes leftbounce {
+	0% {transform: translateX(0);}
+	25% {transform: translateX(-5px);}
+	50% {transform: translateX(0);}
+	100% {transform: translateX(0);}
+}
+.left_arrow_bouncing,
 .right_arrow_bouncing {
-    animation-name: bounce;
     animation-duration: 1s;
     animation-iteration-count: infinite;
     width: 34px;
     height: 16px;
     background-size: contain;
     background-repeat: no-repeat;
+    
+}
+.left_arrow_bouncing {
+    animation-name: leftbounce;
+    margin-right: 10px;
+}
+.right_arrow_bouncing {
+    animation-name: rightbounce;
     margin-left: 10px;
 }
+
 body {
     overflow: hidden;//this is used only to prevent pull-to-refresh which can be triggered anytime the user tries to scroll up on a touch device
 }

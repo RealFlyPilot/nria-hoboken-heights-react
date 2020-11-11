@@ -169,6 +169,12 @@ class Slide extends React.Component {
 						<div style={slideObj.mobileContent.left.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.left.centerBottom.line1}}></div>
 					</div>
 				}
+				{slideObj.mobileHasDifferentContent && slideObj.mobileContent.center && 
+					<div className={"centerBottom mobile-only mobile-content-center " + (slideObj.videoMobileStartPosition == 'center' ? ' animate' : '')}>
+						<div style={slideObj.mobileContent.center.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.center.centerBottom.line1}}></div>
+						<div style={slideObj.mobileContent.center.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.center.centerBottom.line2}}></div>
+					</div>
+				}
 			</div>
 		);
 	}
