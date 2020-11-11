@@ -414,9 +414,13 @@ class MobileMenu extends React.Component {
 			{ className: mobileMenuClasses },
 			React.createElement(
 				'div',
-				{ className: hamburgerClasses, onClick: this.expandMobileMenu.bind(this) },
-				React.createElement('div', { className: 'line' }),
-				React.createElement('div', { className: 'line' })
+				{ className: 'hamburgerWrapper' },
+				React.createElement(
+					'div',
+					{ className: hamburgerClasses, onClick: this.expandMobileMenu.bind(this) },
+					React.createElement('div', { className: 'line' }),
+					React.createElement('div', { className: 'line' })
+				)
 			),
 			React.createElement(
 				'div',

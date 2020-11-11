@@ -32,9 +32,11 @@ class MobileMenu extends React.Component {
 
 		return (
 			<div className={mobileMenuClasses}>
-				<div className={hamburgerClasses} onClick={this.expandMobileMenu.bind(this)}>
-					<div className="line"></div>
-					<div className="line"></div>
+				<div className="hamburgerWrapper">
+					<div className={hamburgerClasses} onClick={this.expandMobileMenu.bind(this)}>
+						<div className="line"></div>
+						<div className="line"></div>
+					</div>
 				</div>
 				<div className={expandedMobileMenuClasses}>
 					<div className="menuItemsContainer">

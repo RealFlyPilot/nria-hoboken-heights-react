@@ -136,14 +136,15 @@ body {
     width: 100%;
     color: #fff;
     
-    .hamburger {
+    .hamburgerWrapper {
         display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+        justify-content: flex-end;
         width: 100%;
-        margin-top: 30px;
+    }
+    .hamburger {
         transform: translateY(0);
         transition: transform 0.5s linear $slideAnimationDuration;
+        padding: 30px 15px 15px 15px;
         &.darkMode {
             .line {
                 border-top-color: #000;
@@ -152,7 +153,7 @@ body {
         .line {
             border-top: solid 4px #fff;
             width: 33px;
-            margin: 0 15px 10px 0;
+            margin-bottom: 10px;
         }
     }
     .expandedMobileMenu {
