@@ -81,7 +81,7 @@ class ContactForm extends React.Component {
 				React.createElement(
 					'div',
 					{ className: 'closeBtn', onClick: this.resetForm },
-					'X'
+					React.createElement('img', { src: '/assets/images/form_close_btn.svg' })
 				)
 			),
 			React.createElement(
@@ -212,7 +212,7 @@ class ContactForm extends React.Component {
 				'div',
 				{ className: 'rightArrowContainer' },
 				React.createElement('img', { className: 'rightArrow not-mobile', src: '/assets/images/rightarrow.svg', onClick: this.handleSubmit }),
-				React.createElement('img', { className: 'logo', src: '/assets/images/NRIA_Logo--White.png' }),
+				React.createElement('img', { className: 'logo mobile-only', src: '/assets/images/NRIA_Logo--White.png' }),
 				React.createElement(
 					'div',
 					{ className: 'mobileRightArrowContainer mobile-only', onClick: this.handleSubmit },
@@ -1316,7 +1316,7 @@ class SplashPage extends React.Component {
 				React.createElement(
 					'div',
 					{ className: 'closeBtn', onClick: this.contactFormCleared.bind(this) },
-					'X'
+					React.createElement('img', { src: '/assets/images/form_close_btn.svg' })
 				)
 			),
 			React.createElement(

@@ -372,7 +372,9 @@ class SplashPage extends React.Component {
 			<div id="page" className={pageClasses}>
 				<div className="submittedFormOverlay mobile-only">
 					<div className="text">THANK YOU!</div>
-					<div className="closeBtn" onClick={this.contactFormCleared.bind(this)}>X</div>
+					<div className="closeBtn" onClick={this.contactFormCleared.bind(this)}>
+						<img src='/assets/images/form_close_btn.svg' />
+					</div>
 				</div>
 				<div className="slides_wrapper" onTouchStart={this.handleTouchStart.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchEnd={this.handleTouchEnd.bind(this)} onWheel={this.handleWheelEvent.bind(this)} onScroll={this.handleScrollEvent.bind(this)}>
 					<Header options={headerOptions} />

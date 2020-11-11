@@ -70,7 +70,9 @@ class ContactForm extends React.Component {
 			<form className={contactFormClasses}>
 				<div className="submittedFormOverlay">
 					<div className="text">THANK YOU!</div>
-					<div className="closeBtn" onClick={this.resetForm}>X</div>
+					<div className="closeBtn" onClick={this.resetForm}>
+						<img src='/assets/images/form_close_btn.svg' />
+					</div>
 				</div>
 				<div className='headline'>FOR INFORMATION PLEASE FILL THE FORM BELOW</div>
 				<div className="two-input-group">
@@ -139,7 +141,7 @@ class ContactForm extends React.Component {
 				<div className="fine-print">NOTE: By filling out this contact form, I give you my permission to contact me via email, cell phone, or text until I opt out of any such communications.</div>
 				<div className="rightArrowContainer">
 					<img className='rightArrow not-mobile' src='/assets/images/rightarrow.svg' onClick={this.handleSubmit} />
-					<img className='logo' src='/assets/images/NRIA_Logo--White.png' />
+					<img className='logo mobile-only' src='/assets/images/NRIA_Logo--White.png' />
 					<div className="mobileRightArrowContainer mobile-only" onClick={this.handleSubmit}>
 						<div className="text">SEND</div>
 						<img className='rightArrow mobile-only' src='/assets/images/mobileSubmitArrow.svg' />

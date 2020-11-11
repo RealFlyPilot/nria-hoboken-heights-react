@@ -259,9 +259,13 @@ body {
                         position: fixed;
                         .text {
                             transform: translateY(200vh);
+                            font-size: 15.5px;
                         }
                         .closeBtn {
                             transform: translateY(400vh);
+                            > img {
+                                width: 16px;
+                            }
                         }
                     }
     

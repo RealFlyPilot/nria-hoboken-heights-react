@@ -166,9 +166,12 @@ body {
 	z-index: 1;
 	.closeBtn {
 		position: absolute;
-		top: 50px;
-		right: 50px;
+		top: 30px;
+		right: 30px;
 		cursor: pointer;
+		> img {
+			width: 30px;
+		}
 	}
 }
 

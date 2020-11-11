@@ -307,9 +307,12 @@ body {
 }
 .submittedFormOverlay .closeBtn {
   position: absolute;
-  top: 50px;
-  right: 50px;
+  top: 30px;
+  right: 30px;
   cursor: pointer;
+}
+.submittedFormOverlay .closeBtn > img {
+  width: 30px;
 }
 
 .formSubmitted .submittedFormOverlay {
@@ -1086,9 +1089,13 @@ body {
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm.submitted .submittedFormOverlay .text {
     transform: translateY(200vh);
+    font-size: 15.5px;
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm.submitted .submittedFormOverlay .closeBtn {
     transform: translateY(400vh);
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm.submitted .submittedFormOverlay .closeBtn > img {
+    width: 16px;
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .fine-print {
     font-size: 9px;
