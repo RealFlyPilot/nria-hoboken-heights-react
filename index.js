@@ -212,6 +212,7 @@ class ContactForm extends React.Component {
 				'div',
 				{ className: 'rightArrowContainer' },
 				React.createElement('img', { className: 'rightArrow not-mobile', src: '/assets/images/rightarrow.svg', onClick: this.handleSubmit }),
+				React.createElement('img', { className: 'logo', src: '/assets/images/NRIA_Logo--White.png' }),
 				React.createElement(
 					'div',
 					{ className: 'mobileRightArrowContainer mobile-only', onClick: this.handleSubmit },
@@ -253,7 +254,7 @@ class ContactFormSlide extends React.Component {
 			React.createElement(ContactForm, { formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
 			React.createElement(
 				"div",
-				{ className: "privacyPolicy" },
+				{ className: "privacyPolicy not-mobile" },
 				React.createElement(
 					"div",
 					{ className: "verticalLineContainer" },
@@ -298,6 +299,55 @@ class ContactFormSlide extends React.Component {
 						"div",
 						{ className: "btn" },
 						"PRIVACY POLICY"
+					)
+				)
+			),
+			React.createElement(
+				"div",
+				{ className: "mobilePrivacyPolicy mobile-only" },
+				React.createElement(
+					"div",
+					{ className: "contactInfo" },
+					React.createElement(
+						"div",
+						{ className: "address" },
+						"1300 Manhattan Avenue Union City, NJ 07087"
+					),
+					React.createElement(
+						"div",
+						{ className: "address" },
+						"Manhattan Avenue Capital 1300, LLC"
+					),
+					React.createElement("br", null),
+					React.createElement(
+						"div",
+						{ className: "address" },
+						"Richard Stabile"
+					),
+					React.createElement(
+						"div",
+						{ className: "address" },
+						"RE/MAX Real Estate Limited"
+					),
+					React.createElement(
+						"a",
+						{ href: "tel:2014007487" },
+						React.createElement(
+							"div",
+							{ className: "phone" },
+							"201-400-7487"
+						)
+					),
+					React.createElement("br", null),
+					React.createElement(
+						"div",
+						{ className: "copyright" },
+						"\xA9 2020 Hoboken Heights. All rights reserved."
+					),
+					React.createElement(
+						"a",
+						{ href: "#" },
+						"Privacy Policy"
 					)
 				)
 			)

@@ -250,80 +250,106 @@ body {
                     }
                 }
             }
-            .contactForm {
-                &.submitted .submittedFormOverlay {
-                    position: fixed;
-                    .text {
-                        transform: translateY(200vh);
+            .contactPageWrapper {
+                .contactForm {
+                    position: static;
+                    width: 100%;
+                    margin-bottom: 0;
+                    &.submitted .submittedFormOverlay {
+                        position: fixed;
+                        .text {
+                            transform: translateY(200vh);
+                        }
+                        .closeBtn {
+                            transform: translateY(400vh);
+                        }
                     }
-                    .closeBtn {
-                        transform: translateY(400vh);
+    
+                    .fine-print {
+                        font-size: 9px;
+                        margin-top: 14px;
                     }
-                }
-
-                .fine-print {
-                    font-size: 9px;
-                    margin-top: 14px;
-                }
-                .mobileRightArrowContainer {
-                    display: flex;
-                    align-items: center;
-                    padding-top: 10px;
-                    padding-bottom: 10px;
-                    .text {
-                        margin-right: 20px;
-                        font-size: 17px;
+                    .rightArrowContainer {
+                        justify-content: space-between;
+                        .logo {
+                            height: 55px;
+                        }
                     }
-                    .rightArrow {
-                        height: 17px;
-                    }
-                }
-                .form-control {
-                    margin-top: 21px;
-                    @include placeholder {
-                        color: #000;
-                    }
-                    .select2-container--default .select2-selection--single {
-                        height: 68px;
+                    .mobileRightArrowContainer {
                         display: flex;
                         align-items: center;
-                        .select2-selection__arrow {
-                            top: auto;
-                            > b {
-                                border-width: 12px 8px 0 8px;
-                                margin-left: -20px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        .text {
+                            margin-right: 20px;
+                            font-size: 17px;
+                        }
+                        .rightArrow {
+                            height: 17px;
+                        }
+                    }
+                    .form-control {
+                        margin-top: 21px;
+                        @include placeholder {
+                            color: #000;
+                        }
+                        .select2-container--default .select2-selection--single {
+                            height: 68px;
+                            display: flex;
+                            align-items: center;
+                            .select2-selection__arrow {
+                                top: auto;
+                                > b {
+                                    border-width: 12px 8px 0 8px;
+                                    margin-left: -20px;
+                                }
+                            }
+                            .select2-selection__rendered {
+                                font-size: 15px;
+                                color: #000000;
+                                .select2-selection__placeholder {
+                                    color: #000000;
+                                }
                             }
                         }
-                        .select2-selection__rendered {
+                        
+                        
+                        .label {
+                            display: none;
+                        }
+                        .input {
+                            height: 68px;
+                            margin-top: 0;
+                            padding: 11px;
                             font-size: 15px;
                             color: #000000;
-                            .select2-selection__placeholder {
-                                color: #000000;
+                            
+                            &.textarea {
+                                height: 136px;
                             }
                         }
                     }
-                    
-                    
-                    .label {
-                        display: none;
-                    }
-                    .input {
-                        height: 68px;
-                        margin-top: 0;
-                        padding: 11px;
-                        font-size: 15px;
-                        color: #000000;
-                        
-                        &.textarea {
-                            height: 136px;
+                    .two-input-group {
+                        flex-direction: column;
+                        .form-control {
+                            + .form-control {
+                                margin-left: 0;
+                            }
                         }
                     }
                 }
-                .two-input-group {
-                    flex-direction: column;
-                    .form-control {
-                        + .form-control {
-                            margin-left: 0;
+                .mobilePrivacyPolicy {
+                    background: #000;
+                    color: #fff;
+                    padding: 65px 0;
+                    text-align: center;
+                    line-height: 1.4em;
+                    font-size: 14px;
+                    .contactInfo {
+                        > a {
+                            color: #fff;
+                            font-weight: bold;
+                            text-decoration: none;
                         }
                     }
                 }
@@ -335,11 +361,7 @@ body {
                     text-align: justify;
                 }
             }
-            .contactForm {
-                position: static;
-                width: 100%;
-                margin-bottom: 0;
-            }
+            
         }
     }
 }
