@@ -906,6 +906,10 @@ body {
     display: none !important;
   }
 
+  .formSubmitted .submittedFormOverlay.mobile-only {
+    position: fixed;
+  }
+
   .slide_idx_0 + .musicplayer_container + .mobileMenu .hamburger {
     transform: translateY(-50px);
     transition: transform 0s;
