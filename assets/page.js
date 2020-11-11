@@ -86,7 +86,8 @@ const SLIDES = [{
 }, {
 	styles: {
 		backgroundColor: "transparent",
-		color: "#000"
+		color: "#000",
+		overflow: "scroll"
 	},
 	// addCornerLogo: true,
 	addDarkCornerLogo: true,

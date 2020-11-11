@@ -187,6 +187,10 @@ class SplashPage extends React.Component {
 		if (this.isTransitioning()) {
 			return;
 		}
+		const positionIsNotAtTopOfSlide = document.querySelector('.activeSlide').scrollTop != 0;
+		if(positionIsNotAtTopOfSlide) {
+			return;
+		}
 		const newIdx = this.state.currIdx - 1;
 		if (newIdx < 0) {
 			return;

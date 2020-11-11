@@ -88,7 +88,7 @@ class Slide extends React.Component {
 		};
 		
 		slideClasses += slideObj.slideClasses != undefined ? " " + slideObj.slideClasses : '';
-		if(isCurrent) slideClasses += " runAnimations";
+		if(isCurrent) slideClasses += " runAnimations activeSlide";
 		if(this.props.slideViewed) slideClasses += " runAnimationOnce";
 		if(slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect'
 		slideClasses += slideObj.videoMobileStartPosition ? ' mobile-video-position-' + slideObj.videoMobileStartPosition : ' mobile-video-position-left'

@@ -650,7 +650,8 @@ const SLIDES = [{
 }, {
 	styles: {
 		backgroundColor: "transparent",
-		color: "#000"
+		color: "#000",
+		overflow: "scroll"
 	},
 	// addCornerLogo: true,
 	addDarkCornerLogo: true,
@@ -748,7 +749,7 @@ class Slide extends React.Component {
 		};
 
 		slideClasses += slideObj.slideClasses != undefined ? " " + slideObj.slideClasses : '';
-		if (isCurrent) slideClasses += " runAnimations";
+		if (isCurrent) slideClasses += " runAnimations activeSlide";
 		if (this.props.slideViewed) slideClasses += " runAnimationOnce";
 		if (slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect';
 		slideClasses += slideObj.videoMobileStartPosition ? ' mobile-video-position-' + slideObj.videoMobileStartPosition : ' mobile-video-position-left';
@@ -1022,6 +1023,10 @@ class SplashPage extends React.Component {
 	}
 	prevSlide() {
 		if (this.isTransitioning()) {
+			return;
+		}
+		const positionIsNotAtTopOfSlide = document.querySelector('.activeSlide').scrollTop != 0;
+		if (positionIsNotAtTopOfSlide) {
 			return;
 		}
 		const newIdx = this.state.currIdx - 1;
