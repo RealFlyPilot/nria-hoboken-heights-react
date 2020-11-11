@@ -80,7 +80,8 @@ class ContactForm extends React.Component {
 							name="first_name"
 							type="text"
 							value={this.state.first_name}
-							onChange={this.handleInputChange} />
+							onChange={this.handleInputChange}
+							placeholder="First Name*" />
 					</div>
 					<div className="form-control">
 						<label className="label">Last Name*</label>
@@ -88,7 +89,8 @@ class ContactForm extends React.Component {
 							name="last_name"
 							type="text"
 							value={this.state.last_name}
-							onChange={this.handleInputChange} />
+							onChange={this.handleInputChange}
+							placeholder="Last Name*" />
 					</div>
 				</div>
 				<div className="form-control">
@@ -97,7 +99,8 @@ class ContactForm extends React.Component {
 						name="email"
 						type="text"
 						value={this.state.email}
-						onChange={this.handleInputChange} />
+						onChange={this.handleInputChange}
+						placeholder="E-mail*" />
 				</div>
 				<div className="form-control">
 					<label className="label">Mobile Phone Number*</label>
@@ -105,7 +108,8 @@ class ContactForm extends React.Component {
 						name="mobilephone"
 						type="text"
 						value={this.state.mobilephone}
-						onChange={this.handleInputChange} />
+						onChange={this.handleInputChange}
+						placeholder="Mobile Phone Number*" />
 				</div>
 				<div className="form-control">
 					<label className="label">How did you hear of us?*</label>
@@ -114,9 +118,10 @@ class ContactForm extends React.Component {
 						value={this.state.how_you_heard}
 						name="how_you_heard"
 						onChange={this.handleInputChange}
-						ref='how_you_heard'>
+						ref='how_you_heard'
+						>
 
-						<option></option>
+						<option className='emptyOption'></option>
 						<option value="Google">Google</option>
 						<option value="Friend">Friend</option>
 						<option value="Newspaper">Newspaper</option>
@@ -128,11 +133,17 @@ class ContactForm extends React.Component {
 						name="how_can_we_help"
 						type="text"
 						value={this.state.how_can_we_help}
-						onChange={this.handleInputChange}/>
+						onChange={this.handleInputChange}
+						placeholder="How may we help you?*" />
 				</div>
 				<div className="fine-print">NOTE: By filling out this contact form, I give you my permission to contact me via email, cell phone, or text until I opt out of any such communications.</div>
 				<div className="rightArrowContainer">
-					<img className='rightArrow' src='/assets/images/rightarrow.svg' onClick={this.handleSubmit} />
+					<img className='rightArrow not-mobile' src='/assets/images/rightarrow.svg' onClick={this.handleSubmit} />
+					<div className="mobileRightArrowContainer mobile-only">
+						<div className="text">SEND</div>
+						<img className='rightArrow mobile-only' src='/assets/images/mobileSubmitArrow.svg' onClick={this.handleSubmit} />
+					</div>
+					
 				</div>
 			</form>
 		);

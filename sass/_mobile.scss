@@ -1,3 +1,10 @@
+@mixin placeholder {
+    ::-webkit-input-placeholder {@content}
+    :-moz-placeholder           {@content}
+    ::-moz-placeholder          {@content}
+    :-ms-input-placeholder      {@content}  
+}
+
 @keyframes rightbounce {
 	0% {transform: translateX(0);}
 	25% {transform: translateX(5px);}
@@ -243,15 +250,76 @@ body {
                     }
                 }
             }
-            .contactForm.submitted .submittedFormOverlay {
-                position: fixed;
-                .text {
-                    transform: translateY(200vh);
+            .contactForm {
+                &.submitted .submittedFormOverlay {
+                    position: fixed;
+                    .text {
+                        transform: translateY(200vh);
+                    }
+                    .closeBtn {
+                        transform: translateY(400vh);
+                    }
                 }
-                .closeBtn {
-                    transform: translateY(400vh);
+
+                
+                .mobileRightArrowContainer {
+                    display: flex;
+                    align-items: center;
+                    .text {
+                        margin-right: 20px;
+                        font-size: 17px;
+                    }
+                    .rightArrow {
+                        height: 17px;
+                    }
+                }
+                .form-control {
+                    margin-top: 21px;
+                    @include placeholder {
+                        color: #000;
+                    }
+                    .select2-container--default .select2-selection--single {
+                        height: 68px;
+                        display: flex;
+                        align-items: center;
+                        .select2-selection__arrow {
+                            top: auto;
+                        }
+                        .select2-selection__rendered {
+                            font-size: 15px;
+                            color: #000000;
+                            .select2-selection__placeholder {
+                                color: #000000;
+                            }
+                        }
+                    }
+                    
+                    
+                    .label {
+                        display: none;
+                    }
+                    .input {
+                        height: 68px;
+                        margin-top: 0;
+                        padding: 11px;
+                        font-size: 15px;
+                        color: #000000;
+                        
+                        &.textarea {
+                            height: 136px;
+                        }
+                    }
+                }
+                .two-input-group {
+                    flex-direction: column;
+                    .form-control {
+                        + .form-control {
+                            margin-left: 0;
+                        }
+                    }
                 }
             }
+           
             .center {
                 // width: 82vw;
                 > h1 {

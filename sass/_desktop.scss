@@ -1,3 +1,26 @@
 .mobile-only {
     display: none !important;
 }
+
+
+.slide {
+    .contactPageWrapper {
+        .contactForm {
+            .form-control .input::-webkit-input-placeholder { /* WebKit browsers */
+                color: transparent;
+            }
+            .form-control .input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+               color: transparent;
+            }
+            .form-control .input::-moz-placeholder { /* Mozilla Firefox 19+ */
+               color: transparent;
+            }
+            .form-control .input:-ms-input-placeholder { /* Internet Explorer 10+ */
+               color: transparent;
+            }
+            .select2-selection__placeholder {
+                color: transparent;
+            }
+        }
+    }
+}

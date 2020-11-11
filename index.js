@@ -104,7 +104,8 @@ class ContactForm extends React.Component {
 						name: 'first_name',
 						type: 'text',
 						value: this.state.first_name,
-						onChange: this.handleInputChange })
+						onChange: this.handleInputChange,
+						placeholder: 'First Name*' })
 				),
 				React.createElement(
 					'div',
@@ -118,7 +119,8 @@ class ContactForm extends React.Component {
 						name: 'last_name',
 						type: 'text',
 						value: this.state.last_name,
-						onChange: this.handleInputChange })
+						onChange: this.handleInputChange,
+						placeholder: 'Last Name*' })
 				)
 			),
 			React.createElement(
@@ -133,7 +135,8 @@ class ContactForm extends React.Component {
 					name: 'email',
 					type: 'text',
 					value: this.state.email,
-					onChange: this.handleInputChange })
+					onChange: this.handleInputChange,
+					placeholder: 'E-mail*' })
 			),
 			React.createElement(
 				'div',
@@ -147,7 +150,8 @@ class ContactForm extends React.Component {
 					name: 'mobilephone',
 					type: 'text',
 					value: this.state.mobilephone,
-					onChange: this.handleInputChange })
+					onChange: this.handleInputChange,
+					placeholder: 'Mobile Phone Number*' })
 			),
 			React.createElement(
 				'div',
@@ -164,8 +168,9 @@ class ContactForm extends React.Component {
 						value: this.state.how_you_heard,
 						name: 'how_you_heard',
 						onChange: this.handleInputChange,
-						ref: 'how_you_heard' },
-					React.createElement('option', null),
+						ref: 'how_you_heard'
+					},
+					React.createElement('option', { className: 'emptyOption' }),
 					React.createElement(
 						'option',
 						{ value: 'Google' },
@@ -195,7 +200,8 @@ class ContactForm extends React.Component {
 					name: 'how_can_we_help',
 					type: 'text',
 					value: this.state.how_can_we_help,
-					onChange: this.handleInputChange })
+					onChange: this.handleInputChange,
+					placeholder: 'How may we help you?*' })
 			),
 			React.createElement(
 				'div',
@@ -205,7 +211,17 @@ class ContactForm extends React.Component {
 			React.createElement(
 				'div',
 				{ className: 'rightArrowContainer' },
-				React.createElement('img', { className: 'rightArrow', src: '/assets/images/rightarrow.svg', onClick: this.handleSubmit })
+				React.createElement('img', { className: 'rightArrow not-mobile', src: '/assets/images/rightarrow.svg', onClick: this.handleSubmit }),
+				React.createElement(
+					'div',
+					{ className: 'mobileRightArrowContainer mobile-only' },
+					React.createElement(
+						'div',
+						{ className: 'text' },
+						'SEND'
+					),
+					React.createElement('img', { className: 'rightArrow mobile-only', src: '/assets/images/mobileSubmitArrow.svg', onClick: this.handleSubmit })
+				)
 			)
 		);
 	}
@@ -1104,7 +1120,7 @@ class SplashPage extends React.Component {
 	}
 	componentDidMount() {
 		$('.how_you_heard').select2({
-			placeholder: "",
+			placeholder: "How did you hear of us?*",
 			width: 'resolve'
 		});
 		window.addEventListener('keydown', event => {

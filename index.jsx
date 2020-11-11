@@ -219,7 +219,7 @@ class SplashPage extends React.Component {
 	}
 	componentDidMount() {
 		$('.how_you_heard').select2({
-			placeholder: "",
+			placeholder: "How did you hear of us?*",
 			width: 'resolve'
 		});
 		window.addEventListener('keydown', (event) => {
