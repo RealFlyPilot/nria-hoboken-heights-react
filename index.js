@@ -586,7 +586,11 @@ const SLIDES = [{
 	mobileContent: {
 		left: {
 			centerBottom: {
-				line1: "SWIPE <div>RIGHT ARROW</div>"
+				line1: "SWIPE <div class='right_arrow_bouncing'></div>",
+				lineStyles: {
+					display: 'flex',
+					alignItems: 'center'
+				}
 			}
 		}
 	},
@@ -803,11 +807,7 @@ class Slide extends React.Component {
 			slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && React.createElement(
 				'div',
 				{ className: "centerBottom mobile-only mobile-content-left " + (slideObj.videoMobileStartPosition == 'left' ? ' animate' : '') },
-				React.createElement(
-					'div',
-					{ className: 'line' },
-					slideObj.mobileContent.left.centerBottom.line1
-				)
+				React.createElement('div', { style: slideObj.mobileContent.left.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.left.centerBottom.line1 } })
 			)
 		);
 	}

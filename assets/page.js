@@ -22,7 +22,11 @@ const SLIDES = [{
 	mobileContent: {
 		left: {
 			centerBottom: {
-				line1: "SWIPE <div>RIGHT ARROW</div>"
+				line1: "SWIPE <div class='right_arrow_bouncing'></div>",
+				lineStyles: {
+					display: 'flex',
+					alignItems: 'center'
+				},
 			}
 		}
 	},

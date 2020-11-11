@@ -166,7 +166,7 @@ class Slide extends React.Component {
 				</div>
 				{slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && 
 					<div className={"centerBottom mobile-only mobile-content-left " + (slideObj.videoMobileStartPosition == 'left' ? ' animate' : '')}>
-						<div className="line">{slideObj.mobileContent.left.centerBottom.line1}</div>
+						<div style={slideObj.mobileContent.left.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.left.centerBottom.line1}}></div>
 					</div>
 				}
 			</div>

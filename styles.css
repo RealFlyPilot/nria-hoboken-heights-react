@@ -137,6 +137,10 @@ body {
   font-weight: 300;
 }
 
+.right_arrow_bouncing {
+  background-image: url(/assets/images/right-arrow-bouncing.svg);
+}
+
 .slides_wrapper {
   overflow: hidden;
   height: 100vh;
@@ -803,6 +807,31 @@ body {
   }
 }
 @media screen and (max-width: 768px) {
+  @keyframes bounce {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(5px);
+    }
+    50% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  .right_arrow_bouncing {
+    animation-name: bounce;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    width: 34px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 10px;
+  }
+
   body {
     overflow: hidden;
   }
@@ -835,6 +864,7 @@ body {
   .centerBottom .line {
     position: relative;
     top: 80px;
+    transition: top 0s linear 1.2s;
   }
 
   .runAnimations .centerBottom .line {
