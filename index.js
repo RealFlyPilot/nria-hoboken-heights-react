@@ -182,7 +182,11 @@ class ContactForm extends React.Component {
 				{ className: 'fine-print' },
 				'NOTE: By filling out this contact form, I give you my permission to contact me via email, cell phone, or text until I opt out of any such communications.'
 			),
-			React.createElement('img', { className: 'rightArrow', src: '/assets/images/rightarrow.svg', onClick: this.handleSubmit })
+			React.createElement(
+				'div',
+				{ className: 'rightArrowContainer' },
+				React.createElement('img', { className: 'rightArrow', src: '/assets/images/rightarrow.svg', onClick: this.handleSubmit })
+			)
 		);
 	}
 }

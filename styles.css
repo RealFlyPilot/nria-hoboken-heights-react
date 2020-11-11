@@ -442,6 +442,7 @@ body {
   justify-content: center;
   letter-spacing: 4.4px;
   font-size: 20px;
+  z-index: 1;
 }
 .slide .contactForm.submitted .submittedFormOverlay .closeBtn {
   position: absolute;
@@ -515,9 +516,12 @@ body {
   margin-top: 18px;
   letter-spacing: 1px;
 }
-.slide .contactForm .rightArrow {
-  float: right;
+.slide .contactForm .rightArrowContainer {
   margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+.slide .contactForm .rightArrowContainer .rightArrow {
   cursor: pointer;
 }
 .slide .privacyPolicy {
@@ -1048,8 +1052,25 @@ body {
   .slides_wrapper .slides_inner .slide.mobile-video-position-right .background-video {
     object-position: right;
   }
+  .slides_wrapper .slides_inner .slide .contactForm.submitted .submittedFormOverlay {
+    position: fixed;
+  }
+  .slides_wrapper .slides_inner .slide .contactForm.submitted .submittedFormOverlay .text {
+    transform: translateY(200vh);
+  }
+  .slides_wrapper .slides_inner .slide .contactForm.submitted .submittedFormOverlay .closeBtn {
+    transform: translateY(400vh);
+  }
   .slides_wrapper .slides_inner .slide .center > h1 {
     text-align: justify;
+  }
+  .slides_wrapper .slides_inner .slide .contactForm {
+    position: static;
+    width: 100%;
+    margin-bottom: 0;
+  }
+  .slides_wrapper .slides_inner .slide .privacyPolicy {
+    display: none;
   }
 }
 /*

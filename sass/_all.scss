@@ -316,6 +316,7 @@ body {
 				justify-content: center;
 				letter-spacing: 4.4px;
 				font-size: 20px;
+				z-index: 1;
 				.closeBtn {
 					position: absolute;
 					top: 50px;
@@ -393,11 +394,15 @@ body {
 			margin-top: 18px;
 			letter-spacing: 1px;
 		}
-		.rightArrow {
-			float: right;
+		.rightArrowContainer {
 			margin-top: 40px;
-			cursor: pointer;
+			display: flex;
+			justify-content: flex-end;
+			.rightArrow {
+				cursor: pointer;
+			}
 		}
+		
 	}
 	.privacyPolicy {
 		width: 45%;
