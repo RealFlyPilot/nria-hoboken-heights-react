@@ -825,14 +825,14 @@ class Slide extends React.Component {
 			),
 			slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && React.createElement(
 				'div',
-				{ className: "centerBottom mobile-only mobile-content-left " + (slideObj.videoMobileStartPosition == 'left' ? ' animate' : '') },
-				React.createElement('div', { style: slideObj.mobileContent.left.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.left.centerBottom.line1 } })
+				{ className: "centerBottom mobile-only mobile-content-left " + (isCurrent && slideObj.videoMobileStartPosition == 'left' ? ' animate' : '') },
+				React.createElement('h1', { style: slideObj.mobileContent.left.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.left.centerBottom.line1 } })
 			),
 			slideObj.mobileHasDifferentContent && slideObj.mobileContent.center && React.createElement(
 				'div',
-				{ className: "centerBottom mobile-only mobile-content-center " + (slideObj.videoMobileStartPosition == 'center' ? ' animate' : '') },
-				React.createElement('div', { style: slideObj.mobileContent.center.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.center.centerBottom.line1 } }),
-				React.createElement('div', { style: slideObj.mobileContent.center.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.center.centerBottom.line2 } })
+				{ className: "centerBottom mobile-only mobile-content-center " + (isCurrent && slideObj.videoMobileStartPosition == 'center' ? ' animate' : '') },
+				React.createElement('h1', { style: slideObj.mobileContent.center.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.center.centerBottom.line1 } }),
+				React.createElement('h1', { style: slideObj.mobileContent.center.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.center.centerBottom.line2 } })
 			)
 		);
 	}

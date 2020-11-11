@@ -165,14 +165,14 @@ class Slide extends React.Component {
 					}
 				</div>
 				{slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && 
-					<div className={"centerBottom mobile-only mobile-content-left " + (slideObj.videoMobileStartPosition == 'left' ? ' animate' : '')}>
-						<div style={slideObj.mobileContent.left.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.left.centerBottom.line1}}></div>
+					<div className={"centerBottom mobile-only mobile-content-left " + (isCurrent && slideObj.videoMobileStartPosition == 'left' ? ' animate' : '')}>
+						<h1 style={slideObj.mobileContent.left.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.left.centerBottom.line1}}></h1>
 					</div>
 				}
 				{slideObj.mobileHasDifferentContent && slideObj.mobileContent.center && 
-					<div className={"centerBottom mobile-only mobile-content-center " + (slideObj.videoMobileStartPosition == 'center' ? ' animate' : '')}>
-						<div style={slideObj.mobileContent.center.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.center.centerBottom.line1}}></div>
-						<div style={slideObj.mobileContent.center.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.center.centerBottom.line2}}></div>
+					<div className={"centerBottom mobile-only mobile-content-center " + (isCurrent && slideObj.videoMobileStartPosition == 'center' ? ' animate' : '')}>
+						<h1 style={slideObj.mobileContent.center.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.center.centerBottom.line1}}></h1>
+						<h1 style={slideObj.mobileContent.center.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.center.centerBottom.line2}}></h1>
 					</div>
 				}
 			</div>

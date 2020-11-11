@@ -52,33 +52,6 @@ table {
   border-spacing: 0;
 }
 
-/* Custom Styles */
-@font-face {
-  src: url("assets/fonts/Gotham-Light.otf");
-  font-family: "Gotham-Light" format("opentype");
-  font-weight: 300;
-}
-@font-face {
-  src: url("assets/fonts/Gotham-Book.otf") format("opentype");
-  font-family: "Gotham";
-  font-weight: 400;
-}
-@font-face {
-  src: url("assets/fonts/Gotham-Bold.otf");
-  font-family: "Gotham-Bold" format("opentype");
-  font-weight: 700;
-  font-style: normal;
-}
-@keyframes fadeInDriftUp {
-  0% {
-    top: 15px;
-    opacity: 0;
-  }
-  100% {
-    top: 0;
-    opacity: 1;
-  }
-}
 @keyframes lineAppear {
   0% {
     height: 0;
@@ -103,6 +76,32 @@ table {
     transform: translateX(0);
   }
 }
+@keyframes slideCornerLogo {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(260px);
+  }
+}
+@keyframes fadeInDriftUp {
+  0% {
+    top: 15px;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -111,13 +110,22 @@ table {
     opacity: 1;
   }
 }
-@keyframes slideCornerLogo {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(260px);
-  }
+/* Custom Styles */
+@font-face {
+  src: url("assets/fonts/Gotham-Light.otf");
+  font-family: "Gotham-Light" format("opentype");
+  font-weight: 300;
+}
+@font-face {
+  src: url("assets/fonts/Gotham-Book.otf") format("opentype");
+  font-family: "Gotham";
+  font-weight: 400;
+}
+@font-face {
+  src: url("assets/fonts/Gotham-Bold.otf");
+  font-family: "Gotham-Bold" format("opentype");
+  font-weight: 700;
+  font-style: normal;
 }
 * {
   box-sizing: border-box;
@@ -388,11 +396,11 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: object-position 0.5s linear 0s;
+  transition: object-position 1400ms linear 0s;
 }
 .slide .background-video.videoZoomEffect {
   transform: scale(1.07);
-  transition: object-position 0.5s linear 0s, transform 1.2s ease-out 1.2s;
+  transition: object-position 1400ms linear 0s, transform 1.2s ease-out 1.2s;
 }
 .slide .centerBottom {
   letter-spacing: 4.4px;
@@ -880,7 +888,6 @@ body {
   .mobile-video-position-center .mobile-content-left,
 .mobile-video-position-center .mobile-content-right {
     opacity: 0;
-    transition: opacity 0s;
   }
 
   .mobile-video-position-right .mobile-content-center,
@@ -888,10 +895,39 @@ body {
     opacity: 0;
   }
 
+  .mobile-video-position-left .mobile-content-left:not(.animate) > h1,
+.mobile-video-position-center .mobile-content-center:not(.animate) > h1,
+.mobile-video-position-right .mobile-content-right:not(.animate) > h1 {
+    animation-duration: 0.5s;
+    animation-name: fadeOut;
+  }
+
+  .slide.runAnimations .centerBottom > h1 {
+    opacity: 1;
+    animation-name: none;
+  }
+
+  .slide .centerBottom > h1 {
+    top: 0;
+  }
+
+  .centerBottom.mobile-only.animate > h1 {
+    opacity: 0;
+    position: relative;
+    animation-fill-mode: forwards;
+    animation-name: fadeInDriftUp;
+    animation-duration: 0.7s;
+    animation-delay: 0.5s;
+  }
+  .centerBottom.mobile-only.animate > h1 + h1 {
+    animation-delay: 0.7s;
+  }
+
   .centerBottom .line {
     position: relative;
+    opacity: 1;
     top: 80px;
-    transition: top 0s linear 1.2s;
+    transition: top 0s linear 1.2s, opacity 1s;
   }
 
   .runAnimations .centerBottom .line {

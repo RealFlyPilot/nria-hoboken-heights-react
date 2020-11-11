@@ -45,28 +45,71 @@ body {
     .mobile-content-center,
     .mobile-content-right {
         opacity: 0;
+        // transition: opacity 0s;
     }
 }
 .mobile-video-position-center {
     .mobile-content-left,
     .mobile-content-right {
         opacity: 0;
-        transition: opacity 0s;
+        // transition: opacity 0s;
     }
 }
 .mobile-video-position-right {
     .mobile-content-center,
     .mobile-content-left {
         opacity: 0;
+        // transition: opacity 0s;
         
     }
 }
 
+//This was necessary to fade out h1 tags when leaving a slide
+.mobile-video-position-left .mobile-content-left,
+.mobile-video-position-center .mobile-content-center,
+.mobile-video-position-right .mobile-content-right {
+    &:not(.animate) {
+        > h1 {
+            animation-duration: 0.5s;
+            animation-name: fadeOut;
+        }
+    }
+}
+
+
+ 
+.slide.runAnimations .centerBottom > h1 {
+    opacity: 1;
+    animation-name: none;//prevents desktop animation from running (which doesnt require .animate parent)
+}
+.slide .centerBottom > h1 {
+    // opacity: 0;
+    top: 0;
+    // transition: opacity 0.5s;
+}
+.centerBottom {
+    &.mobile-only {
+        &.animate {
+            > h1 {
+                opacity: 0;
+                position: relative;
+				animation-fill-mode: forwards;
+				animation-name: fadeInDriftUp;
+				animation-duration: 0.7s;
+				animation-delay: 0.5s;
+				+ h1 {
+					animation-delay: 0.7s;
+				}
+            }
+        }
+    }
+}
 .centerBottom {
     .line {
         position: relative;
+        opacity: 1;
         top: 80px;
-        transition: top 0s linear 1.2s;
+        transition: top 0s linear 1.2s, opacity 1s;
     }
 }
 
