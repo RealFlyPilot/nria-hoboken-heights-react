@@ -816,6 +816,39 @@ body {
     transition: transform 0s;
   }
 
+  .mobile-video-position-left .mobile-content-center,
+.mobile-video-position-left .mobile-content-right {
+    opacity: 0;
+  }
+
+  .mobile-video-position-center .mobile-content-left,
+.mobile-video-position-center .mobile-content-right {
+    opacity: 0;
+    transition: opacity 0s;
+  }
+
+  .mobile-video-position-right .mobile-content-center,
+.mobile-video-position-right .mobile-content-left {
+    opacity: 0;
+  }
+
+  .centerBottom .line {
+    position: relative;
+    top: 80px;
+  }
+
+  .runAnimations .centerBottom .line {
+    top: 0;
+    transition: top 0.5s linear 0.8s;
+  }
+
+  .mobile-content-center,
+.mobile-content-right,
+.mobile-content-left {
+    opacity: 1;
+    transition: opacity 0.4s;
+  }
+
   .mobileMenu {
     display: flex;
     position: absolute;

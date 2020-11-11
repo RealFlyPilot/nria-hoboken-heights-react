@@ -802,7 +802,7 @@ class Slide extends React.Component {
 			),
 			slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && React.createElement(
 				'div',
-				{ className: 'centerBottom mobile-only mobile-content-left' },
+				{ className: "centerBottom mobile-only mobile-content-left " + (slideObj.videoMobileStartPosition == 'left' ? ' animate' : '') },
 				React.createElement(
 					'div',
 					{ className: 'line' },
