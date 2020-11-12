@@ -1,4 +1,9 @@
-@mixin slideInAnimation($elementWidth, $delay) {
+.resize-animation-stopper * {
+	animation: none !important;
+	transition: none !important;
+  }
+  
+  @mixin slideInAnimation($elementWidth, $delay) {
 	.slideInAnimationWrapper {
 		.slideInAnimationElementContainer {
 			overflow: hidden;

@@ -105,9 +105,16 @@ class SplashPage extends React.Component {
 			}
 		});
 
-		if(this.state.operating_sys == 'android'){
-			this.androidSoftKeyboardViewportFix()
-		}
+		
+
+		let resizeTimer;
+		window.addEventListener("resize", () => {
+		document.body.classList.add("resize-animation-stopper");
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(() => {
+			document.body.classList.remove("resize-animation-stopper");
+		}, 400);
+		});
 	}
 	componentDidUpdate() {
 		const that = this;
@@ -126,78 +133,6 @@ class SplashPage extends React.Component {
 	// 	this.setState({previousScrollVal: 0});
 	// }
 
-	/*
-	 * androidSoftKeyboardViewportFix is necessary to correct an issue with Android
-	 * when selecting a text input. When selecting a text input, the soft keyboard pops up,
-	 * changing the height of the viewport. This causes a resize event where all the elements 
-	 * with 100vh are simultaneously shrunk. The user suddenly gets sent to a previous slide and then
-	 * has to wait for it to animate back to the slide where they clicked the <input>.
-	 * 
-	 * The reason there are many event listeners is because we do not want to reset the viewport
-	 * until after the input is deselected.
-	 * 
-	 * For example:
-	 * mousedown - an input is selected
-	 * focus - update the viewport
-	 * resize - allow the window resize, but because we have updated the viewport the UX will be smooth
-	 * focusout - an input is deselected. set the state to allow the viewport to be reset
-	 * resize - reset the viewport
-	 * 
-	 * Example of user switching from one input to another:
-	 * A user currently has an input selected
-	 * mousedown - the user selects a different input. set state that this should not reset the viewport
-	 * focusout - will not set the state which will allow the viewport to be reset
-	 * focus - will do nothing because androidInputActivated is active from previous input selection
-	 * resize - will not reset the viewport, will remove the state set by mousedown
-	 * 
-	 * This issue doesn't occur in iOS because that soft keyboard doesn't change the viewport
-	 * height.
-	 */
-	androidSoftKeyboardViewportFix(){
-		const self = this
-		const metaViewport = document.querySelector('meta[name=viewport]')
-		this.setState({ 
-			androidInitialHeight: null,
-			androidInputActivated: 0,
-			androidInputClicked: 0
-		});
-
-		$( ".input" ).mousedown(function() {
-			self.setState({ 
-				androidInputClicked: 1
-			});
-		});
-
-		$( ".input" ).focusout(function() {
-			if(!self.state.androidInputClicked) {
-				self.setState({ 
-					androidInputActivated: 0
-				})
-			}
-		});
-
-		$( ".input" ).focus(function() {
-			if(self.state.androidInputActivated) return;
-			self.setState({ 
-				androidInputActivated: 1
-			})
-			self.setState({ 
-				androidInitialHeight: window.innerHeight
-			})
-			metaViewport.setAttribute('content', 'height=' + self.state.androidInitialHeight + 'px, width=device-width, initial-scale=1.0')
-		});
-
-		$(window).on('resize', function(){
-			if(!self.state.androidInputActivated) {
-				if(window.innerHeight == self.state.androidInitialHeight) {
-					metaViewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
-				}
-			}
-			self.setState({ 
-				androidInputClicked: 0
-			})
-		})
-	}
 	musicMute(evt) {
 		this.setState({ isPlaying: false });
 	}
