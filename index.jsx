@@ -196,7 +196,7 @@ class SplashPage extends React.Component {
 			self.setState({ 
 				androidInputClicked: 0
 			})
-		 })
+		})
 	}
 	musicMute(evt) {
 		this.setState({ isPlaying: false });
