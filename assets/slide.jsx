@@ -121,6 +121,14 @@ class Slide extends React.Component {
 			centerTextStyles = slideObj.centerTextStylesMobile
 		}
 
+		let centerImageStyles;
+		if(window.innerWidth > 768){
+			centerImageStyles = slideObj.centerImageStyles
+		}
+		else {
+			centerImageStyles = slideObj.centerImageStylesMobile
+		}
+
 		return (
 			
 			<div className={slideClasses} style={this.state.styles}>
@@ -142,7 +150,7 @@ class Slide extends React.Component {
 				}
 				<div className={centerTextClasses} style={centerTextStyles}>
 					{slideObj.centerImage &&
-						<img style={slideObj.centerImageStyles} src={slideObj.centerImage}/>
+						<img style={centerImageStyles} src={slideObj.centerImage}/>
 					}
 					<h1 dangerouslySetInnerHTML={{ __html: slideObj.center }} />
 					{slideObj.contactButton &&
