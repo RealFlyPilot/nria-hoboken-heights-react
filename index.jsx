@@ -28,7 +28,8 @@ class SplashPage extends React.Component {
 			},
 
 			isPlaying: false,
-			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3')
+			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3'),
+			inputFocusOutEvent: null
 		};
 		this.lastSlide = this.lastSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
@@ -105,28 +106,44 @@ class SplashPage extends React.Component {
 			}
 		});
 
-		/*
-		 * The resize event is sometimes triggered twice from a single focusOut
-		 * event from the .input element. The resizeTime should be large enough to
-		 * last long enough for the second event to occur before the timeout is cleared
-		 */
+		
+		//See handleResize() for details
+		if(this.state.operating_sys == 'android') {
+			this.timerHandle = null;
+			let self = this
+			$( ".input" ).focusout(function() {
+				self.setState({ inputFocusOutEvent: true });
+			})
+			window.addEventListener('resize', () => this.handleResize())
+		}
+	}
+
+	/*
+	 * handleResize() is used due to android soft keyboards changing the 
+	 * viewport height which causes the page to suddenly shift.
+	 * 
+	 * The resize event is sometimes triggered twice from a single focusOut
+	 * event from the .input element. The resizeTime should be large enough to
+	 * last long enough for the second event to occur before the timeout is cleared.
+	 * 
+	 * The animation stopper will run if a text input is active because it is 
+	 * is the reason a keyboard would appear
+	 * 
+	 * It will also run if a text input has recently had an event of focusout because
+	 * we dont want to have animations as the keyboard hides itself
+	 */
+
+	handleResize(){
 		const resizeTime = 1500; 
-		let resizeTimer;
-		let inputFocusOutEvent;
-		$( ".input" ).focusout(function() {
-			inputFocusOutEvent = true
-		})
-		window.addEventListener("resize", () => {
-			const inputIsActive = $(document.activeElement).attr('type') === 'text';
-			if(inputIsActive || inputFocusOutEvent) {
-				inputFocusOutEvent = false;
-				document.body.classList.add("resize-animation-stopper");
-				clearTimeout(resizeTimer);
-				resizeTimer = setTimeout(() => {
-					document.body.classList.remove("resize-animation-stopper");
-				}, resizeTime);
-			}
-		});
+		const inputIsActive = $(document.activeElement).attr('type') === 'text';
+		if(inputIsActive || this.state.inputFocusOutEvent) {
+			this.setState({ inputFocusOutEvent: false });
+			document.body.classList.add("resize-animation-stopper");
+			clearTimeout(this.timerHandle);
+			this.timerHandle = setTimeout(() => {
+				document.body.classList.remove("resize-animation-stopper");
+			}, resizeTime);
+		}
 	}
 	componentDidUpdate() {
 		const that = this;
