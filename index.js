@@ -1054,15 +1054,15 @@ class SplashPage extends React.Component {
 			}
 		});
 
-		/* 
+		/*
    * The resize event is sometimes triggered twice from a single focusOut
-   * event from the .input element. The resizeTime should be large enough to 
+   * event from the .input element. The resizeTime should be large enough to
    * last long enough for the second event to occur before the timeout is cleared
    */
 		const resizeTime = 1500;
 		let resizeTimer;
 		let inputFocusOutEvent;
-		$(".input").inputFocusOutEvent(function () {
+		$(".input").focusout(function () {
 			inputFocusOutEvent = true;
 		});
 		window.addEventListener("resize", () => {
