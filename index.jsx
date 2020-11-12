@@ -71,6 +71,12 @@ class SplashPage extends React.Component {
 		if (user_agent.indexOf('windows') != -1){
 			this.state.operating_sys = 'windows';
 		}
+		else if (user_agent.indexOf('android') != -1){
+			this.state.operating_sys = 'android';
+		}
+		else if (user_agent.indexOf('macintosh') != -1){
+			this.state.operating_sys = 'macintosh';
+		}
 		if (user_agent.indexOf('safari') != -1) {
 			if (user_agent.indexOf('chrome') > -1) {
 				browser= 'chrome';
@@ -82,6 +88,32 @@ class SplashPage extends React.Component {
 			browser ='firefox';
 		}
 		this.state.browser= browser;
+	}
+	componentDidMount() {
+		$('.how_you_heard').select2({
+			placeholder: "How did you hear of us?*",
+			width: 'resolve',
+			minimumResultsForSearch: -1
+		});
+
+		window.addEventListener('keydown', (event) => {
+			if (!event.target.classList.contains('input')) {
+				if (event.code == "ArrowUp") this.prevSlide()
+				else if (event.code == "ArrowDown") this.nextSlide()
+				else if (event.code == "ArrowLeft") this.prevSlide()
+				else if (event.code == "ArrowRight") this.nextSlide()
+			}
+		});
+	}
+	componentDidUpdate() {
+		const that = this;
+		return;
+		this.refs.inner.addEventListener('transitionend', (evt) => {
+			that.setState({
+				transitiongState: 0,
+				currIdx: (this.state.currIdx + delta)
+			});
+		}, false);
 	}
 	// debounceOnScroll() {
 	// 	//very long scrolls last 3.5 seconds, should be safe to zero out the scroll at that point
@@ -140,7 +172,7 @@ class SplashPage extends React.Component {
 	}
 	handleWheelEvent(evt) {
 		const deltaY = evt.deltaY;
-		const browserWithSingleScrollEvent = this.state.browser == 'safari' || (this.state.browser == 'firefox' && this.state.operating_sys == 'windows');
+		const browserWithSingleScrollEvent = this.state.browser == 'safari' || (this.state.browser == 'firefox' && !this.state.operating_sys == 'macintosh');
 		if(browserWithSingleScrollEvent) {
 			this.scrollSlide(deltaY)
 		}
@@ -216,32 +248,6 @@ class SplashPage extends React.Component {
 			currIdx: newIdx
 		});
 		this.addIdxToViewedSlides(newIdx);
-	}
-	componentDidMount() {
-		$('.how_you_heard').select2({
-			placeholder: "How did you hear of us?*",
-			width: 'resolve',
-			minimumResultsForSearch: -1
-		});
-
-		window.addEventListener('keydown', (event) => {
-			if (!event.target.classList.contains('input')) {
-				if (event.code == "ArrowUp") this.prevSlide()
-				else if (event.code == "ArrowDown") this.nextSlide()
-				else if (event.code == "ArrowLeft") this.prevSlide()
-				else if (event.code == "ArrowRight") this.nextSlide()
-			}
-		});
-	}
-	componentDidUpdate() {
-		const that = this;
-		return;
-		this.refs.inner.addEventListener('transitionend', (evt) => {
-			that.setState({
-				transitiongState: 0,
-				currIdx: (this.state.currIdx + delta)
-			});
-		}, false);
 	}
 
 	handleTouchStart(evt){
