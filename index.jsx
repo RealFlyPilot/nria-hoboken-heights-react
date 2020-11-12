@@ -220,8 +220,10 @@ class SplashPage extends React.Component {
 	componentDidMount() {
 		$('.how_you_heard').select2({
 			placeholder: "How did you hear of us?*",
-			width: 'resolve'
+			width: 'resolve',
+			minimumResultsForSearch: -1
 		});
+
 		window.addEventListener('keydown', (event) => {
 			if (!event.target.classList.contains('input')) {
 				if (event.code == "ArrowUp") this.prevSlide()
