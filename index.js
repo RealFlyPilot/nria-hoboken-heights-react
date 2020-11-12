@@ -1118,9 +1118,7 @@ class SplashPage extends React.Component {
 		});
 
 		$(".input").focusout(function () {
-			console.log('focusout');
 			if (!self.state.androidInputClicked) {
-				console.log('unsetinput');
 				self.setState({
 					androidInputActivated: 0
 				});
