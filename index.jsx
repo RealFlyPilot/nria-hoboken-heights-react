@@ -105,15 +105,27 @@ class SplashPage extends React.Component {
 			}
 		});
 
-		
-
+		/* 
+		 * The resize event is sometimes triggered twice from a single focusOut
+		 * event from the .input element. The resizeTime should be large enough to 
+		 * last long enough for the second event to occur before the timeout is cleared
+		 */
+		const resizeTime = 1500; 
 		let resizeTimer;
+		let inputFocusOutEvent;
+		$( ".input" ).inputFocusOutEvent(function() {
+			inputFocusOutEvent = true
+		})
 		window.addEventListener("resize", () => {
-		document.body.classList.add("resize-animation-stopper");
-		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout(() => {
-			document.body.classList.remove("resize-animation-stopper");
-		}, 400);
+			const inputIsActive = $(document.activeElement).attr('type') === 'text';
+			if(inputIsActive || inputFocusOutEvent) {
+				inputFocusOutEvent = false;
+				document.body.classList.add("resize-animation-stopper");
+				clearTimeout(resizeTimer);
+				resizeTimer = setTimeout(() => {
+					document.body.classList.remove("resize-animation-stopper");
+				}, resizeTime);
+			}
 		});
 	}
 	componentDidUpdate() {
