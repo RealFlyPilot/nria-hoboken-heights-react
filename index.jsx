@@ -248,7 +248,7 @@ class SplashPage extends React.Component {
 	}
 	handleWheelEvent(evt) {
 		const deltaY = evt.deltaY;
-		const browserWithSingleScrollEvent = this.state.browser == 'safari' || (this.state.browser == 'firefox' && !this.state.operating_sys == 'macintosh');
+		const browserWithSingleScrollEvent = this.state.browser == 'safari' || (this.state.browser == 'firefox' && this.state.operating_sys != 'macintosh');
 		if(browserWithSingleScrollEvent) {
 			this.scrollSlide(deltaY)
 		}
