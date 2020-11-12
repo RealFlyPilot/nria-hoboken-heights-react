@@ -140,7 +140,7 @@ class Slide extends React.Component {
 					<MusicPlayer currIdx={this.props.currIdx} toggleMusicPlayer={this.musicToggle}  goToNextSlide={this.scrollToNextSlide} scrollToLastSlide={this.scrollToContactForm} isPlaying={this.props.isPlaying}></MusicPlayer>
 				}
 				{slideObj.video &&
-					<video autoPlay muted loop={slideObj.videoLoop ? true : false} className={videoClasses}>
+					<video playsInline autoPlay muted loop={slideObj.videoLoop ? true : false} className={videoClasses}>
 						<source src={slideObj.video} type="video/mp4" />
 					</video>
 				}

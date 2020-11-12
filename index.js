@@ -908,7 +908,7 @@ class Slide extends React.Component {
 			React.createElement(MusicPlayer, { currIdx: this.props.currIdx, toggleMusicPlayer: this.musicToggle, goToNextSlide: this.scrollToNextSlide, scrollToLastSlide: this.scrollToContactForm, isPlaying: this.props.isPlaying }),
 			slideObj.video && React.createElement(
 				'video',
-				{ autoPlay: true, muted: true, loop: slideObj.videoLoop ? true : false, className: videoClasses },
+				{ playsInline: true, autoPlay: true, muted: true, loop: slideObj.videoLoop ? true : false, className: videoClasses },
 				React.createElement('source', { src: slideObj.video, type: 'video/mp4' })
 			),
 			slideObj.contactFormSlide && React.createElement(ContactFormSlide, { formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
