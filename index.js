@@ -911,7 +911,7 @@ class Slide extends React.Component {
 				dangerouslySetInnerHTML: {
 					__html: `
 							<video
-							class=${videoClasses}
+							class="${videoClasses}"
 							${slideObj.videoLoop ? 'loop' : ''}
 							muted
 							autoplay
