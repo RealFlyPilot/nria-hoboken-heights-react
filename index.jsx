@@ -66,11 +66,18 @@ class SplashPage extends React.Component {
 		 * sometimes every few ms, but it doesnt create nearly as many events as Chrome. A single scroll can output
 		 * dozens of deltaY events
 		 *
+		 * Opera scrolls in increments of 100. A normal scroll will execute 20-30 deltaY values of 100. 
+		 * A hard scroll executes a strange output. An example would be:
+		 * values of 100x6 200x1 100x6 300x1 100x10 all for a single scroll 
+		 * 
 		*/
 		let browser;
 		const user_agent = navigator.userAgent.toLowerCase();
 		if (user_agent.indexOf('windows') != -1){
 			this.state.operating_sys = 'windows';
+		}
+		else if(navigator.userAgent.indexOf('OPR') != -1 || navigator.userAgent.indexOf('Opera') != -1) {
+			this.state.operating_sys = 'opera';
 		}
 		else if (user_agent.indexOf('android') != -1){
 			this.state.operating_sys = 'android';
@@ -78,6 +85,7 @@ class SplashPage extends React.Component {
 		else if (user_agent.indexOf('macintosh') != -1){
 			this.state.operating_sys = 'macintosh';
 		}
+
 		if (user_agent.indexOf('safari') != -1) {
 			if (user_agent.indexOf('chrome') > -1) {
 				browser= 'chrome';
