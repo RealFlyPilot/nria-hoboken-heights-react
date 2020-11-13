@@ -1135,6 +1135,7 @@ body {
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .mobileRightArrowContainer .text {
     margin-right: 20px;
     font-size: 17px;
+    letter-spacing: 4.4px;
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .mobileRightArrowContainer .rightArrow {
     height: 17px;
