@@ -670,7 +670,7 @@ const SLIDES = [{
 	styles: {
 		background: "#000"
 	},
-	video: "/assets/videos/NIRMA_Logo_Motion.mp4",
+	video: "/assets/videos/NIRMA_Logo_Motion without audio.mp4",
 	videoMobileStartPosition: 'center',
 	isLandingPage: 1
 }, {
