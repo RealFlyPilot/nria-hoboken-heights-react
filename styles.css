@@ -1082,14 +1082,21 @@ body {
   .slides_wrapper .slides_inner .slide.backgroundFrame {
     background-size: cover;
   }
-  .slides_wrapper .slides_inner .slide.mobile-video-position-left .background-video {
-    object-position: left;
+  .slides_wrapper .slides_inner .slide.mobile-video-position-left .videoContainer {
+    transform: translateX(33%);
   }
-  .slides_wrapper .slides_inner .slide.mobile-video-position-center .background-video {
+  .slides_wrapper .slides_inner .slide.mobile-video-position-center .videoContainer {
+    transform: translateX(0%);
+  }
+  .slides_wrapper .slides_inner .slide.mobile-video-position-right .videoContainer {
+    transform: translateX(-33%);
+  }
+  .slides_wrapper .slides_inner .slide .videoContainer {
+    transition: transform 0.8s;
+  }
+  .slides_wrapper .slides_inner .slide .videoContainer .background-video {
     object-position: center;
-  }
-  .slides_wrapper .slides_inner .slide.mobile-video-position-right .background-video {
-    object-position: right;
+    width: auto;
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm {
     position: static;

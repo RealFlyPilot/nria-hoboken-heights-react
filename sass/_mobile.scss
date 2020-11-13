@@ -242,22 +242,30 @@ body {
             }
             &.mobile-video-position- {
                 &left {
-                    .background-video {
-                        object-position: left;
+                    .videoContainer {
+                        transform: translateX(33%);
                     }
                     
                 }
                 &center {
-                    .background-video {
-                        object-position: center;
+                    .videoContainer {
+                        transform: translateX(0%);
                     }
                 }
                 &right {
-                    .background-video {
-                        object-position: right;
+                    .videoContainer {
+                        transform: translateX(-33%);
                     }
                 }
             }
+            .videoContainer {
+                transition: transform 0.8s;
+                .background-video {
+                    object-position: center;
+                    width: auto;
+                }
+            }
+            
             .contactPageWrapper {
                 .contactForm {
                     position: static;
