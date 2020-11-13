@@ -906,15 +906,22 @@ class Slide extends React.Component {
 			// This music player should only appear on the second slide to create the visual effect of it sliding down and up with the second slide.
 			// The regular music player is fixed in the right top corner
 			React.createElement(MusicPlayer, { currIdx: this.props.currIdx, toggleMusicPlayer: this.musicToggle, goToNextSlide: this.scrollToNextSlide, scrollToLastSlide: this.scrollToContactForm, isPlaying: this.props.isPlaying }),
-			slideObj.video && React.createElement(
-				'div',
-				{ className: 'videoContainer' },
-				React.createElement(
-					'video',
-					{ playsInline: true, autoPlay: true, muted: true, loop: slideObj.videoLoop ? true : false, className: videoClasses },
-					React.createElement('source', { src: slideObj.video, type: 'video/mp4' })
-				)
-			),
+			slideObj.video && React.createElement('div', {
+				className: 'videoContainer',
+				dangerouslySetInnerHTML: {
+					__html: `
+							<video
+							class=${videoClasses}
+							${slideObj.videoLoop ? 'loop' : ''}
+							muted
+							autoplay
+							playsinline
+							preload="metadata"
+							>
+							<source src="${slideObj.video}" type="video/mp4" />
+							</video>`
+				}
+			}),
 			slideObj.contactFormSlide && React.createElement(ContactFormSlide, { formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
 			React.createElement(
 				'div',
