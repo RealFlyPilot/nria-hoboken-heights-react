@@ -1008,7 +1008,8 @@ class SplashPage extends React.Component {
 
 			isPlaying: false,
 			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3'),
-			inputFocusOutEvent: null
+			inputFocusOutEvent: null,
+			scrollDebouncer: null
 		};
 		this.lastSlide = this.lastSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
@@ -1156,7 +1157,24 @@ class SplashPage extends React.Component {
 			this.prevSlide();
 		}
 	}
+
+	/*
+  * enableScroll()
+  * Some browsers have the smallest deltaY above 0 at 100 and will never go to 0. This is problematic because
+  * if a single deltaY of 100 is triggered, the first scroll will run, but then after a few moments if a second
+  * deltaY of 100 is triggered, we need a way to enable the scroll feature between the two events to make sure
+  * the second event triggers a scroll.
+  * This can run on browsers that don't have this issue without complication.
+  */
+	enableScroll() {
+		this.setState({ readyForScroll: true,
+			previousScrollVal: 0 });
+	}
 	throttleOnScroll(deltaY) {
+		if (this.scrollDebouncer != null) {
+			clearTimeout(this.scrollDebouncer);
+		}
+		this.scrollDebouncer = setTimeout(this.enableScroll.bind(this), 500);
 		if (Math.abs(deltaY) >= 1 && this.state.readyForScroll) {
 			if (Math.abs(deltaY) > Math.abs(this.state.previousScrollVal)) {
 				this.scrollSlide(deltaY);
