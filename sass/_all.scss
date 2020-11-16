@@ -50,7 +50,7 @@
 
 @font-face {
     src: url("assets/fonts/Gotham-Book.otf") format("opentype");
-	font-family: 'Gotham';
+	font-family: 'Gotham-Book';
 	font-weight: 400;
 }
 
@@ -71,8 +71,12 @@
 	display: none;
 }
 body {
-	font-family: 'Gotham', sans-serif;
+	font-family: 'Gotham-Book', sans-serif;
 	font-weight: 400;
+}
+.gotham-bold {
+	font-family: "Gotham-Bold", sans-serif;
+	font-weight: 700;
 }
 .gotham-light {
 	font-family: "Gotham-Light", sans-serif;
@@ -357,8 +361,7 @@ body {
 			}
 		}
 		.form-control {
-			font-family: "Gotham-Light", sans-serif;
-			font-weight: 300;
+			@extend .gotham-light;
 			letter-spacing: 1px;
 			.label {
 				display: block;
@@ -374,8 +377,7 @@ body {
 				border: none 0 transparent;
 				width: 100%;
 				font-size: 20px;
-				font-weight: 300;
-				font-family: "Gotham-Light", sans-serif;
+				@extend .gotham-light;
 				letter-spacing: 4.4px;
 				padding: 10px;
 				&.textarea {
@@ -449,12 +451,10 @@ body {
 				line-height: 25px;
 			}
 			.phone {
-				font-weight: 700;
-				font-family: 'Gotham-Bold', sans-serif;
+				@extend .gotham-bold;
 			}
 			.copyright {
-				font-weight: 300;
-				font-family: 'Gotham-Light', sans-serif;
+				@extend .gotham-light;
 				margin-top: 1.4em;
 			}
 			.btn {
@@ -545,8 +545,7 @@ body {
 						overflow: hidden;
 					}
 					&:hover {
-						font-weight: 700;
-						font-family: 'Gotham-Bold', sans-serif;
+						@extend .gotham-bold;
 					}
 				}
 				.separator {

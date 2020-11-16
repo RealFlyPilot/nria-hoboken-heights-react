@@ -123,7 +123,7 @@ table {
 }
 @font-face {
   src: url("assets/fonts/Gotham-Book.otf") format("opentype");
-  font-family: "Gotham";
+  font-family: "Gotham-Book";
   font-weight: 400;
 }
 @font-face {
@@ -141,11 +141,16 @@ table {
 }
 
 body {
-  font-family: "Gotham", sans-serif;
+  font-family: "Gotham-Book", sans-serif;
   font-weight: 400;
 }
 
-.gotham-light {
+.gotham-bold, .musicplayer_container .musicplayer .landing_page_sound_player .settings .button:hover, .slide .privacyPolicy .contactInfo .phone {
+  font-family: "Gotham-Bold", sans-serif;
+  font-weight: 700;
+}
+
+.gotham-light, .slide .privacyPolicy .contactInfo .copyright, .slide .contactForm .form-control .input, .slide .contactForm .form-control {
   font-family: "Gotham-Light", sans-serif;
   font-weight: 300;
 }
@@ -481,8 +486,6 @@ body {
   margin-left: 32px;
 }
 .slide .contactForm .form-control {
-  font-family: "Gotham-Light", sans-serif;
-  font-weight: 300;
   letter-spacing: 1px;
 }
 .slide .contactForm .form-control .label {
@@ -499,8 +502,6 @@ body {
   border: none 0 transparent;
   width: 100%;
   font-size: 20px;
-  font-weight: 300;
-  font-family: "Gotham-Light", sans-serif;
   letter-spacing: 4.4px;
   padding: 10px;
 }
@@ -568,13 +569,7 @@ body {
   font-size: 15px;
   line-height: 25px;
 }
-.slide .privacyPolicy .contactInfo .phone {
-  font-weight: 700;
-  font-family: "Gotham-Bold", sans-serif;
-}
 .slide .privacyPolicy .contactInfo .copyright {
-  font-weight: 300;
-  font-family: "Gotham-Light", sans-serif;
   margin-top: 1.4em;
 }
 .slide .privacyPolicy .contactInfo .btn {
@@ -654,10 +649,6 @@ body {
 }
 .musicplayer_container .musicplayer .landing_page_sound_player .settings .button .text {
   overflow: hidden;
-}
-.musicplayer_container .musicplayer .landing_page_sound_player .settings .button:hover {
-  font-weight: 700;
-  font-family: "Gotham-Bold", sans-serif;
 }
 .musicplayer_container .musicplayer .landing_page_sound_player .settings .separator {
   margin: 0;
