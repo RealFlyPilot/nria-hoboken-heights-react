@@ -348,6 +348,7 @@ body {
   animation-name: fadeInDriftUp;
   animation-duration: 0.7s;
   animation-delay: 0.5s;
+  opacity: 0;
 }
 .slide.runAnimations .centerBottom > h1 + h1 {
   animation-delay: 0.7s;
@@ -360,8 +361,10 @@ body {
   animation-duration: 1.7s;
   animation-delay: 0.5s;
 }
+.slide.runAnimations .center .contactButton,
 .slide.runAnimations .center > h1 {
   animation-delay: 0.7s;
+  opacity: 0;
 }
 .slide.runAnimations .center .contactButton {
   animation-delay: 1.1s;
@@ -421,8 +424,10 @@ body {
 .slide .center {
   text-align: center;
 }
+.slide .center .contactButton,
 .slide .center > h1 {
-  opacity: 0;
+  opacity: 1;
+  transition: opacity 0.5s;
 }
 .slide .background-image {
   position: absolute;
@@ -449,7 +454,7 @@ body {
   text-align: center;
 }
 .slide .centerBottom > h1 {
-  opacity: 0;
+  opacity: 1;
 }
 .slide .contactButton {
   color: #a9a9a9;
