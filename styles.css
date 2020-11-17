@@ -619,9 +619,11 @@ body {
 }
 .musicplayer_container .corner_content .separator {
   margin: 0;
+  transition: border-left-color 1400ms;
 }
 .musicplayer_container .button {
   cursor: pointer;
+  transition: color 1400ms;
 }
 .musicplayer_container .musicplayer .landing_page_sound_player .title {
   position: relative;

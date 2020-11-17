@@ -506,10 +506,12 @@ body {
 		}
 		.separator {
 			margin: 0;
+			transition: border-left-color $slideAnimationDuration;
 		}
 	}
 	.button {
 		cursor: pointer;
+		transition: color $slideAnimationDuration;
 	}
 	
 
