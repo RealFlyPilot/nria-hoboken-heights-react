@@ -516,12 +516,15 @@ body {
 .slide .contactForm .form-control .select2-container--default .select2-selection--single {
   border: none;
   border-radius: 0;
+  height: 44px;
 }
 .slide .contactForm .form-control .select2-container--default .select2-selection--single .select2-selection__rendered {
   letter-spacing: 4.4px;
+  line-height: 44px;
 }
 .slide .contactForm .form-control .select2-container--default .select2-selection--single .select2-selection__arrow b {
   border-color: #000 transparent transparent transparent;
+  border-width: 13px 7px 0 7px;
 }
 .slide .contactForm .form-control .how_you_heard {
   width: 100%;
@@ -832,6 +835,10 @@ body {
     display: none !important;
   }
 
+  .slide .contactPageWrapper .contactForm .form-control .select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 5px;
+    right: 18px;
+  }
   .slide .contactPageWrapper .contactForm .form-control .input::-webkit-input-placeholder {
     /* WebKit browsers */
     color: transparent;

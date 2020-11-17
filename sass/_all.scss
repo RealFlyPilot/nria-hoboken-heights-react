@@ -388,14 +388,20 @@ body {
 				}
 			}
 			.select2-container--default {
+				$select2_height: 44px;
 				.select2-selection--single {
 					border: none;
 					border-radius: 0;
+					height: $select2_height;
 					.select2-selection__rendered {
 						letter-spacing: 4.4px;
+						line-height: $select2_height;
 					}
-					.select2-selection__arrow b {
-						border-color: #000 transparent transparent transparent;
+					.select2-selection__arrow {
+						b {
+							border-color: #000 transparent transparent transparent;
+							border-width: 13px 7px 0 7px;
+						}
 					}
 				}
 			}
