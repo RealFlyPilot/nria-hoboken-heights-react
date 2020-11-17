@@ -221,7 +221,7 @@ class ContactForm extends React.Component {
 						{ className: 'text' },
 						'SEND'
 					),
-					React.createElement('img', { className: 'rightArrow mobile-only', src: '/assets/images/mobileSubmitArrow.svg' })
+					React.createElement('img', { className: 'rightArrow', src: '/assets/images/mobileSubmitArrow.svg' })
 				)
 			)
 		);

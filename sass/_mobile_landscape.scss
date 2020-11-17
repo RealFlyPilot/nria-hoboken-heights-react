@@ -1,0 +1,28 @@
+.formSubmitted .submittedFormOverlay {
+    display: flex !important;
+}
+.slides_wrapper .slides_inner .slide {
+    &.mobile-video-position-{
+        &left,
+        &center,
+        &right {
+            .videoContainer {
+                transform: translateX(0%);
+            }
+        }
+    }
+    .mobilePrivacyPolicy.mobile-only {
+        display: block !important;
+    }
+    .privacyPolicy.not-mobile {
+        display: none;
+    }
+    .contactForm .rightArrowContainer {
+        .rightArrow.not-mobile {
+            display: none;
+        }
+        .mobileRightArrowContainer.mobile-only {
+            display: flex !important;
+        }
+    }
+}

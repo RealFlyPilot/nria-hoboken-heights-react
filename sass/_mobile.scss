@@ -39,9 +39,7 @@
 body {
     overflow: hidden;//this is used only to prevent pull-to-refresh which can be triggered anytime the user tries to scroll up on a touch device
 }
-.not-mobile {
-	display: none !important;
-}
+
 .formSubmitted {
     .submittedFormOverlay.mobile-only {
         position: fixed;

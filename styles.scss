@@ -12,8 +12,20 @@
 }
 
 @media screen and (max-width: 768px) {
+	.not-mobile {
+		display: none !important;
+	}
+}
+
+@media screen and (max-width: 768px),
+	screen and (max-width: 896px) and (orientation: landscape) {
 	@import 'sass/_mobile';
 }
+
+@media screen and (max-width: 896px) and (orientation: landscape) {//For large landscape phones eg. iPhone 11
+	@import 'sass/_mobile_landscape';
+}
+
 
 
 
