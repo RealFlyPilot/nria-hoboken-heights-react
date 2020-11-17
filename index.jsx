@@ -157,12 +157,12 @@ class SplashPage extends React.Component {
 	componentDidUpdate() {
 		const that = this;
 		return;
-		this.refs.inner.addEventListener('transitionend', (evt) => {
-			that.setState({
-				transitiongState: 0,
-				currIdx: (this.state.currIdx + delta)
-			});
-		}, false);
+		// this.refs.inner.addEventListener('transitionend', (evt) => {
+		// 	that.setState({
+		// 		transitiongState: 0,
+		// 		currIdx: (this.state.currIdx + delta)
+		// 	});
+		// }, false);
 	}
 	// debounceOnScroll() {
 	// 	//very long scrolls last 3.5 seconds, should be safe to zero out the scroll at that point
@@ -204,7 +204,6 @@ class SplashPage extends React.Component {
 	throttleOnScroll(deltaY) {
 		if(this.scrollDebouncer != null) {
 			clearTimeout(this.scrollDebouncer)
-
 		}
 		this.scrollDebouncer=setTimeout(this.enableScroll.bind(this),500);
 		if (Math.abs(deltaY) >= 1 && this.state.readyForScroll) {
@@ -230,30 +229,31 @@ class SplashPage extends React.Component {
 		// this.throttleOnScroll(deltaY);
 		// this.debounceOnScroll(deltaY);
 		return;
-		const isScrollingDown = deltaY > 0;
-		if (isScrollingDown) {
-			this.nextSlide();
-		} else {
-			this.prevSlide();
-		}
+		// const isScrollingDown = deltaY > 0;
+		// if (isScrollingDown) {
+		// 	this.nextSlide();
+		// } else {
+		// 	this.prevSlide();
+		// }
 	}
 	handleWheelEvent(evt) {
 		const deltaY = evt.deltaY;
-		const browserWithSingleScrollEvent = this.state.browser == 'safari' || (this.state.browser == 'firefox' && this.state.operating_sys != 'macintosh');
-		if(browserWithSingleScrollEvent) {
-			this.scrollSlide(deltaY)
-		}
-		else {
-			this.throttleOnScroll(deltaY);
-		}
+		// const browserWithSingleScrollEvent = this.state.browser == 'safari' || (this.state.browser == 'firefox' && this.state.operating_sys != 'macintosh');
+		// if(browserWithSingleScrollEvent) {
+		// 	this.scrollSlide(deltaY)
+		// }
+		// else {
+		// 	this.throttleOnScroll(deltaY);
+		// }
+		this.throttleOnScroll(deltaY);
 		// this.debounceOnScroll(deltaY);
 		return;
-		const isScrollingDown = deltaY > 0;
-		if (isScrollingDown) {
-			this.nextSlide();
-		} else {
-			this.prevSlide();
-		}
+		// const isScrollingDown = deltaY > 0;
+		// if (isScrollingDown) {
+		// 	this.nextSlide();
+		// } else {
+		// 	this.prevSlide();
+		// }
 	}
 	watchForEventEnd() {
 		this.setState({transitiongState: 0});
