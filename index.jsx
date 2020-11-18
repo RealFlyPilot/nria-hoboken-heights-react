@@ -198,8 +198,11 @@ class SplashPage extends React.Component {
 	 * This can run on browsers that don't have this issue without complication.
 	 */
 	enableScroll(){
-		this.setState({readyForScroll: true,
-		previousScrollVal: 0});
+		this.setState({
+			readyForScroll: true,
+			previousScrollVal: 0
+		});
+		this.scrollDebouncer = null
 	}
 	throttleOnScroll(deltaY) {
 		if(this.scrollDebouncer != null) {
