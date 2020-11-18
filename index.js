@@ -709,8 +709,15 @@ const SLIDES = [{
 	slideClasses: "backgroundFrame",
 	styles: {
 		fontSize: '15px',
-		lineHeight: '21px'
+		lineHeight: '21px',
+		overflow: "scroll"
 	},
+	stylesMobile: {
+		paddingTop: '63px',
+		paddingBottom: '63px',
+		alignItems: "flex-start"
+	},
+	enableScrolling: true,
 	centerImage: "/assets/images/NIRMA_Logo_White.png",
 	centerImageStyles: {
 		width: "272px",
@@ -764,12 +771,15 @@ const SLIDES = [{
 	// addCornerLogo: true,
 	addDarkCornerLogo: true,
 	// animateCornerLogoOnStart: true,
-	contactFormSlide: true
+	contactFormSlide: true,
+	enableScrolling: true
 }];
 
 module.exports = SLIDES;
 
 },{}],9:[function(require,module,exports){
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 const ContactFormSlide = require('./contactformslide.jsx');
 const Header = require('./header.jsx');
 const LandingPageMusicPlayer = require('./landingpagemusicplayer.jsx');
@@ -850,6 +860,7 @@ class Slide extends React.Component {
 		this.playSoundEffect();
 
 		const slideObj = this.props.obj;
+
 		let slideClasses = "slide bg000";
 		let videoClasses = 'background-video';
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
@@ -885,12 +896,17 @@ class Slide extends React.Component {
 		}
 
 		let centerTextStyles;
+		let slideStyles;
 		if (window.innerWidth > 768) {
 			centerTextStyles = slideObj.centerTextStyles;
+			slideStyles = this.state.styles;
 		} else {
 			centerTextStyles = slideObj.centerTextStylesMobile;
+			slideStyles = _extends({}, this.state.styles, slideObj.stylesMobile);
 		}
 
+		console.log(this.state.styles);
+		console.log(slideObj.stylesMobile);
 		let centerImageStyles;
 		if (window.innerWidth > 768) {
 			centerImageStyles = slideObj.centerImageStyles;
@@ -900,13 +916,15 @@ class Slide extends React.Component {
 
 		return React.createElement(
 			'div',
-			{ className: slideClasses, style: this.state.styles },
+			{ className: slideClasses, style: slideStyles },
 			React.createElement(Header, { options: headerOptions }),
 			slideObj.phantomMusicPlayer &&
 			// This music player should only appear on the second slide to create the visual effect of it sliding down and up with the second slide.
 			// The regular music player is fixed in the right top corner
 			React.createElement(MusicPlayer, { currIdx: this.props.currIdx, toggleMusicPlayer: this.musicToggle, goToNextSlide: this.scrollToNextSlide, scrollToLastSlide: this.scrollToContactForm, isPlaying: this.props.isPlaying }),
-			slideObj.video && React.createElement('div', {
+			slideObj.video &&
+			//Video is set this way because react does not set muted to true which is required by some devices to allow autoplay
+			React.createElement('div', {
 				className: 'videoContainer',
 				dangerouslySetInnerHTML: {
 					__html: `
@@ -1240,6 +1258,13 @@ class SplashPage extends React.Component {
 	nextSlide() {
 		if (this.isTransitioning()) {
 			return;
+		}
+
+		if (this.state.slides[this.state.currIdx].enableScrolling) {
+			const scrollBottom = document.querySelector('.activeSlide').scrollHeight - document.querySelector('.activeSlide').offsetHeight - document.querySelector('.activeSlide').scrollTop;
+			if (scrollBottom != 0) {
+				return;
+			}
 		}
 		const newIdx = this.state.currIdx + 1;
 		if (newIdx >= SLIDES.length) {

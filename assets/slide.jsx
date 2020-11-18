@@ -79,6 +79,7 @@ class Slide extends React.Component {
 		this.playSoundEffect();
 
 		const slideObj = this.props.obj;
+
 		let slideClasses = "slide bg000"
 		let videoClasses = 'background-video'
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
@@ -114,13 +115,18 @@ class Slide extends React.Component {
 		}
 		
 		let centerTextStyles;
+		let slideStyles;
 		if(window.innerWidth > 768){
 			centerTextStyles = slideObj.centerTextStyles
+			slideStyles = this.state.styles
 		}
 		else {
 			centerTextStyles = slideObj.centerTextStylesMobile
+			slideStyles = {...this.state.styles, ...slideObj.stylesMobile}
 		}
 
+		console.log(this.state.styles)
+		console.log(slideObj.stylesMobile)
 		let centerImageStyles;
 		if(window.innerWidth > 768){
 			centerImageStyles = slideObj.centerImageStyles
@@ -131,7 +137,7 @@ class Slide extends React.Component {
 
 		return (
 			
-			<div className={slideClasses} style={this.state.styles}>
+			<div className={slideClasses} style={slideStyles}>
 				<Header options={headerOptions} />
 				
 				{slideObj.phantomMusicPlayer &&
@@ -140,6 +146,7 @@ class Slide extends React.Component {
 					<MusicPlayer currIdx={this.props.currIdx} toggleMusicPlayer={this.musicToggle}  goToNextSlide={this.scrollToNextSlide} scrollToLastSlide={this.scrollToContactForm} isPlaying={this.props.isPlaying}></MusicPlayer>
 				}
 				{slideObj.video &&
+							//Video is set this way because react does not set muted to true which is required by some devices to allow autoplay
 						<div
 						className="videoContainer"
 						dangerouslySetInnerHTML={{

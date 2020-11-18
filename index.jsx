@@ -274,6 +274,13 @@ class SplashPage extends React.Component {
 		if (this.isTransitioning()) {
 			return;
 		}
+		
+		if(this.state.slides[this.state.currIdx].enableScrolling) {
+			const scrollBottom = document.querySelector('.activeSlide').scrollHeight - document.querySelector('.activeSlide').offsetHeight - document.querySelector('.activeSlide').scrollTop;
+			if(scrollBottom != 0) {
+				return;
+			}
+		}
 		const newIdx = this.state.currIdx + 1;
 		if (newIdx >= SLIDES.length) {
 			return;

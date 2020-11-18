@@ -41,8 +41,15 @@ const SLIDES = [{
 	slideClasses: "backgroundFrame",
 	styles: {
 		fontSize: '15px',
-		lineHeight: '21px'
+		lineHeight: '21px',
+		overflow: "scroll"
 	},
+	stylesMobile: {
+		paddingTop: '63px',
+		paddingBottom: '63px',
+		alignItems: "flex-start"
+	},
+	enableScrolling: true,
 	centerImage: "/assets/images/NIRMA_Logo_White.png",
 	centerImageStyles: {
 		width: "272px",
@@ -96,7 +103,8 @@ const SLIDES = [{
 	// addCornerLogo: true,
 	addDarkCornerLogo: true,
 	// animateCornerLogoOnStart: true,
-	contactFormSlide: true
+	contactFormSlide: true,
+	enableScrolling: true,
 }];
 
 module.exports = SLIDES;
