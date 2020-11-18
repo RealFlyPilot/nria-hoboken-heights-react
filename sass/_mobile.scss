@@ -157,11 +157,11 @@ body {
         transition: transform 0.5s linear $slideAnimationDuration;
         padding: 30px 15px 15px 15px;
         pointer-events: all;//because .mobileMenu has none
-        &.darkMode {
-            .line {
-                border-top-color: #000;
-            }
-        }
+        // &.darkMode {
+        //     .line {
+        //         border-top-color: #000;
+        //     }
+        // }
         .line {
             border-top: solid 4px #fff;
             width: 33px;

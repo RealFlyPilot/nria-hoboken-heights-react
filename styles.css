@@ -1007,9 +1007,6 @@ body {
     padding: 30px 15px 15px 15px;
     pointer-events: all;
   }
-  .mobileMenu .hamburger.darkMode .line {
-    border-top-color: #000;
-  }
   .mobileMenu .hamburger .line {
     border-top: solid 4px #fff;
     width: 33px;
