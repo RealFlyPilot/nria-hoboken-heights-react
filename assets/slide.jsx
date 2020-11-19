@@ -125,8 +125,6 @@ class Slide extends React.Component {
 			slideStyles = {...this.state.styles, ...slideObj.stylesMobile}
 		}
 
-		console.log(this.state.styles)
-		console.log(slideObj.stylesMobile)
 		let centerImageStyles;
 		if(window.innerWidth > 768){
 			centerImageStyles = slideObj.centerImageStyles
