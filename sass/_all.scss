@@ -531,6 +531,9 @@ body {
 		align-items: center;
 		.slideInAnimationElement {
 			width: $cornerMusicPlayerChildElementWidth;
+			&:hover {
+				font-weight: 700;
+			}
 		}
 		.separator {
 			margin: 0;

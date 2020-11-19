@@ -641,6 +641,9 @@ body {
 .musicplayer_container .corner_content .slideInAnimationElement {
   width: 140px;
 }
+.musicplayer_container .corner_content .slideInAnimationElement:hover {
+  font-weight: 700;
+}
 .musicplayer_container .corner_content .separator {
   margin: 0;
   transition: border-left-color 1400ms;
