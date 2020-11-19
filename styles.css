@@ -127,6 +127,11 @@ table {
   font-weight: 400;
 }
 @font-face {
+  src: url("assets/fonts/Gotham-Medium.otf") format("truetype");
+  font-family: "Gotham-Medium";
+  font-weight: 500;
+}
+@font-face {
   src: url("assets/fonts/Gotham-Bold.otf");
   font-family: "Gotham-Bold" format("opentype");
   font-weight: 700;
@@ -148,6 +153,11 @@ body {
 .gotham-bold, .musicplayer_container .musicplayer .landing_page_sound_player .settings .button:hover, .slide .privacyPolicy .contactInfo .phone {
   font-family: "Gotham-Bold", sans-serif;
   font-weight: 700;
+}
+
+.gotham-medium {
+  font-family: "Gotham-Medium", sans-serif;
+  font-weight: 500;
 }
 
 .gotham-light, .slide .privacyPolicy .contactInfo .copyright, .slide .contactForm .form-control .input, .slide .contactForm .form-control {

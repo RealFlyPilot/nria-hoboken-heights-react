@@ -218,7 +218,7 @@ class ContactForm extends React.Component {
 					{ className: 'mobileRightArrowContainer mobile-only', onClick: this.handleSubmit },
 					React.createElement(
 						'div',
-						{ className: 'text' },
+						{ className: 'text gotham-medium' },
 						'SEND'
 					),
 					React.createElement('img', { className: 'rightArrow', src: '/assets/images/mobileSubmitArrow.svg' })

@@ -143,7 +143,7 @@ class ContactForm extends React.Component {
 					<img className='rightArrow not-mobile' src='/assets/images/rightarrow.svg' onClick={this.handleSubmit} />
 					<img className='logo mobile-only' src='/assets/images/NRIA_Logo--White.png' />
 					<div className="mobileRightArrowContainer mobile-only" onClick={this.handleSubmit}>
-						<div className="text">SEND</div>
+						<div className="text gotham-medium">SEND</div>
 						<img className='rightArrow' src='/assets/images/mobileSubmitArrow.svg' />
 					</div>
 					
