@@ -277,7 +277,7 @@ class SplashPage extends React.Component {
 		
 		if(this.state.slides[this.state.currIdx].enableScrolling) {
 			const scrollBottom = document.querySelector('.activeSlide').scrollHeight - document.querySelector('.activeSlide').offsetHeight - document.querySelector('.activeSlide').scrollTop;
-			if(scrollBottom != 0) {
+			if(scrollBottom > 0) {//scrollBottom can be negative
 				return;
 			}
 		}
