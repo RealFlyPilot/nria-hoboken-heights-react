@@ -435,7 +435,7 @@ body {
   background-image: url(/assets/images/hobokenh1.jpg);
   background-color: #FFF;
   background-position: top;
-  background-size: calc(100% - 90px) calc(100% - 45px);
+  background-size: 100% 100%;
 }
 .slide .center {
   text-align: center;
