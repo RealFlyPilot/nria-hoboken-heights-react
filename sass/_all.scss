@@ -486,6 +486,11 @@ body {
 			.btn {
 				border: solid 1px #000;
 				margin-top: 46px;
+				transition: all 0.25s;
+				&:hover {
+					background-color: #000;
+					color: #fff;
+				}
 			}
 		}
 	}

@@ -599,6 +599,11 @@ body {
 .slide .privacyPolicy .contactInfo .btn {
   border: solid 1px #000;
   margin-top: 46px;
+  transition: all 0.25s;
+}
+.slide .privacyPolicy .contactInfo .btn:hover {
+  background-color: #000;
+  color: #fff;
 }
 
 .musicplayer_container {
