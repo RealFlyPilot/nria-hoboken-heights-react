@@ -11,6 +11,12 @@
             }
         }
     }
+    .centerBottom.mobile-only {
+        display: none;
+    }
+    .centerBottom.not-mobile {
+        display: block !important;
+    }
     .mobilePrivacyPolicy.mobile-only {
         display: block !important;
     }
@@ -25,4 +31,6 @@
             display: flex !important;
         }
     }
+
+
 }
