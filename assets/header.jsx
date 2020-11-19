@@ -3,6 +3,11 @@ const modules = require('./modules.jsx');
 class Header extends React.Component {
 	constructor(props) {
 		super(props);
+
+	}
+	firstSlide(){
+		const {scrollToFirstSlide} = this.props;
+		scrollToFirstSlide();
 	}
 	render() {
 		const slideHeaderState = this.props.options;
@@ -33,7 +38,7 @@ class Header extends React.Component {
 			cornerLogoWrapperClasses += ' cornerLogofadeIn';
 		}
 		return (
-			<div className={cornerLogoWrapperClasses}>
+			<div className={cornerLogoWrapperClasses} onClick={this.firstSlide.bind(this)}>
 				<div className='text'>
 					{modules.explodeString('HOBOKEN HEIGHTS')}
 					<div className='cascading-animation separator' />

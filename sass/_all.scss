@@ -106,6 +106,7 @@ body {
 		transition-property: transform;
 		transition-duration: $slideAnimationDuration;
 		transition-timing-function: cubic-bezier(0.29, 0.79, 0.35, 0.99);
+		
 		&.slide_idx_4 {
 			.cornerLogoHideOnLastSlide {
 				opacity: 0;
@@ -600,7 +601,7 @@ body {
 	z-index: 12;
 	height: 60px;
 	width: 250px;
-	cursor: default;
+	cursor: pointer;
 
 	&.fixed {
 		z-index: 0;

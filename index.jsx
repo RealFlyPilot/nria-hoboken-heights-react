@@ -32,6 +32,7 @@ class SplashPage extends React.Component {
 			inputFocusOutEvent: null,
 			scrollDebouncer: null
 		};
+		this.firstSlide = this.firstSlide.bind(this);
 		this.lastSlide = this.lastSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
 		this.handleTouchStart = this.handleTouchStart.bind(this);
@@ -310,6 +311,19 @@ class SplashPage extends React.Component {
 		});
 		this.addIdxToViewedSlides(newIdx);
 	}
+	firstSlide() {
+		const newIdx = 0;
+		const alreadyOnFirstSlide = this.state.currIdx == newIdx;
+
+		if (this.isTransitioning() || alreadyOnFirstSlide) {
+			return;
+		}
+		this.setState({
+			transitiongState: 1,
+			currIdx: newIdx
+		});
+		this.addIdxToViewedSlides(newIdx);
+	}
 	lastSlide() {
 		const newIdx = this.state.slides.length - 1;
 		const alreadyOnLastSlide = this.state.currIdx == newIdx;
@@ -426,7 +440,7 @@ class SplashPage extends React.Component {
 		}
 
 		const $slides = this.state.slides.map((slide, idx) =>
-			<Slide formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
+			<Slide scrollToFirstSlide={this.firstSlide} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
 		);
 		const innerStyle = {
 			transform: 'translateY(-' + (this.state.currIdx * 100) + 'vh)'
@@ -462,7 +476,7 @@ class SplashPage extends React.Component {
 					</div>
 				</div>
 				<div className="slides_wrapper" onTouchStart={this.handleTouchStart.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchEnd={this.handleTouchEnd.bind(this)} onWheel={this.handleWheelEvent.bind(this)} onScroll={this.handleScrollEvent.bind(this)}>
-					<Header options={headerOptions} />
+					<Header options={headerOptions} scrollToFirstSlide={this.firstSlide}/>
 					<div
 						ref="inner"
 						className={slides_inner_classes}

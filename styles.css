@@ -698,7 +698,7 @@ body {
   z-index: 12;
   height: 60px;
   width: 250px;
-  cursor: default;
+  cursor: pointer;
 }
 .corner-logo-wrapper.fixed {
   z-index: 0;

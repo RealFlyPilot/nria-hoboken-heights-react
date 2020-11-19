@@ -42,6 +42,10 @@ class Slide extends React.Component {
 		const {scrollToLastSlide} = this.props;
 		scrollToLastSlide();
 	}
+	scrollToTop() {
+		const {scrollToFirstSlide} = this.props;
+		scrollToFirstSlide();
+	}
 
 	scrollToNextSlide() {
 		const {goToNextSlide} = this.props;
@@ -100,6 +104,7 @@ class Slide extends React.Component {
 		if(this.props.slideViewed) slideClasses += " runAnimationOnce";
 		if(slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect'
 		slideClasses += slideObj.videoMobileStartPosition ? ' mobile-video-position-' + slideObj.videoMobileStartPosition : ' mobile-video-position-left'
+		slideClasses += slideObj.contactFormSlide ? ' contactFormSlide' : '';
 		
 		// if(!this.state.landingPageAnimationFinished) {
 		// 	landing_page_sound_player_classes += " animationHasNotRun";
@@ -136,7 +141,7 @@ class Slide extends React.Component {
 		return (
 			
 			<div className={slideClasses} style={slideStyles}>
-				<Header options={headerOptions} />
+				<Header options={headerOptions} scrollToFirstSlide={this.scrollToTop.bind(this)} />
 				
 				{slideObj.phantomMusicPlayer &&
 					// This music player should only appear on the second slide to create the visual effect of it sliding down and up with the second slide.

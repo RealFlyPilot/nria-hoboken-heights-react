@@ -363,6 +363,10 @@ class Header extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+	firstSlide() {
+		const { scrollToFirstSlide } = this.props;
+		scrollToFirstSlide();
+	}
 	render() {
 		const slideHeaderState = this.props.options;
 		const fixedHeader = slideHeaderState.fixedHeader;
@@ -393,7 +397,7 @@ class Header extends React.Component {
 		}
 		return React.createElement(
 			'div',
-			{ className: cornerLogoWrapperClasses },
+			{ className: cornerLogoWrapperClasses, onClick: this.firstSlide.bind(this) },
 			React.createElement(
 				'div',
 				{ className: 'text' },
@@ -824,6 +828,10 @@ class Slide extends React.Component {
 		const { scrollToLastSlide } = this.props;
 		scrollToLastSlide();
 	}
+	scrollToTop() {
+		const { scrollToFirstSlide } = this.props;
+		scrollToFirstSlide();
+	}
 
 	scrollToNextSlide() {
 		const { goToNextSlide } = this.props;
@@ -881,6 +889,7 @@ class Slide extends React.Component {
 		if (this.props.slideViewed) slideClasses += " runAnimationOnce";
 		if (slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect';
 		slideClasses += slideObj.videoMobileStartPosition ? ' mobile-video-position-' + slideObj.videoMobileStartPosition : ' mobile-video-position-left';
+		slideClasses += slideObj.contactFormSlide ? ' contactFormSlide' : '';
 
 		// if(!this.state.landingPageAnimationFinished) {
 		// 	landing_page_sound_player_classes += " animationHasNotRun";
@@ -915,7 +924,7 @@ class Slide extends React.Component {
 		return React.createElement(
 			'div',
 			{ className: slideClasses, style: slideStyles },
-			React.createElement(Header, { options: headerOptions }),
+			React.createElement(Header, { options: headerOptions, scrollToFirstSlide: this.scrollToTop.bind(this) }),
 			slideObj.phantomMusicPlayer &&
 			// This music player should only appear on the second slide to create the visual effect of it sliding down and up with the second slide.
 			// The regular music player is fixed in the right top corner
@@ -1027,6 +1036,7 @@ class SplashPage extends React.Component {
 			inputFocusOutEvent: null,
 			scrollDebouncer: null
 		};
+		this.firstSlide = this.firstSlide.bind(this);
 		this.lastSlide = this.lastSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
 		this.handleTouchStart = this.handleTouchStart.bind(this);
@@ -1294,6 +1304,19 @@ class SplashPage extends React.Component {
 		});
 		this.addIdxToViewedSlides(newIdx);
 	}
+	firstSlide() {
+		const newIdx = 0;
+		const alreadyOnFirstSlide = this.state.currIdx == newIdx;
+
+		if (this.isTransitioning() || alreadyOnFirstSlide) {
+			return;
+		}
+		this.setState({
+			transitiongState: 1,
+			currIdx: newIdx
+		});
+		this.addIdxToViewedSlides(newIdx);
+	}
 	lastSlide() {
 		const newIdx = this.state.slides.length - 1;
 		const alreadyOnLastSlide = this.state.currIdx == newIdx;
@@ -1398,7 +1421,7 @@ class SplashPage extends React.Component {
 			this.state.audioPlayer.pause();
 		}
 
-		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this), currIdx: this.state.currIdx, playMusic: this.musicPlay, stopMusic: this.musicMute, slideViewed: this.state.slidesViewed.includes(idx), goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx, isPlaying: this.state.isPlaying }));
+		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { scrollToFirstSlide: this.firstSlide, formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this), currIdx: this.state.currIdx, playMusic: this.musicPlay, stopMusic: this.musicMute, slideViewed: this.state.slidesViewed.includes(idx), goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx, isPlaying: this.state.isPlaying }));
 		const innerStyle = {
 			transform: 'translateY(-' + this.state.currIdx * 100 + 'vh)'
 		};
@@ -1443,7 +1466,7 @@ class SplashPage extends React.Component {
 			React.createElement(
 				'div',
 				{ className: 'slides_wrapper', onTouchStart: this.handleTouchStart.bind(this), onTouchMove: this.handleTouchMove.bind(this), onTouchEnd: this.handleTouchEnd.bind(this), onWheel: this.handleWheelEvent.bind(this), onScroll: this.handleScrollEvent.bind(this) },
-				React.createElement(Header, { options: headerOptions }),
+				React.createElement(Header, { options: headerOptions, scrollToFirstSlide: this.firstSlide }),
 				React.createElement(
 					'div',
 					{
