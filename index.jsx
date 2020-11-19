@@ -32,6 +32,7 @@ class SplashPage extends React.Component {
 			inputFocusOutEvent: null,
 			scrollDebouncer: null
 		};
+		this.watchForEventEnd = this.watchForEventEnd.bind(this);
 		this.firstSlide = this.firstSlide.bind(this);
 		this.lastSlide = this.lastSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
@@ -259,7 +260,12 @@ class SplashPage extends React.Component {
 		// 	this.prevSlide();
 		// }
 	}
-	watchForEventEnd() {
+	watchForEventEnd(e) {
+		//The onTransitionEnd event triggers many properties and not only for .slides_inner . We only want to run this function for the transform property
+		const isSlidesInner = e.target.classList.contains('slides_inner');
+		if(!isSlidesInner) return;
+		// const transitionProperty = e.propertyName
+		// if(transitionProperty != 'transform') return;
 		this.setState({transitiongState: 0});
 	}
 	isTransitioning() {
@@ -432,7 +438,7 @@ class SplashPage extends React.Component {
 	}
 
 
-	render() {		
+	render() {
 		if(this.state.isPlaying) {
 			this.state.audioPlayer.play();
 		} else {
@@ -481,7 +487,7 @@ class SplashPage extends React.Component {
 						ref="inner"
 						className={slides_inner_classes}
 						style={innerStyle}
-						onTransitionEnd={this.watchForEventEnd.bind(this)}>
+						onTransitionEnd={e => this.watchForEventEnd(e)}>
 						{$slides}
 					</div>
 					<MusicPlayer toggleMusicPlayer={this.musicToggle} soundEffect={thisSlideSoundEffect} darkMode={darkCornerLogo} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0} currIdx={this.state.currIdx} isPlaying={this.state.isPlaying}></MusicPlayer>
