@@ -150,7 +150,7 @@ body {
   font-weight: 400;
 }
 
-.gotham-bold, .musicplayer_container .musicplayer .landing_page_sound_player .settings .button:hover, .slide .privacyPolicy .contactInfo .phone {
+.gotham-bold, .slide .privacyPolicy .contactInfo .phone {
   font-family: "Gotham-Bold", sans-serif;
   font-weight: 700;
 }
@@ -675,6 +675,9 @@ body {
 }
 .musicplayer_container .musicplayer .landing_page_sound_player .settings .button .text {
   overflow: hidden;
+}
+.musicplayer_container .musicplayer .landing_page_sound_player .settings .button:hover {
+  font-weight: 700;
 }
 .musicplayer_container .musicplayer .landing_page_sound_player .settings .separator {
   margin: 0;

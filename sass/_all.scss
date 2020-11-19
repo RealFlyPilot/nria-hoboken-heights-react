@@ -572,7 +572,7 @@ body {
 						overflow: hidden;
 					}
 					&:hover {
-						@extend .gotham-bold;
+						font-weight: 700;
 					}
 				}
 				.separator {
