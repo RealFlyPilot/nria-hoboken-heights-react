@@ -891,7 +891,7 @@ body {
     display: none !important;
   }
 }
-@media screen and (max-width: 768px), screen and (max-height: 768px) and (orientation: landscape) {
+@media screen and (max-width: 768px), screen and (max-height: 400px) and (orientation: landscape) {
   @keyframes rightbounce {
     0% {
       transform: translateX(0);
@@ -1067,24 +1067,24 @@ body {
     line-height: 1.4em;
   }
 }
-@media screen and (max-width: 768px) and (max-width: 398px), screen and (max-height: 768px) and (orientation: landscape) and (max-width: 398px) {
+@media screen and (max-width: 768px) and (max-width: 398px), screen and (max-height: 400px) and (orientation: landscape) and (max-width: 398px) {
   .mobileMenu .expandedMobileMenu .menuItemsContainer .text {
     width: min-content;
   }
 }
-@media screen and (max-width: 768px), screen and (max-height: 768px) and (orientation: landscape) {
+@media screen and (max-width: 768px), screen and (max-height: 400px) and (orientation: landscape) {
   .mobileMenu .expandedMobileMenu .menuItemsContainer .separator {
     height: 33px;
     margin: 0 5px;
   }
 }
-@media screen and (max-width: 768px), screen and (max-height: 768px) and (orientation: landscape) {
+@media screen and (max-width: 768px), screen and (max-height: 400px) and (orientation: landscape) {
   .mobileMenu .expandedMobileMenu .menuItemsContainer .logo > img {
     height: 35px;
     margin: 0 5px;
   }
 }
-@media screen and (max-width: 768px), screen and (max-height: 768px) and (orientation: landscape) {
+@media screen and (max-width: 768px), screen and (max-height: 400px) and (orientation: landscape) {
   .mobileMenu .expandedMobileMenu .menuItemsContainer .sound > img,
 .mobileMenu .expandedMobileMenu .menuItemsContainer .contact > img,
 .mobileMenu .expandedMobileMenu .menuItemsContainer .close_btn > img {
@@ -1092,12 +1092,12 @@ body {
     margin-left: 5px;
   }
 }
-@media screen and (max-width: 768px), screen and (max-height: 768px) and (orientation: landscape) {
+@media screen and (max-width: 768px), screen and (max-height: 400px) and (orientation: landscape) {
   .corner_content_wrapper {
     display: none;
   }
 }
-@media screen and (max-width: 768px), screen and (max-height: 768px) and (orientation: landscape) {
+@media screen and (max-width: 768px), screen and (max-height: 400px) and (orientation: landscape) {
   .musicplayer_container .musicplayer .landing_page_sound_player {
     font-size: 12px;
   }
@@ -1105,7 +1105,7 @@ body {
     margin-top: 10px;
   }
 }
-@media screen and (max-width: 768px), screen and (max-height: 768px) and (orientation: landscape) {
+@media screen and (max-width: 768px), screen and (max-height: 400px) and (orientation: landscape) {
   .slides_wrapper .corner-logo-wrapper {
     display: none;
   }
@@ -1240,7 +1240,7 @@ body {
     text-align: justify;
   }
 }
-@media screen and (max-height: 768px) and (orientation: landscape) {
+@media screen and (max-height: 400px) and (orientation: landscape) {
   .formSubmitted .submittedFormOverlay {
     display: flex !important;
   }
