@@ -362,6 +362,7 @@ class SplashPage extends React.Component {
 	}
 	handleTouchMove(evt){
 		if(this.state.touchState != 1) return;
+		evt.preventDefault()
 		const coordinateX = evt.touches[0].clientX;
 		const coordinateY = evt.touches[0].clientY;
 		const horizontalDirection = this.state.touchStartCoordinate.x > coordinateX ? 'right' : 'left';
@@ -401,11 +402,14 @@ class SplashPage extends React.Component {
 				this.slideHorizontal('right');
 				break;
 		}
+
 	}
 	handleTouchEnd(){
 		this.setState({
 			touchState: 0
 		});
+
+		jQuery("html, body").animate({ scrollTop: 0 })//possible fix to hide address bar on iPhone when body is > 100vh
 	}
 	slideHorizontal(direction){
 		const key = this.state.currIdx;

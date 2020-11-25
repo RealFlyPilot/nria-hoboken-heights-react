@@ -37,7 +37,10 @@
 }
 
 body {
-    overflow: hidden;//this is used only to prevent pull-to-refresh which can be triggered anytime the user tries to scroll up on a touch device
+    // overflow: hidden;//this is used only to prevent pull-to-refresh which can be triggered anytime the user tries to scroll up on a touch device
+    //overscroll-behavior-y: contain;
+    height: calc(100vh + 1px);//possible fix for iOS address bar not hiding
+    background-color: #000000;//possible fix for iOS address bar not hiding
 }
 
 .formSubmitted {
