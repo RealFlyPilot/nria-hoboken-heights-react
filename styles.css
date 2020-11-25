@@ -941,6 +941,7 @@ body {
   }
 
   body {
+    overscroll-behavior-y: contain;
     height: calc(100vh + 1px);
     background-color: #000000;
   }
