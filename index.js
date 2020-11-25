@@ -1354,7 +1354,6 @@ class SplashPage extends React.Component {
 	}
 	handleTouchMove(evt) {
 		if (this.state.touchState != 1) return;
-		evt.preventDefault();
 		const coordinateX = evt.touches[0].clientX;
 		const coordinateY = evt.touches[0].clientY;
 		const horizontalDirection = this.state.touchStartCoordinate.x > coordinateX ? 'right' : 'left';
