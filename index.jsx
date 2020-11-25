@@ -263,7 +263,10 @@ class SplashPage extends React.Component {
 	watchForEventEnd(e) {
 		//The onTransitionEnd event triggers many properties and not only for .slides_inner . We only want to run this function for the transform property
 		const isSlidesInner = e.target.classList.contains('slides_inner');
-		if(!isSlidesInner) return;
+		if(!isSlidesInner) {
+			return;
+		}
+
 		// const transitionProperty = e.propertyName
 		// if(transitionProperty != 'transform') return;
 		this.setState({transitiongState: 0});
@@ -277,8 +280,14 @@ class SplashPage extends React.Component {
 		let slidesViewedArray = this.state.slidesViewed.concat(idx);
 		this.setState({ slidesViewed: slidesViewedArray })
 	}
+
+	//animationsStopped is used to prevent animation issues with the android keyboard appearing when dealing with form inputs
+	animationsStopped() {
+		const isStopped = document.body.classList.contains("resize-animation-stopper");
+		return isStopped;
+	}
 	nextSlide() {
-		if (this.isTransitioning()) {
+		if (this.isTransitioning() || this.animationsStopped()) {
 			return;
 		}
 		
@@ -300,7 +309,7 @@ class SplashPage extends React.Component {
 		this.addIdxToViewedSlides(newIdx);
 	}
 	prevSlide() {
-		if (this.isTransitioning()) {
+		if (this.isTransitioning() || this.animationsStopped()) {
 			return;
 		}
 		const positionIsNotAtTopOfSlide = document.querySelector('.activeSlide').scrollTop != 0;
