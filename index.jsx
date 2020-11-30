@@ -1,5 +1,5 @@
 'use strict';
-const fetchWPRestAPI = require('./assets/page.js');
+const flypilotFetchWPRestAPI = require('./assets/page.js');
 const Slide = require('./assets/slide.jsx');
 const MusicPlayer = require('./assets/musicplayer.jsx');
 const modules = require('./assets/modules.jsx');
@@ -101,7 +101,7 @@ class SplashPage extends React.Component {
 		this.state.browser= browser;
 	}
 	componentDidMount() {
-		fetchWPRestAPI(this)
+		flypilotFetchWPRestAPI(this)
 
 		window.addEventListener('keydown', (event) => {
 			if (!event.target.classList.contains('input')) {

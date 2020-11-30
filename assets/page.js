@@ -1,8 +1,63 @@
-const fetchWPRestAPI = async (self) => {
-	const acf_page_response = await fetch('https://nriahh.wpengine.com/wp-json/acf/v3/pages/');
+/*
+ * These functions are used to fetch data from Wordpress's Advanced Custom Fields 
+ * using the Wordpress REST API to be used with React
+ * 
+ * These functions require the Wordpress plugin ACF to REST API
+ * https://github.com/airesvsg/acf-to-rest-api
+ * 
+ * Usage:
+ * Require this file at the top of the main index.jsx file:
+ * const flypilotFetchWPRestAPI = require('./assets/page.js');
+ *
+ * Within componentDidMount() execute the function:
+ * flypilotFetchWPRestAPI(this)
+ * 
+ * By passing (this) in the above function, we will be able to set states using self
+ * in our flypilotFetchWPRestAPI() and flypilotParseData() functions
+ * 
+ * In the plugin settings you will find information about the request version:
+ * https://mywordpresssite.wpengine.com/wp-admin/options-permalink.php#acf-to-rest-api-settings
+ * 
+ * All the available endpoints are shown in the ACF to REST API github readme
+ * 
+ * You will need to set the ENDPOINT value to that which you desire.
+ * For example:
+ * const ENDPOINT = 'https://mysite.wpengine.com/wp-json/acf/v3/pages/';
+ * 
+ */
+
+const ENDPOINT = 'https://nriahh.wpengine.com/wp-json/acf/v3/pages/';
+
+
+/* 
+ * flypilotFetchWPRestAPI()
+ * This will receive the data from the endpoint. The data received should be used within flypilotParseData
+ * You should not have to edit this function
+ */
+const flypilotFetchWPRestAPI = async (self) => {
+	const acf_page_response = await fetch(ENDPOINT);
 	const json = await acf_page_response.json();
-	const page_data = json[0].acf
-	console.log(page_data)
+	const acf_data = json
+	flypilotParseData(self, acf_data)
+}
+
+/*
+ * flypilotParseData()
+ * You will need to edit the code within flypilotParseData brackets
+ * 
+ * The default function is simply:
+ * const flypilotParseData = (self, acf_data) => {}
+ * 
+ * To set states you can use self:
+ * self.setState({ myState:  acf_data.myProperty});
+ * 
+ * The data received will be in the acf_data variable:
+ * myValue = acf_data.value
+ * 
+ */
+
+const flypilotParseData = (self, acf_data) => {
+	const page_data = acf_data[0].acf
 	const SLIDES = [{
 		styles: {
 			background: "#000",
@@ -129,4 +184,4 @@ const fetchWPRestAPI = async (self) => {
 	self.setState({ slides: SLIDES });
 }
 
-module.exports = fetchWPRestAPI
+module.exports = flypilotFetchWPRestAPI
