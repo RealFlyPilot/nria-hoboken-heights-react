@@ -1,6 +1,5 @@
 'use strict';
-
-const SLIDES = require('./assets/page.js');
+const fetchWPRestAPI = require('./assets/page.js');
 const Slide = require('./assets/slide.jsx');
 const MusicPlayer = require('./assets/musicplayer.jsx');
 const modules = require('./assets/modules.jsx');
@@ -11,7 +10,7 @@ class SplashPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			slides: SLIDES,
+			slides: [{}],
 			slidesViewed: [0],
 			transitiongState: 0, // 0 for false -1 for up 1 for down
 			currIdx: 0,
@@ -102,6 +101,8 @@ class SplashPage extends React.Component {
 		this.state.browser= browser;
 	}
 	componentDidMount() {
+		fetchWPRestAPI(this)
+
 		$('.how_you_heard').select2({
 			placeholder: "How did you hear of us?*",
 			width: 'resolve',
@@ -298,7 +299,7 @@ class SplashPage extends React.Component {
 			}
 		}
 		const newIdx = this.state.currIdx + 1;
-		if (newIdx >= SLIDES.length) {
+		if (newIdx >= this.state.slides.length) {
 			return;
 		}
 		this.setState({

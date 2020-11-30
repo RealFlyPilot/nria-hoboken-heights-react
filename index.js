@@ -457,7 +457,7 @@ class LandingPageMusicPlayer extends React.Component {
 				React.createElement(
 					'div',
 					{ className: 'text slideInAnimationElement slideInAnimationElementLeft' },
-					'YES'
+					this.props.slideData.sound_choice_start
 				)
 			),
 			React.createElement('div', { className: 'separator' }),
@@ -467,7 +467,7 @@ class LandingPageMusicPlayer extends React.Component {
 				React.createElement(
 					'div',
 					{ className: 'text slideInAnimationElement slideInAnimationElementRight' },
-					'NO'
+					this.props.slideData.sound_choice_stop
 				)
 			)
 		);
@@ -670,116 +670,139 @@ class MusicPlayer extends React.Component {
 module.exports = MusicPlayer;
 
 },{}],8:[function(require,module,exports){
-const SLIDES = [{
-	styles: {
-		background: "#000"
-	},
-	video: "/assets/videos/NIRMA_Logo_Motion without audio.mp4",
-	videoMobileStartPosition: 'center',
-	isLandingPage: 1
-}, {
-	video: "/assets/videos/NRIMA_1_Exterior_HIGH_Cinemagraphic.mp4",
-	videoLoop: true,
-	videoZoomEffect: true,
-	videoMobileStartPosition: 'left',
-	addCornerLogo: true,
-	centerBottom: {
-		line1: "MANHATTAN AVE, 1300",
-		line2: "COMING SOON"
-	},
-	hasDownArrow: true,
-	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3",
-	phantomMusicPlayer: true,
-	mobileHasDifferentContent: true,
-	mobileContent: {
-		left: {
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+const fetchWPRestAPI = (() => {
+	var _ref = _asyncToGenerator(function* (self) {
+		const acf_page_response = yield fetch('https://nriahh.wpengine.com/wp-json/acf/v3/pages/');
+		const json = yield acf_page_response.json();
+		const page_data = json[0].acf;
+		console.log(page_data);
+		const SLIDES = [{
+			styles: {
+				background: "#000"
+			},
+			video: page_data.background_video_hero,
+			videoMobileStartPosition: 'center',
+			isLandingPage: 1,
+			soundTitle: page_data.sound,
+			sound_choice_start: page_data.sound_choice,
+			sound_choice_stop: page_data.no_choice
+		}, {
+			video: page_data.background_video_second,
+			videoLoop: true,
+			videoZoomEffect: true,
+			videoMobileStartPosition: 'left',
+			addCornerLogo: true,
 			centerBottom: {
-				line1: "SWIPE <div class='right_arrow_bouncing'></div>",
-				lineStyles: {
-					display: 'flex',
-					alignItems: 'center'
+				line1: page_data.address,
+				line2: page_data.coming_soon_text
+			},
+			hasDownArrow: true,
+			downArrowImage: page_data.down_arrow,
+			soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3",
+			phantomMusicPlayer: true,
+			mobileHasDifferentContent: true,
+			mobileContent: {
+				left: {
+					centerBottom: {
+						line1: "SWIPE <div class='right_arrow_bouncing'></div>",
+						lineStyles: {
+							display: 'flex',
+							alignItems: 'center'
+						}
+					}
+				},
+				center: {
+					centerBottom: {
+						line1: "MANHATTAN AVE, 1300",
+						line2: "COMING SOON"
+					}
+				}
+			},
+			mobileHorizontalVideoSlideEnabled: true
+		}, {
+			slideClasses: "backgroundFrame",
+			styles: {
+				fontSize: '15px',
+				lineHeight: '21px',
+				overflow: "scroll",
+				backgroundImage: "url(" + page_data.background_image + ")"
+			},
+			stylesMobile: {
+				paddingTop: '63px',
+				paddingBottom: '63px',
+				alignItems: "flex-start"
+			},
+			enableScrolling: true,
+			centerImage: page_data.logo_third,
+			centerImageStyles: {
+				width: "272px",
+				marginBottom: "55px"
+			},
+			centerImageStylesMobile: {
+				width: "180px",
+				marginBottom: "40px"
+			},
+			center: page_data.content_third,
+			centerTextClasses: 'gotham-light',
+			centerTextStyles: {
+				width: "56vw"
+			},
+			centerTextStylesMobile: {
+				width: "82vw"
+			},
+
+			contactButton: true,
+			buttonText: page_data.button_text_third
+
+			// background: "#000"
+		}, {
+			video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
+			videoLoop: true,
+			videoZoomEffect: true,
+			videoMobileStartPosition: 'center',
+			addCornerLogo: true,
+			cornerLogoHideOnLastSlide: true,
+			cornerLogofadeIn: true,
+			soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3",
+			mobileHorizontalVideoSlideEnabled: true,
+			mobileHasDifferentContent: true,
+
+			mobileContent: {
+				center: {
+					centerBottom: {
+						line1: "<div class='left_arrow_bouncing'></div> SWIPE <div class='right_arrow_bouncing'></div>",
+						lineStyles: {
+							display: 'flex',
+							alignItems: 'center'
+						}
+					}
 				}
 			}
-		},
-		center: {
-			centerBottom: {
-				line1: "MANHATTAN AVE, 1300",
-				line2: "COMING SOON"
-			}
-		}
-	},
-	mobileHorizontalVideoSlideEnabled: true
-}, {
-	slideClasses: "backgroundFrame",
-	styles: {
-		fontSize: '15px',
-		lineHeight: '21px',
-		overflow: "scroll"
-	},
-	stylesMobile: {
-		paddingTop: '63px',
-		paddingBottom: '63px',
-		alignItems: "flex-start"
-	},
-	enableScrolling: true,
-	centerImage: "/assets/images/NIRMA_Logo_White.png",
-	centerImageStyles: {
-		width: "272px",
-		marginBottom: "55px"
-	},
-	centerImageStylesMobile: {
-		width: "180px",
-		marginBottom: "40px"
-	},
-	center: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.<br /><br />Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-	centerTextClasses: 'gotham-light',
-	centerTextStyles: {
-		width: "56vw"
-	},
-	centerTextStylesMobile: {
-		width: "82vw"
-	},
 
-	contactButton: true
-	// background: "#000"
-}, {
-	video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
-	videoLoop: true,
-	videoZoomEffect: true,
-	videoMobileStartPosition: 'center',
-	addCornerLogo: true,
-	cornerLogoHideOnLastSlide: true,
-	cornerLogofadeIn: true,
-	soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3",
-	mobileHorizontalVideoSlideEnabled: true,
-	mobileHasDifferentContent: true,
+		}, {
+			styles: {
+				backgroundColor: "transparent",
+				color: "#000",
+				overflow: "scroll"
+			},
+			// addCornerLogo: true,
+			addDarkCornerLogo: true,
+			// animateCornerLogoOnStart: true,
+			contactFormSlide: true,
+			enableScrolling: true
+		}];
 
-	mobileContent: {
-		center: {
-			centerBottom: {
-				line1: "<div class='left_arrow_bouncing'></div> SWIPE <div class='right_arrow_bouncing'></div>",
-				lineStyles: {
-					display: 'flex',
-					alignItems: 'center'
-				}
-			}
-		}
-	}
+		self.setState({ slides: SLIDES });
+	});
 
-}, {
-	styles: {
-		backgroundColor: "transparent",
-		color: "#000",
-		overflow: "scroll"
-	},
-	// addCornerLogo: true,
-	addDarkCornerLogo: true,
-	// animateCornerLogoOnStart: true,
-	contactFormSlide: true,
-	enableScrolling: true
-}];
+	return function fetchWPRestAPI(_x) {
+		return _ref.apply(this, arguments);
+	};
+})();
 
-module.exports = SLIDES;
+module.exports = fetchWPRestAPI;
 
 },{}],9:[function(require,module,exports){
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -956,7 +979,7 @@ class Slide extends React.Component {
 				slideObj.contactButton && React.createElement(
 					'div',
 					{ className: 'btn contactButton', onClick: this.scrollToContactForm.bind(this) },
-					'CONTACT'
+					slideObj.buttonText
 				)
 			),
 			React.createElement(
@@ -974,15 +997,15 @@ class Slide extends React.Component {
 							React.createElement(
 								'div',
 								{ className: 'title' },
-								'SOUND EXPERIENCE'
+								slideObj.soundTitle
 							),
-							React.createElement(LandingPageMusicPlayer, { animationEnded: this.landingPageAnimationEnded, nextSlide: this.scrollToNextSlide, muteMusic: this.musicMute, playMusic: this.musicPlay, isPlaying: this.props.isPlaying })
+							React.createElement(LandingPageMusicPlayer, { slideData: slideObj, animationEnded: this.landingPageAnimationEnded, nextSlide: this.scrollToNextSlide, muteMusic: this.musicMute, playMusic: this.musicPlay, isPlaying: this.props.isPlaying })
 						)
 					)
 				),
 				slideObj.centerBottom && slideObj.centerBottom.line1 && React.createElement('h1', { dangerouslySetInnerHTML: { __html: slideObj.centerBottom.line1 } }),
 				slideObj.centerBottom && slideObj.centerBottom.line2 && React.createElement('h1', { dangerouslySetInnerHTML: { __html: slideObj.centerBottom.line2 } }),
-				slideObj.hasDownArrow && React.createElement('img', { onClick: this.scrollToNextSlide.bind(this), className: 'downArrow', src: '/assets/images/downarrow.svg' })
+				slideObj.hasDownArrow && React.createElement('img', { onClick: this.scrollToNextSlide.bind(this), className: 'downArrow', src: slideObj.downArrowImage })
 			),
 			slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && React.createElement(
 				'div',
@@ -1004,7 +1027,7 @@ module.exports = Slide;
 },{"./contactformslide.jsx":2,"./header.jsx":3,"./landingpagemusicplayer.jsx":4,"./musicplayer.jsx":7}],10:[function(require,module,exports){
 'use strict';
 
-const SLIDES = require('./assets/page.js');
+const fetchWPRestAPI = require('./assets/page.js');
 const Slide = require('./assets/slide.jsx');
 const MusicPlayer = require('./assets/musicplayer.jsx');
 const modules = require('./assets/modules.jsx');
@@ -1015,7 +1038,7 @@ class SplashPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			slides: SLIDES,
+			slides: [{}],
 			slidesViewed: [0],
 			transitiongState: 0, // 0 for false -1 for up 1 for down
 			currIdx: 0,
@@ -1100,6 +1123,8 @@ class SplashPage extends React.Component {
 		this.state.browser = browser;
 	}
 	componentDidMount() {
+		fetchWPRestAPI(this);
+
 		$('.how_you_heard').select2({
 			placeholder: "How did you hear of us?*",
 			width: 'resolve',
@@ -1291,7 +1316,7 @@ class SplashPage extends React.Component {
 			}
 		}
 		const newIdx = this.state.currIdx + 1;
-		if (newIdx >= SLIDES.length) {
+		if (newIdx >= this.state.slides.length) {
 			return;
 		}
 		this.setState({

@@ -37,11 +37,11 @@ class LandingPageMusicPlayer extends React.Component {
 		return (
 			<div className={settingsClasses}>
 				<div className={playButtonClasses} onClick={this.startMusicPlayer.bind(this)}>
-					<div className='text slideInAnimationElement slideInAnimationElementLeft'>YES</div>
+					<div className='text slideInAnimationElement slideInAnimationElementLeft'>{this.props.slideData.sound_choice_start}</div>
 				</div>
 				<div className='separator' />
 				<div onClick={this.stopMusicPlayer.bind(this)} className={muteButtonClasses} onAnimationEnd={this.animationHasEnded.bind(this)}>
-					<div className='text slideInAnimationElement slideInAnimationElementRight'>NO</div>
+					<div className='text slideInAnimationElement slideInAnimationElementRight'>{this.props.slideData.sound_choice_stop}</div>
 				</div>
 			</div>
 		);

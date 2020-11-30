@@ -1,110 +1,125 @@
-const SLIDES = [{
-	styles: {
-		background: "#000",
-	},
-	video: "/assets/videos/NIRMA_Logo_Motion without audio.mp4",
-	videoMobileStartPosition: 'center',
-	isLandingPage: 1,
-}, {
-	video: "/assets/videos/NRIMA_1_Exterior_HIGH_Cinemagraphic.mp4",
-	videoLoop: true,
-	videoZoomEffect: true,
-	videoMobileStartPosition: 'left',
-	addCornerLogo: true,
-	centerBottom: {
-		line1: "MANHATTAN AVE, 1300",
-		line2: "COMING SOON",
-	},
-	hasDownArrow: true,
-	soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3",
-	phantomMusicPlayer: true,
-	mobileHasDifferentContent: true,
-	mobileContent: {
-		left: {
-			centerBottom: {
-				line1: "SWIPE <div class='right_arrow_bouncing'></div>",
-				lineStyles: {
-					display: 'flex',
-					alignItems: 'center'
-				},
-			}
+const fetchWPRestAPI = async (self) => {
+	const acf_page_response = await fetch('https://nriahh.wpengine.com/wp-json/acf/v3/pages/');
+	const json = await acf_page_response.json();
+	const page_data = json[0].acf
+	console.log(page_data)
+	const SLIDES = [{
+		styles: {
+			background: "#000",
 		},
-		center: {
-			centerBottom: {
-				line1: "MANHATTAN AVE, 1300",
-				line2: "COMING SOON",
-			}
+		video: page_data.background_video_hero,
+		videoMobileStartPosition: 'center',
+		isLandingPage: 1,
+		soundTitle: page_data.sound,
+		sound_choice_start: page_data.sound_choice,
+		sound_choice_stop: page_data.no_choice,
+	}, {
+		video: page_data.background_video_second,
+		videoLoop: true,
+		videoZoomEffect: true,
+		videoMobileStartPosition: 'left',
+		addCornerLogo: true,
+		centerBottom: {
+			line1: page_data.address,
+			line2: page_data.coming_soon_text,
 		},
-	},
-	mobileHorizontalVideoSlideEnabled: true
-}, {
-	slideClasses: "backgroundFrame",
-	styles: {
-		fontSize: '15px',
-		lineHeight: '21px',
-		overflow: "scroll"
-	},
-	stylesMobile: {
-		paddingTop: '63px',
-		paddingBottom: '63px',
-		alignItems: "flex-start"
-	},
-	enableScrolling: true,
-	centerImage: "/assets/images/NIRMA_Logo_White.png",
-	centerImageStyles: {
-		width: "272px",
-		marginBottom: "55px"
-	},
-	centerImageStylesMobile: {
-		width: "180px",
-		marginBottom: "40px"
-	},
-	center: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.<br /><br />Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-	centerTextClasses: 'gotham-light',
-	centerTextStyles: {
-		width: "56vw",
-	},
-	centerTextStylesMobile: {
-		width: "82vw",
-	},
-
-	contactButton: true,
-	// background: "#000"
-}, {
-	video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
-	videoLoop: true,
-	videoZoomEffect: true,
-	videoMobileStartPosition: 'center',
-	addCornerLogo: true,
-	cornerLogoHideOnLastSlide: true,
-	cornerLogofadeIn: true,
-	soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3",
-	mobileHorizontalVideoSlideEnabled: true,
-	mobileHasDifferentContent: true,
+		hasDownArrow: true,
+		downArrowImage: page_data.down_arrow,
+		soundEffect: "./assets/sounds/SOUND-NIGHT_VIEW.mp3",
+		phantomMusicPlayer: true,
+		mobileHasDifferentContent: true,
+		mobileContent: {
+			left: {
+				centerBottom: {
+					line1: "SWIPE <div class='right_arrow_bouncing'></div>",
+					lineStyles: {
+						display: 'flex',
+						alignItems: 'center'
+					},
+				}
+			},
+			center: {
+				centerBottom: {
+					line1: "MANHATTAN AVE, 1300",
+					line2: "COMING SOON",
+				}
+			},
+		},
+		mobileHorizontalVideoSlideEnabled: true
+	}, {
+		slideClasses: "backgroundFrame",
+		styles: {
+			fontSize: '15px',
+			lineHeight: '21px',
+			overflow: "scroll",
+			backgroundImage: "url("+page_data.background_image+")"
+		},
+		stylesMobile: {
+			paddingTop: '63px',
+			paddingBottom: '63px',
+			alignItems: "flex-start"
+		},
+		enableScrolling: true,
+		centerImage: page_data.logo_third,
+		centerImageStyles: {
+			width: "272px",
+			marginBottom: "55px"
+		},
+		centerImageStylesMobile: {
+			width: "180px",
+			marginBottom: "40px"
+		},
+		center: page_data.content_third,
+		centerTextClasses: 'gotham-light',
+		centerTextStyles: {
+			width: "56vw",
+		},
+		centerTextStylesMobile: {
+			width: "82vw",
+		},
 	
-	mobileContent: {
-		center: {
-			centerBottom: {
-				line1: "<div class='left_arrow_bouncing'></div> SWIPE <div class='right_arrow_bouncing'></div>",
-				lineStyles: {
-					display: 'flex',
-					alignItems: 'center'
-				},
-			}
+		contactButton: true,
+		buttonText: page_data.button_text_third,
+		
+		// background: "#000"
+	}, {
+		video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
+		videoLoop: true,
+		videoZoomEffect: true,
+		videoMobileStartPosition: 'center',
+		addCornerLogo: true,
+		cornerLogoHideOnLastSlide: true,
+		cornerLogofadeIn: true,
+		soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3",
+		mobileHorizontalVideoSlideEnabled: true,
+		mobileHasDifferentContent: true,
+		
+		mobileContent: {
+			center: {
+				centerBottom: {
+					line1: "<div class='left_arrow_bouncing'></div> SWIPE <div class='right_arrow_bouncing'></div>",
+					lineStyles: {
+						display: 'flex',
+						alignItems: 'center'
+					},
+				}
+			},
 		},
-	},
+		
+	}, {
+		styles: {
+			backgroundColor: "transparent",
+			color: "#000",
+			overflow: "scroll"
+		},
+		// addCornerLogo: true,
+		addDarkCornerLogo: true,
+		// animateCornerLogoOnStart: true,
+		contactFormSlide: true,
+		enableScrolling: true,
+	}];
 	
-}, {
-	styles: {
-		backgroundColor: "transparent",
-		color: "#000",
-		overflow: "scroll"
-	},
-	// addCornerLogo: true,
-	addDarkCornerLogo: true,
-	// animateCornerLogoOnStart: true,
-	contactFormSlide: true,
-	enableScrolling: true,
-}];
+	self.setState({ slides: SLIDES });
+}
 
-module.exports = SLIDES;
+module.exports = fetchWPRestAPI

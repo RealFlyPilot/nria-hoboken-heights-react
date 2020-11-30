@@ -177,7 +177,7 @@ class Slide extends React.Component {
 					}
 					<h1 dangerouslySetInnerHTML={{ __html: slideObj.center }} />
 					{slideObj.contactButton &&
-						<div className='btn contactButton' onClick={this.scrollToContactForm.bind(this)}>CONTACT</div>
+						<div className='btn contactButton' onClick={this.scrollToContactForm.bind(this)}>{slideObj.buttonText}</div>
 					}
 				</div>
 				
@@ -186,8 +186,8 @@ class Slide extends React.Component {
 						<div className="musicplayer_container center_layout">
 							<div className='musicplayer centered_content'>
 								<div className={landing_page_sound_player_classes}>
-									<div className='title'>SOUND EXPERIENCE</div>
-									<LandingPageMusicPlayer animationEnded={this.landingPageAnimationEnded} nextSlide={this.scrollToNextSlide} muteMusic={this.musicMute} playMusic={this.musicPlay} isPlaying={this.props.isPlaying} />
+									<div className='title'>{slideObj.soundTitle}</div>
+									<LandingPageMusicPlayer slideData={slideObj} animationEnded={this.landingPageAnimationEnded} nextSlide={this.scrollToNextSlide} muteMusic={this.musicMute} playMusic={this.musicPlay} isPlaying={this.props.isPlaying} />
 								</div>
 							</div>
 						</div>
@@ -199,7 +199,7 @@ class Slide extends React.Component {
 						<h1 dangerouslySetInnerHTML={{ __html: slideObj.centerBottom.line2 }}></h1>
 					}
 					{slideObj.hasDownArrow &&
-						<img onClick={this.scrollToNextSlide.bind(this)} className='downArrow' src='/assets/images/downarrow.svg' />
+						<img onClick={this.scrollToNextSlide.bind(this)} className='downArrow' src={slideObj.downArrowImage} />
 					}
 				</div>
 				{slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && 
