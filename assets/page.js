@@ -83,7 +83,7 @@ const fetchWPRestAPI = async (self) => {
 		
 		// background: "#000"
 	}, {
-		video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
+		video: page_data.background_video_four,
 		videoLoop: true,
 		videoZoomEffect: true,
 		videoMobileStartPosition: 'center',
@@ -117,6 +117,13 @@ const fetchWPRestAPI = async (self) => {
 		// animateCornerLogoOnStart: true,
 		contactFormSlide: true,
 		enableScrolling: true,
+		contactLogo: page_data.contact_logo,
+		companyAddress: page_data.company_address,
+		companyName: page_data.company_name,
+		agentName: page_data.agent_name,
+		rightsReserved: page_data.rights_reserved,
+		buttonText: page_data.button_text_fifth,
+		buttonLink: page_data.button_link_fifth,
 	}];
 	
 	self.setState({ slides: SLIDES });

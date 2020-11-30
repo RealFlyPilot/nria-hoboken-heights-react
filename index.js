@@ -67,6 +67,14 @@ class ContactForm extends React.Component {
 		const select2Styles = {
 			width: "100%"
 		};
+		const select2Initialized = $('.how_you_heard').hasClass("select2-hidden-accessible");
+		if (!select2Initialized) {
+			$('.how_you_heard').select2({
+				placeholder: "How did you hear of us?*",
+				width: 'resolve',
+				minimumResultsForSearch: -1
+			});
+		}
 		return React.createElement(
 			'form',
 			{ className: contactFormClasses },
@@ -260,45 +268,44 @@ class ContactFormSlide extends React.Component {
 					{ className: "verticalLineContainer" },
 					React.createElement("div", { className: "verticalLine" })
 				),
-				React.createElement("img", { className: "logo", src: "/assets/images/NRLiving.png" }),
+				React.createElement("img", { className: "logo", src: this.props.slideObj.contactLogo }),
 				React.createElement(
 					"div",
 					{ className: "contactInfo" },
 					React.createElement(
 						"div",
 						{ className: "address" },
-						"1300 Manhattan Avenue Union City, NJ 07087"
+						this.props.slideObj.companyAddress
 					),
 					React.createElement(
 						"div",
 						{ className: "address" },
-						"Manhattan Avenue Capital 1300, LLC"
-					),
-					React.createElement("br", null),
-					React.createElement(
-						"div",
-						{ className: "address" },
-						"Richard Stabile"
+						this.props.slideObj.companyName
 					),
 					React.createElement(
 						"div",
 						{ className: "address" },
-						"RE/MAX Real Estate Limited"
+						this.props.slideObj.agentName
+					),
+					React.createElement(
+						"div",
+						{ className: "address" },
+						this.props.slideObj.agentCompany
 					),
 					React.createElement(
 						"div",
 						{ className: "phone" },
-						"201-400-7487"
+						this.props.slideObj.agentPhoneNumber
 					),
 					React.createElement(
 						"div",
 						{ className: "copyright" },
-						"\xA9 2020 Hoboken Heights. All rights reserved."
+						this.props.slideObj.rightsReserved
 					),
 					React.createElement(
 						"div",
 						{ className: "btn" },
-						"PRIVACY POLICY"
+						this.props.slideObj.buttonText
 					)
 				)
 			),
@@ -758,7 +765,7 @@ const fetchWPRestAPI = (() => {
 
 			// background: "#000"
 		}, {
-			video: "/assets/videos/NIRMA_2_Patio_High_Cinemagraphic.mp4",
+			video: page_data.background_video_four,
 			videoLoop: true,
 			videoZoomEffect: true,
 			videoMobileStartPosition: 'center',
@@ -791,7 +798,14 @@ const fetchWPRestAPI = (() => {
 			addDarkCornerLogo: true,
 			// animateCornerLogoOnStart: true,
 			contactFormSlide: true,
-			enableScrolling: true
+			enableScrolling: true,
+			contactLogo: page_data.contact_logo,
+			companyAddress: page_data.company_address,
+			companyName: page_data.company_name,
+			agentName: page_data.agent_name,
+			rightsReserved: page_data.rights_reserved,
+			buttonText: page_data.button_text_fifth,
+			buttonLink: page_data.button_link_fifth
 		}];
 
 		self.setState({ slides: SLIDES });
@@ -970,7 +984,7 @@ class Slide extends React.Component {
 							</video>`
 				}
 			}),
-			slideObj.contactFormSlide && React.createElement(ContactFormSlide, { formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
+			slideObj.contactFormSlide && React.createElement(ContactFormSlide, { slideObj: slideObj, formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
 			React.createElement(
 				'div',
 				{ className: centerTextClasses, style: centerTextStyles },
@@ -1124,12 +1138,6 @@ class SplashPage extends React.Component {
 	}
 	componentDidMount() {
 		fetchWPRestAPI(this);
-
-		$('.how_you_heard').select2({
-			placeholder: "How did you hear of us?*",
-			width: 'resolve',
-			minimumResultsForSearch: -1
-		});
 
 		window.addEventListener('keydown', event => {
 			if (!event.target.classList.contains('input')) {

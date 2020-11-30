@@ -168,7 +168,7 @@ class Slide extends React.Component {
 					/>
 				}
 				{slideObj.contactFormSlide &&
-					<ContactFormSlide formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} />
+					<ContactFormSlide slideObj={slideObj} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} />
 					
 				}
 				<div className={centerTextClasses} style={centerTextStyles}>

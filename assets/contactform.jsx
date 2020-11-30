@@ -66,6 +66,14 @@ class ContactForm extends React.Component {
 		const select2Styles = {
 			width:"100%"
 		}
+		const select2Initialized = $('.how_you_heard').hasClass("select2-hidden-accessible")
+		if(!select2Initialized) {
+			$('.how_you_heard').select2({
+				placeholder: "How did you hear of us?*",
+				width: 'resolve',
+				minimumResultsForSearch: -1
+			});
+		}
 		return (
 			<form className={contactFormClasses}>
 				<div className="submittedFormOverlay">
