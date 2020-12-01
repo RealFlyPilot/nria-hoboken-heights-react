@@ -50,6 +50,12 @@ class ContactForm extends React.Component {
 		formCleared();
 	}
 
+	scrollToTop(){
+		const {scrollToFirstSlide} = this.props
+		scrollToFirstSlide()
+	}
+
+
 	componentDidMount() {
 
 		//This is a fix to detect changes on the select2
@@ -66,6 +72,26 @@ class ContactForm extends React.Component {
 		const select2Styles = {
 			width:"100%"
 		}
+		const slideTopOffset = $('.contactForm').length ? $('.contactForm').closest('.slide').position().top : 0
+		const contactFormTopOffset = $('.contactForm').length ? $('.contactForm').offset().top : 0
+		const cornerLogoTopOffset = $('.corner-logo-wrapper.fixed').offset().top
+		const cornerLogoHeight = $('.corner-logo-wrapper.fixed').height()
+		const cornerLogoLeft = $('.corner-logo-wrapper.fixed').position().left
+		const phantomClickableLogoTopOffset = slideTopOffset + cornerLogoTopOffset
+
+		let phantomClickableLogoHeight = cornerLogoHeight
+		if(contactFormTopOffset <= cornerLogoTopOffset + cornerLogoHeight) {
+			phantomClickableLogoHeight = contactFormTopOffset - cornerLogoTopOffset > 0 ? contactFormTopOffset - cornerLogoTopOffset : 0
+		}
+
+		const phantomClickableLogoStyles = {
+			position: "fixed",
+			top: phantomClickableLogoTopOffset,
+			left: cornerLogoLeft,
+			width: "400px",
+			height: phantomClickableLogoHeight,
+			cursor: "pointer",
+		}
 		const select2Initialized = $('.how_you_heard').hasClass("select2-hidden-accessible")
 		if(!select2Initialized) {
 			$('.how_you_heard').select2({
@@ -76,6 +102,7 @@ class ContactForm extends React.Component {
 		}
 		return (
 			<form className={contactFormClasses}>
+				<div onClick={this.scrollToTop.bind(this)} className="phantomClickableLogo" style={phantomClickableLogoStyles}></div>
 				<div className="submittedFormOverlay">
 					<div className="text">THANK YOU!</div>
 					<div className="closeBtn" onClick={this.resetForm}>

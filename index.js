@@ -51,6 +51,11 @@ class ContactForm extends React.Component {
 		formCleared();
 	}
 
+	scrollToTop() {
+		const { scrollToFirstSlide } = this.props;
+		scrollToFirstSlide();
+	}
+
 	componentDidMount() {
 
 		//This is a fix to detect changes on the select2
@@ -67,6 +72,26 @@ class ContactForm extends React.Component {
 		const select2Styles = {
 			width: "100%"
 		};
+		const slideTopOffset = $('.contactForm').length ? $('.contactForm').closest('.slide').position().top : 0;
+		const contactFormTopOffset = $('.contactForm').length ? $('.contactForm').offset().top : 0;
+		const cornerLogoTopOffset = $('.corner-logo-wrapper.fixed').offset().top;
+		const cornerLogoHeight = $('.corner-logo-wrapper.fixed').height();
+		const cornerLogoLeft = $('.corner-logo-wrapper.fixed').position().left;
+		const phantomClickableLogoTopOffset = slideTopOffset + cornerLogoTopOffset;
+
+		let phantomClickableLogoHeight = cornerLogoHeight;
+		if (contactFormTopOffset <= cornerLogoTopOffset + cornerLogoHeight) {
+			phantomClickableLogoHeight = contactFormTopOffset - cornerLogoTopOffset > 0 ? contactFormTopOffset - cornerLogoTopOffset : 0;
+		}
+
+		const phantomClickableLogoStyles = {
+			position: "fixed",
+			top: phantomClickableLogoTopOffset,
+			left: cornerLogoLeft,
+			width: "400px",
+			height: phantomClickableLogoHeight,
+			cursor: "pointer"
+		};
 		const select2Initialized = $('.how_you_heard').hasClass("select2-hidden-accessible");
 		if (!select2Initialized) {
 			$('.how_you_heard').select2({
@@ -78,6 +103,7 @@ class ContactForm extends React.Component {
 		return React.createElement(
 			'form',
 			{ className: contactFormClasses },
+			React.createElement('div', { onClick: this.scrollToTop.bind(this), className: 'phantomClickableLogo', style: phantomClickableLogoStyles }),
 			React.createElement(
 				'div',
 				{ className: 'submittedFormOverlay' },
@@ -255,11 +281,16 @@ class ContactFormSlide extends React.Component {
 		formCleared();
 	}
 
+	scrollToTop() {
+		const { scrollToFirstSlide } = this.props;
+		scrollToFirstSlide();
+	}
+
 	render() {
 		return React.createElement(
 			"div",
 			{ className: "contactPageWrapper" },
-			React.createElement(ContactForm, { formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
+			React.createElement(ContactForm, { scrollToFirstSlide: this.scrollToTop.bind(this), formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
 			React.createElement(
 				"div",
 				{ className: "privacyPolicy not-mobile" },
@@ -1039,7 +1070,7 @@ class Slide extends React.Component {
 							</video>`
 				}
 			}),
-			slideObj.contactFormSlide && React.createElement(ContactFormSlide, { slideObj: slideObj, formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
+			slideObj.contactFormSlide && React.createElement(ContactFormSlide, { scrollToFirstSlide: this.scrollToTop.bind(this), slideObj: slideObj, formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
 			React.createElement(
 				'div',
 				{ className: centerTextClasses, style: centerTextStyles },

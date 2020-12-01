@@ -14,10 +14,15 @@ class ContactFormSlide extends React.Component {
 		formCleared();
 	}
 
+	scrollToTop(){
+		const {scrollToFirstSlide} = this.props
+		scrollToFirstSlide()
+	}
+
 	render(){
 		return (
 			<div className="contactPageWrapper">
-				<ContactForm formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} />
+				<ContactForm scrollToFirstSlide={this.scrollToTop.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} />
 				<div className="privacyPolicy not-mobile">
 					<div className="verticalLineContainer">
 						<div className="verticalLine" />

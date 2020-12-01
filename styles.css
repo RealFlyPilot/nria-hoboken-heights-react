@@ -1147,6 +1147,9 @@ body {
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm.submitted .submittedFormOverlay .closeBtn > img {
     width: 16px;
   }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .phantomClickableLogo {
+    display: none;
+  }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .fine-print {
     font-size: 9px;
     margin-top: 14px;
