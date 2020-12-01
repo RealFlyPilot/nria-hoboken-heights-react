@@ -173,7 +173,7 @@ class Slide extends React.Component {
 				}
 				<div className={centerTextClasses} style={centerTextStyles}>
 					{slideObj.centerImage &&
-						<img style={centerImageStyles} src={slideObj.centerImage}/>
+						<img onClick={this.scrollToTop.bind(this)} style={centerImageStyles} src={slideObj.centerImage}/>
 					}
 					<h1 dangerouslySetInnerHTML={{ __html: slideObj.center }} />
 					{slideObj.contactButton &&

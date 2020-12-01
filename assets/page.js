@@ -118,7 +118,8 @@ const flypilotParseData = (self, acf_data) => {
 		centerImage: page_data.logo_third,
 		centerImageStyles: {
 			width: "272px",
-			marginBottom: "55px"
+			marginBottom: "55px",
+			cursor: "pointer"
 		},
 		centerImageStylesMobile: {
 			width: "180px",

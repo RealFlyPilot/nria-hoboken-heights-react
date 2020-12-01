@@ -804,7 +804,8 @@ const flypilotParseData = (self, acf_data) => {
 		centerImage: page_data.logo_third,
 		centerImageStyles: {
 			width: "272px",
-			marginBottom: "55px"
+			marginBottom: "55px",
+			cursor: "pointer"
 		},
 		centerImageStylesMobile: {
 			width: "180px",
@@ -1042,7 +1043,7 @@ class Slide extends React.Component {
 			React.createElement(
 				'div',
 				{ className: centerTextClasses, style: centerTextStyles },
-				slideObj.centerImage && React.createElement('img', { style: centerImageStyles, src: slideObj.centerImage }),
+				slideObj.centerImage && React.createElement('img', { onClick: this.scrollToTop.bind(this), style: centerImageStyles, src: slideObj.centerImage }),
 				React.createElement('h1', { dangerouslySetInnerHTML: { __html: slideObj.center } }),
 				slideObj.contactButton && React.createElement(
 					'div',
