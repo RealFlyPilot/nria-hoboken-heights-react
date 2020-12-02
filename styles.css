@@ -833,6 +833,19 @@ body {
 .corner-logo-wrapper.darkMode .separator {
   border-left-color: #000;
 }
+.corner-logo-wrapper.phantomcornerLogoWrapper.animate {
+  display: none;
+  z-index: 1;
+}
+.corner-logo-wrapper.phantomcornerLogoWrapper.animate.activated {
+  display: block;
+}
+.corner-logo-wrapper.phantomcornerLogoWrapper.animate .text .cascading-animation.letter,
+.corner-logo-wrapper.phantomcornerLogoWrapper.animate .text .cascading-animation.separator,
+.corner-logo-wrapper.phantomcornerLogoWrapper.animate .corner-logo {
+  animation-duration: 0s;
+  animation-delay: 0s;
+}
 .corner-logo-wrapper .corner-logo {
   width: 110px;
   transition: all 1s;
@@ -1162,9 +1175,6 @@ body {
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm.submitted .submittedFormOverlay .closeBtn > img {
     width: 16px;
-  }
-  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .phantomClickableLogo {
-    display: none;
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .fine-print {
     font-size: 9px;

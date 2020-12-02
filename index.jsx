@@ -101,6 +101,7 @@ class SplashPage extends React.Component {
 		this.state.browser= browser;
 
 		this.mobileMenuElement = React.createRef()
+		this.headerElement = React.createRef()
 	}
 	componentDidMount() {
 		flypilotFetchWPRestAPI(this)
@@ -304,7 +305,7 @@ class SplashPage extends React.Component {
 		});
 
 		this.addIdxToViewedSlides(newIdx);
-		this.mobileMenuElement.current.closeMobileMenu()
+		this.handleSlideChange()
 	}
 	prevSlide() {
 		if (this.isTransitioning() || this.animationsStopped()) {
@@ -323,7 +324,7 @@ class SplashPage extends React.Component {
 			currIdx: newIdx
 		});
 		this.addIdxToViewedSlides(newIdx);
-		this.mobileMenuElement.current.closeMobileMenu()
+		this.handleSlideChange()
 	}
 	firstSlide() {
 		const newIdx = 0;
@@ -337,7 +338,7 @@ class SplashPage extends React.Component {
 			currIdx: newIdx
 		});
 		this.addIdxToViewedSlides(newIdx);
-		this.mobileMenuElement.current.closeMobileMenu()
+		this.handleSlideChange()
 	}
 	lastSlide() {
 		const newIdx = this.state.slides.length - 1;
@@ -354,9 +355,14 @@ class SplashPage extends React.Component {
 			currIdx: newIdx
 		});
 		this.addIdxToViewedSlides(newIdx);
-		this.mobileMenuElement.current.closeMobileMenu()
+		this.handleSlideChange()
 	}
 
+	handleSlideChange(){
+		this.mobileMenuElement.current.closeMobileMenu()
+		const notOnLastSlide = this.state.currIdx != this.state.slides.length - 1
+		if(notOnLastSlide) this.headerElement.current.deactivatePhantomLogo()
+	}
 	handleTouchStart(evt){
 		const coordinateX = evt.touches[0].clientX;
 		const coordinateY = evt.touches[0].clientY;
@@ -495,7 +501,7 @@ class SplashPage extends React.Component {
 					</div>
 				</div>
 				<div className="slides_wrapper" onTouchStart={this.handleTouchStart.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchEnd={this.handleTouchEnd.bind(this)} onWheel={this.handleWheelEvent.bind(this)} onScroll={this.handleScrollEvent.bind(this)}>
-					<Header options={headerOptions} scrollToFirstSlide={this.firstSlide}/>
+					<Header hasPhantomLogo={true} ref={this.headerElement} currIdx={this.state.currIdx} options={headerOptions} scrollToFirstSlide={this.firstSlide}/>
 					<div
 						ref="inner"
 						className={slides_inner_classes}

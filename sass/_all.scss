@@ -603,7 +603,7 @@ body {
 	height: 60px;
 	width: 250px;
 	cursor: pointer;
-
+	
 	&.fixed {
 		z-index: 0;
 		@for $i from 1 through 16 {//letters in string plus following line
@@ -647,6 +647,7 @@ body {
 			opacity: 1;
 		}
 	}
+	
 	&:hover {
 		.corner-logo {
 			transform: translateX($cornerLogoAnimateDistance);
@@ -677,6 +678,19 @@ body {
 		}
 		.separator {
 			border-left-color: #000;
+		}
+	}
+	&.phantomcornerLogoWrapper.animate {
+		display: none;
+		z-index: 1;
+		&.activated {
+			display: block;
+		}
+		.text .cascading-animation.letter,
+		.text .cascading-animation.separator,
+		.corner-logo {
+			animation-duration: 0s;
+			animation-delay: 0s;
 		}
 	}
 	.corner-logo {

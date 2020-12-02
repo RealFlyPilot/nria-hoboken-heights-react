@@ -72,26 +72,7 @@ class ContactForm extends React.Component {
 		const select2Styles = {
 			width: "100%"
 		};
-		const slideTopOffset = $('.contactForm').length ? $('.contactForm').closest('.slide').position().top : 0;
-		const contactFormTopOffset = $('.contactForm').length ? $('.contactForm').offset().top : 0;
-		const cornerLogoTopOffset = $('.corner-logo-wrapper.fixed').offset().top;
-		const cornerLogoHeight = $('.corner-logo-wrapper.fixed').height();
-		const cornerLogoLeft = $('.corner-logo-wrapper.fixed').position().left;
-		const phantomClickableLogoTopOffset = slideTopOffset + cornerLogoTopOffset;
 
-		let phantomClickableLogoHeight = cornerLogoHeight;
-		if (contactFormTopOffset <= cornerLogoTopOffset + cornerLogoHeight) {
-			phantomClickableLogoHeight = contactFormTopOffset - cornerLogoTopOffset > 0 ? contactFormTopOffset - cornerLogoTopOffset : 0;
-		}
-
-		const phantomClickableLogoStyles = {
-			position: "fixed",
-			top: phantomClickableLogoTopOffset,
-			left: cornerLogoLeft,
-			width: "400px",
-			height: phantomClickableLogoHeight,
-			cursor: "pointer"
-		};
 		const select2Initialized = $('.how_you_heard').hasClass("select2-hidden-accessible");
 		if (!select2Initialized) {
 			$('.how_you_heard').select2({
@@ -103,7 +84,6 @@ class ContactForm extends React.Component {
 		return React.createElement(
 			'form',
 			{ className: contactFormClasses },
-			React.createElement('div', { onClick: this.scrollToTop.bind(this), className: 'phantomClickableLogo', style: phantomClickableLogoStyles }),
 			React.createElement(
 				'div',
 				{ className: 'submittedFormOverlay' },
@@ -400,10 +380,21 @@ const modules = require('./modules.jsx');
 class Header extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			phantomLogoActivated: false
+		};
 	}
 	firstSlide() {
 		const { scrollToFirstSlide } = this.props;
 		scrollToFirstSlide();
+	}
+	cornerLogoAnimationEnded(e) {
+		if (e.target.classList.contains('corner-logo')) {
+			this.setState({ phantomLogoActivated: true });
+		}
+	}
+	deactivatePhantomLogo() {
+		this.setState({ phantomLogoActivated: false });
 	}
 	render() {
 		const slideHeaderState = this.props.options;
@@ -433,17 +424,36 @@ class Header extends React.Component {
 		if (cornerLogofadeIn) {
 			cornerLogoWrapperClasses += ' cornerLogofadeIn';
 		}
+
+		let phantomcornerLogoWrapperClasses = cornerLogoWrapperClasses + ' phantomcornerLogoWrapper';
+		if (this.state.phantomLogoActivated) phantomcornerLogoWrapperClasses += ' activated';
 		return React.createElement(
 			'div',
-			{ className: cornerLogoWrapperClasses, onClick: this.firstSlide.bind(this) },
+			null,
 			React.createElement(
 				'div',
-				{ className: 'text' },
-				modules.explodeString('HOBOKEN HEIGHTS'),
-				React.createElement('div', { className: 'cascading-animation separator' })
+				{ className: cornerLogoWrapperClasses, onClick: this.firstSlide.bind(this), onAnimationEnd: e => this.cornerLogoAnimationEnded(e) },
+				React.createElement(
+					'div',
+					{ className: 'text' },
+					modules.explodeString('HOBOKEN HEIGHTS'),
+					React.createElement('div', { className: 'cascading-animation separator' })
+				),
+				darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_Black.png' }),
+				!darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_White.png' })
 			),
-			darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_Black.png' }),
-			!darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_White.png' })
+			this.props.hasPhantomLogo && React.createElement(
+				'div',
+				{ className: phantomcornerLogoWrapperClasses, onClick: this.firstSlide.bind(this) },
+				React.createElement(
+					'div',
+					{ className: 'text' },
+					modules.explodeString('HOBOKEN HEIGHTS'),
+					React.createElement('div', { className: 'cascading-animation separator' })
+				),
+				darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_Black.png' }),
+				!darkCornerLogo && React.createElement('img', { className: 'corner-logo', src: '/assets/images/NIRMA_Logo_Symbol_White.png' })
+			)
 		);
 	}
 }
@@ -1223,6 +1233,7 @@ class SplashPage extends React.Component {
 		this.state.browser = browser;
 
 		this.mobileMenuElement = React.createRef();
+		this.headerElement = React.createRef();
 	}
 	componentDidMount() {
 		flypilotFetchWPRestAPI(this);
@@ -1421,7 +1432,7 @@ class SplashPage extends React.Component {
 		});
 
 		this.addIdxToViewedSlides(newIdx);
-		this.mobileMenuElement.current.closeMobileMenu();
+		this.handleSlideChange();
 	}
 	prevSlide() {
 		if (this.isTransitioning() || this.animationsStopped()) {
@@ -1440,7 +1451,7 @@ class SplashPage extends React.Component {
 			currIdx: newIdx
 		});
 		this.addIdxToViewedSlides(newIdx);
-		this.mobileMenuElement.current.closeMobileMenu();
+		this.handleSlideChange();
 	}
 	firstSlide() {
 		const newIdx = 0;
@@ -1454,7 +1465,7 @@ class SplashPage extends React.Component {
 			currIdx: newIdx
 		});
 		this.addIdxToViewedSlides(newIdx);
-		this.mobileMenuElement.current.closeMobileMenu();
+		this.handleSlideChange();
 	}
 	lastSlide() {
 		const newIdx = this.state.slides.length - 1;
@@ -1471,9 +1482,14 @@ class SplashPage extends React.Component {
 			currIdx: newIdx
 		});
 		this.addIdxToViewedSlides(newIdx);
-		this.mobileMenuElement.current.closeMobileMenu();
+		this.handleSlideChange();
 	}
 
+	handleSlideChange() {
+		this.mobileMenuElement.current.closeMobileMenu();
+		const notOnLastSlide = this.state.currIdx != this.state.slides.length - 1;
+		if (notOnLastSlide) this.headerElement.current.deactivatePhantomLogo();
+	}
 	handleTouchStart(evt) {
 		const coordinateX = evt.touches[0].clientX;
 		const coordinateY = evt.touches[0].clientY;
@@ -1608,7 +1624,7 @@ class SplashPage extends React.Component {
 			React.createElement(
 				'div',
 				{ className: 'slides_wrapper', onTouchStart: this.handleTouchStart.bind(this), onTouchMove: this.handleTouchMove.bind(this), onTouchEnd: this.handleTouchEnd.bind(this), onWheel: this.handleWheelEvent.bind(this), onScroll: this.handleScrollEvent.bind(this) },
-				React.createElement(Header, { options: headerOptions, scrollToFirstSlide: this.firstSlide }),
+				React.createElement(Header, { hasPhantomLogo: true, ref: this.headerElement, currIdx: this.state.currIdx, options: headerOptions, scrollToFirstSlide: this.firstSlide }),
 				React.createElement(
 					'div',
 					{
