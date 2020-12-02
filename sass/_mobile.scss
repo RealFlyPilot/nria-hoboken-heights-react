@@ -36,11 +36,23 @@
     margin-left: 10px;
 }
 
+html,
 body {
-    // overflow: hidden;//this is used only to prevent pull-to-refresh which can be triggered anytime the user tries to scroll up on a touch device
-    overscroll-behavior-y: contain;
-    height: calc(100vh + 1px);//possible fix for iOS address bar not hiding
-    background-color: #000000;//possible fix for iOS address bar not hiding
+    /*
+     * this is used only to prevent pull-to-refresh which can be triggered 
+     * anytime the user tries to scroll up on a touch device
+     * 
+     * This also prevents an issue where the background color of the body is 
+     * exposed during overscroll/elasticscroll behavior on iOS
+     * 
+     */
+    overflow: hidden;
+}
+body {
+    // overflow: hidden;
+    overscroll-behavior-y: contain;//this is used only to prevent pull-to-refresh which can be triggered anytime the user tries to scroll up on a touch device
+    // height: calc(100vh + 1px);//possible fix for iOS address bar not hiding
+    // background-color: #000000;//possible fix for iOS address bar not hiding
 }
 
 .formSubmitted {
