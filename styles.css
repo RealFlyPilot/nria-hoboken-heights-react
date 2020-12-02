@@ -380,7 +380,7 @@ body {
 .slide.runAnimations .center .contactButton {
   animation-delay: 1.1s;
   transition: all 0.25s;
-  border: solid #fff 2px;
+  border: solid #fff 1px;
 }
 .slide.runAnimations .center .contactButton:hover {
   color: #ffffff;
