@@ -99,6 +99,8 @@ class SplashPage extends React.Component {
 			browser ='firefox';
 		}
 		this.state.browser= browser;
+
+		this.mobileMenuElement = React.createRef()
 	}
 	componentDidMount() {
 		flypilotFetchWPRestAPI(this)
@@ -302,6 +304,7 @@ class SplashPage extends React.Component {
 		});
 
 		this.addIdxToViewedSlides(newIdx);
+		this.mobileMenuElement.current.closeMobileMenu()
 	}
 	prevSlide() {
 		if (this.isTransitioning() || this.animationsStopped()) {
@@ -320,6 +323,7 @@ class SplashPage extends React.Component {
 			currIdx: newIdx
 		});
 		this.addIdxToViewedSlides(newIdx);
+		this.mobileMenuElement.current.closeMobileMenu()
 	}
 	firstSlide() {
 		const newIdx = 0;
@@ -333,6 +337,7 @@ class SplashPage extends React.Component {
 			currIdx: newIdx
 		});
 		this.addIdxToViewedSlides(newIdx);
+		this.mobileMenuElement.current.closeMobileMenu()
 	}
 	lastSlide() {
 		const newIdx = this.state.slides.length - 1;
@@ -349,6 +354,7 @@ class SplashPage extends React.Component {
 			currIdx: newIdx
 		});
 		this.addIdxToViewedSlides(newIdx);
+		this.mobileMenuElement.current.closeMobileMenu()
 	}
 
 	handleTouchStart(evt){
@@ -498,7 +504,7 @@ class SplashPage extends React.Component {
 						{$slides}
 					</div>
 					<MusicPlayer toggleMusicPlayer={this.musicToggle} soundEffect={thisSlideSoundEffect} darkMode={darkCornerLogo} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} isFirstSlide={this.state.currIdx === 0} currIdx={this.state.currIdx} isPlaying={this.state.isPlaying}></MusicPlayer>
-					<MobileMenu currIdx={this.state.currIdx} scrollToLastSlide={this.lastSlide} isPlaying={this.state.isPlaying} toggleMusic={this.musicToggle} />
+					<MobileMenu ref={this.mobileMenuElement} currIdx={this.state.currIdx} scrollToLastSlide={this.lastSlide} isPlaying={this.state.isPlaying} toggleMusic={this.musicToggle} />
 				</div>
 			</div>
 		);
