@@ -12,10 +12,8 @@ class Header extends React.Component {
 		const {scrollToFirstSlide} = this.props;
 		scrollToFirstSlide();
 	}
-	cornerLogoAnimationEnded(e){
-		if(e.target.classList.contains('corner-logo')) {
-			this.setState({phantomLogoActivated: true})
-		}
+	activatePhantomLogo(){
+		this.setState({phantomLogoActivated: true})
 	}
 	deactivatePhantomLogo(){
 		this.setState({phantomLogoActivated: false})
@@ -53,7 +51,7 @@ class Header extends React.Component {
 		if(this.state.phantomLogoActivated) phantomcornerLogoWrapperClasses += ' activated'
 		return (
 			<div>
-				<div className={cornerLogoWrapperClasses} onClick={this.firstSlide.bind(this)} onAnimationEnd={e =>this.cornerLogoAnimationEnded(e)}>
+				<div className={cornerLogoWrapperClasses} onClick={this.firstSlide.bind(this)}>
 					<div className='text'>
 						{modules.explodeString('HOBOKEN HEIGHTS')}
 						<div className='cascading-animation separator' />

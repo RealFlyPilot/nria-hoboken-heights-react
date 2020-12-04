@@ -680,17 +680,23 @@ body {
 			border-left-color: #000;
 		}
 	}
-	&.phantomcornerLogoWrapper.animate {
-		display: none;
-		z-index: 1;
-		&.activated {
-			display: block;
-		}
-		.text .cascading-animation.letter,
-		.text .cascading-animation.separator,
-		.corner-logo {
-			animation-duration: 0s;
-			animation-delay: 0s;
+	&.phantomcornerLogoWrapper {
+		$phantomLogoEarlyAnimateTimeDifference: 0.5s;
+		opacity: 0;
+		transition: opacity 0.2s linear calc(#{$slideAnimationDuration} - #{$phantomLogoEarlyAnimateTimeDifference});
+		&.animate {
+			// display: none;
+			z-index: 1;
+			&.activated {
+				// display: block;
+				opacity: 1;
+			}
+			// .text .cascading-animation.letter,
+			// .text .cascading-animation.separator,
+			// .corner-logo {
+			// 	animation-duration: 0s;
+			// 	animation-delay: 0s;
+			// }
 		}
 	}
 	.corner-logo {

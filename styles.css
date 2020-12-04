@@ -833,18 +833,15 @@ body {
 .corner-logo-wrapper.darkMode .separator {
   border-left-color: #000;
 }
+.corner-logo-wrapper.phantomcornerLogoWrapper {
+  opacity: 0;
+  transition: opacity 0.2s linear calc(1400ms - 0.5s);
+}
 .corner-logo-wrapper.phantomcornerLogoWrapper.animate {
-  display: none;
   z-index: 1;
 }
 .corner-logo-wrapper.phantomcornerLogoWrapper.animate.activated {
-  display: block;
-}
-.corner-logo-wrapper.phantomcornerLogoWrapper.animate .text .cascading-animation.letter,
-.corner-logo-wrapper.phantomcornerLogoWrapper.animate .text .cascading-animation.separator,
-.corner-logo-wrapper.phantomcornerLogoWrapper.animate .corner-logo {
-  animation-duration: 0s;
-  animation-delay: 0s;
+  opacity: 1;
 }
 .corner-logo-wrapper .corner-logo {
   width: 110px;

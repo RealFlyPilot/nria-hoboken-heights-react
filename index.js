@@ -388,10 +388,8 @@ class Header extends React.Component {
 		const { scrollToFirstSlide } = this.props;
 		scrollToFirstSlide();
 	}
-	cornerLogoAnimationEnded(e) {
-		if (e.target.classList.contains('corner-logo')) {
-			this.setState({ phantomLogoActivated: true });
-		}
+	activatePhantomLogo() {
+		this.setState({ phantomLogoActivated: true });
 	}
 	deactivatePhantomLogo() {
 		this.setState({ phantomLogoActivated: false });
@@ -432,7 +430,7 @@ class Header extends React.Component {
 			null,
 			React.createElement(
 				'div',
-				{ className: cornerLogoWrapperClasses, onClick: this.firstSlide.bind(this), onAnimationEnd: e => this.cornerLogoAnimationEnded(e) },
+				{ className: cornerLogoWrapperClasses, onClick: this.firstSlide.bind(this) },
 				React.createElement(
 					'div',
 					{ className: 'text' },
@@ -1430,9 +1428,7 @@ class SplashPage extends React.Component {
 			transitiongState: 1,
 			currIdx: newIdx
 		});
-
-		this.addIdxToViewedSlides(newIdx);
-		this.handleSlideChange();
+		this.handleSlideChange(newIdx);
 	}
 	prevSlide() {
 		if (this.isTransitioning() || this.animationsStopped()) {
@@ -1450,8 +1446,7 @@ class SplashPage extends React.Component {
 			transitiongState: -1,
 			currIdx: newIdx
 		});
-		this.addIdxToViewedSlides(newIdx);
-		this.handleSlideChange();
+		this.handleSlideChange(newIdx);
 	}
 	firstSlide() {
 		const newIdx = 0;
@@ -1464,8 +1459,7 @@ class SplashPage extends React.Component {
 			transitiongState: 1,
 			currIdx: newIdx
 		});
-		this.addIdxToViewedSlides(newIdx);
-		this.handleSlideChange();
+		this.handleSlideChange(newIdx);
 	}
 	lastSlide() {
 		const newIdx = this.state.slides.length - 1;
@@ -1481,14 +1475,15 @@ class SplashPage extends React.Component {
 			transitiongState: 1,
 			currIdx: newIdx
 		});
-		this.addIdxToViewedSlides(newIdx);
-		this.handleSlideChange();
+		this.handleSlideChange(newIdx);
 	}
 
-	handleSlideChange() {
+	handleSlideChange(newIdx) {
+		this.addIdxToViewedSlides(newIdx);
+		const isLastSlide = newIdx == this.state.slides.length - 1;
 		this.mobileMenuElement.current.closeMobileMenu();
 		const notOnLastSlide = this.state.currIdx != this.state.slides.length - 1;
-		if (notOnLastSlide) this.headerElement.current.deactivatePhantomLogo();
+		if (isLastSlide) this.headerElement.current.activatePhantomLogo();else this.headerElement.current.deactivatePhantomLogo();
 	}
 	handleTouchStart(evt) {
 		const coordinateX = evt.touches[0].clientX;
