@@ -1083,7 +1083,7 @@ class Slide extends React.Component {
 				'div',
 				{ className: centerTextClasses, style: centerTextStyles },
 				slideObj.centerImage && React.createElement('img', { onClick: this.scrollToTop.bind(this), style: centerImageStyles, src: slideObj.centerImage }),
-				React.createElement('h1', { dangerouslySetInnerHTML: { __html: slideObj.center } }),
+				React.createElement('div', { className: 'centerContent', dangerouslySetInnerHTML: { __html: slideObj.center } }),
 				slideObj.contactButton && React.createElement(
 					'div',
 					{ className: 'btn contactButton', onClick: this.scrollToContactForm.bind(this) },

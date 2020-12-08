@@ -231,6 +231,11 @@ body {
 			}
 		}
 		.center {
+			.centerContent {
+				> p + p {
+					margin-top: 1em;
+				}
+			}
 			> h1,
 			.contactButton {
 				position: relative;
