@@ -78,6 +78,10 @@ class Slide extends React.Component {
 		const {formCleared} = this.props;
 		formCleared();
 	}
+	createHubspotForm(){
+		const {createHubspotContactForm} = this.props;
+		createHubspotContactForm();
+	}
 
 	render() {
 		this.playSoundEffect();
@@ -168,7 +172,7 @@ class Slide extends React.Component {
 					/>
 				}
 				{slideObj.contactFormSlide &&
-					<ContactFormSlide scrollToFirstSlide={this.scrollToTop.bind(this)} slideObj={slideObj} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} />
+					<ContactFormSlide scrollToFirstSlide={this.scrollToTop.bind(this)} slideObj={slideObj} createHubspotContactForm={this.createHubspotForm.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} />
 					
 				}
 				<div className={centerTextClasses} style={centerTextStyles}>

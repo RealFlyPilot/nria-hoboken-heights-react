@@ -21,11 +21,12 @@ class ContactForm extends React.Component {
 		jQuery(this.refs.how_you_heard).on("change", e => {
 			this.handleInputChange(e);
 		});
-		hbspt.forms.create({
-			portalId: "5163160",
-			formId: "4c41114a-2807-4884-b5e9-d6b49d56d217",
-			target: '#hubspotFormWrapper'
-		});
+		this.createHubspotForm(); //this is used to create the form on load
+	}
+
+	createHubspotForm() {
+		const { createHubspotContactForm } = this.props;
+		createHubspotContactForm();
 	}
 
 	handleInputChange(event) {
@@ -142,11 +143,16 @@ class ContactFormSlide extends React.Component {
 		scrollToFirstSlide();
 	}
 
+	createHubspotForm() {
+		const { createHubspotContactForm } = this.props;
+		createHubspotContactForm();
+	}
+
 	render() {
 		return React.createElement(
 			"div",
 			{ className: "contactPageWrapper" },
-			React.createElement(ContactForm, { scrollToFirstSlide: this.scrollToTop.bind(this), formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
+			React.createElement(ContactForm, { createHubspotContactForm: this.createHubspotForm.bind(this), scrollToFirstSlide: this.scrollToTop.bind(this), formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
 			React.createElement(
 				"div",
 				{ className: "privacyPolicy not-mobile" },
@@ -870,6 +876,10 @@ class Slide extends React.Component {
 		const { formCleared } = this.props;
 		formCleared();
 	}
+	createHubspotForm() {
+		const { createHubspotContactForm } = this.props;
+		createHubspotContactForm();
+	}
 
 	render() {
 		this.playSoundEffect();
@@ -954,7 +964,7 @@ class Slide extends React.Component {
 							</video>`
 				}
 			}),
-			slideObj.contactFormSlide && React.createElement(ContactFormSlide, { scrollToFirstSlide: this.scrollToTop.bind(this), slideObj: slideObj, formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
+			slideObj.contactFormSlide && React.createElement(ContactFormSlide, { scrollToFirstSlide: this.scrollToTop.bind(this), slideObj: slideObj, createHubspotContactForm: this.createHubspotForm.bind(this), formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this) }),
 			React.createElement(
 				'div',
 				{ className: centerTextClasses, style: centerTextStyles },
@@ -1442,6 +1452,24 @@ class SplashPage extends React.Component {
 	contactFormCleared() {
 		this.setState({ formSubmitted: null });
 		$('#page').removeClass('formSubmitted');
+		$('.contactPageWrapper .contactForm').outerHeight('auto');
+	}
+
+	createHubspotForm() {
+		let self = this;
+		hbspt.forms.create({
+			portalId: "5163160",
+			formId: "4c41114a-2807-4884-b5e9-d6b49d56d217",
+			target: '#hubspotFormWrapper',
+			onFormSubmit: function ($form) {
+				$('#page').addClass('formSubmitted');
+				const formHeight = $('.contactPageWrapper .contactForm').outerHeight();
+				$('.contactPageWrapper .contactForm').outerHeight(formHeight);
+			},
+			onFormSubmitted: function () {
+				self.createHubspotForm();
+			}
+		});
 	}
 
 	render() {
@@ -1451,7 +1479,7 @@ class SplashPage extends React.Component {
 			this.state.audioPlayer.pause();
 		}
 
-		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { scrollToFirstSlide: this.firstSlide, formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this), currIdx: this.state.currIdx, playMusic: this.musicPlay, stopMusic: this.musicMute, slideViewed: this.state.slidesViewed.includes(idx), goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx, isPlaying: this.state.isPlaying }));
+		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { scrollToFirstSlide: this.firstSlide, createHubspotContactForm: this.createHubspotForm.bind(this), formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this), currIdx: this.state.currIdx, playMusic: this.musicPlay, stopMusic: this.musicMute, slideViewed: this.state.slidesViewed.includes(idx), goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx, isPlaying: this.state.isPlaying }));
 		const innerStyle = {
 			transform: 'translateY(-' + this.state.currIdx * 100 + 'vh)'
 		};

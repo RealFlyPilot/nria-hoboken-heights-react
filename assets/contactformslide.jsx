@@ -19,10 +19,15 @@ class ContactFormSlide extends React.Component {
 		scrollToFirstSlide()
 	}
 
+	createHubspotForm(){
+		const {createHubspotContactForm} = this.props;
+		createHubspotContactForm();
+	}
+
 	render(){
 		return (
 			<div className="contactPageWrapper">
-				<ContactForm scrollToFirstSlide={this.scrollToTop.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} />
+				<ContactForm createHubspotContactForm={this.createHubspotForm.bind(this)} scrollToFirstSlide={this.scrollToTop.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} />
 				<div className="privacyPolicy not-mobile">
 					<div className="verticalLineContainer">
 						<div className="verticalLine" />

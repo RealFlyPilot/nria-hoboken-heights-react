@@ -125,6 +125,7 @@ class SplashPage extends React.Component {
 			})
 			window.addEventListener('resize', () => this.handleResize())
 		}
+
 	}
 
 	/*
@@ -453,6 +454,25 @@ class SplashPage extends React.Component {
 	contactFormCleared(){
 		this.setState({ formSubmitted: null })
 		$('#page').removeClass('formSubmitted')
+		$('.contactPageWrapper .contactForm').outerHeight('auto')
+		
+	}
+
+	createHubspotForm(){
+		let self = this
+		hbspt.forms.create({
+			portalId: "5163160",
+			formId: "4c41114a-2807-4884-b5e9-d6b49d56d217",
+			target: '#hubspotFormWrapper',
+			onFormSubmit: function($form) {
+				$('#page').addClass('formSubmitted')
+				const formHeight = $('.contactPageWrapper .contactForm').outerHeight()
+				$('.contactPageWrapper .contactForm').outerHeight(formHeight)
+			},
+			onFormSubmitted: function() {
+				self.createHubspotForm()
+			}
+		});
 	}
 
 
@@ -464,7 +484,7 @@ class SplashPage extends React.Component {
 		}
 
 		const $slides = this.state.slides.map((slide, idx) =>
-			<Slide scrollToFirstSlide={this.firstSlide} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
+			<Slide scrollToFirstSlide={this.firstSlide}  createHubspotContactForm={this.createHubspotForm.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
 		);
 		const innerStyle = {
 			transform: 'translateY(-' + (this.state.currIdx * 100) + 'vh)'

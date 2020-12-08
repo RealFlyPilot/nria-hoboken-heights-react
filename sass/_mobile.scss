@@ -285,6 +285,67 @@ body {
             
             .contactPageWrapper {
                 .contactForm {
+                    .hubspotFormWrapper {
+                        .hs-nested-form-fix {
+                            .hs-form {
+                                .form-columns-0 {//fine print
+                                    font-size: 9px;
+                                    margin-top: 14px;
+                                }
+                                .form-columns-2 {
+                                    .hs-form-field {
+                                        width: 100%;
+                                        > label,
+                                        .input,
+                                        .hs-error-msgs {
+                                            margin-right: 0;
+                                            margin-left: 0;
+                                        }
+                                    }
+                                }
+                                .hs-form-field {
+                                    margin-top: 21px;
+                                    @include placeholder {
+                                        color: #000;
+                                    }
+                                    > label {
+                                        display: none;
+                                    }
+                                    .input > input,
+                                    .input > textarea {
+                                        height: 68px;
+                                        margin-top: 0;
+                                        padding: 11px;
+                                        font-size: 15px;
+                                        color: #000000;
+                                        
+                                        &.textarea {
+                                            height: 136px;
+                                        }
+                                    }
+                                    .select2-container--default .select2-selection--single {
+                                        height: 68px;
+                                        display: flex;
+                                        align-items: center;
+                                        .select2-selection__arrow {
+                                            top: auto;
+                                            > b {
+                                                border-width: 12px 8px 0 8px;
+                                                margin-left: -20px;
+                                            }
+                                        }
+                                        .select2-selection__rendered {
+                                            font-size: 15px;
+                                            color: #000000;
+                                            .select2-selection__placeholder {
+                                                color: #000000;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                     position: static;
                     width: 100%;
                     margin-bottom: 0;

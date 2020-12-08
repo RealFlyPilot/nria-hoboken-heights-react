@@ -9,6 +9,7 @@
             .hubspotFormWrapper {
                 .hs-nested-form-fix .hs-form {
                     .select2-container--default {
+                        margin-top: 16px;
                         .select2-selection--single {
                             .select2-selection__arrow {
                                 top: 5px;
@@ -33,7 +34,7 @@
                     }
                 }
             }
-
+            
             .form-control .select2-container--default .select2-selection--single .select2-selection__arrow {
                 top: 5px;
                 right: 18px;

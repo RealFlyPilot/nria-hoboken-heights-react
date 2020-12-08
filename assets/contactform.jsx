@@ -21,13 +21,12 @@ class ContactForm extends React.Component {
 		jQuery(this.refs.how_you_heard).on("change",  (e)=> {
 			this.handleInputChange(e)
 		})
-		hbspt.forms.create({
-			portalId: "5163160",
-			formId: "4c41114a-2807-4884-b5e9-d6b49d56d217",
-			target: '#hubspotFormWrapper'
-		});
-		
+		this.createHubspotForm()//this is used to create the form on load
+	}
 
+	createHubspotForm(){
+		const {createHubspotContactForm} = this.props;
+		createHubspotContactForm();
 	}
 
 	handleInputChange(event) {

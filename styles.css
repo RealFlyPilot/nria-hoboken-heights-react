@@ -561,9 +561,6 @@ body {
 .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .input > textarea {
   height: 80px;
 }
-.slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .select2-container--default {
-  margin-top: 16px;
-}
 .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .select2-container--default .select2-selection--single {
   border: none;
   border-radius: 0;
@@ -960,6 +957,9 @@ body {
     display: none !important;
   }
 
+  .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .select2-container--default {
+    margin-top: 16px;
+  }
   .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .select2-container--default .select2-selection--single .select2-selection__arrow {
     top: 5px;
     right: 18px;
@@ -1270,6 +1270,68 @@ body {
     position: static;
     width: 100%;
     margin-bottom: 0;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .form-columns-0 {
+    font-size: 9px;
+    margin-top: 14px;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .form-columns-2 .hs-form-field {
+    width: 100%;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .form-columns-2 .hs-form-field > label,
+.slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .form-columns-2 .hs-form-field .input,
+.slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .form-columns-2 .hs-form-field .hs-error-msgs {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field {
+    margin-top: 21px;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field ::-webkit-input-placeholder {
+    color: #000;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field :-moz-placeholder {
+    color: #000;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field ::-moz-placeholder {
+    color: #000;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field :-ms-input-placeholder {
+    color: #000;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field > label {
+    display: none;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .input > input,
+.slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .input > textarea {
+    height: 68px;
+    margin-top: 0;
+    padding: 11px;
+    font-size: 15px;
+    color: #000000;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .input > input.textarea,
+.slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .input > textarea.textarea {
+    height: 136px;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .select2-container--default .select2-selection--single {
+    height: 68px;
+    display: flex;
+    align-items: center;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: auto;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .select2-container--default .select2-selection--single .select2-selection__arrow > b {
+    border-width: 12px 8px 0 8px;
+    margin-left: -20px;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .select2-container--default .select2-selection--single .select2-selection__rendered {
+    font-size: 15px;
+    color: #000000;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .select2-container--default .select2-selection--single .select2-selection__rendered .select2-selection__placeholder {
+    color: #000000;
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm.submitted .submittedFormOverlay {
     position: fixed;
