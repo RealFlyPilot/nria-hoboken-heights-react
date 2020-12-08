@@ -14,6 +14,21 @@ class ContactForm extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.resetForm = this.resetForm.bind(this);
 	}
+	
+
+	componentDidMount() {
+		//This is a fix to detect changes on the select2
+		jQuery(this.refs.how_you_heard).on("change",  (e)=> {
+			this.handleInputChange(e)
+		})
+		hbspt.forms.create({
+			portalId: "5163160",
+			formId: "4c41114a-2807-4884-b5e9-d6b49d56d217",
+			target: '#hubspotFormWrapper'
+		});
+		
+
+	}
 
 	handleInputChange(event) {
 		const target = event.target;
@@ -56,15 +71,10 @@ class ContactForm extends React.Component {
 	}
 
 
-	componentDidMount() {
-
-		//This is a fix to detect changes on the select2
-		jQuery(this.refs.how_you_heard).on("change",  (e)=> {
-			this.handleInputChange(e)
-		})
-	}
+	
 
     render() {
+		
 		let contactFormClasses = 'contactForm';
 		// if(this.state.formSubmitted){
 		// 	contactFormClasses += ' submitted'
@@ -75,7 +85,12 @@ class ContactForm extends React.Component {
 
 		const select2Initialized = $('.how_you_heard').hasClass("select2-hidden-accessible")
 		if(!select2Initialized) {
-			$('.how_you_heard').select2({
+			// $('.how_you_heard').select2({
+			// 	placeholder: "How did you hear of us?*",
+			// 	width: 'resolve',
+			// 	minimumResultsForSearch: -1
+			// });
+			$('#how_did_you_hear_of_us_-4c41114a-2807-4884-b5e9-d6b49d56d217').select2({
 				placeholder: "How did you hear of us?*",
 				width: 'resolve',
 				minimumResultsForSearch: -1
@@ -90,7 +105,8 @@ class ContactForm extends React.Component {
 					</div>
 				</div>
 				<div className='headline'>FOR INFORMATION PLEASE FILL THE FORM BELOW</div>
-				<div className="two-input-group">
+				<div className="hubspotFormWrapper" id="hubspotFormWrapper"></div>
+				{/* <div className="two-input-group">
 					<div className="form-control">
 						<label className="label">First Name*</label>
 						<input className="input"
@@ -162,7 +178,7 @@ class ContactForm extends React.Component {
 						<img className='rightArrow' src='/assets/images/mobileSubmitArrow.svg' />
 					</div>
 					
-				</div>
+				</div> */}
 			</form>
 		);
 	}

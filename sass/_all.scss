@@ -362,6 +362,7 @@ body {
 		height: 100%;
 	}
 	.contactForm {
+		// display: none;
 		position: absolute;
 		left: 100px;
 		top: 175px;
@@ -369,6 +370,94 @@ body {
 		padding: 53px;
 		width: 44vw;
 		margin-bottom: 53px;
+		.hubspotFormWrapper {
+			.hs-nested-form-fix {
+				.hs-form {
+					.form-columns-2 {
+						.hs-form-field {
+							> label,
+							.input,
+							.hs-error-msgs {
+								margin-right: 16px;
+							}
+							+ .hs-form-field {
+								> label,
+								.input,
+								.hs-error-msgs {
+									margin-left: 16px;
+									margin-right: 0;
+								}
+							}
+						}
+					}
+					.form-columns-1,
+					.form-columns-2 {
+						max-width: none;
+					}
+
+					.form-columns-1 {
+						.hs-input {
+							width: 100%;
+						}
+					}
+					.form-columns-0 {//fine print
+						font-size: 10px;
+						line-height: 1.4em;
+						color: #000;
+						margin-top: 18px;
+						letter-spacing: 1px;
+					}
+					.hs-form-field {
+						letter-spacing: 1px;
+						@extend .gotham-light;
+						> label {
+							display: block;
+							color: #000;
+							font-size: 14.2px;
+							line-height: 19.88px;
+							margin-top: 24px;
+						}
+						.input {
+							margin-right: 0;
+							> input,
+							> textarea {
+								margin-top: 16px;
+								background-color: #fff;
+								height: 44px;
+								border: none 0 transparent;
+								width: 100%;
+								font-size: 20px;
+								@extend .gotham-light;
+								letter-spacing: 4.4px;
+								padding: 10px;
+							}
+							> textarea {
+								height: 80px;
+							}
+						}
+					}
+					.select2-container--default {
+						$select2_height: 44px;
+						margin-top: 16px;
+						.select2-selection--single {
+							border: none;
+							border-radius: 0;
+							height: $select2_height;
+							.select2-selection__rendered {
+								letter-spacing: 4.4px;
+								line-height: $select2_height;
+							}
+							.select2-selection__arrow {
+								b {
+									border-color: #000 transparent transparent transparent;
+									border-width: 13px 7px 0 7px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 		
 		.headline {
 			font-size: 14px;

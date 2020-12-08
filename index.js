@@ -16,6 +16,18 @@ class ContactForm extends React.Component {
 		this.resetForm = this.resetForm.bind(this);
 	}
 
+	componentDidMount() {
+		//This is a fix to detect changes on the select2
+		jQuery(this.refs.how_you_heard).on("change", e => {
+			this.handleInputChange(e);
+		});
+		hbspt.forms.create({
+			portalId: "5163160",
+			formId: "4c41114a-2807-4884-b5e9-d6b49d56d217",
+			target: '#hubspotFormWrapper'
+		});
+	}
+
 	handleInputChange(event) {
 		const target = event.target;
 		const value = target.value;
@@ -56,15 +68,8 @@ class ContactForm extends React.Component {
 		scrollToFirstSlide();
 	}
 
-	componentDidMount() {
-
-		//This is a fix to detect changes on the select2
-		jQuery(this.refs.how_you_heard).on("change", e => {
-			this.handleInputChange(e);
-		});
-	}
-
 	render() {
+
 		let contactFormClasses = 'contactForm';
 		// if(this.state.formSubmitted){
 		// 	contactFormClasses += ' submitted'
@@ -75,7 +80,12 @@ class ContactForm extends React.Component {
 
 		const select2Initialized = $('.how_you_heard').hasClass("select2-hidden-accessible");
 		if (!select2Initialized) {
-			$('.how_you_heard').select2({
+			// $('.how_you_heard').select2({
+			// 	placeholder: "How did you hear of us?*",
+			// 	width: 'resolve',
+			// 	minimumResultsForSearch: -1
+			// });
+			$('#how_did_you_hear_of_us_-4c41114a-2807-4884-b5e9-d6b49d56d217').select2({
 				placeholder: "How did you hear of us?*",
 				width: 'resolve',
 				minimumResultsForSearch: -1
@@ -103,141 +113,7 @@ class ContactForm extends React.Component {
 				{ className: 'headline' },
 				'FOR INFORMATION PLEASE FILL THE FORM BELOW'
 			),
-			React.createElement(
-				'div',
-				{ className: 'two-input-group' },
-				React.createElement(
-					'div',
-					{ className: 'form-control' },
-					React.createElement(
-						'label',
-						{ className: 'label' },
-						'First Name*'
-					),
-					React.createElement('input', { className: 'input',
-						name: 'first_name',
-						type: 'text',
-						value: this.state.first_name,
-						onChange: this.handleInputChange,
-						placeholder: 'First Name*' })
-				),
-				React.createElement(
-					'div',
-					{ className: 'form-control' },
-					React.createElement(
-						'label',
-						{ className: 'label' },
-						'Last Name*'
-					),
-					React.createElement('input', { className: 'input',
-						name: 'last_name',
-						type: 'text',
-						value: this.state.last_name,
-						onChange: this.handleInputChange,
-						placeholder: 'Last Name*' })
-				)
-			),
-			React.createElement(
-				'div',
-				{ className: 'form-control' },
-				React.createElement(
-					'label',
-					{ className: 'label' },
-					'E-mail*'
-				),
-				React.createElement('input', { className: 'input',
-					name: 'email',
-					type: 'text',
-					value: this.state.email,
-					onChange: this.handleInputChange,
-					placeholder: 'E-mail*' })
-			),
-			React.createElement(
-				'div',
-				{ className: 'form-control' },
-				React.createElement(
-					'label',
-					{ className: 'label' },
-					'Mobile Phone Number*'
-				),
-				React.createElement('input', { className: 'input',
-					name: 'mobilephone',
-					type: 'text',
-					value: this.state.mobilephone,
-					onChange: this.handleInputChange,
-					placeholder: 'Mobile Phone Number*' })
-			),
-			React.createElement(
-				'div',
-				{ className: 'form-control' },
-				React.createElement(
-					'label',
-					{ className: 'label' },
-					'How did you hear of us?*'
-				),
-				React.createElement(
-					'select',
-					{ style: select2Styles,
-						className: 'how_you_heard',
-						value: this.state.how_you_heard,
-						name: 'how_you_heard',
-						onChange: this.handleInputChange,
-						ref: 'how_you_heard'
-					},
-					React.createElement('option', { className: 'emptyOption' }),
-					React.createElement(
-						'option',
-						{ value: 'Google' },
-						'Google'
-					),
-					React.createElement(
-						'option',
-						{ value: 'Friend' },
-						'Friend'
-					),
-					React.createElement(
-						'option',
-						{ value: 'Newspaper' },
-						'Newspaper'
-					)
-				)
-			),
-			React.createElement(
-				'div',
-				{ className: 'form-control' },
-				React.createElement(
-					'label',
-					{ className: 'label' },
-					'How may we help you?*'
-				),
-				React.createElement('textarea', { className: 'input textarea',
-					name: 'how_can_we_help',
-					type: 'text',
-					value: this.state.how_can_we_help,
-					onChange: this.handleInputChange,
-					placeholder: 'How may we help you?*' })
-			),
-			React.createElement(
-				'div',
-				{ className: 'fine-print' },
-				'NOTE: By filling out this contact form, I give you my permission to contact me via email, cell phone, or text until I opt out of any such communications.'
-			),
-			React.createElement(
-				'div',
-				{ className: 'rightArrowContainer' },
-				React.createElement('img', { className: 'rightArrow not-mobile', src: '/assets/images/rightarrow.svg', onClick: this.handleSubmit }),
-				React.createElement('img', { className: 'logo mobile-only', src: '/assets/images/NRIA_Logo--White.png' }),
-				React.createElement(
-					'div',
-					{ className: 'mobileRightArrowContainer mobile-only', onClick: this.handleSubmit },
-					React.createElement(
-						'div',
-						{ className: 'text gotham-medium' },
-						'SEND'
-					),
-					React.createElement('img', { className: 'rightArrow', src: '/assets/images/mobileSubmitArrow.svg' })
-				)
-			)
+			React.createElement('div', { className: 'hubspotFormWrapper', id: 'hubspotFormWrapper' })
 		);
 	}
 }
@@ -1565,6 +1441,7 @@ class SplashPage extends React.Component {
 	}
 	contactFormCleared() {
 		this.setState({ formSubmitted: null });
+		$('#page').removeClass('formSubmitted');
 	}
 
 	render() {

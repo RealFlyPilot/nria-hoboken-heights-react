@@ -452,6 +452,7 @@ class SplashPage extends React.Component {
 	}
 	contactFormCleared(){
 		this.setState({ formSubmitted: null })
+		$('#page').removeClass('formSubmitted')
 	}
 
 
