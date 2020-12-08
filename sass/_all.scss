@@ -407,6 +407,24 @@ body {
 						margin-top: 18px;
 						letter-spacing: 1px;
 					}
+					.hs-submit {
+						.actions {
+							text-align: right;
+							.hs-button {
+								background-image: url(/assets/images/rightarrow.svg);
+								background-color: transparent;
+								border: none 0 transparent;
+								background-size: contain;
+								background-repeat: no-repeat;
+								color: transparent;
+								height: 37px;
+								cursor: pointer;
+								background-position: center;
+								width: 51px;
+								padding: 0;
+							}
+						}
+					}
 					.hs-form-field {
 						letter-spacing: 1px;
 						@extend .gotham-light;

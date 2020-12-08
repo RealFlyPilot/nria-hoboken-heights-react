@@ -518,6 +518,22 @@ body {
   margin-top: 18px;
   letter-spacing: 1px;
 }
+.slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-submit .actions {
+  text-align: right;
+}
+.slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-submit .actions .hs-button {
+  background-image: url(/assets/images/rightarrow.svg);
+  background-color: transparent;
+  border: none 0 transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: transparent;
+  height: 37px;
+  cursor: pointer;
+  background-position: center;
+  width: 51px;
+  padding: 0;
+}
 .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field {
   letter-spacing: 1px;
 }
@@ -947,6 +963,25 @@ body {
   .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .select2-container--default .select2-selection--single .select2-selection__arrow {
     top: 5px;
     right: 18px;
+  }
+  .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .hs-input::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: transparent;
+  }
+  .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .hs-input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: transparent;
+  }
+  .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .hs-input::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: transparent;
+  }
+  .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .hs-input:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: transparent;
+  }
+  .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .select2-selection__placeholder {
+    color: transparent;
   }
   .slide .contactPageWrapper .contactForm .form-control .select2-container--default .select2-selection--single .select2-selection__arrow {
     top: 5px;

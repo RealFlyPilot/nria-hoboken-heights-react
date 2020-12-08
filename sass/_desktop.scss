@@ -16,6 +16,21 @@
                             }
                         }
                     }
+                    .hs-form-field .hs-input::-webkit-input-placeholder { /* WebKit browsers */
+                        color: transparent;
+                    }
+                    .hs-form-field .hs-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                       color: transparent;
+                    }
+                    .hs-form-field .hs-input::-moz-placeholder { /* Mozilla Firefox 19+ */
+                       color: transparent;
+                    }
+                    .hs-form-field .hs-input:-ms-input-placeholder { /* Internet Explorer 10+ */
+                       color: transparent;
+                    }
+                    .select2-selection__placeholder {
+                        color: transparent;
+                    }
                 }
             }
 
