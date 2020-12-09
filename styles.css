@@ -493,6 +493,10 @@ body {
   width: 44vw;
   margin-bottom: 53px;
 }
+.slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-error-msgs {
+  margin-top: 7px;
+  font-size: 0.8em;
+}
 .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .form-columns-2 .hs-form-field > label,
 .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .form-columns-2 .hs-form-field .input,
 .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .form-columns-2 .hs-form-field .hs-error-msgs {

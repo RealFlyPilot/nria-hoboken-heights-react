@@ -373,6 +373,10 @@ body {
 		.hubspotFormWrapper {
 			.hs-nested-form-fix {
 				.hs-form {
+					.hs-error-msgs {
+						margin-top: 7px;
+						font-size: 0.8em;
+					}
 					.form-columns-2 {
 						.hs-form-field {
 							> label,
