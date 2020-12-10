@@ -974,7 +974,7 @@ body {
     display: none !important;
   }
 
-  .slide .videoContainer {
+  .slide.fullWidthVideo .videoContainer {
     width: 100%;
   }
   .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .select2-container--default {

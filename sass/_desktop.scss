@@ -4,8 +4,10 @@
 
 
 .slide {
-    .videoContainer {
-        width: 100%;
+    &.fullWidthVideo {
+        .videoContainer {
+            width: 100%;
+        }
     }
     .contactPageWrapper {
         .contactForm {

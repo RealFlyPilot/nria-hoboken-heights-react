@@ -69,6 +69,7 @@ const flypilotParseData = (self, acf_data) => {
 		sound_choice_start: page_data.sound_choice,
 		sound_choice_stop: page_data.no_choice,
 	}, {
+		slideClasses: "fullWidthVideo",
 		video: page_data.background_video_second,
 		videoLoop: true,
 		videoZoomEffect: true,
@@ -139,6 +140,7 @@ const flypilotParseData = (self, acf_data) => {
 		
 		// background: "#000"
 	}, {
+		slideClasses: "fullWidthVideo",
 		video: page_data.background_video_four,
 		videoLoop: true,
 		videoZoomEffect: true,
