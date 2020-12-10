@@ -104,7 +104,9 @@ class ContactForm extends React.Component {
 					</div>
 				</div>
 				<div className='headline'>FOR INFORMATION PLEASE FILL THE FORM BELOW</div>
-				<div className="hubspotFormWrapper" id="hubspotFormWrapper"></div>
+				<div className="hubspotFormWrapper" id="hubspotFormWrapper">
+
+				</div>
 				{/* <div className="two-input-group">
 					<div className="form-control">
 						<label className="label">First Name*</label>

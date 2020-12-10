@@ -410,6 +410,17 @@ body {
 						color: #000;
 						margin-top: 18px;
 						letter-spacing: 1px;
+						.recaptcha_branding {
+							margin-top: 10px;
+							> a {
+								text-decoration: none;
+								color: #000;
+							}
+						}
+					}
+					.grecaptcha-badge { visibility: hidden; }
+					.hs_recaptcha {
+						height: 20px;
 					}
 					.hs-submit {
 						.actions {

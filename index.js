@@ -1457,6 +1457,7 @@ class SplashPage extends React.Component {
 
 	createHubspotForm() {
 		let self = this;
+		const recaptcha_branding = `<div class='recaptcha_branding'>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</div>`;
 		hbspt.forms.create({
 			portalId: "5163160",
 			formId: "4c41114a-2807-4884-b5e9-d6b49d56d217",
@@ -1465,6 +1466,9 @@ class SplashPage extends React.Component {
 				$('#page').addClass('formSubmitted');
 				const formHeight = $('.contactPageWrapper .contactForm').outerHeight();
 				$('.contactPageWrapper .contactForm').outerHeight(formHeight);
+			},
+			onFormReady: function () {
+				$("#hubspotFormWrapper .form-columns-0").append(recaptcha_branding);
 			},
 			onFormSubmitted: function () {
 				self.createHubspotForm();

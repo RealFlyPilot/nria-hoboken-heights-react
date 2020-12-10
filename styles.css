@@ -522,6 +522,19 @@ body {
   margin-top: 18px;
   letter-spacing: 1px;
 }
+.slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .form-columns-0 .recaptcha_branding {
+  margin-top: 10px;
+}
+.slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .form-columns-0 .recaptcha_branding > a {
+  text-decoration: none;
+  color: #000;
+}
+.slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .grecaptcha-badge {
+  visibility: hidden;
+}
+.slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs_recaptcha {
+  height: 20px;
+}
 .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-submit .actions {
   text-align: right;
 }
