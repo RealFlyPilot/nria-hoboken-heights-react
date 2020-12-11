@@ -6,8 +6,12 @@
 .slide {
     &.fullWidthVideo {
         .videoContainer {
-            width: 100%;
+            width: 100%;//video letterboxing prevention
         }
+    }
+    &.backgroundFrame {
+        background-size: cover;
+        background-position: center bottom;
     }
     .contactPageWrapper {
         .contactForm {

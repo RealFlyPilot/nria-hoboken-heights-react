@@ -977,6 +977,10 @@ body {
   .slide.fullWidthVideo .videoContainer {
     width: 100%;
   }
+  .slide.backgroundFrame {
+    background-size: cover;
+    background-position: center bottom;
+  }
   .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .select2-container--default {
     margin-top: 16px;
   }
