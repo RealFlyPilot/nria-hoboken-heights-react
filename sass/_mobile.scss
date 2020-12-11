@@ -57,10 +57,16 @@ body {
 
 #page {
     &.iPhone {
-        .slide {
+        .slides_wrapper .slides_inner .slide {
             .centerBottom {
                 bottom: 17vh;
             }
+            .contactPageWrapper .mobilePrivacyPolicy {
+                padding-bottom: 165px;
+            }
+        }
+        .slide {
+            
         }
     }
 }
