@@ -55,6 +55,16 @@ body {
     // background-color: #000000;//possible fix for iOS address bar not hiding
 }
 
+#page {
+    &.iPhone {
+        .slide {
+            .centerBottom {
+                bottom: 17vh;
+            }
+        }
+    }
+}
+
 .formSubmitted {
     .submittedFormOverlay.mobile-only {
         position: fixed;

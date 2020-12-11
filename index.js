@@ -1049,6 +1049,7 @@ class SplashPage extends React.Component {
 			readyForScroll: 1,
 			browser: '',
 			operating_sys: '',
+			isiPhone: '',
 			touchState: 0, //0 for end, 1 for start, 2 for move
 			touchDirection: null,
 			touchStartCoordinate: {
@@ -1126,6 +1127,8 @@ class SplashPage extends React.Component {
 
 		this.mobileMenuElement = React.createRef();
 		this.headerElement = React.createRef();
+
+		this.state.isiPhone = navigator.platform == "iPhone";
 	}
 	componentDidMount() {
 		flypilotFetchWPRestAPI(this);
@@ -1516,6 +1519,7 @@ class SplashPage extends React.Component {
 		let slides_inner_classes = "slides_inner slide_idx_" + this.state.currIdx;
 
 		let pageClasses = this.state.formSubmitted ? 'formSubmitted' : '';
+		pageClasses += isiPhone ? ' iPhone' : '';
 		return React.createElement(
 			'div',
 			{ id: 'page', className: pageClasses },

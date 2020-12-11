@@ -1107,6 +1107,10 @@ body {
     overscroll-behavior-y: contain;
   }
 
+  #page.iPhone .slide .centerBottom {
+    bottom: 17vh;
+  }
+
   .formSubmitted .submittedFormOverlay.mobile-only {
     position: fixed;
   }
