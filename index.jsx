@@ -128,7 +128,6 @@ class SplashPage extends React.Component {
 			})
 			window.addEventListener('resize', () => this.handleResize())
 		}
-
 	}
 
 	/*
@@ -462,6 +461,7 @@ class SplashPage extends React.Component {
 	}
 
 	createHubspotForm(){
+		return;
 		let self = this
 		const recaptcha_branding = `<div class='recaptcha_branding'>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</div>`;
 		hbspt.forms.create({

@@ -23,7 +23,6 @@ class MobileMenu extends React.Component {
 		this.setState({mobileMenuOpen: 0});
 	}
 	render() {
-		
 		let mobileMenuClasses = 'mobileMenu';
 		let expandedMobileMenuClasses = 'expandedMobileMenu';
 		let hamburgerClasses = 'hamburger';
