@@ -56,10 +56,14 @@ body {
 }
 
 #page {
+    //iPhone specific issues because the bottom toolbar doesnt disappear when scrolling
     &.iPhone {
         .slides_wrapper .slides_inner .slide {
             .centerBottom {
                 bottom: 17vh;
+            }
+            .center .contactButton {
+                margin-bottom: 50px;
             }
             .contactPageWrapper .mobilePrivacyPolicy {
                 padding-bottom: 165px;

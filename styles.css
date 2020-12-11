@@ -1110,6 +1110,9 @@ body {
   #page.iPhone .slides_wrapper .slides_inner .slide .centerBottom {
     bottom: 17vh;
   }
+  #page.iPhone .slides_wrapper .slides_inner .slide .center .contactButton {
+    margin-bottom: 50px;
+  }
   #page.iPhone .slides_wrapper .slides_inner .slide .contactPageWrapper .mobilePrivacyPolicy {
     padding-bottom: 165px;
   }
