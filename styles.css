@@ -583,6 +583,9 @@ body {
 .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .input > textarea {
   height: 80px;
 }
+.slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .select2-container--default {
+  width: 100%;
+}
 .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .select2-container--default .select2-selection--single {
   border: none;
   border-radius: 0;
