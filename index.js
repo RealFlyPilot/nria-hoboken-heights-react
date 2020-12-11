@@ -734,6 +734,7 @@ const flypilotParseData = (self, acf_data) => {
 			marginBottom: "40px"
 		},
 		center: page_data.content_third,
+		centerTagline: page_data.tagline_third,
 		centerTextClasses: 'gotham-light',
 		centerTextStyles: {
 			width: "56vw"
@@ -971,6 +972,11 @@ class Slide extends React.Component {
 				'div',
 				{ className: centerTextClasses, style: centerTextStyles },
 				slideObj.centerImage && React.createElement('img', { onClick: this.scrollToTop.bind(this), style: centerImageStyles, src: slideObj.centerImage }),
+				slideObj.centerTagline && React.createElement(
+					'p',
+					{ className: 'centerTagline' },
+					slideObj.centerTagline
+				),
 				React.createElement('div', { className: 'centerContent', dangerouslySetInnerHTML: { __html: slideObj.center } }),
 				slideObj.contactButton && React.createElement(
 					'div',

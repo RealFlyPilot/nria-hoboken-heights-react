@@ -127,6 +127,7 @@ const flypilotParseData = (self, acf_data) => {
 			marginBottom: "40px"
 		},
 		center: page_data.content_third,
+		centerTagline: page_data.tagline_third,
 		centerTextClasses: 'gotham-light',
 		centerTextStyles: {
 			width: "56vw",

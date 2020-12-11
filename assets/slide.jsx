@@ -179,6 +179,9 @@ class Slide extends React.Component {
 					{slideObj.centerImage &&
 						<img onClick={this.scrollToTop.bind(this)} style={centerImageStyles} src={slideObj.centerImage}/>
 					}
+					{slideObj.centerTagline &&
+						<p className="centerTagline">{slideObj.centerTagline}</p>
+					}
 					<div className="centerContent" dangerouslySetInnerHTML={{ __html: slideObj.center }} />
 					{slideObj.contactButton &&
 						<div className='btn contactButton' onClick={this.scrollToContactForm.bind(this)}>{slideObj.buttonText}</div>

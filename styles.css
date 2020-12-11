@@ -365,6 +365,10 @@ body {
 .slide.runAnimations .centerBottom > h1 + h1 {
   animation-delay: 0.7s;
 }
+.slide.runAnimations .center .centerTagline {
+  margin-bottom: 1em;
+  text-transform: uppercase;
+}
 .slide.runAnimations .center .centerContent > p + p {
   margin-top: 1em;
 }
@@ -475,6 +479,7 @@ body {
 }
 .slide .centerBottom > h1 {
   opacity: 1;
+  text-transform: uppercase;
 }
 .slide .contactButton {
   color: #a9a9a9;

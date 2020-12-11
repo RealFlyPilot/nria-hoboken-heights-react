@@ -231,6 +231,10 @@ body {
 			}
 		}
 		.center {
+			.centerTagline {
+				margin-bottom: 1em;
+				text-transform: uppercase;
+			}
 			.centerContent {
 				> p + p {
 					margin-top: 1em;
@@ -351,6 +355,7 @@ body {
 		text-align: center;
 		> h1 {
 			opacity: 1;
+			text-transform: uppercase;
 		}
 	}
 	.contactButton {
