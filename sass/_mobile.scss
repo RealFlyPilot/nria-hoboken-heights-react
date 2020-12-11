@@ -58,6 +58,10 @@ body {
 #page {
     //iPhone specific issues because the bottom toolbar doesnt disappear when scrolling
     &.iPhone {
+        position: fixed;//this prevents a bouncing effec
+        .mobileMenu {
+            // position: fixed;
+        }
         .slides_wrapper .slides_inner .slide {
             .centerBottom {
                 bottom: 17vh;
@@ -68,9 +72,6 @@ body {
             .contactPageWrapper .mobilePrivacyPolicy {
                 padding-bottom: 165px;
             }
-        }
-        .slide {
-            
         }
     }
 }
