@@ -1519,7 +1519,7 @@ class SplashPage extends React.Component {
 		let slides_inner_classes = "slides_inner slide_idx_" + this.state.currIdx;
 
 		let pageClasses = this.state.formSubmitted ? 'formSubmitted' : '';
-		pageClasses += isiPhone ? ' iPhone' : '';
+		pageClasses += this.state.isiPhone ? ' iPhone' : '';
 		return React.createElement(
 			'div',
 			{ id: 'page', className: pageClasses },
