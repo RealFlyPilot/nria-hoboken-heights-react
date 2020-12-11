@@ -86,11 +86,13 @@ class ContactForm extends React.Component {
 			// 	width: 'resolve',
 			// 	minimumResultsForSearch: -1
 			// });
-			$('#how_did_you_hear_of_us_-4c41114a-2807-4884-b5e9-d6b49d56d217').select2({
-				placeholder: "How did you hear of us?*",
-				width: 'resolve',
-				minimumResultsForSearch: -1
-			});
+
+			//Removed this to test iPhone touch event problem
+			// $('#how_did_you_hear_of_us_-4c41114a-2807-4884-b5e9-d6b49d56d217').select2({
+			// 	placeholder: "How did you hear of us?*",
+			// 	width: 'resolve',
+			// 	minimumResultsForSearch: -1
+			// });
 		}
 		return React.createElement(
 			'form',
