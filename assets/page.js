@@ -96,8 +96,8 @@ const flypilotParseData = (self, acf_data) => {
 			},
 			center: {
 				centerBottom: {
-					line1: "MANHATTAN AVE, 1300",
-					line2: "COMING SOON",
+					line1: page_data.address,
+					line2: page_data.coming_soon_text,
 				}
 			},
 		},
