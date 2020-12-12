@@ -476,7 +476,7 @@ body {
 					}
 					.select2-container--default {
 						$select2_height: 44px;
-						width: 100%;
+						width: 100% !important;//these help fix the issue causing long placeholders to stretch select2 field
 						.select2-selection--single {
 							border: none;
 							border-radius: 0;
@@ -484,6 +484,10 @@ body {
 							.select2-selection__rendered {
 								letter-spacing: 4.4px;
 								line-height: $select2_height;
+							}
+							.select2-selection__placeholder {
+								white-space: normal;//these help fix the issue causing long placeholders to stretch select2 field
+								line-height: 1.4em;//these help fix the issue causing long placeholders to stretch select2 field
 							}
 							.select2-selection__arrow {
 								b {
