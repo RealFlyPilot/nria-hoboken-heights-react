@@ -107,7 +107,7 @@ const flypilotParseData = (self, acf_data) => {
 		styles: {
 			fontSize: '15px',
 			lineHeight: '21px',
-			overflow: "scroll",
+			overflowY: "scroll",
 			backgroundImage: "url("+page_data.background_image+")"
 		},
 		stylesMobile: {
