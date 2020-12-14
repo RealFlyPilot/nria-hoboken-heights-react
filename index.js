@@ -1519,6 +1519,10 @@ class SplashPage extends React.Component {
 
 		let pageClasses = this.state.formSubmitted ? 'formSubmitted' : '';
 		pageClasses += this.state.isiPhone ? ' iPhone' : '';
+
+		let slidesWrapperClasses = "slides_wrapper";
+		const activeSlide = document.querySelector('.activeSlide');
+		if (activeSlide && activeSlide.scrollTop) slidesWrapperClasses += ' scrolled';
 		return React.createElement(
 			'div',
 			{ id: 'page', className: pageClasses },
@@ -1538,7 +1542,7 @@ class SplashPage extends React.Component {
 			),
 			React.createElement(
 				'div',
-				{ className: 'slides_wrapper', onTouchStart: this.handleTouchStart.bind(this), onTouchMove: this.handleTouchMove.bind(this), onTouchEnd: this.handleTouchEnd.bind(this), onWheel: this.handleWheelEvent.bind(this), onScroll: this.handleScrollEvent.bind(this) },
+				{ className: slidesWrapperClasses, onTouchStart: this.handleTouchStart.bind(this), onTouchMove: this.handleTouchMove.bind(this), onTouchEnd: this.handleTouchEnd.bind(this), onWheel: this.handleWheelEvent.bind(this), onScroll: this.handleScrollEvent.bind(this) },
 				React.createElement(Header, { hasPhantomLogo: true, ref: this.headerElement, currIdx: this.state.currIdx, options: headerOptions, scrollToFirstSlide: this.firstSlide }),
 				React.createElement(
 					'div',

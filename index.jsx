@@ -517,6 +517,10 @@ class SplashPage extends React.Component {
 		
 		let pageClasses = this.state.formSubmitted ? 'formSubmitted' : '';
 		pageClasses += this.state.isiPhone ? ' iPhone' : '';
+
+		let slidesWrapperClasses = "slides_wrapper";
+		const activeSlide = document.querySelector('.activeSlide')
+		if(activeSlide && activeSlide.scrollTop) slidesWrapperClasses += ' scrolled'
 		return (
 			<div id="page" className={pageClasses}>
 				<div className="submittedFormOverlay mobile-only">
@@ -525,7 +529,7 @@ class SplashPage extends React.Component {
 						<img src='/assets/images/form_close_btn.svg' />
 					</div>
 				</div>
-				<div className="slides_wrapper" onTouchStart={this.handleTouchStart.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchEnd={this.handleTouchEnd.bind(this)} onWheel={this.handleWheelEvent.bind(this)} onScroll={this.handleScrollEvent.bind(this)}>
+				<div className={slidesWrapperClasses} onTouchStart={this.handleTouchStart.bind(this)} onTouchMove={this.handleTouchMove.bind(this)} onTouchEnd={this.handleTouchEnd.bind(this)} onWheel={this.handleWheelEvent.bind(this)} onScroll={this.handleScrollEvent.bind(this)}>
 					<Header hasPhantomLogo={true} ref={this.headerElement} currIdx={this.state.currIdx} options={headerOptions} scrollToFirstSlide={this.firstSlide}/>
 					<div
 						ref="inner"

@@ -178,6 +178,9 @@ body {
   overflow: hidden;
   height: 100vh;
 }
+.slides_wrapper.scrolled .phantomcornerLogoWrapper {
+  background-color: #fff;
+}
 .slides_wrapper .slides_inner {
   transition-property: transform;
   transition-duration: 1400ms;
@@ -940,7 +943,7 @@ body {
 }
 .corner-logo-wrapper.phantomcornerLogoWrapper {
   opacity: 0;
-  transition: opacity 0.2s linear calc(1400ms - 0.5s), background-color 0.2s linear 1400ms;
+  transition: opacity 0.2s linear calc(1400ms - 0.5s);
   background-color: transparent;
   width: 50%;
   top: 0;
@@ -955,7 +958,6 @@ body {
 }
 .corner-logo-wrapper.phantomcornerLogoWrapper.animate.activated {
   opacity: 1;
-  background-color: #fff;
 }
 .corner-logo-wrapper .corner-logo {
   width: 110px;
