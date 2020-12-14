@@ -309,6 +309,19 @@ body {
                     .hubspotFormWrapper {
                         .hs-nested-form-fix {
                             .hs-form {
+                                .hs-submit {
+                                    .actions {
+                                        .hs-button {
+                                            background-image: url(/assets/images/rightarrow.svg);
+                                            background-size: contain;
+                                            background-repeat: no-repeat;
+                                            color: transparent;
+                                            height: 37px;
+                                            background-position: center;
+                                            width: 51px;
+                                        }
+                                    }
+                                }
                                 .form-columns-0 {//fine print
                                     font-size: 9px;
                                     margin-top: 14px;

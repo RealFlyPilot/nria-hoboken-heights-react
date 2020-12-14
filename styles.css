@@ -544,17 +544,10 @@ body {
   text-align: right;
 }
 .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-submit .actions .hs-button {
-  background-image: url(/assets/images/rightarrow.svg);
-  background-color: transparent;
   border: none 0 transparent;
-  background-size: contain;
-  background-repeat: no-repeat;
-  color: transparent;
-  height: 37px;
   cursor: pointer;
-  background-position: center;
-  width: 51px;
   padding: 0;
+  background-color: transparent;
 }
 .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field {
   letter-spacing: 1px;
@@ -994,6 +987,17 @@ body {
     background-size: cover;
     background-position: center bottom;
   }
+  .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-submit .actions .hs-button {
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 3px;
+    line-height: 18px;
+    border-bottom: #000 solid 1px;
+    padding-bottom: 4px;
+  }
+  .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-submit .actions .hs-button:hover {
+    font-weight: bold;
+  }
   .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .select2-container--default {
     margin-top: 16px;
   }
@@ -1320,6 +1324,15 @@ body {
     position: static;
     width: 100%;
     margin-bottom: 0;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-submit .actions .hs-button {
+    background-image: url(/assets/images/rightarrow.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: transparent;
+    height: 37px;
+    background-position: center;
+    width: 51px;
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .form-columns-0 {
     font-size: 9px;

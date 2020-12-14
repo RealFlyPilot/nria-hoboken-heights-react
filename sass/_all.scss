@@ -431,17 +431,10 @@ body {
 						.actions {
 							text-align: right;
 							.hs-button {
-								background-image: url(/assets/images/rightarrow.svg);
-								background-color: transparent;
 								border: none 0 transparent;
-								background-size: contain;
-								background-repeat: no-repeat;
-								color: transparent;
-								height: 37px;
 								cursor: pointer;
-								background-position: center;
-								width: 51px;
 								padding: 0;
+								background-color: transparent;
 							}
 						}
 					}
