@@ -196,8 +196,8 @@ class ContactFormSlide extends React.Component {
 						this.props.slideObj.rightsReserved
 					),
 					React.createElement(
-						"div",
-						{ className: "btn" },
+						"a",
+						{ target: "_blank", href: "https://hobokenheights.com/privacy-policy.html", className: "btn" },
 						this.props.slideObj.buttonText
 					)
 				)
@@ -246,7 +246,7 @@ class ContactFormSlide extends React.Component {
 					),
 					React.createElement(
 						"a",
-						{ href: "#" },
+						{ target: "_blank", href: "https://hobokenheights.com/privacy-policy.html" },
 						"Privacy Policy"
 					)
 				)
