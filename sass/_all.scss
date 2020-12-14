@@ -724,8 +724,9 @@ body {
 
 
 .corner-logo-wrapper {
+	$corner-logo-top-offset: 40px;
 	position: absolute;
-	top: 40px;
+	top: $corner-logo-top-offset;
 	left: 100px;
 	z-index: 12;
 	height: 60px;
@@ -811,13 +812,25 @@ body {
 	&.phantomcornerLogoWrapper {
 		$phantomLogoEarlyAnimateTimeDifference: 0.5s;
 		opacity: 0;
-		transition: opacity 0.2s linear calc(#{$slideAnimationDuration} - #{$phantomLogoEarlyAnimateTimeDifference});
+		transition: opacity 0.2s linear calc(#{$slideAnimationDuration} - #{$phantomLogoEarlyAnimateTimeDifference}), background-color 0.2s linear $slideAnimationDuration;
+
+		//This group is specifically to set the white background
+		background-color: transparent;
+		width: 50%;
+		top: 0;
+		padding-top: $corner-logo-top-offset;
+		height: 110px;
+		.text {
+			padding-top: $corner-logo-top-offset;
+		}
+
 		&.animate {
 			// display: none;
 			z-index: 1;
 			&.activated {
 				// display: block;
 				opacity: 1;
+				background-color: #fff;
 			}
 			// .text .cascading-animation.letter,
 			// .text .cascading-animation.separator,

@@ -940,13 +940,22 @@ body {
 }
 .corner-logo-wrapper.phantomcornerLogoWrapper {
   opacity: 0;
-  transition: opacity 0.2s linear calc(1400ms - 0.5s);
+  transition: opacity 0.2s linear calc(1400ms - 0.5s), background-color 0.2s linear 1400ms;
+  background-color: transparent;
+  width: 50%;
+  top: 0;
+  padding-top: 40px;
+  height: 110px;
+}
+.corner-logo-wrapper.phantomcornerLogoWrapper .text {
+  padding-top: 40px;
 }
 .corner-logo-wrapper.phantomcornerLogoWrapper.animate {
   z-index: 1;
 }
 .corner-logo-wrapper.phantomcornerLogoWrapper.animate.activated {
   opacity: 1;
+  background-color: #fff;
 }
 .corner-logo-wrapper .corner-logo {
   width: 110px;
