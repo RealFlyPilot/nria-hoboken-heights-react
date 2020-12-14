@@ -415,6 +415,7 @@ body {
 						color: #000;
 						margin-top: 18px;
 						letter-spacing: 1px;
+						@extend .gotham-light;
 						.recaptcha_branding {
 							margin-top: 10px;
 							> a {
@@ -495,11 +496,8 @@ body {
 		}
 		
 		.headline {
-			font-size: 14px;
-			letter-spacing: 4.17px;
 			line-height: 16.66px;
 			text-transform: uppercase;
-			color: #fff;
 			margin-bottom: 18px;
 		}
 		.two-input-group {

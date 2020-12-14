@@ -161,7 +161,7 @@ body {
 }
 
 .gotham-light, .slide .privacyPolicy .contactInfo .copyright, .slide .contactForm .form-control .input, .slide .contactForm .form-control, .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .input > input,
-.slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .input > textarea, .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field {
+.slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field .input > textarea, .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-form-field, .slide .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .form-columns-0 {
   font-family: "Gotham-Light", sans-serif;
   font-weight: 300;
 }
@@ -597,11 +597,8 @@ body {
   border-width: 13px 7px 0 7px;
 }
 .slide .contactForm .headline {
-  font-size: 14px;
-  letter-spacing: 4.17px;
   line-height: 16.66px;
   text-transform: uppercase;
-  color: #fff;
   margin-bottom: 18px;
 }
 .slide .contactForm .two-input-group {
@@ -987,6 +984,13 @@ body {
     background-size: cover;
     background-position: center bottom;
   }
+  .slide .contactPageWrapper .contactForm .headline {
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #000;
+    font-family: "Gotham-Bold", sans-serif;
+    font-weight: 700;
+  }
   .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-submit .actions .hs-button {
     text-transform: uppercase;
     font-size: 15px;
@@ -1324,6 +1328,11 @@ body {
     position: static;
     width: 100%;
     margin-bottom: 0;
+  }
+  .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .headline {
+    font-size: 14px;
+    letter-spacing: 4.17px;
+    color: #fff;
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm .hubspotFormWrapper .hs-nested-form-fix .hs-form .hs-submit .actions .hs-button {
     background-image: url(/assets/images/rightarrow.svg);
