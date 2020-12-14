@@ -79,7 +79,7 @@ class ContactForm extends React.Component {
 			width: "100%"
 		};
 
-		const select2Initialized = $('.how_you_heard').hasClass("select2-hidden-accessible");
+		const select2Initialized = $('#how_did_you_hear_of_us_-4c41114a-2807-4884-b5e9-d6b49d56d217').hasClass("select2-hidden-accessible");
 		if (!select2Initialized) {
 			// $('.how_you_heard').select2({
 			// 	placeholder: "How did you hear of us?*",
