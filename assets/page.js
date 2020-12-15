@@ -169,7 +169,7 @@ const flypilotParseData = (self, acf_data) => {
 		styles: {
 			backgroundColor: "transparent",
 			color: "#000",
-			overflow: "scroll"
+			overflow: "auto"
 		},
 		// addCornerLogo: true,
 		addDarkCornerLogo: true,

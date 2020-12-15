@@ -775,7 +775,7 @@ const flypilotParseData = (self, acf_data) => {
 		styles: {
 			backgroundColor: "transparent",
 			color: "#000",
-			overflow: "scroll"
+			overflow: "auto"
 		},
 		// addCornerLogo: true,
 		addDarkCornerLogo: true,
@@ -807,6 +807,13 @@ const MusicPlayer = require('./musicplayer.jsx');
 class Slide extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.handleLangChange = e => {
+			let element = e.target;
+			const scrolled = element.scrollTop > 0 ? true : false;
+			this.props.onSlideScroll(scrolled);
+		};
+
 		this.state = {
 			styles: this.props.obj.styles,
 			landingPageAnimationFinished: 0,
@@ -942,7 +949,7 @@ class Slide extends React.Component {
 
 		return React.createElement(
 			'div',
-			{ className: slideClasses, style: slideStyles },
+			{ className: slideClasses, style: slideStyles, onScroll: this.handleLangChange },
 			React.createElement(Header, { options: headerOptions, scrollToFirstSlide: this.scrollToTop.bind(this) }),
 			slideObj.phantomMusicPlayer &&
 			// This music player should only appear on the second slide to create the visual effect of it sliding down and up with the second slide.
@@ -1038,6 +1045,11 @@ const MobileMenu = require('./assets/mobilemenu.jsx');
 class SplashPage extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.handleSlideScroll = hasScrolled => {
+			this.setState({ slideHasScrolled: hasScrolled });
+		};
+
 		this.state = {
 			slides: [{}],
 			slidesViewed: [0],
@@ -1059,7 +1071,8 @@ class SplashPage extends React.Component {
 			isPlaying: false,
 			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3'),
 			inputFocusOutEvent: null,
-			scrollDebouncer: null
+			scrollDebouncer: null,
+			slideHasScrolled: null
 		};
 		this.watchForEventEnd = this.watchForEventEnd.bind(this);
 		this.firstSlide = this.firstSlide.bind(this);
@@ -1493,7 +1506,7 @@ class SplashPage extends React.Component {
 			this.state.audioPlayer.pause();
 		}
 
-		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { scrollToFirstSlide: this.firstSlide, createHubspotContactForm: this.createHubspotForm.bind(this), formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this), currIdx: this.state.currIdx, playMusic: this.musicPlay, stopMusic: this.musicMute, slideViewed: this.state.slidesViewed.includes(idx), goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx, isPlaying: this.state.isPlaying }));
+		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { onSlideScroll: this.handleSlideScroll, scrollToFirstSlide: this.firstSlide, createHubspotContactForm: this.createHubspotForm.bind(this), formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this), currIdx: this.state.currIdx, playMusic: this.musicPlay, stopMusic: this.musicMute, slideViewed: this.state.slidesViewed.includes(idx), goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx, isPlaying: this.state.isPlaying }));
 		const innerStyle = {
 			transform: 'translateY(-' + this.state.currIdx * 100 + 'vh)'
 		};
@@ -1521,8 +1534,7 @@ class SplashPage extends React.Component {
 		pageClasses += this.state.isiPhone ? ' iPhone' : '';
 
 		let slidesWrapperClasses = "slides_wrapper";
-		const activeSlide = document.querySelector('.activeSlide');
-		if (activeSlide && activeSlide.scrollTop) slidesWrapperClasses += ' scrolled';
+		if (this.state.slideHasScrolled) slidesWrapperClasses += ' scrolled';
 		return React.createElement(
 			'div',
 			{ id: 'page', className: pageClasses },

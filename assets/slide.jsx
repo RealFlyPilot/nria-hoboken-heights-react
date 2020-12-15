@@ -83,6 +83,12 @@ class Slide extends React.Component {
 		createHubspotContactForm();
 	}
 
+	handleLangChange = e => {
+		let element = e.target
+		const scrolled = element.scrollTop > 0 ? true : false
+        this.props.onSlideScroll(scrolled);            
+    }
+
 	render() {
 		this.playSoundEffect();
 
@@ -144,7 +150,7 @@ class Slide extends React.Component {
 
 		return (
 			
-			<div className={slideClasses} style={slideStyles}>
+			<div className={slideClasses} style={slideStyles} onScroll={this.handleLangChange}>
 				<Header options={headerOptions} scrollToFirstSlide={this.scrollToTop.bind(this)} />
 				
 				{slideObj.phantomMusicPlayer &&
