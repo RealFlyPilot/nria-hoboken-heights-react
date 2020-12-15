@@ -236,15 +236,6 @@ body {
 			}
 		}
 		.center {
-			.centerTagline {
-				margin-bottom: 1em;
-				text-transform: uppercase;
-			}
-			.centerContent {
-				> p + p {
-					margin-top: 1em;
-				}
-			}
 			> h1,
 			.contactButton {
 				position: relative;
@@ -326,6 +317,15 @@ body {
 	.center {
 		text-align: center;
 		// width: 56vw;
+		.centerTagline {
+			margin-bottom: 1em;
+			text-transform: uppercase;
+		}
+		.centerContent {
+			> p + p {
+				margin-top: 1em;
+			}
+		}
 		.contactButton,
 		> h1 {
 			opacity: 1;

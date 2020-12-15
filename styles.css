@@ -368,13 +368,6 @@ body {
 .slide.runAnimations .centerBottom > h1 + h1 {
   animation-delay: 0.7s;
 }
-.slide.runAnimations .center .centerTagline {
-  margin-bottom: 1em;
-  text-transform: uppercase;
-}
-.slide.runAnimations .center .centerContent > p + p {
-  margin-top: 1em;
-}
 .slide.runAnimations .center > h1,
 .slide.runAnimations .center .contactButton {
   position: relative;
@@ -450,6 +443,13 @@ body {
 }
 .slide .center {
   text-align: center;
+}
+.slide .center .centerTagline {
+  margin-bottom: 1em;
+  text-transform: uppercase;
+}
+.slide .center .centerContent > p + p {
+  margin-top: 1em;
 }
 .slide .center .contactButton,
 .slide .center > h1 {
