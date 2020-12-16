@@ -1155,8 +1155,7 @@ class SplashPage extends React.Component {
 		if (this.state.operating_sys == 'android') {
 			this.timerHandle = null;
 			let self = this;
-			$(".input").focusout(function () {
-				console.log('focusoutevent')
+			$(".hs-input").focusout(function () {
 				self.setState({ inputFocusOutEvent: true });
 			});
 			window.addEventListener('resize', () => this.handleResize());
@@ -1179,12 +1178,9 @@ class SplashPage extends React.Component {
   */
 
 	handleResize() {
-		console.log('resizeevent')
 		const resizeTime = 1500;
 		const inputIsActive = $(document.activeElement).attr('type') === 'text';
 		if (inputIsActive || this.state.inputFocusOutEvent) {
-			console.log(inputIsActive);
-			console.log(this.state.inputFocusOutEvent);
 			this.setState({ inputFocusOutEvent: false });
 			document.body.classList.add("resize-animation-stopper");
 			clearTimeout(this.timerHandle);
