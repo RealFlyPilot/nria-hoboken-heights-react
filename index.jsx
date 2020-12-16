@@ -124,7 +124,7 @@ class SplashPage extends React.Component {
 		if(this.state.operating_sys == 'android') {
 			this.timerHandle = null;
 			let self = this
-			$( ".hs-input" ).focusout(function() {
+			$( ".hs-input" ).on('focusout', function() {
 				self.setState({ inputFocusOutEvent: true });
 			})
 			window.addEventListener('resize', () => this.handleResize())
