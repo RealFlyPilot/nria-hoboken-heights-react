@@ -1157,6 +1157,7 @@ class SplashPage extends React.Component {
 			let self = this;
 			$(".hs-input").focusout(function () {
 				self.setState({ inputFocusOutEvent: true });
+				self.handleResize();
 			});
 			window.addEventListener('resize', () => this.handleResize());
 		}
