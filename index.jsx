@@ -144,7 +144,7 @@ class SplashPage extends React.Component {
 
 	handleResizeOnAndroid(){
 		const resizeTime = 1500; 
-		const inputIsActive = $(document.activeElement).attr('type') === 'text';
+		const inputIsActive = $(document.activeElement).hasClass('hs-input');
 		if(inputIsActive || this.state.inputFocusOutEvent) {
 			this.setState({ inputFocusOutEvent: false });
 			document.body.classList.add("resize-animation-stopper");
