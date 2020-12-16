@@ -126,6 +126,7 @@ class SplashPage extends React.Component {
 			let self = this
 			$( ".input" ).focusout(function() {
 				self.setState({ inputFocusOutEvent: true });
+				self.handleResize()
 			})
 			window.addEventListener('resize', () => this.handleResize())
 		}
@@ -150,6 +151,8 @@ class SplashPage extends React.Component {
 		const resizeTime = 1500; 
 		const inputIsActive = $(document.activeElement).attr('type') === 'text';
 		if(inputIsActive || this.state.inputFocusOutEvent) {
+			console.log(inputIsActive)
+			console.log(this.state.inputFocusOutEvent)
 			this.setState({ inputFocusOutEvent: false });
 			document.body.classList.add("resize-animation-stopper");
 			clearTimeout(this.timerHandle);
