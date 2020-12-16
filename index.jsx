@@ -120,19 +120,15 @@ class SplashPage extends React.Component {
 		});
 
 		
-		//See handleResize() for details
+		//See handleResizeOnAndroid() for details
 		if(this.state.operating_sys == 'android') {
 			this.timerHandle = null;
-			let self = this
-			$( ".hs-input" ).on('focusout', function() {
-				self.setState({ inputFocusOutEvent: true });
-			})
-			window.addEventListener('resize', () => this.handleResize())
+			window.addEventListener('resize', () => this.handleResizeOnAndroid())
 		}
 	}
 
 	/*
-	 * handleResize() is used due to android soft keyboards changing the 
+	 * handleResizeOnAndroid() is used due to android soft keyboards changing the 
 	 * viewport height which causes the page to suddenly shift.
 	 * 
 	 * The resize event is sometimes triggered twice from a single focusOut
@@ -146,7 +142,7 @@ class SplashPage extends React.Component {
 	 * we dont want to have animations as the keyboard hides itself
 	 */
 
-	handleResize(){
+	handleResizeOnAndroid(){
 		const resizeTime = 1500; 
 		const inputIsActive = $(document.activeElement).attr('type') === 'text';
 		if(inputIsActive || this.state.inputFocusOutEvent) {
@@ -475,6 +471,10 @@ class SplashPage extends React.Component {
 			},
 			onFormReady: function(){
 				$("#hubspotFormWrapper .form-columns-0").append(recaptcha_branding);
+
+				$( ".hs-input" ).on('focusout', function() {
+					self.setState({ inputFocusOutEvent: true });
+				})
 			},
 			onFormSubmitted: function() {
 				self.createHubspotForm()
