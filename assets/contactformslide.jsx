@@ -20,8 +20,13 @@ class ContactFormSlide extends React.Component {
 	}
 
 	createHubspotForm(){
-		const {createHubspotContactForm} = this.props;
+		const {createHubspotContactForm} = this.props
 		createHubspotContactForm();
+	}
+
+	openPrivacyPolicyModal(){
+		const {showPrivacyPolicy} = this.props
+		showPrivacyPolicy()
 	}
 
 	render(){
@@ -41,7 +46,7 @@ class ContactFormSlide extends React.Component {
 						<div className="address">{this.props.slideObj.agentCompany}</div>
 						<div className="phone">{this.props.slideObj.agentPhoneNumber}</div>
 						<div className="copyright">{this.props.slideObj.rightsReserved}</div>
-						<a target="_blank" href="https://hobokenheights.com/privacy-policy.html" className="btn">{this.props.slideObj.buttonText}</a>
+						<a target="_blank" onClick={this.openPrivacyPolicyModal.bind(this)} className="btn">{this.props.slideObj.buttonText}</a>
 					</div>
 				</div>
 				<div className="mobilePrivacyPolicy mobile-only">
@@ -52,7 +57,7 @@ class ContactFormSlide extends React.Component {
 						<div className="address">RE/MAX Real Estate Limited</div>
 						<a href='tel:2014007487'><div className="phone">201-400-7487</div></a><br />
 						<div className="copyright">© 2020 Hoboken Heights. All rights reserved.</div>
-						<a target="_blank" href='https://hobokenheights.com/privacy-policy.html'>Privacy Policy</a>
+						<a target="_blank" onClick={this.openPrivacyPolicyModal.bind(this)}>Privacy Policy</a>
 					</div>
 				</div>
 			</div>

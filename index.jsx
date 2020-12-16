@@ -4,6 +4,7 @@ const Slide = require('./assets/slide.jsx');
 const MusicPlayer = require('./assets/musicplayer.jsx');
 const modules = require('./assets/modules.jsx');
 const Header = require('./assets/header.jsx');
+const PrivacyPolicy = require('./assets/privacypolicy.jsx');
 const MobileMenu = require('./assets/mobilemenu.jsx');
 
 class SplashPage extends React.Component {
@@ -31,7 +32,8 @@ class SplashPage extends React.Component {
 			audioPlayer: new Audio('./assets/sounds/SOUND-GENERAL_MUSIC.mp3'),
 			inputFocusOutEvent: null,
 			scrollDebouncer: null,
-			slideHasScrolled: null
+			slideHasScrolled: null,
+			privacyPolicyEnabled: false
 		};
 		this.watchForEventEnd = this.watchForEventEnd.bind(this);
 		this.firstSlide = this.firstSlide.bind(this);
@@ -484,7 +486,29 @@ class SplashPage extends React.Component {
 
 	handleSlideScroll = (hasScrolled) => {
         this.setState({slideHasScrolled: hasScrolled});
-    }
+	}
+	
+	privacyPolicyModalOpen(){
+		this.setState({ privacyPolicyEnabled: true });
+		setTimeout(() => this.setState({ privacyPolicyFadeType: "in" }), 0);
+
+	}
+	privacyPolicyModalRemove(){
+		this.setState({ 
+			privacyPolicyEnabled: false,
+			privacyPolicyFadeType: null
+		 });
+	}
+	privacyPolicyModalFadeOut(){
+		this.setState({ privacyPolicyFadeType: 'out' });
+	}
+	privacyPolicyModalTransitionEnd = e => {
+		if (e.propertyName !== "opacity" || this.state.privacyPolicyFadeType === "in") return;
+	
+		if (this.state.privacyPolicyFadeType === "out") {
+			this.privacyPolicyModalRemove();
+		}
+	}
 	render() {
 		if(this.state.isPlaying) {
 			this.state.audioPlayer.play();
@@ -493,7 +517,7 @@ class SplashPage extends React.Component {
 		}
 
 		const $slides = this.state.slides.map((slide, idx) =>
-			<Slide horizontalSlide={this.slideHorizontal.bind(this)} onSlideScroll={this.handleSlideScroll} scrollToFirstSlide={this.firstSlide}  createHubspotContactForm={this.createHubspotForm.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
+			<Slide showPrivacyPolicy={this.privacyPolicyModalOpen.bind(this)} horizontalSlide={this.slideHorizontal.bind(this)} onSlideScroll={this.handleSlideScroll} scrollToFirstSlide={this.firstSlide}  createHubspotContactForm={this.createHubspotForm.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
 		);
 		const innerStyle = {
 			transform: 'translateY(-' + (this.state.currIdx * 100) + 'vh)'
@@ -524,8 +548,22 @@ class SplashPage extends React.Component {
 
 		let slidesWrapperClasses = "slides_wrapper";
 		if(this.state.slideHasScrolled) slidesWrapperClasses += ' scrolled'
+
+		let privacyPolicyClasses = 'privacyPolicyModal'
+		if(this.state.privacyPolicyFadeType == 'out') {
+			privacyPolicyClasses +=  ' fade-out'
+		}
+		else if(this.state.privacyPolicyFadeType == 'in') {
+			privacyPolicyClasses += ' fade-in'
+		}
+		
 		return (
 			<div id="page" className={pageClasses}>
+				{this.state.privacyPolicyEnabled && 
+					<div className={privacyPolicyClasses} onTransitionEnd={this.privacyPolicyModalTransitionEnd} onClick={this.privacyPolicyModalFadeOut.bind(this)}>
+						<PrivacyPolicy />
+					</div>
+				}
 				<div className="submittedFormOverlay mobile-only">
 					<div className="text">THANK YOU!</div>
 					<div className="closeBtn" onClick={this.contactFormCleared.bind(this)}>

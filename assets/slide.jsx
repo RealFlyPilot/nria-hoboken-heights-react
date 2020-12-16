@@ -93,6 +93,10 @@ class Slide extends React.Component {
         this.props.onSlideScroll(scrolled);
     }
 
+	openPrivacyPolicyModal(){
+		const {showPrivacyPolicy} = this.props
+		showPrivacyPolicy()
+	}
 	render() {
 		this.playSoundEffect();
 
@@ -184,7 +188,7 @@ class Slide extends React.Component {
 					/>
 				}
 				{slideObj.contactFormSlide &&
-					<ContactFormSlide scrollToFirstSlide={this.scrollToTop.bind(this)} slideObj={slideObj} createHubspotContactForm={this.createHubspotForm.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} />
+					<ContactFormSlide scrollToFirstSlide={this.scrollToTop.bind(this)} slideObj={slideObj} createHubspotContactForm={this.createHubspotForm.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} showPrivacyPolicy={this.openPrivacyPolicyModal.bind(this)}  />
 					
 				}
 				<div className={centerTextClasses} style={centerTextStyles}>
