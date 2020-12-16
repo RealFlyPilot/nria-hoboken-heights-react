@@ -52,6 +52,10 @@ class Slide extends React.Component {
 		goToNextSlide();
 	}
 
+	slideHorizontal(direction) {
+		this.props.horizontalSlide(direction);
+	}
+
 	playSoundEffect(){
 		const soundEffect = this.props.obj.soundEffect;
 		const musicIsPlaying = this.props.isPlaying;
@@ -86,7 +90,7 @@ class Slide extends React.Component {
 	handleLangChange = e => {
 		let element = e.target
 		const scrolled = element.scrollTop > 0 ? true : false
-        this.props.onSlideScroll(scrolled);            
+        this.props.onSlideScroll(scrolled);
     }
 
 	render() {
@@ -148,6 +152,8 @@ class Slide extends React.Component {
 			centerImageStyles = slideObj.centerImageStylesMobile
 		}
 
+		let right_arrow_bouncing = <div className='right_arrow_bouncing' onClick={() => this.slideHorizontal('right')}/>
+		let left_arrow_bouncing = <div className='left_arrow_bouncing' onClick={() => this.slideHorizontal('left')}/>
 		return (
 			
 			<div className={slideClasses} style={slideStyles} onScroll={this.handleLangChange}>
@@ -215,15 +221,22 @@ class Slide extends React.Component {
 						<img onClick={this.scrollToNextSlide.bind(this)} className='downArrow' src={slideObj.downArrowImage} />
 					}
 				</div>
-				{slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && 
-					<div className={"centerBottom mobile-only mobile-content-left " + (isCurrent && slideObj.videoMobileStartPosition == 'left' ? ' animate' : '')}>
-						<h1 style={slideObj.mobileContent.left.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.left.centerBottom.line1}}></h1>
-					</div>
-				}
 				{slideObj.mobileHasDifferentContent && slideObj.mobileContent.center && 
 					<div className={"centerBottom mobile-only mobile-content-center " + (isCurrent && slideObj.videoMobileStartPosition == 'center' ? ' animate' : '')}>
-						<h1 style={slideObj.mobileContent.center.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.center.centerBottom.line1}}></h1>
+						<h1 style={slideObj.mobileContent.center.centerBottom.lineStyles} className="line">
+							{slideObj.mobileContent.center.centerBottom.line1LeftArrowBouncing && left_arrow_bouncing}
+							<div dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.center.centerBottom.line1}} />
+							{slideObj.mobileContent.center.centerBottom.line1RightArrowBouncing && right_arrow_bouncing}
+						</h1>
 						<h1 style={slideObj.mobileContent.center.centerBottom.lineStyles} className="line" dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.center.centerBottom.line2}}></h1>
+					</div>
+				}
+				{slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && 
+					<div className={"centerBottom mobile-only mobile-content-left " + (isCurrent && slideObj.videoMobileStartPosition == 'left' ? ' animate' : '')}>
+						<h1 style={slideObj.mobileContent.left.centerBottom.lineStyles} className="line" >
+							<div dangerouslySetInnerHTML={{ __html: slideObj.mobileContent.left.centerBottom.line1}} />
+							{slideObj.mobileContent.left.centerBottom.line1RightArrowBouncing && right_arrow_bouncing}
+						</h1>
 					</div>
 				}
 			</div>

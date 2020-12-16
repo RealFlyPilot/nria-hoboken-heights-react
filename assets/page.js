@@ -87,7 +87,8 @@ const flypilotParseData = (self, acf_data) => {
 		mobileContent: {
 			left: {
 				centerBottom: {
-					line1: "SWIPE <div class='right_arrow_bouncing'></div>",
+					line1: "SWIPE ",
+					line1RightArrowBouncing: true,
 					lineStyles: {
 						display: 'flex',
 						alignItems: 'center'
@@ -156,7 +157,9 @@ const flypilotParseData = (self, acf_data) => {
 		mobileContent: {
 			center: {
 				centerBottom: {
-					line1: "<div class='left_arrow_bouncing'></div> SWIPE <div class='right_arrow_bouncing'></div>",
+					line1: " SWIPE ",
+					line1RightArrowBouncing: true,
+					line1LeftArrowBouncing: true,
 					lineStyles: {
 						display: 'flex',
 						alignItems: 'center'

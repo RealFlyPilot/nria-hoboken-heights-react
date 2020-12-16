@@ -42,8 +42,6 @@ class ContactForm extends React.Component {
 	}
 
 	handleSubmit() {
-		console.log('A form was submitted: ');
-		console.log(this.state);
 		this.setState({
 			// formSubmitted: true,
 			first_name: '',
@@ -693,7 +691,8 @@ const flypilotParseData = (self, acf_data) => {
 		mobileContent: {
 			left: {
 				centerBottom: {
-					line1: "SWIPE <div class='right_arrow_bouncing'></div>",
+					line1: "SWIPE ",
+					line1RightArrowBouncing: true,
 					lineStyles: {
 						display: 'flex',
 						alignItems: 'center'
@@ -762,7 +761,9 @@ const flypilotParseData = (self, acf_data) => {
 		mobileContent: {
 			center: {
 				centerBottom: {
-					line1: "<div class='left_arrow_bouncing'></div> SWIPE <div class='right_arrow_bouncing'></div>",
+					line1: " SWIPE ",
+					line1RightArrowBouncing: true,
+					line1LeftArrowBouncing: true,
 					lineStyles: {
 						display: 'flex',
 						alignItems: 'center'
@@ -860,6 +861,10 @@ class Slide extends React.Component {
 		goToNextSlide();
 	}
 
+	slideHorizontal(direction) {
+		this.props.horizontalSlide(direction);
+	}
+
 	playSoundEffect() {
 		const soundEffect = this.props.obj.soundEffect;
 		const musicIsPlaying = this.props.isPlaying;
@@ -947,6 +952,8 @@ class Slide extends React.Component {
 			centerImageStyles = slideObj.centerImageStylesMobile;
 		}
 
+		let right_arrow_bouncing = React.createElement('div', { className: 'right_arrow_bouncing', onClick: () => this.slideHorizontal('right') });
+		let left_arrow_bouncing = React.createElement('div', { className: 'left_arrow_bouncing', onClick: () => this.slideHorizontal('left') });
 		return React.createElement(
 			'div',
 			{ className: slideClasses, style: slideStyles, onScroll: this.handleLangChange },
@@ -1015,16 +1022,27 @@ class Slide extends React.Component {
 				slideObj.centerBottom && slideObj.centerBottom.line2 && React.createElement('h1', { dangerouslySetInnerHTML: { __html: slideObj.centerBottom.line2 } }),
 				slideObj.hasDownArrow && React.createElement('img', { onClick: this.scrollToNextSlide.bind(this), className: 'downArrow', src: slideObj.downArrowImage })
 			),
-			slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && React.createElement(
-				'div',
-				{ className: "centerBottom mobile-only mobile-content-left " + (isCurrent && slideObj.videoMobileStartPosition == 'left' ? ' animate' : '') },
-				React.createElement('h1', { style: slideObj.mobileContent.left.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.left.centerBottom.line1 } })
-			),
 			slideObj.mobileHasDifferentContent && slideObj.mobileContent.center && React.createElement(
 				'div',
 				{ className: "centerBottom mobile-only mobile-content-center " + (isCurrent && slideObj.videoMobileStartPosition == 'center' ? ' animate' : '') },
-				React.createElement('h1', { style: slideObj.mobileContent.center.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.center.centerBottom.line1 } }),
+				React.createElement(
+					'h1',
+					{ style: slideObj.mobileContent.center.centerBottom.lineStyles, className: 'line' },
+					slideObj.mobileContent.center.centerBottom.line1LeftArrowBouncing && left_arrow_bouncing,
+					React.createElement('div', { dangerouslySetInnerHTML: { __html: slideObj.mobileContent.center.centerBottom.line1 } }),
+					slideObj.mobileContent.center.centerBottom.line1RightArrowBouncing && right_arrow_bouncing
+				),
 				React.createElement('h1', { style: slideObj.mobileContent.center.centerBottom.lineStyles, className: 'line', dangerouslySetInnerHTML: { __html: slideObj.mobileContent.center.centerBottom.line2 } })
+			),
+			slideObj.mobileHasDifferentContent && slideObj.mobileContent.left && React.createElement(
+				'div',
+				{ className: "centerBottom mobile-only mobile-content-left " + (isCurrent && slideObj.videoMobileStartPosition == 'left' ? ' animate' : '') },
+				React.createElement(
+					'h1',
+					{ style: slideObj.mobileContent.left.centerBottom.lineStyles, className: 'line' },
+					React.createElement('div', { dangerouslySetInnerHTML: { __html: slideObj.mobileContent.left.centerBottom.line1 } }),
+					slideObj.mobileContent.left.centerBottom.line1RightArrowBouncing && right_arrow_bouncing
+				)
 			)
 		);
 	}
@@ -1506,7 +1524,7 @@ class SplashPage extends React.Component {
 			this.state.audioPlayer.pause();
 		}
 
-		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { onSlideScroll: this.handleSlideScroll, scrollToFirstSlide: this.firstSlide, createHubspotContactForm: this.createHubspotForm.bind(this), formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this), currIdx: this.state.currIdx, playMusic: this.musicPlay, stopMusic: this.musicMute, slideViewed: this.state.slidesViewed.includes(idx), goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx, isPlaying: this.state.isPlaying }));
+		const $slides = this.state.slides.map((slide, idx) => React.createElement(Slide, { horizontalSlide: this.slideHorizontal.bind(this), onSlideScroll: this.handleSlideScroll, scrollToFirstSlide: this.firstSlide, createHubspotContactForm: this.createHubspotForm.bind(this), formCleared: this.contactFormCleared.bind(this), formSubmitted: this.contactFormSubmitted.bind(this), currIdx: this.state.currIdx, playMusic: this.musicPlay, stopMusic: this.musicMute, slideViewed: this.state.slidesViewed.includes(idx), goToNextSlide: this.nextSlide, scrollToLastSlide: this.lastSlide, key: idx, obj: slide, isCurrent: idx == this.state.currIdx, isPlaying: this.state.isPlaying }));
 		const innerStyle = {
 			transform: 'translateY(-' + this.state.currIdx * 100 + 'vh)'
 		};

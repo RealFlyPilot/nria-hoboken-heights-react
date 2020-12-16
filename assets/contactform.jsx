@@ -42,8 +42,6 @@ class ContactForm extends React.Component {
 	}
 
 	handleSubmit() {
-		console.log('A form was submitted: ');
-		console.log(this.state);
 		this.setState ({
 			// formSubmitted: true,
 			first_name: '',
@@ -68,9 +66,6 @@ class ContactForm extends React.Component {
 		const {scrollToFirstSlide} = this.props
 		scrollToFirstSlide()
 	}
-
-
-	
 
     render() {
 		

@@ -493,7 +493,7 @@ class SplashPage extends React.Component {
 		}
 
 		const $slides = this.state.slides.map((slide, idx) =>
-			<Slide onSlideScroll={this.handleSlideScroll} scrollToFirstSlide={this.firstSlide}  createHubspotContactForm={this.createHubspotForm.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
+			<Slide horizontalSlide={this.slideHorizontal.bind(this)} onSlideScroll={this.handleSlideScroll} scrollToFirstSlide={this.firstSlide}  createHubspotContactForm={this.createHubspotForm.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
 		);
 		const innerStyle = {
 			transform: 'translateY(-' + (this.state.currIdx * 100) + 'vh)'
