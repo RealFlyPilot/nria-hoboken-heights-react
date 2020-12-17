@@ -86,10 +86,9 @@ class ContactForm extends React.Component {
 			// });
 			const hubspotFormExists = $('#how_did_you_hear_of_us_-4c41114a-2807-4884-b5e9-d6b49d56d217').length
 			if(hubspotFormExists) {
-				const placeholderText = $('#how_did_you_hear_of_us_-4c41114a-2807-4884-b5e9-d6b49d56d217')[0][0].innerHTML
-
+				const disabledOptionText = $('#how_did_you_hear_of_us_-4c41114a-2807-4884-b5e9-d6b49d56d217 option:disabled')[0].innerHTML
 				$('#how_did_you_hear_of_us_-4c41114a-2807-4884-b5e9-d6b49d56d217').select2({
-					placeholder: placeholderText,
+					placeholder: disabledOptionText,
 					width: 'resolve',
 					minimumResultsForSearch: -1
 				});
