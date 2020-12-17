@@ -796,6 +796,7 @@ const flypilotParseData = (self, acf_data) => {
 		companyAddress: page_data.company_address,
 		companyName: page_data.company_name,
 		agentName: page_data.agent_name,
+		agentPhoneNumber: page_data.agent_phone_number,
 		rightsReserved: page_data.rights_reserved,
 		buttonText: page_data.button_text_fifth,
 		buttonLink: page_data.button_link_fifth
