@@ -522,9 +522,14 @@ body {
 .slide .centerBottom {
   letter-spacing: 4.4px;
   position: absolute;
-  bottom: 13vh;
   line-height: 45px;
   text-align: center;
+}
+.slide .centerBottom.not-mobile {
+  bottom: 5vh;
+}
+.slide .centerBottom.mobile-only {
+  bottom: 13vh;
 }
 .slide .centerBottom > h1 {
   opacity: 1;
