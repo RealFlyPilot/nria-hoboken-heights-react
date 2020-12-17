@@ -1,4 +1,4 @@
 .DS_Store
 node_modules/
 *.tmp-browserify*
- styles.css.map
+styles.css.map
