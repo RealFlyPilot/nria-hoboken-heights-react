@@ -133,11 +133,15 @@ body {
     opacity: 1;
     animation-name: none;//prevents desktop animation from running (which doesnt require .animate parent)
 }
-.slide .centerBottom > h1 {
-    // opacity: 0;
-    top: 0;
-    // transition: opacity 0.5s;
+.slide .centerBottom {
+    bottom: 17vh;
+    > h1 {
+        // opacity: 0;
+        top: 0;
+        // transition: opacity 0.5s;
+    }
 }
+
 .centerBottom {
     &.mobile-only {
         &.animate {

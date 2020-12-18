@@ -403,12 +403,6 @@ body {
 		position: absolute;
 		line-height: 45px;
 		text-align: center;
-		&.not-mobile {
-			bottom: 5vh;
-		}
-		&.mobile-only {
-			bottom: 13vh;
-		}
 		> h1 {
 			opacity: 1;
 			text-transform: uppercase;
