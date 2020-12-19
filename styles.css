@@ -151,6 +151,14 @@ body {
   font-size: 15px;
 }
 
+.mobile-FF-only {
+  display: none;
+}
+
+.firefoxAndroid .mobile-FF-only {
+  display: block;
+}
+
 .gotham-bold, .slide .privacyPolicy .contactInfo .phone {
   font-family: "Gotham-Bold", sans-serif;
   font-weight: 700;

@@ -516,8 +516,10 @@ class SplashPage extends React.Component {
 			this.state.audioPlayer.pause();
 		}
 
+		const isFirefoxAndroid = this.state.browser == 'chrome' && this.state.operating_sys == 'android'
+
 		const $slides = this.state.slides.map((slide, idx) =>
-			<Slide showPrivacyPolicy={this.privacyPolicyModalOpen.bind(this)} horizontalSlide={this.slideHorizontal.bind(this)} onSlideScroll={this.handleSlideScroll} scrollToFirstSlide={this.firstSlide}  createHubspotContactForm={this.createHubspotForm.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
+			<Slide isFirefoxAndroid={isFirefoxAndroid} showPrivacyPolicy={this.privacyPolicyModalOpen.bind(this)} horizontalSlide={this.slideHorizontal.bind(this)} onSlideScroll={this.handleSlideScroll} scrollToFirstSlide={this.firstSlide}  createHubspotContactForm={this.createHubspotForm.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
 		);
 		const innerStyle = {
 			transform: 'translateY(-' + (this.state.currIdx * 100) + 'vh)'
@@ -545,7 +547,7 @@ class SplashPage extends React.Component {
 		
 		let pageClasses = this.state.formSubmitted ? 'formSubmitted' : '';
 		pageClasses += this.state.isiPhone ? ' iPhone' : '';
-
+		pageClasses +=  isFirefoxAndroid ? ' firefoxAndroid' : '';
 		let slidesWrapperClasses = "slides_wrapper";
 		if(this.state.slideHasScrolled) slidesWrapperClasses += ' scrolled'
 

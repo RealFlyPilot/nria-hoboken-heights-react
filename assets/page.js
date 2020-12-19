@@ -68,6 +68,16 @@ const flypilotParseData = (self, acf_data) => {
 		soundTitle: page_data.sound,
 		sound_choice_start: page_data.sound_choice,
 		sound_choice_stop: page_data.no_choice,
+		centerImage: page_data.logo_third,//used to replace video logo on Firefox mobile
+		centerImageStyles: {
+			width: "272px",
+			marginBottom: "55px",
+		},
+		centerImageStylesMobile: {
+			width: "180px",
+			marginBottom: "40px"
+		},
+		centerTextClasses: "mobile-FF-only"
 	}, {
 		slideClasses: "fullWidthVideo",
 		video: page_data.background_video_second,

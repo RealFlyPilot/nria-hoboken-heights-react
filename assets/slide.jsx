@@ -158,6 +158,8 @@ class Slide extends React.Component {
 
 		let right_arrow_bouncing = <div className='right_arrow_bouncing' onClick={() => this.slideHorizontal('right')}/>
 		let left_arrow_bouncing = <div className='left_arrow_bouncing' onClick={() => this.slideHorizontal('left')}/>
+		
+		const disableVideo = slideObj.isLandingPage && this.props.isFirefoxAndroid ? true : false //This will be used because videos do not autoplay on FF mobile
 		return (
 			
 			<div className={slideClasses} style={slideStyles} onScroll={this.handleLangChange}>
@@ -168,7 +170,8 @@ class Slide extends React.Component {
 					// The regular music player is fixed in the right top corner
 					<MusicPlayer currIdx={this.props.currIdx} toggleMusicPlayer={this.musicToggle}  goToNextSlide={this.scrollToNextSlide} scrollToLastSlide={this.scrollToContactForm} isPlaying={this.props.isPlaying}></MusicPlayer>
 				}
-				{slideObj.video &&
+				{slideObj.video && !disableVideo && 
+							//Hide landingpage video on FFMobile because it will not autoplay
 							//Video is set this way because react does not set muted to true which is required by some devices to allow autoplay
 						<div
 						className="videoContainer"
