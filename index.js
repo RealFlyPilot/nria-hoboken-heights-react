@@ -1653,10 +1653,10 @@ class Slide extends React.Component {
 					__html: `
 							<video
 							class="${videoClasses}"
-							${slideObj.videoLoop ? 'loop' : ''}
+							${slideObj.videoLoop ? 'loop="true"' : ''}
 							muted='true'
 							autoplay='true'
-							playsinline
+							playsinline='true'
 							preload="metadata"
 							>
 							<source src="${slideObj.video}" type="video/mp4" />
