@@ -15,7 +15,6 @@ class LandingPageMusicPlayer extends React.Component {
 		const {muteMusic} = this.props;
 		muteMusic();
 		nextSlide();
-		document.querySelector('.background-video').play()
 	}
 
 	animationHasEnded() {

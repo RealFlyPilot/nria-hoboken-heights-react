@@ -33,7 +33,8 @@ class SplashPage extends React.Component {
 			inputFocusOutEvent: null,
 			scrollDebouncer: null,
 			slideHasScrolled: null,
-			privacyPolicyEnabled: false
+			privacyPolicyEnabled: false,
+			videosPlayed: null
 		};
 		this.watchForEventEnd = this.watchForEventEnd.bind(this);
 		this.firstSlide = this.firstSlide.bind(this);
@@ -189,6 +190,30 @@ class SplashPage extends React.Component {
 		} else {
 			this.prevSlide();
 		}
+	}
+
+
+	/*
+	 * This function is used because on Firefox Android the videos will not autoplay
+	 * This function is executed at the end of every touch event and will continue to 
+	 * execute each touch event until Firefox allows the user to play the video.
+	 * Firefox will not allow the video to play until a tap event occurs - not a touchdrag.
+	 */
+	playVideos(){
+		if(this.state.videosPlayed) return
+		const allVideos = document.querySelectorAll('.background-video')
+		allVideos.forEach(function(video){
+			playPromise = video.play()
+			if (playPromise !== undefined) {
+				playPromise.then(function() {
+					this.setState({ videosPlayed: true })
+				}).catch(function(error) {
+				  console.log('play failed')
+				});
+			}
+		})
+		
+		  
 	}
 
 	/*
@@ -420,6 +445,7 @@ class SplashPage extends React.Component {
 
 	}
 	handleTouchEnd(){
+		this.playVideos()
 		this.setState({
 			touchState: 0
 		});
