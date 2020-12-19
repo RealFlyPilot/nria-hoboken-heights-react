@@ -1942,7 +1942,7 @@ class SplashPage extends React.Component {
 		if (this.state.videosPlayed) return;
 		const allVideos = document.querySelectorAll('.background-video');
 		allVideos.forEach(function (video) {
-			playPromise = video.play();
+			const playPromise = video.play();
 			if (playPromise !== undefined) {
 				playPromise.then(function () {
 					this.setState({ videosPlayed: true });
