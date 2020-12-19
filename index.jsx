@@ -516,7 +516,7 @@ class SplashPage extends React.Component {
 			this.state.audioPlayer.pause();
 		}
 
-		const isFirefoxAndroid = this.state.browser == 'chrome' && this.state.operating_sys == 'android'
+		const isFirefoxAndroid = this.state.browser == 'firefox' && this.state.operating_sys == 'android'
 
 		const $slides = this.state.slides.map((slide, idx) =>
 			<Slide isFirefoxAndroid={isFirefoxAndroid} showPrivacyPolicy={this.privacyPolicyModalOpen.bind(this)} horizontalSlide={this.slideHorizontal.bind(this)} onSlideScroll={this.handleSlideScroll} scrollToFirstSlide={this.firstSlide}  createHubspotContactForm={this.createHubspotForm.bind(this)} formCleared={this.contactFormCleared.bind(this)} formSubmitted={this.contactFormSubmitted.bind(this)} currIdx={this.state.currIdx} playMusic={this.musicPlay} stopMusic={this.musicMute} slideViewed={this.state.slidesViewed.includes(idx)} goToNextSlide={this.nextSlide} scrollToLastSlide={this.lastSlide} key={idx} obj={slide} isCurrent={idx == this.state.currIdx} isPlaying={this.state.isPlaying}></Slide>
