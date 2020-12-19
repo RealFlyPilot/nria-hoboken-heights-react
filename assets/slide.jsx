@@ -180,8 +180,8 @@ class Slide extends React.Component {
 							<video
 							class="${videoClasses}"
 							${slideObj.videoLoop ? 'loop' : ''}
-							muted
-							autoplay
+							muted='true'
+							autoplay='true'
 							playsinline
 							preload="metadata"
 							>
