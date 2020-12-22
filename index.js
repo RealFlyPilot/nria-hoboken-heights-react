@@ -1939,6 +1939,7 @@ class SplashPage extends React.Component {
   * Firefox will not allow the video to play until a tap event occurs - not a touchdrag.
   */
 	playVideos() {
+		let self = this;
 		if (this.state.videosPlayed) return;
 		const allVideos = document.querySelectorAll('.background-video');
 		allVideos.forEach(function (video) {
@@ -1946,7 +1947,7 @@ class SplashPage extends React.Component {
 			if (playPromise !== undefined) {
 				playPromise.then(function () {
 					console.log('play success');
-					this.setState({ videosPlayed: true });
+					self.setState({ videosPlayed: true });
 				}).catch(function (error) {
 					console.log(playPromise);
 					console.log(error);
