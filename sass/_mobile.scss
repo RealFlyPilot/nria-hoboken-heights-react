@@ -61,18 +61,21 @@ body {
 }
 
 #page {
-    //iPhone specific issues because the bottom toolbar doesnt disappear when scrolling
+    //Mobile Browser specific issues because the bottom toolbar doesnt disappear when scrolling
     &.iPhone {
         position: fixed;//this prevents a bouncing effec
         .mobileMenu {
             // position: fixed;
         }
+    }
+    &.iPhone,
+    &.firefoxAndroid {
         .slides_wrapper .slides_inner .slide {
             .centerBottom {
                 bottom: 17vh;
             }
             .center .contactButton {
-                margin-bottom: 50px;
+                margin-bottom: 80px;
             }
             .contactPageWrapper .mobilePrivacyPolicy {
                 padding-bottom: 165px;
