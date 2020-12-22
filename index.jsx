@@ -207,12 +207,9 @@ class SplashPage extends React.Component {
 			const playPromise = video.play()
 			if (playPromise !== undefined) {
 				playPromise.then(function() {
-					console.log('play success')
 					self.setState({ videosPlayed: true })
 				}).catch(function(error) {
-				  console.log(playPromise)
-				  console.log(error)
-				  console.log('play failed')
+				  console.log('play failed', error)
 				});
 			}
 		})
