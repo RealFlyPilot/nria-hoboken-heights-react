@@ -2047,7 +2047,9 @@ class SplashPage extends React.Component {
 		return isStopped;
 	}
 	nextSlide() {
-		if (this.isTransitioning() || this.animationsStopped()) {
+		const isFirefoxAndroid = this.state.browser == 'firefox' && this.state.operating_sys == 'android';
+		const videosPlayed = this.state.videosPlayed;
+		if (this.isTransitioning() || this.animationsStopped() || isFirefoxAndroid && !videosPlayed) {
 			return;
 		}
 
