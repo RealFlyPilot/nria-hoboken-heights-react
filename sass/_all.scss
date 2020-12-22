@@ -220,6 +220,7 @@ body {
  */
 
 .firefoxAndroid {
+	//These animations happen earlier because this browser does not have a logo animation on the first slide
 	.musicplayer_container .musicplayer .landing_page_sound_player {
 		&:not(.animationHasNotRun) {
 			@include slideInAnimation($soundOptionsButtonWidth, 1s)
