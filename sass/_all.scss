@@ -219,6 +219,17 @@ body {
  * slideInAnimation($elementWidth, $delay)
  */
 
+.firefoxAndroid {
+	.musicplayer_container .musicplayer .landing_page_sound_player {
+		&:not(.animationHasNotRun) {
+			@include slideInAnimation($soundOptionsButtonWidth, 1s)
+		}
+		.title {
+			animation-delay: 0.5s;
+		}
+	}
+}
+
 
 .landing_page_sound_player:not(.animationHasNotRun) {
 	@include slideInAnimation($soundOptionsButtonWidth, 4.5s)

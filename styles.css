@@ -284,6 +284,52 @@ body {
  * For reference: 
  * slideInAnimation($elementWidth, $delay)
  */
+.firefoxAndroid .musicplayer_container .musicplayer .landing_page_sound_player:not(.animationHasNotRun) .slideInAnimationWrapper .slideInAnimationElementContainer {
+  overflow: hidden;
+}
+.firefoxAndroid .musicplayer_container .musicplayer .landing_page_sound_player:not(.animationHasNotRun) .slideInAnimationWrapper .slideInAnimationElementContainer .slideInAnimationElement {
+  animation-fill-mode: forwards;
+  animation-duration: 0.75s;
+  transform: translateX(100vw);
+  width: 86px;
+}
+.firefoxAndroid .musicplayer_container .musicplayer .landing_page_sound_player:not(.animationHasNotRun) .slideInAnimationWrapper .slideInAnimationElementContainer .slideInAnimationElementLeft {
+  animation-fill-mode: forwards;
+  animation-name: soundOptionsSlideOutLeft;
+  animation-delay: 1.5s;
+}
+@keyframes soundOptionsSlideOutLeft {
+  0% {
+    transform: translateX(86px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.firefoxAndroid .musicplayer_container .musicplayer .landing_page_sound_player:not(.animationHasNotRun) .slideInAnimationWrapper .slideInAnimationElementContainer .slideInAnimationElementRight {
+  animation-fill-mode: forwards;
+  animation-name: soundOptionsSlideOutRight;
+  animation-delay: 1.7s;
+}
+@keyframes soundOptionsSlideOutRight {
+  0% {
+    transform: translateX(-86px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.firefoxAndroid .musicplayer_container .musicplayer .landing_page_sound_player:not(.animationHasNotRun) .slideInAnimationWrapper .separator {
+  height: 0;
+  animation-fill-mode: forwards;
+  animation-name: lineAppear;
+  animation-duration: 0.75s;
+  animation-delay: 1s;
+}
+.firefoxAndroid .musicplayer_container .musicplayer .landing_page_sound_player .title {
+  animation-delay: 0.5s;
+}
+
 .landing_page_sound_player:not(.animationHasNotRun) .slideInAnimationWrapper .slideInAnimationElementContainer {
   overflow: hidden;
 }
