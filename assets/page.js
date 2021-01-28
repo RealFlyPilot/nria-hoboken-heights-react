@@ -177,6 +177,44 @@ const flypilotParseData = (self, acf_data) => {
 				}
 			},
 		},
+	}, {
+		// slideClasses: "fullWidthVideo",
+		// video: page_data.background_video_four,
+		// videoLoop: true,
+		// videoZoomEffect: true,
+		// videoMobileStartPosition: 'center',
+		
+		styles: {
+			background: "rgb(21 22 23)",
+			fontSize: '15px',
+			lineHeight: '21px',
+			overflowY: "auto",
+			backgroundImage: "url("+page_data.background_image_fifth_slide+")",
+			backgroundSize: 'contain'
+		},
+		addCornerLogo: true,
+		cornerLogoHideOnLastSlide: true,
+		cornerLogofadeIn: true,
+		soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3",
+		mobileHorizontalVideoSlideEnabled: true,
+		mobileHasDifferentContent: true,
+		founderHeadline: page_data.headline_fifth,
+		founderTagline: page_data.tagline_fifth,
+		founderBenefits: page_data.founder_benefits,
+
+		mobileContent: {
+			center: {
+				centerBottom: {
+					line1: " SWIPE ",
+					line1RightArrowBouncing: true,
+					line1LeftArrowBouncing: true,
+					lineStyles: {
+						display: 'flex',
+						alignItems: 'center'
+					},
+				}
+			},
+		},
 		
 	}, {
 		styles: {

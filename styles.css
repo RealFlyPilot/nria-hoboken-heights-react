@@ -117,6 +117,11 @@ table {
 }
 
 @font-face {
+  src: url("assets/fonts/Gotham-Thin.otf");
+  font-family: "Gotham-Thin" format("opentype");
+  font-weight: 200;
+}
+@font-face {
   src: url("assets/fonts/Gotham-Light.otf");
   font-family: "Gotham-Light" format("opentype");
   font-weight: 300;
@@ -587,6 +592,44 @@ body {
 .slide .contactButton {
   color: #a9a9a9;
   opacity: 0;
+}
+.slide .founderSlide {
+  position: absolute;
+  width: 60%;
+  left: 40%;
+}
+.slide .founderSlide .founderHeadline {
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 40px;
+  margin-bottom: 20px;
+  font-family: "Gotham-Thin", sans-serif;
+  font-weight: 200;
+}
+.slide .founderSlide .founderTagline {
+  color: #a6682f;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.slide .founderSlide .founderBenefits {
+  font-size: 18px;
+}
+.slide .founderSlide .founderBenefits .benefitPair {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+.slide .founderSlide .founderBenefits .benefitPair .count {
+  color: #151617;
+  background-color: #a6682f;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+}
+.slide .founderSlide .founderBenefits .benefitPair .benefit {
+  margin-left: 10px;
 }
 .slide .contactPageWrapper {
   width: 100%;

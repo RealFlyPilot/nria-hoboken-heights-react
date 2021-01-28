@@ -1,3 +1,4 @@
+$color-bronze: #a6682f;
 .resize-animation-stopper * {
 	animation: none !important;
 	transition: none !important;
@@ -42,6 +43,11 @@
 	}
 }
 
+@font-face {
+	src: url("assets/fonts/Gotham-Thin.otf");
+	font-family: "Gotham-Thin" format("opentype");
+	font-weight: 200;
+}
 @font-face {
 	src: url("assets/fonts/Gotham-Light.otf");
 	font-family: "Gotham-Light" format("opentype");
@@ -429,6 +435,45 @@ body {
 	.contactButton {
 		color: #a9a9a9;
 		opacity: 0;
+	}
+	.founderSlide {
+		position: absolute;
+		width: 60%;
+		left: 40%;
+		.founderHeadline {
+			text-transform: uppercase;
+			color: #fff;
+			font-size: 40px;
+			margin-bottom: 20px;
+			font-family: "Gotham-Thin", sans-serif;
+			font-weight: 200;
+		}
+		.founderTagline {
+			color: $color-bronze;
+			margin-bottom: 15px;
+			font-size: 18px;
+		}
+		.founderBenefits {
+			font-size: 18px;
+			.benefitPair {
+				display: flex;
+				align-items: center;
+				margin-top: 15px;
+				.count {
+					color: rgb(21 22 23);
+					background-color: $color-bronze;
+					border-radius: 50%;
+					width: 32px;
+					height: 32px;
+					line-height: 32px;
+					text-align: center;
+				}
+				.benefit {
+					margin-left: 10px;
+				}
+			}
+		}
+
 	}
 	.contactPageWrapper {
 		width: 100%;

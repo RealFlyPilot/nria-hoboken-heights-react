@@ -206,7 +206,28 @@ class Slide extends React.Component {
 						<div className='btn contactButton' onClick={this.scrollToContactForm.bind(this)}>{slideObj.buttonText}</div>
 					}
 				</div>
-				
+				<div className="founderSlide">
+					{slideObj.founderHeadline && 
+						<p className="founderHeadline">{slideObj.founderHeadline}</p>
+					}
+					{slideObj.founderTagline && 
+						<p className="founderTagline">{slideObj.founderTagline}</p>
+					}
+					{slideObj.founderBenefits &&  
+						<div className="founderBenefits">
+							{Object.entries(slideObj.founderBenefits).map(([key, value]) => {
+								return(
+								<div key={key} className="benefitPair">
+									<div className="count">{parseInt(key)+1}</div>
+									<div className="benefit">{value.benefit}</div>
+								</div>
+								)
+							})}
+							
+						</div>
+					}
+					
+				</div>
 				<div className={centerBottomClasses}>
 					{slideObj.isLandingPage &&
 						<div className="musicplayer_container center_layout">

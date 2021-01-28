@@ -790,6 +790,44 @@ const flypilotParseData = (self, acf_data) => {
 				}
 			}
 		}
+	}, {
+		// slideClasses: "fullWidthVideo",
+		// video: page_data.background_video_four,
+		// videoLoop: true,
+		// videoZoomEffect: true,
+		// videoMobileStartPosition: 'center',
+
+		styles: {
+			background: "rgb(21 22 23)",
+			fontSize: '15px',
+			lineHeight: '21px',
+			overflowY: "auto",
+			backgroundImage: "url(" + page_data.background_image_fifth_slide + ")",
+			backgroundSize: 'contain'
+		},
+		addCornerLogo: true,
+		cornerLogoHideOnLastSlide: true,
+		cornerLogofadeIn: true,
+		soundEffect: "./assets/sounds/SOUND-SUNSET_VIEW.mp3",
+		mobileHorizontalVideoSlideEnabled: true,
+		mobileHasDifferentContent: true,
+		founderHeadline: page_data.headline_fifth,
+		founderTagline: page_data.tagline_fifth,
+		founderBenefits: page_data.founder_benefits,
+
+		mobileContent: {
+			center: {
+				centerBottom: {
+					line1: " SWIPE ",
+					line1RightArrowBouncing: true,
+					line1LeftArrowBouncing: true,
+					lineStyles: {
+						display: 'flex',
+						alignItems: 'center'
+					}
+				}
+			}
+		}
 
 	}, {
 		styles: {
@@ -1678,6 +1716,40 @@ class Slide extends React.Component {
 					'div',
 					{ className: 'btn contactButton', onClick: this.scrollToContactForm.bind(this) },
 					slideObj.buttonText
+				)
+			),
+			React.createElement(
+				'div',
+				{ className: 'founderSlide' },
+				slideObj.founderHeadline && React.createElement(
+					'p',
+					{ className: 'founderHeadline' },
+					slideObj.founderHeadline
+				),
+				slideObj.founderTagline && React.createElement(
+					'p',
+					{ className: 'founderTagline' },
+					slideObj.founderTagline
+				),
+				slideObj.founderBenefits && React.createElement(
+					'div',
+					{ className: 'founderBenefits' },
+					Object.entries(slideObj.founderBenefits).map(([key, value]) => {
+						return React.createElement(
+							'div',
+							{ key: key, className: 'benefitPair' },
+							React.createElement(
+								'div',
+								{ className: 'count' },
+								parseInt(key) + 1
+							),
+							React.createElement(
+								'div',
+								{ className: 'benefit' },
+								value.benefit
+							)
+						);
+					})
 				)
 			),
 			React.createElement(
