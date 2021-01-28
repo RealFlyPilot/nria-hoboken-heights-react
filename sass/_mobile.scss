@@ -315,6 +315,17 @@ body {
                     width: auto;
                 }
             }
+            .founderSlide {
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                margin-left: 10px;
+                .founderHeadline {
+                    font-size: 34px;
+                    margin-bottom: 10px;
+                }
+            }
             
             .contactPageWrapper {
                 .contactForm {

@@ -447,6 +447,8 @@ body {
 			margin-bottom: 20px;
 			font-family: "Gotham-Thin", sans-serif;
 			font-weight: 200;
+			line-height: 1.4em;
+			width: 1px;//This forces line breaks between words
 		}
 		.founderTagline {
 			color: $color-bronze;
@@ -455,6 +457,8 @@ body {
 		}
 		.founderBenefits {
 			font-size: 18px;
+			padding-right: 20px;
+			padding-bottom: 10px;
 			.benefitPair {
 				display: flex;
 				align-items: center;
@@ -467,9 +471,11 @@ body {
 					height: 32px;
 					line-height: 32px;
 					text-align: center;
+					@extend .gotham-bold;
 				}
 				.benefit {
 					margin-left: 10px;
+					width: 100%;//Prevents the count to get squeezed
 				}
 			}
 		}

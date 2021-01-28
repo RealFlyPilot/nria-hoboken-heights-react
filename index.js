@@ -803,8 +803,10 @@ const flypilotParseData = (self, acf_data) => {
 			lineHeight: '21px',
 			overflowY: "auto",
 			backgroundImage: "url(" + page_data.background_image_fifth_slide + ")",
-			backgroundSize: 'contain'
+			backgroundSize: 'contain',
+			backgroundPosition: 'bottom left'
 		},
+		enableScrolling: true,
 		addCornerLogo: true,
 		cornerLogoHideOnLastSlide: true,
 		cornerLogofadeIn: true,
