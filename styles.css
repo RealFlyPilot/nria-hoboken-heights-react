@@ -1499,12 +1499,13 @@ body {
     width: 100%;
     height: 100%;
     left: 0;
-    top: 0;
+    top: 63px;
     margin-left: 10px;
   }
   .slides_wrapper .slides_inner .slide .founderSlide .founderHeadline {
     font-size: 34px;
     margin-bottom: 10px;
+    width: 100%;
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm {
     position: static;
