@@ -118,16 +118,15 @@ table {
 
 @font-face {
   src: url("assets/fonts/Gotham-Thin.otf");
-  font-family: "Gotham-Thin" format("opentype");
-  font-weight: 200;
+  font-family: "Gotham-Thin";
 }
 @font-face {
   src: url("assets/fonts/Gotham-Light.otf");
-  font-family: "Gotham-Light" format("opentype");
+  font-family: "Gotham-Light";
   font-weight: 300;
 }
 @font-face {
-  src: url("assets/fonts/Gotham-Book.otf") format("opentype");
+  src: url("assets/fonts/Gotham-Book.otf");
   font-family: "Gotham-Book";
   font-weight: 400;
 }
@@ -138,7 +137,7 @@ table {
 }
 @font-face {
   src: url("assets/fonts/Gotham-Bold.otf");
-  font-family: "Gotham-Bold" format("opentype");
+  font-family: "Gotham-Bold";
   font-weight: 700;
   font-style: normal;
 }
@@ -612,11 +611,13 @@ body {
   color: #a6682f;
   margin-bottom: 15px;
   font-size: 18px;
+  font-family: "Gotham-Light", sans-serif;
 }
 .slide .founderSlide .founderBenefits {
   font-size: 18px;
   padding-right: 20px;
   padding-bottom: 10px;
+  font-family: "Gotham-Light", sans-serif;
 }
 .slide .founderSlide .founderBenefits .benefitPair {
   display: flex;
@@ -629,8 +630,9 @@ body {
   border-radius: 50%;
   width: 32px;
   height: 32px;
-  line-height: 32px;
+  line-height: 34px;
   text-align: center;
+  flex-shrink: 0;
 }
 .slide .founderSlide .founderBenefits .benefitPair .benefit {
   margin-left: 10px;
