@@ -1519,7 +1519,8 @@ body {
     margin-bottom: 10px;
     width: 100%;
   }
-  .slides_wrapper .slides_inner .slide .founderSlide .founderBenefits {
+  .slides_wrapper .slides_inner .slide .founderSlide .founderTagline,
+.slides_wrapper .slides_inner .slide .founderSlide .founderBenefits {
     font-size: 16px;
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm {
