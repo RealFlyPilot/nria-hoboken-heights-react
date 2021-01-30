@@ -1511,12 +1511,16 @@ body {
     height: 100%;
     left: 0;
     top: 63px;
-    margin-left: 10px;
+    padding-left: 30px;
+    padding-right: 15px;
   }
   .slides_wrapper .slides_inner .slide .founderSlide .founderHeadline {
-    font-size: 34px;
+    font-size: 30px;
     margin-bottom: 10px;
     width: 100%;
+  }
+  .slides_wrapper .slides_inner .slide .founderSlide .founderBenefits {
+    font-size: 16px;
   }
   .slides_wrapper .slides_inner .slide .contactPageWrapper .contactForm {
     position: static;
