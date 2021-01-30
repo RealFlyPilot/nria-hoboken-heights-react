@@ -1720,7 +1720,7 @@ class Slide extends React.Component {
 					slideObj.buttonText
 				)
 			),
-			React.createElement(
+			slideObj.founderHeadline && React.createElement(
 				'div',
 				{ className: 'founderSlide' },
 				slideObj.founderHeadline && React.createElement(

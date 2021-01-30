@@ -206,7 +206,8 @@ class Slide extends React.Component {
 						<div className='btn contactButton' onClick={this.scrollToContactForm.bind(this)}>{slideObj.buttonText}</div>
 					}
 				</div>
-				<div className="founderSlide">
+				{slideObj.founderHeadline && 
+					<div className="founderSlide">
 					{slideObj.founderHeadline && 
 						<p className="founderHeadline">{slideObj.founderHeadline}</p>
 					}
@@ -228,6 +229,8 @@ class Slide extends React.Component {
 					}
 					
 				</div>
+				}
+				
 				<div className={centerBottomClasses}>
 					{slideObj.isLandingPage &&
 						<div className="musicplayer_container center_layout">
