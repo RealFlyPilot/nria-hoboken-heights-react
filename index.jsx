@@ -313,14 +313,11 @@ class SplashPage extends React.Component {
 		return isStopped;
 	}
 	nextSlide() {
-		console.log('nextSlide')
 		const isFirefoxAndroid = this.state.browser == 'firefox' && this.state.operating_sys == 'android'
 		const videosPlayed = this.state.videosPlayed
 		if (this.isTransitioning() || this.animationsStopped() || (isFirefoxAndroid && !videosPlayed)) {
 			return;
 		}
-		console.log(this.state.slides[this.state.currIdx].enableScrolling)
-		console.log('scrollbottom',document.querySelector('.activeSlide').scrollHeight - document.querySelector('.activeSlide').offsetHeight - document.querySelector('.activeSlide').scrollTop)
 		if(this.state.slides[this.state.currIdx].enableScrolling) {
 			const scrollBottom = document.querySelector('.activeSlide').scrollHeight - document.querySelector('.activeSlide').offsetHeight - document.querySelector('.activeSlide').scrollTop;
 			if(scrollBottom > 0) {//scrollBottom can be negative
