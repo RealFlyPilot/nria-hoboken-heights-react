@@ -495,7 +495,7 @@ body {
   left: -10%;
   height: 120%;
   opacity: 0;
-  transition: all 0.8s ease-out 0.7s;
+  transition: bottom 1.2s ease-in-out 0.7s, left 1.2s ease-in-out 0.7s, opacity 1.2s linear 0.7s, transform 1.2s ease-out 0.7s;
   transform: scale(1.5);
 }
 .slide.founderSlide .founderSlideWrapper {
@@ -523,10 +523,10 @@ body {
   transform: scale(1);
 }
 .slide.runAnimationOnce .founderSlideWrapper .founderHeadline {
-  animation-delay: 1s;
+  animation-delay: 1.4s;
 }
 .slide.runAnimationOnce .founderSlideWrapper .founderTagline {
-  animation-delay: 1.1s;
+  animation-delay: 1.5s;
 }
 .slide.runAnimationOnce .founderSlideWrapper .founderHeadline,
 .slide.runAnimationOnce .founderSlideWrapper .founderTagline {
@@ -538,52 +538,52 @@ body {
   animation-timing-function: ease-in-out;
 }
 .slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(1) {
-  animation-delay: 1.28s;
-}
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(2) {
-  animation-delay: 1.36s;
-}
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(3) {
-  animation-delay: 1.44s;
-}
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(4) {
-  animation-delay: 1.52s;
-}
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(5) {
-  animation-delay: 1.6s;
-}
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(6) {
   animation-delay: 1.68s;
 }
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(7) {
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(2) {
   animation-delay: 1.76s;
 }
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(8) {
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(3) {
   animation-delay: 1.84s;
 }
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(9) {
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(4) {
   animation-delay: 1.92s;
 }
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(10) {
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(5) {
   animation-delay: 2s;
 }
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(11) {
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(6) {
   animation-delay: 2.08s;
 }
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(12) {
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(7) {
   animation-delay: 2.16s;
 }
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(13) {
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(8) {
   animation-delay: 2.24s;
 }
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(14) {
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(9) {
   animation-delay: 2.32s;
 }
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(15) {
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(10) {
   animation-delay: 2.4s;
 }
-.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(16) {
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(11) {
   animation-delay: 2.48s;
+}
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(12) {
+  animation-delay: 2.56s;
+}
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(13) {
+  animation-delay: 2.64s;
+}
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(14) {
+  animation-delay: 2.72s;
+}
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(15) {
+  animation-delay: 2.8s;
+}
+.slide.runAnimationOnce .founderSlideWrapper .founderBenefits :nth-child(16) {
+  animation-delay: 2.88s;
 }
 .slide.runAnimationOnce .founderSlideWrapper .founderBenefits .benefitPair {
   position: relative;
