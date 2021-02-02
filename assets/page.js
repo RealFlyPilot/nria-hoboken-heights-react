@@ -185,13 +185,13 @@ const flypilotParseData = (self, acf_data) => {
 		// videoMobileStartPosition: 'center',
 		
 		styles: {
-			background: "rgb(21 22 23)",
+			// background: "rgb(21 22 23)",
 			fontSize: '15px',
 			lineHeight: '21px',
 			overflowY: "auto",
-			backgroundImage: "url("+page_data.background_image_fifth_slide+")",
-			backgroundSize: 'contain',
-			backgroundPosition: 'bottom left',
+			// backgroundImage: "url("+page_data.background_image_fifth_slide+")",
+			// backgroundSize: 'contain',
+			// backgroundPosition: 'bottom left',
 		},
 		enableScrolling: true,
 		addCornerLogo: true,
@@ -203,7 +203,7 @@ const flypilotParseData = (self, acf_data) => {
 		founderHeadline: page_data.headline_fifth,
 		founderTagline: page_data.tagline_fifth,
 		founderBenefits: page_data.founder_benefits,
-
+        founderImage: page_data.background_image_fifth_slide,
 		mobileContent: {
 			center: {
 				centerBottom: {

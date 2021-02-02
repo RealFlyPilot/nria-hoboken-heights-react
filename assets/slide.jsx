@@ -102,7 +102,7 @@ class Slide extends React.Component {
 
 		const slideObj = this.props.obj;
 
-		let slideClasses = "slide bg000"
+		let slideClasses = "slide"
 		let videoClasses = 'background-video'
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
 		let centerTextClasses = 'center';
@@ -123,6 +123,7 @@ class Slide extends React.Component {
 		if(slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect'
 		slideClasses += slideObj.videoMobileStartPosition ? ' mobile-video-position-' + slideObj.videoMobileStartPosition : ' mobile-video-position-left'
 		slideClasses += slideObj.contactFormSlide ? ' contactFormSlide' : '';
+		slideClasses += slideObj.founderHeadline ? ' founderSlide' : '';
 		
 		// if(!this.state.landingPageAnimationFinished) {
 		// 	landing_page_sound_player_classes += " animationHasNotRun";
@@ -146,7 +147,7 @@ class Slide extends React.Component {
 		else {
 			centerTextStyles = slideObj.centerTextStylesMobile
 			slideStyles = {...this.state.styles, ...slideObj.stylesMobile}
-		}
+        }
 
 		let centerImageStyles;
 		if(window.innerWidth > 768){
@@ -206,31 +207,31 @@ class Slide extends React.Component {
 						<div className='btn contactButton' onClick={this.scrollToContactForm.bind(this)}>{slideObj.buttonText}</div>
 					}
 				</div>
-				{slideObj.founderHeadline && 
-					<div className="founderSlide">
-					{slideObj.founderHeadline && 
-						<p className="founderHeadline">{slideObj.founderHeadline}</p>
-					}
-					{slideObj.founderTagline && 
-						<p className="founderTagline">{slideObj.founderTagline}</p>
-					}
-					{slideObj.founderBenefits &&  
-						<div className="founderBenefits">
-							{Object.entries(slideObj.founderBenefits).map(([key, value]) => {
-								return(
-								<div key={key} className="benefitPair">
-									<div className="count">{parseInt(key)+1}</div>
-									<div className="benefit">{value.benefit}</div>
-								</div>
-								)
-							})}
-							
-						</div>
-					}
-					
-				</div>
+                {slideObj.founderHeadline &&
+                    <div className="founderSlideContainer">
+                        <img className="founderImage" src={slideObj.founderImage} alt=""/>
+                        <div className="founderSlideWrapper">
+                        {slideObj.founderHeadline &&
+                            <p className="founderHeadline">{slideObj.founderHeadline}</p>
+                        }
+                        {slideObj.founderTagline &&
+                            <p className="founderTagline">{slideObj.founderTagline}</p>
+                        }
+                        {slideObj.founderBenefits &&
+                            <div className="founderBenefits">
+                                {Object.entries(slideObj.founderBenefits).map(([key, value]) => {
+                                    return(
+                                    <div key={key} className="benefitPair">
+                                        <div className="count">{parseInt(key)+1}</div>
+                                        <div className="benefit">{value.benefit}</div>
+                                    </div>
+                                    )
+                                })}
+                            </div>
+                        }
+                        </div>
+                    </div>
 				}
-				
 				<div className={centerBottomClasses}>
 					{slideObj.isLandingPage &&
 						<div className="musicplayer_container center_layout">

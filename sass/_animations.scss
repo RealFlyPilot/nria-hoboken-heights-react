@@ -25,6 +25,10 @@
 	0%   {top: 15px;opacity: 0;}
 	100% {top: 0;opacity: 1;}
 }
+@keyframes fadeInDriftUpFounderSlide {
+	0%   {top: 50px;opacity: 0;}
+	100% {top: 0;opacity: 1;}
+}
 
 @keyframes fadeOut {
 	0% {opacity: 1;}
@@ -34,4 +38,16 @@
 @keyframes fadeIn {
 	0% {opacity: 0;}
 	100% {opacity: 1;}
+}
+
+
+@keyframes founderAnimationBackground {
+	0% {
+        background-size: 120%;
+        background-position: 50% 84%;
+    }
+	100% {
+        background-position: left bottom;
+        background-size: contain;
+    }
 }

@@ -798,13 +798,13 @@ const flypilotParseData = (self, acf_data) => {
 		// videoMobileStartPosition: 'center',
 
 		styles: {
-			background: "rgb(21 22 23)",
+			// background: "rgb(21 22 23)",
 			fontSize: '15px',
 			lineHeight: '21px',
-			overflowY: "auto",
-			backgroundImage: "url(" + page_data.background_image_fifth_slide + ")",
-			backgroundSize: 'contain',
-			backgroundPosition: 'bottom left'
+			overflowY: "auto"
+			// backgroundImage: "url("+page_data.background_image_fifth_slide+")",
+			// backgroundSize: 'contain',
+			// backgroundPosition: 'bottom left',
 		},
 		enableScrolling: true,
 		addCornerLogo: true,
@@ -816,7 +816,7 @@ const flypilotParseData = (self, acf_data) => {
 		founderHeadline: page_data.headline_fifth,
 		founderTagline: page_data.tagline_fifth,
 		founderBenefits: page_data.founder_benefits,
-
+		founderImage: page_data.background_image_fifth_slide,
 		mobileContent: {
 			center: {
 				centerBottom: {
@@ -1620,7 +1620,7 @@ class Slide extends React.Component {
 
 		const slideObj = this.props.obj;
 
-		let slideClasses = "slide bg000";
+		let slideClasses = "slide";
 		let videoClasses = 'background-video';
 		let landing_page_sound_player_classes = 'landing_page_sound_player';
 		let centerTextClasses = 'center';
@@ -1641,6 +1641,7 @@ class Slide extends React.Component {
 		if (slideObj.videoZoomEffect) videoClasses += ' videoZoomEffect';
 		slideClasses += slideObj.videoMobileStartPosition ? ' mobile-video-position-' + slideObj.videoMobileStartPosition : ' mobile-video-position-left';
 		slideClasses += slideObj.contactFormSlide ? ' contactFormSlide' : '';
+		slideClasses += slideObj.founderHeadline ? ' founderSlide' : '';
 
 		// if(!this.state.landingPageAnimationFinished) {
 		// 	landing_page_sound_player_classes += " animationHasNotRun";
@@ -1722,36 +1723,41 @@ class Slide extends React.Component {
 			),
 			slideObj.founderHeadline && React.createElement(
 				'div',
-				{ className: 'founderSlide' },
-				slideObj.founderHeadline && React.createElement(
-					'p',
-					{ className: 'founderHeadline' },
-					slideObj.founderHeadline
-				),
-				slideObj.founderTagline && React.createElement(
-					'p',
-					{ className: 'founderTagline' },
-					slideObj.founderTagline
-				),
-				slideObj.founderBenefits && React.createElement(
+				{ className: 'founderSlideContainer' },
+				React.createElement('img', { className: 'founderImage', src: slideObj.founderImage, alt: '' }),
+				React.createElement(
 					'div',
-					{ className: 'founderBenefits' },
-					Object.entries(slideObj.founderBenefits).map(([key, value]) => {
-						return React.createElement(
-							'div',
-							{ key: key, className: 'benefitPair' },
-							React.createElement(
+					{ className: 'founderSlideWrapper' },
+					slideObj.founderHeadline && React.createElement(
+						'p',
+						{ className: 'founderHeadline' },
+						slideObj.founderHeadline
+					),
+					slideObj.founderTagline && React.createElement(
+						'p',
+						{ className: 'founderTagline' },
+						slideObj.founderTagline
+					),
+					slideObj.founderBenefits && React.createElement(
+						'div',
+						{ className: 'founderBenefits' },
+						Object.entries(slideObj.founderBenefits).map(([key, value]) => {
+							return React.createElement(
 								'div',
-								{ className: 'count' },
-								parseInt(key) + 1
-							),
-							React.createElement(
-								'div',
-								{ className: 'benefit' },
-								value.benefit
-							)
-						);
-					})
+								{ key: key, className: 'benefitPair' },
+								React.createElement(
+									'div',
+									{ className: 'count' },
+									parseInt(key) + 1
+								),
+								React.createElement(
+									'div',
+									{ className: 'benefit' },
+									value.benefit
+								)
+							);
+						})
+					)
 				)
 			),
 			React.createElement(
