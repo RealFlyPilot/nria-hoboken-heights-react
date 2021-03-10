@@ -26,7 +26,7 @@
  * 
  */
 
-const ENDPOINT = 'https://nriahh.wpengine.com/wp-json/acf/v3/pages/';
+const ENDPOINT = 'https://nriahhlp.wpengine.com/wp-json/acf/v3/pages/';
 
 
 /* 

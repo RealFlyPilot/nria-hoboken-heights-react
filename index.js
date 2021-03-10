@@ -634,7 +634,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
  * 
  */
 
-const ENDPOINT = 'https://nriahh.wpengine.com/wp-json/acf/v3/pages/';
+const ENDPOINT = 'https://nriahhlp.wpengine.com/wp-json/acf/v3/pages/';
 
 /* 
  * flypilotFetchWPRestAPI()
